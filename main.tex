@@ -1,0 +1,419 @@
+% ====================== Beginning of setup ============================
+
+% Basic imports
+\documentclass[a4paper, 12pt]{article}
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{svg}
+\usepackage{bm}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usepackage[babel]{csquotes}
+\usepackage{caption}
+\usepackage{multirow, array, multirow}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{amssymb}
+% Load the parskip package without options
+\usepackage{parskip}
+\usepackage{siunitx}
+\usepackage{pdflscape}
+\usepackage[export]{adjustbox}
+\usepackage{nameref}
+\usepackage{import}
+\DeclareUnicodeCharacter{2009}{\,} 
+
+\usepackage{csquotes}
+\setquotestyle[guillemets]{german}
+
+\usepackage{gensymb}
+
+\renewcommand{\topfraction}{1}	% max fraction of floats at top
+\renewcommand{\bottomfraction}{1}	% max fraction of floats at top
+
+% Full page figures
+\usepackage{rotating}
+
+% Section title big
+\usepackage{titlesec}
+\titleformat*{\section}{\LARGE\bfseries}
+
+\usepackage{braket}
+
+\usepackage[onehalfspacing]{setspace}
+
+\usepackage{subcaption}
+
+% Paragraph as subsubsubsection
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% Good settings for Floats
+\renewcommand{\textfraction}{0.2}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.91}
+\renewcommand{\floatpagefraction}{0.7}
+
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+
+\newcommand{\tikzcircle}[2][red,fill=red]{\tikz[baseline=-0.5ex]\draw[#1,radius=#2] (0,0) circle ;}%
+
+% (\tikzbullet{cluster1}{cluster1}, \tikzbullet{cluster2}{cluster2}, \tikzbullet{cluster3}{cluster3}, \tikzbullet{cluster4}{cluster4}, \tikzbullet{cluster5}{cluster5}, \tikzbullet{cluster6}{cluster6})
+
+% Some nice colors
+\definecolor{cluster1}{HTML}{2980b9}
+\definecolor{cluster2}{HTML}{2ecc71}
+\definecolor{cluster3}{HTML}{8e44ad}
+\definecolor{cluster4}{HTML}{c0392b}
+\definecolor{cluster5}{HTML}{ecf0f1}
+\definecolor{cluster6}{HTML}{f1c40f}
+
+% nice enumeration
+\usepackage{enumitem}
+
+\usepackage{bbm}
+
+% set page margins
+\usepackage[top=0.9in, left=0.9in, bottom=0.9in, right=0.9in, includehead]{geometry}
+% hyperlinks
+
+% set colors for references
+\usepackage[bookmarks=false]{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% allow todos in the document
+\usepackage[colorinlistoftodos, color = Dandelion, prependcaption={TODO: }]{todonotes}
+\setuptodonotes{inline}
+
+% Bibliography settings
+\usepackage[style=authoryear,backend=biber, natbib=true,maxcitenames=2]{biblatex} %biblatex mit biber laden
+\ExecuteBibliographyOptions{
+    %bibencoding=en-US,
+    %refsegment=section,
+    hyperref=auto,
+    %useprefix=true
+    sorting=nyt, %Sortierung Autor, Titel, Jahr ynt
+    bibwarn=true, %Probleme mit den Daten, die Backend betreffen anzeigen
+    isbn=false, %keine isbn anzeigen
+    url=true, %keine url anzeigen
+    doi=true, %keine doi anzeigen
+    eprint=false,
+    defernumbers=true, 
+    abbreviate=false
+}
+\addbibresource{bibs/bib.bib}
+
+\usepackage{mathtools}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\usepackage{tabularx}
+
+% Enable the inclusion of Code
+\usepackage[outputdir=loux]{minted}
+\usemintedstyle{manni}
+\setminted[R]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
+\setminted[C]{frame=single, obeytabs=true, tabsize=4, linenos, breaklines}
+\setminted[python3]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
+\setminted[julia]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
+
+\usepackage{tocbasic}
+
+\DeclareNewTOC[%
+  type=codebox,%
+  types=codeboxes,%
+  float,% Gleitumgebungen sollen definiert werden.
+  floattype=4,%
+  name=Code-Snippet,%
+  listname={List of Code-Snippets}%
+  ]{lor}
+\setuptoc{lor}{chapteratlist}
+
+% Relations with text beneath
+\newcommand{\isEquivTo}[1]{\underset{#1}{\sim}}
+
+
+% Prevent figures from jumping between sections / subsections
+\usepackage{placeins}
+\let\Oldsection\section
+\renewcommand{\section}{\FloatBarrier\Oldsection}
+\let\Oldsubsection\subsection
+\renewcommand{\subsection}{\FloatBarrier\Oldsubsection}
+\let\Oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\FloatBarrier\Oldsubsubsection}
+
+% Enable explanations of parts of equations
+\usepackage{calc}
+\newcommand{\explain}[2]{\underbrace{#1}_{\parbox{\widthof{\ensuremath{#1}}}{\footnotesize \centering #2}}}
+
+% Define colors used in the document
+\definecolor{blue1}{HTML}{30336b}
+% define modern green and modern red
+\definecolor{green1}{HTML}{00b894}
+\definecolor{red1}{HTML}{d63031}
+
+% Enable highlight-boxes
+\usepackage[most]{tcolorbox}
+
+%textmarker style from colorbox doc
+\tcbset{textmarker/.style={%
+        enhanced,
+        parbox=false,boxrule=0mm,boxsep=0mm,arc=0mm,
+        outer arc=0mm,left=6mm,right=3mm,top=7pt,bottom=7pt,
+        toptitle=1mm,bottomtitle=1mm,oversize}}
+
+
+% define new colorboxes
+\newtcolorbox{hintBox}{textmarker,
+    borderline west={6pt}{0pt}{yellow},
+    colback=yellow!10!white}
+\newtcolorbox{importantBox}{textmarker,
+    borderline west={6pt}{0pt}{red},
+    colback=red!10!white}
+\newtcolorbox{noteBox}{textmarker,
+    borderline west={6pt}{0pt}{green},
+    colback=green!10!white}
+
+% define commands for easy access
+\newcommand{\note}[1]{\begin{noteBox} \textbf{Note:} #1 \end{noteBox}}
+\newcommand{\idea}[1]{\begin{hintBox} \textbf{Idea:} #1 \end{noteBox}}
+\newcommand{\problem}[1]{\begin{importantBox} \textbf{Problem:} #1 \end{importantBox}}
+
+\newcommand{\greenbox}[1]{\begin{noteBox} #1 \end{noteBox}}
+\newcommand{\redbox}[1]{\begin{importantBox} #1 \end{importantBox}}
+\newcommand{\yellowbox}[1]{\begin{hintBox} #1 \end{hintBox}}
+
+% Enable multirow tables
+\usepackage{booktabs,multirow,array}
+\newcolumntype{N}{@{}m{0pt}@{}}%a fix for array package
+
+% Line break in table
+\newcommand\ExtraSep
+{\dimexpr\cmidrulewidth+\aboverulesep+\belowrulesep\relax}
+
+% Fancy page headers
+\usepackage{fancyhdr} % Paket laden
+\pagestyle{fancy}
+\fancyhead[R]{\thepage}
+\fancyhead[L]{\leftmark}
+\cfoot{}
+
+\usepackage{mathtools}
+
+\usepackage{epigraph}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\km}{km}
+\DeclareMathOperator{\s}{s}
+\DeclareMathOperator{\m}{m}
+\DeclareMathOperator{\cm}{cm}
+\DeclareMathOperator{\eV}{eV}
+\DeclareMathOperator{\keV}{keV}
+\DeclareMathOperator{\e}{e}
+\DeclareMathOperator{\K}{K}
+\DeclareMathOperator{\h}{h}
+\DeclareMathOperator{\MeV}{MeV}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\SE}{SE}
+\DeclareMathOperator{\bias}{bias}
+\makeatletter
+% overline
+\newcommand{\dbloverline}[1]{\overline{\dbl@overline{#1}}}
+\newcommand{\dbl@overline}[1]{\mathpalette\dbl@@overline{#1}}
+\newcommand{\dbl@@overline}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\overline{#2}$}%
+  \ht\z@=\dimexpr\ht\z@-2\dbl@adjust{#1}\relax
+  \box\z@
+  \ifx#1\scriptstyle\kern-\scriptspace\else
+  \ifx#1\scriptscriptstyle\kern-\scriptspace\fi\fi
+  \endgroup
+}
+% underline
+\newcommand{\dblunderline}[1]{\@@underline{\dbl@underline{#1}}}
+\newcommand{\dbl@underline}[1]{\mathpalette\dbl@@underline{#1}}
+\newcommand{\dbl@@underline}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1\@@underline{#2}$}%
+  \dp\z@=\dimexpr\dp\z@-2\dbl@adjust{#1}\relax
+  \box\z@
+  \ifx#1\scriptstyle\kern-\scriptspace\else
+  \ifx#1\scriptscriptstyle\kern-\scriptspace\fi\fi
+  \endgroup
+}
+\newcommand{\dbl@adjust}[1]{%
+  \fontdimen8
+  \ifx#1\displaystyle\textfont\else
+  \ifx#1\textstyle\textfont\else
+  \ifx#1\scriptstyle\scriptfont\else
+  \scriptscriptfont\fi\fi\fi 3
+}
+\makeatother
+
+% vectors and matrices
+\renewcommand{\vec}[1]{{%
+  \mspace{0.5mu}%
+  \underline{\mspace{-0.5mu}#1_{}\kern-\scriptspace\mspace{-0.5mu}}%
+  \mspace{0.5mu}%
+  \mathcorr{#1}%
+}}
+\newcommand{\mat}[1]{{%
+  \mspace{0.5mu}%
+  \dblunderline{\mspace{-0.5mu}#1_{}\kern-\scriptspace\mspace{-0.5mu}}%
+  \mspace{0.5mu}%
+  \mathcorr{#1}%
+}}
+\makeatletter
+\newcommand{\mathcorr}[1]{\mathpalette\math@corr{#1}}
+\newcommand{\math@corr}[2]{%
+  \begingroup
+  \sbox\z@{$\m@th#1#2$}\sbox2{$\m@th#1#2_{}\kern-\scriptspace$}%
+  \kern\dimexpr\wd\z@-\wd\tw@\relax
+  \endgroup
+}
+\makeatother
+
+% center fixed width:
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+%\pagestyle{headings}  % Abschnitt/Kapitel links oben, Seitenzahlen rechts/außen oben
+
+% ===================== End of setup ============================
+
+
+% ===================== Useful commands =========================
+
+% SVG figure
+%\begin{figure}[!htb]
+%  \centering
+%  \includesvg[width=1.0\textwidth]{figures/figure.svg}\hfill
+%  \caption{Description of the Figure}
+%  \label{fig:my_labelX}
+%\end{figure}
+
+% PDF figure
+% \begin{figure}[!htb]
+%   \centering
+%   \includegraphics[width=1.0\textwidth]{figures/figure.pdf}\hfill
+%   \caption{Description of the Figure}
+%   \label{fig:my_label}
+%  \end{figure}
+
+% Break page
+% \pagebreak
+
+% Code-Snippet
+% \begin{codebox}
+%     \begin{minted}{R}
+%         # Creating a Graph
+%         attach(mtcars)
+%         plot(wt, mpg)
+%         abline(lm(mpg~wt))
+%         title("Regression of MPG on Weight")
+%     \end{minted}
+%     \caption{Example R code}
+%     \label{code:example}
+% \end{codebox}
+
+% Equation
+% \begin{equation}
+%     x = y
+%     \label{eq:example}
+% \end{equation}
+
+% Multiline Equation
+% \begin{equation}
+%   \begin{multlined}
+%       a = b \\
+%       b = c
+%   \end{multlined}
+% \end{equation}
+
+% ==============================================================
+
+% ===================== Title and author ========================
+\title{An Introduction to Computational Physics}
+\author{Leonard Storcks}
+% ===============================================================
+
+
+
+% ======================= Document ==============================
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Heidelberg University \par}
+	\vspace{0.5cm}
+	{\scshape\LARGE Department of Physics and Astronomy \par}
+	\vspace{1cm}
+	{\scshape\Large Book in Progress\par}
+	\vspace{1.5cm}
+	{\huge\bfseries An Introduction to Computational Physics \par}
+	\vspace{2cm}
+	{\Large\itshape Leonard Storcks\par}
+	\vfill
+    \par
+	\vfill
+\vfill
+
+    % Bottom of the page
+	{\large \today\par}
+
+\end{titlepage}
+
+
+\begin{abstract}
+\todo[inline]{TODO: write abstract}
+\end{abstract}
+% \vspace{3cm}
+% \begin{abstract}
+% Dieser Report behandelt verschiedene numerische Methoden zur Lösung von Differentialgleichungen. Die Schwerpunkte liegen dabei auf den Herausforderungen, die sich aus der Bewahrung von Erhaltungsgrößen sowie der Behandlung von steifen Differentialgleichungen als neuem Konzept ergeben. Symplektische Integratoren, wie z. B. die Leapfrog-Methode, erweisen sich als vorteilhaft für Hamilton-Systeme, da sie die langfristige Energie abweichungen mitigieren. Implizite Integratoren und fortgeschrittene mathematische Techniken wie automatische Differenzierung und Färbung von Graphen werden für die effiziente Lösung von steifen Differentialgleichungen vorgestellt. 
+% \end{abstract}
+
+\thispagestyle{empty}
+
+\pagebreak
+
+\tableofcontents
+
+\thispagestyle{empty}
+
+\pagebreak
+
+\setcounter{page}{1} % Set the page counter to 1
+
+
+\import{sections/}{0-notes.tex}
+\import{sections/}{1-introduction.tex}
+\import{sections/}{2_0-computation.tex}
+\import{sections/}{2_1-numbers.tex}
+\import{sections/}{3_0_simulation.tex}
+\import{sections/}{3_1_odes.tex}
+
+\pagebreak
+\thispagestyle{plain}
+\printbibliography[title={References}]
+\addcontentsline{toc}{section}{References}
+
+\end{document}
+% ======================== End of document ==========================
+

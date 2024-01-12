@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.blg'
+[101] biber-MSWIN64:340> INFO - === 
+[134] Biber.pm:419> INFO - Reading 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf'
+[239] Biber.pm:979> INFO - Found 9 citekeys in bib section 0
+[254] Biber.pm:4419> INFO - Processing section 0
+[267] Biber.pm:4610> INFO - Looking for bibtex file 'bibs/bib.bib' for section 0
+[318] bibtex.pm:1713> INFO - LaTeX decoding ...
+[372] bibtex.pm:1519> INFO - Found BibTeX data source 'bibs/bib.bib'
+[463] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[463] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[463] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[463] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[476] bbl.pm:660> INFO - Writing 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl' with encoding 'UTF-8'
+[481] bbl.pm:763> INFO - Output to C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl

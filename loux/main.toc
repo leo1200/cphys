@@ -1,0 +1,45 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Notes and Todo}{1}{section.1}%
+\contentsline {section}{\numberline {2}Introduction}{2}{section.2}%
+\contentsline {part}{I\hspace {1em}Basics of Numerical Computation}{3}{part.1}%
+\contentsline {section}{\numberline {3}Digital Representation of Numbers}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Integer Arithmetic}{4}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Unsigned integers}{4}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Two's complement for negative numbers}{7}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Integer types in C}{8}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Byte Ordering in Storage: Big and Little Endian}{8}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}Properties and Caveats of Integer Arithmetic}{9}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.6}Can there be integer-overflow in python?}{10}{subsubsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.2}Floating Point Arithmetic}{10}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}IEEE 754 Floating Point Standard}{11}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Only a finite set of floating point numbers can be represented exactly}{13}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Machine Precision is finite}{14}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}Rounding and Pitfalls of Floating Point Arithmetic}{14}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.5}Rewriting Expressions to Avoid Cancellation I}{15}{subsubsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.6}Rewriting Expressions to Avoid Cancellation II}{17}{subsubsection.3.2.6}%
+\contentsline {subsubsection}{\numberline {3.2.7}Accumulation of Round-off Errors}{17}{subsubsection.3.2.7}%
+\contentsline {subsubsection}{\numberline {3.2.8}Higher Precision}{17}{subsubsection.3.2.8}%
+\contentsline {subsection}{\numberline {3.3}A more general view on sources of numerical error}{18}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Backward error, forward error and condition number}{18}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Conditioning}{18}{subsubsection.3.4.1}%
+\contentsline {part}{II\hspace {1em}Simulation Methods}{20}{part.2}%
+\contentsline {section}{\numberline {4}Integration of ordinary differential equations}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Notes on ODEs}{20}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Converting to a first order system}{20}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Existence and uniqueness of an ODE solution for an initial value problem - Picard-Lindelöf and Lipschitz condition}{21}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Introduction of Numerical Integration at the hand of the two-body problem}{21}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}The two-body problem}{22}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Integrals of Motion}{22}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Kepler Orbits are Conic Sections}{24}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.4}Connection of the Runge-Lenz vector to the eccentricity of a conic section}{24}{subsubsection.4.2.4}%
+\contentsline {subsubsection}{\numberline {4.2.5}Dimensionless variables}{24}{subsubsection.4.2.5}%
+\contentsline {subsubsection}{\numberline {4.2.6}Solving the two-body problem using explicit (aka forward) Euler}{24}{subsubsection.4.2.6}%
+\contentsline {subsubsection}{\numberline {4.2.7}Probing the accuracy of an integration scheme - energy error of explicit Euler}{24}{subsubsection.4.2.7}%
+\contentsline {subsection}{\numberline {4.3}Explicit Euler and it's shortcomings}{24}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Explicit Euler is only first order accurate | truncation error}{24}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Explicit Euler has stability issues}{25}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}Introduction of the Problem of Stiffness and Implicit Euler to the help}{26}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Introducing stiffness at the hand of a simple example}{26}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}A \textit {definition} of stiffness}{28}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Implicit Euler to the help}{28}{subsubsection.4.4.3}%
+\contentsline {section}{References}{34}{figure.caption.23}%

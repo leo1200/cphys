@@ -1,0 +1,398 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{biamonte2017quantum}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=392818d7b034b0b53362804f322ab7a5}{%
+           family={Biamonte},
+           familyi={B\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f5a146c5713dd2c5d0bae5d5b944d722}{%
+           family={Wittek},
+           familyi={W\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b7f7b29051f4774bb6f5496c8bde3137}{%
+           family={Pancotti},
+           familyi={P\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a16ddc4e1334ba284e93d2d9662ed1c3}{%
+           family={Rebentrost},
+           familyi={R\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9906b78ec80183f9ac5008ae54ce7088}{%
+           family={Wiebe},
+           familyi={W\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=501c0933970931f080455b29b43e560d}{%
+           family={Lloyd},
+           familyi={L\bibinitperiod},
+           given={Seth},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group UK London}%
+      }
+      \strng{namehash}{de65f18da53209f6400cff1efb92e03a}
+      \strng{fullhash}{031ed5130f34284243a48743ae52d3e4}
+      \strng{bibnamehash}{de65f18da53209f6400cff1efb92e03a}
+      \strng{authorbibnamehash}{de65f18da53209f6400cff1efb92e03a}
+      \strng{authornamehash}{de65f18da53209f6400cff1efb92e03a}
+      \strng{authorfullhash}{031ed5130f34284243a48743ae52d3e4}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{number}{7671}
+      \field{title}{Quantum machine learning}
+      \field{volume}{549}
+      \field{year}{2017}
+      \field{pages}{195\bibrangedash 202}
+      \range{pages}{8}
+    \endentry
+    \entry{bryant2011computer}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=733e32bf9035c50457c549c4ca2d1a72}{%
+           family={Bryant},
+           familyi={B\bibinitperiod},
+           given={Randal\bibnamedelima E},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2191ab59173964cad6fe0e4205cd61ef}{%
+           family={O’Hallaron},
+           familyi={O\bibinitperiod},
+           given={David\bibnamedelima Richard},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall}%
+      }
+      \strng{namehash}{a2e2173252fbf54505c8185e3036818a}
+      \strng{fullhash}{a2e2173252fbf54505c8185e3036818a}
+      \strng{bibnamehash}{a2e2173252fbf54505c8185e3036818a}
+      \strng{authorbibnamehash}{a2e2173252fbf54505c8185e3036818a}
+      \strng{authornamehash}{a2e2173252fbf54505c8185e3036818a}
+      \strng{authorfullhash}{a2e2173252fbf54505c8185e3036818a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computer systems: a programmer’s perspective}
+      \field{year}{2011}
+    \endentry
+    \entry{Hairer1996}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=83e9309b497414bd7c7550110d37b3d7}{%
+           family={Hairer},
+           familyi={H\bibinitperiod},
+           given={Ernst},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6715424cc951a02c09b3082a661642ab}{%
+           family={Wanner},
+           familyi={W\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \strng{fullhash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \strng{bibnamehash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \strng{authorbibnamehash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \strng{authornamehash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \strng{authorfullhash}{1d34fc180148e9785fc9665e3a2ebfe1}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Solving Ordinary Differential Equations {II}}
+      \field{year}{1996}
+      \verb{doi}
+      \verb 10.1007/978-3-642-05221-7
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-642-05221-7
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-642-05221-7
+      \endverb
+    \endentry
+    \entry{heiter12}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1fc9202cf74cd900a01ea3db19f4fcde}{%
+           family={Heiter},
+           familyi={H\bibinitperiod},
+           given={Pascal\bibnamedelima Frederik},
+           giveni={P\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Ulm University}%
+      }
+      \strng{namehash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \strng{fullhash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \strng{bibnamehash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \strng{authorbibnamehash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \strng{authornamehash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \strng{authorfullhash}{1fc9202cf74cd900a01ea3db19f4fcde}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{On Numerical Methods for Stiff Ordinary Differential Equation Systems}
+      \field{type}{mathesis}
+      \field{year}{2012}
+      \verb{urlraw}
+      \verb https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.070/abschlussarbeiten/masterthesis_pfh.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.070/abschlussarbeiten/masterthesis_pfh.pdf
+      \endverb
+    \endentry
+    \entry{higham02}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5bec9d02065c9b35d45c881a24f7a1cd}{%
+           family={Higham},
+           familyi={H\bibinitperiod},
+           given={Nicholas\bibnamedelima J.},
+           giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{fullhash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{bibnamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authorbibnamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authornamehash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \strng{authorfullhash}{5bec9d02065c9b35d45c881a24f7a1cd}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Second}
+      \field{title}{Accuracy and Stability of Numerical Algorithms}
+      \field{year}{2002}
+      \verb{doi}
+      \verb 10.1137/1.9780898718027
+      \endverb
+      \verb{eprint}
+      \verb https://epubs.siam.org/doi/pdf/10.1137/1.9780898718027
+      \endverb
+      \verb{urlraw}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718027
+      \endverb
+      \verb{url}
+      \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718027
+      \endverb
+    \endentry
+    \entry{lambert91}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1d732bdcb336067c2b135039680bfe7a}{%
+           family={Lambert},
+           familyi={L\bibinitperiod},
+           given={J.D.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{1d732bdcb336067c2b135039680bfe7a}
+      \strng{fullhash}{1d732bdcb336067c2b135039680bfe7a}
+      \strng{bibnamehash}{1d732bdcb336067c2b135039680bfe7a}
+      \strng{authorbibnamehash}{1d732bdcb336067c2b135039680bfe7a}
+      \strng{authornamehash}{1d732bdcb336067c2b135039680bfe7a}
+      \strng{authorfullhash}{1d732bdcb336067c2b135039680bfe7a}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780471929901}
+      \field{title}{Numerical Methods for Ordinary Differential Systems: The Initial Value Problem}
+      \field{year}{1991}
+      \verb{urlraw}
+      \verb https://books.google.de/books?id=P0vPnQEACAAJ
+      \endverb
+      \verb{url}
+      \verb https://books.google.de/books?id=P0vPnQEACAAJ
+      \endverb
+    \endentry
+    \entry{Moser1978}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a13cbf048aedbb8bec8811f1f1ff37f9}{%
+           family={Moser},
+           familyi={M\bibinitperiod},
+           given={Jürgen},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \strng{fullhash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \strng{bibnamehash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \strng{authorbibnamehash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \strng{authornamehash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \strng{authorfullhash}{a13cbf048aedbb8bec8811f1f1ff37f9}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0343-6993}
+      \field{journaltitle}{The Mathematical Intelligencer}
+      \field{number}{2}
+      \field{title}{Is the solar system stable?}
+      \field{volume}{1}
+      \field{year}{1978}
+      \field{pages}{65\bibrangedash 71}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1007/BF03023062
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/BF03023062
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/BF03023062
+      \endverb
+    \endentry
+    \entry{press07}{book}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=0eab1ccd4d6c57a2ff6794a4724ccafb}{%
+           family={Press},
+           familyi={P\bibinitperiod},
+           given={William\bibnamedelima H.},
+           giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ff8354846900d7ef6c94cb025f7e938c}{%
+           family={Teukolsky},
+           familyi={T\bibinitperiod},
+           given={Saul\bibnamedelima A.},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0bb298496cc38e45b21c576a005078a0}{%
+           family={Vetterling},
+           familyi={V\bibinitperiod},
+           given={William\bibnamedelima T.},
+           giveni={W\bibinitperiod\bibinitdelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f40726c661611c8a024d53294b6e0ad0}{%
+           family={Flannery},
+           familyi={F\bibinitperiod},
+           given={Brian\bibnamedelima P.},
+           giveni={B\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {USA}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{618fa62f030076edf2937faa1b1684fb}
+      \strng{fullhash}{f75c24a04994b574cb620c685a1f8229}
+      \strng{bibnamehash}{618fa62f030076edf2937faa1b1684fb}
+      \strng{authorbibnamehash}{618fa62f030076edf2937faa1b1684fb}
+      \strng{authornamehash}{618fa62f030076edf2937faa1b1684fb}
+      \strng{authorfullhash}{f75c24a04994b574cb620c685a1f8229}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{isbn}{0521880688}
+      \field{title}{Numerical Recipes 3rd Edition: The Art of Scientific Computing}
+      \field{year}{2007}
+    \endentry
+    \entry{Ulmann2020}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=484dcc06308e8dc6a25f782795a4e601}{%
+           family={Ulmann},
+           familyi={U\bibinitperiod},
+           given={Bernd},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {De Gruyter}%
+      }
+      \strng{namehash}{484dcc06308e8dc6a25f782795a4e601}
+      \strng{fullhash}{484dcc06308e8dc6a25f782795a4e601}
+      \strng{bibnamehash}{484dcc06308e8dc6a25f782795a4e601}
+      \strng{authorbibnamehash}{484dcc06308e8dc6a25f782795a4e601}
+      \strng{authornamehash}{484dcc06308e8dc6a25f782795a4e601}
+      \strng{authorfullhash}{484dcc06308e8dc6a25f782795a4e601}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783110662207}
+      \field{month}{5}
+      \field{title}{Analog and Hybrid Computer Programming}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.1515/9783110662207
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1515/9783110662207
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1515/9783110662207
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

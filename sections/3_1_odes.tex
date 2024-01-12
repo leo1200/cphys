@@ -1,0 +1,419 @@
+\section{Integration of ordinary differential equations}
+\thispagestyle{plain}
+
+Our aim is solving an ordinary differential equation (ODE) 
+$\partial_t \vec{y} = \vec{f} \left(\vec{y} \right)$ with initial 
+values $\vec{y}(t = t_0)=\vec{y}_0$. Notice that $\vec{f} = \vec{f}(\vec{y}, t)$ 
+can be handled by augmenting $\Tilde{\vec{y}} = \begin{pmatrix} \vec{y} \\ t \end{pmatrix}$ 
+and $\Tilde{\vec{f}}(\Tilde{\vec{y}}) = \begin{pmatrix} \vec{f}(\Tilde{\vec{y}}) \\ 1 \end{pmatrix}$.
+
+\subsection{Notes on ODEs}
+\subsubsection{Converting to a first order system}
+Ordinary differential equations only contain derivatives with respect
+to one variable. Note, however, that higher order derivatives with respect
+to that variable can occur. We can get to the form $\partial_t \vec{y} = \vec{f} \left(\vec{y} \right)$
+by converting to a coupled first order system.
+
+Consider the n-th order ODE
+
+\begin{equation}
+    \partial_t^n y(t) = f\left(y(t), \partial_t y(t), \dots, \partial_t^{n-1} y(t), t\right), \quad f: U \subset \mathbb{R} \times \mathbb{K}^n \to \mathbb{K}
+\end{equation}
+
+for instance a pendulum with damping
+
+\begin{equation}
+    \partial_t^2 \phi = - \omega_0^2 \sin \phi - \gamma \partial_t \phi , \quad \gamma, \omega_0 \in \mathbb{R}
+\end{equation}
+
+Now we define the variables
+
+\begin{equation}
+    u_m = \partial_t^m y(t), \quad m \in \{0, \dots, n-1\}
+\end{equation}
+
+leading to the coupled first order system
+
+\begin{equation}
+    \partial_t \begin{pmatrix} u_0 \\ u_1 \\ \vdots \\ u_{n-2} \\ u_n \end{pmatrix} = \begin{pmatrix} u_1 \\ u_2 \\ \vdots \\ u_{n-1} \\ f\left(t, u_0, u_1, \dots, u_{n-1}\right) \end{pmatrix} \rightarrow \partial_t \vec{u} = \vec{f}\left(t, \vec{u}\right)
+\end{equation}
+
+Using $\phi$ for the angle and $\omega = \partial_t \phi$ for the angular velocity, we can write the pendulum as
+
+\begin{equation}
+    \partial_t \begin{pmatrix} \phi \\ \omega \end{pmatrix} = \begin{pmatrix} \omega \\ - \omega_0^2 \sin \phi - \gamma \omega \end{pmatrix}
+\end{equation}
+
+\subsubsection{Existence and uniqueness of an ODE solution for an initial value problem - Picard-Lindelöf and Lipschitz condition}
+For the initial value problem $\partial_t \vec{y} = \vec{f} \left(\vec{y} \right), \vec{y}(t_0) = \vec{y}_0$ to have a unique solution in the vicinity of $(\vec{y}_0,t_0)$, i.e. for the change
+around that point, to uniquely determine the development, this change must be \textit{well-behaved}, $\vec{f}$ must be \textit{Lipschitz-continuous}.
+
+\begin{equation}
+    \forall (\vec{y},t),(\vec{z},t) \text{ in the vicinity of } (\vec{y}_0,t_0): ||\vec{f}(\vec{y},t) - \vec{f}(\vec{z},t)|| \leq \lambda ||\vec{y} - \vec{z}||
+\end{equation}
+
+with $\lambda > 0$ and $||\cdot||$ being an arbitrary vector norm. The slope of the line connecting two close-by evaluations of $\vec{f}$ must be bounded by $\lambda$.
+This is guaranteed for $\vec{f}$ being continuous and sufficiently often differentiable with bounded derivatives and more so $\vec{f}$ analytic.
+
+\subsection{Introduction of Numerical Integration at the hand of the two-body problem}
+Our aim is computationally modelling the interaction of two-bodies. This lends itself well
+as an example, as stepping the system forward in time is easy to imagine visually, an analytic
+solution exists to which we might compare numerical solution and it guides us to the problem
+of conserved quantities and symplectic integrators.
+
+\subsubsection{The two-body problem}
+For the two-body problem (illustrated in figure \ref{fig:two_body_problem}) the equations of motion are
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.4\textwidth]{figures/two_body_problem.svg}\hfill
+  \caption{Illustration of the two-body problem.}
+  \label{fig:two_body_problem}
+\end{figure}
+
+\begin{equation}
+    \begin{aligned}
+        m_1 \partial_t^2 \vec{r}_1 &= - G \frac{m_1 m_2}{|\vec{r}|^3} (\vec{r}) \\
+        m_2 \partial_t^2 \vec{r}_2 &= + G \frac{m_1 m_2}{|\vec{r}|^3} (\vec{r})
+    \end{aligned}
+\end{equation}
+
+for $\vec{r} = \vec{r}_1 - \vec{r}_2$. Subtracting both yields
+
+\begin{equation}
+    \partial_t^2 \vec{r} = - G \frac{M}{|\vec{r}|^3} \vec{r}
+\end{equation}
+
+with $M = m_1 + m_2$. Which is equivalent to the equation of motion of a single body of mass $\mu = \frac{m_1 m_2}{M}$ in a potential $U(r) = -G \frac{m_1m_2}{r}=-G \frac{M\mu}{r}$.
+
+We can write this as the first order system
+
+\begin{equation}
+    \partial_t \begin{pmatrix} \vec{r} \\ \vec{v} \end{pmatrix} = \begin{pmatrix} \vec{v} \\ - G \frac{M}{|\vec{r}|^3} \vec{r} \end{pmatrix}
+\end{equation}
+
+\subsubsection{Integrals of Motion}
+The following quantities are conserved along the trajectories of $m_1$ and $m_2$ and are therefore useful sanity checks for simulations.
+
+\begin{itemize}
+    \item Total energy 
+        \begin{equation} E = T + U = \frac{\mu}{2}v^2 - \frac{GM}{r}\mu \end{equation}
+    \item Angular momentum (perpendicular to the orbital plane)
+        \begin{equation}\vec{L} = \vec{r} \times \vec{p} =  \vec{r} \times \mu \vec{v}\end{equation}
+    \item Laplace-Runge-Lenz vector (here in its dimensionless form, the eccentricity vector)
+        \begin{equation} \begin{multlined} \vec{e} = \frac{\vec{v} \times \vec{j}}{GM} - \vec{\hat{e}}_r, \quad \text{ specific angular momentum } \vec{j} = \frac{\vec{L}}{\mu} \end{multlined} \\ \text{ eccentricity } e = ||\vec{e}||\end{equation}
+\end{itemize}
+
+\note{The 1-body Kepler problem has 6 degrees of freedom (phase-space coordinates), of which one cannot be conserved, as nothing should be able to tell us
+the initial time of our motion. Therefore, only 5 quantities can be conserved and the Laplace-Runge-Lenz vector indeed only adds $1$ more conserved degree of freedom (taking $E$ and $\vec{L}$ as primary conserved quantities, $\vec{e}$ only has one degree of freedom).}
+
+\textbf{Additional notes on the Laplace-Runge Lenz vector} \par
+The Lenz vector is conserved in all $\frac{1}{r}$-potentials, like the gravitational or Coulomb potential, for instance
+in the Hydrogen atom (but not for multi-electron atoms). Kepler-orbits are conic sections and the Laplace-Runge-Lenz vector
+is illustrated in figure \ref{fig:laplace_runge_lenz}.
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.4\textwidth]{figures/lrl.svg}\hfill
+  \caption{Illustration of the Laplace-Runge-Lenz vector.}
+  \label{fig:laplace_runge_lenz}
+\end{figure}
+
+From our pictorial evidence, we see that $\vec{e}$ is points along the semi-major axis. Note here we have drawn that $\vec{r} = \vec{r}_1 - \vec{r}_2$ follows a conic section.
+Likewise $m_1$ and $m_2$ move on conic sections with respect to the center of mass, $\vec{0} \explain{=}{o.b.d.A.} \frac{1}{M} \left( m_1 \vec{r}_1 + m_2 \vec{r}_2 \right)$ leading
+to $\vec{r}_1 = \frac{m_2}{M} \vec{r}$ and $\vec{r}_2 = - \frac{m_1}{M} \vec{r}$.
+
+
+\subsubsection{Kepler Orbits are Conic Sections}
+
+\subsubsection{Connection of the Runge-Lenz vector to the eccentricity of a conic section}
+
+\subsubsection{Dimensionless variables}
+
+\subsubsection{Solving the two-body problem using explicit (aka forward) Euler}
+
+\subsubsection{Probing the accuracy of an integration scheme - energy error of explicit Euler}
+
+\subsection{Explicit Euler and it's shortcomings}
+The simplest method for solving an ODE is the Explicit Euler method
+\[
+    \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n)} \right) \Delta t, \quad\mathrm{where}\quad   \vec{y}^{(0)} = \vec{y}_0
+\]
+which is explicit as the computation of $\vec{y}^{(n+1)}$ only depends on already known states.
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.4\textwidth]{figures/expl_euler_step.svg}\hfill
+  \caption{Illustration of one time step in the Explicit Euler scheme.}
+  \label{fig:expl_euler_step}
+\end{figure}
+
+As illustrated in Figure \ref{fig:expl_euler_step} in every step we step forward along the current derivative $\vec{f} \left( \vec{y}^{(n)} \right)$.
+
+\subsubsection{Explicit Euler is only first order accurate | truncation error}
+A simple error approximation follows from Taylor expansion
+\[
+\vec{y}(t+\Delta t) = \vec{y}(t) + \Delta t \vec{f}(t) + \mathcal O_s(\Delta t^2)
+\]
+In each step we make an error $\mathcal O_s(\Delta t^2)$ so over some 
+timespan $T$ where we need $N_S = \frac{T}{\Delta t}$ steps we accumulate 
+the error $N_S \mathcal O_S (\Delta t^2) = \mathcal O_T(\Delta t)$. We therefore 
+call Explicit Euler first order accurate.
+\note{For a global error scaling with $\mathcal O_T(\Delta t^n)$ (n-th order
+accurate scheme), the local truncation error (of the Taylor expansion) must
+be $\mathcal O_s(\Delta t^{n+1})$.}
+
+\subsubsection{Explicit Euler has stability issues}
+Stability analysis is a broad field, and the interested reader can find details in chapter IV.3 of \cite{Hairer1996}. For now, consider the ODE $\partial_t y = \alpha y, Re(\alpha) < 0, y(0) = y_0$ with the solution $y(t) = y_0 e^{\alpha y}$.
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.7\textwidth]{figures/exp_euler_stab.svg}\hfill
+  \caption{Linear stability of the Explicit Euler scheme.}
+  \label{fig:expl_euler_stab}
+\end{figure}
+
+The results of applying Explicit Euler for different step sizes $\Delta t$ are shown in figure \ref{fig:expl_euler_stab}. At a small step size the correct solution is obtained, for a larger step size the numerical solution becomes oscillatory and for even larger step sizes it diverges. We can quantitatively explain this behavior by looking at the Euler steps
+
+\[
+\begin{aligned}
+y^{(n+1)} &= y^{(n)} + \alpha y^{(n)} \Delta t \\
+&= y^{(n)}(1 + \alpha \Delta t)\\
+&= y^{(0)}(1 + \alpha \Delta t)^{n + 1}\\
+\end{aligned}
+\]
+
+\begin{itemize}
+\item $\Delta t < -\frac{1}{\alpha}  \rightarrow$ we observe monotonous decrease (ok)
+\item $-\frac{1}{\alpha} < \Delta t < -\frac{2}{\alpha} \rightarrow $ oscillation (regarding the sign) but still decrease in the absolute value (problematic)
+\item $-\frac{2}{\alpha} < \Delta t \rightarrow $ an increasing, oscillating solution (very bad)
+\end{itemize}
+
+The growth factor $R(\alpha \Delta t) = 1 + \alpha \Delta t$ in $y^{(n + 1)} = R(\alpha \Delta t) y^{(n)}$ is called stability function and
+
+\[
+\mathcal{D}:=\left\{ z \in \mathcal{C}: |R(z)| \le 1\right\} \quad\mathrm{so}\quad D_{Euler}=\left\{ z = \alpha \Delta t \in \mathcal{C}: |1 + z| \le 1\right\}
+\]
+
+is called region of absolute stability or linear stability domain. $D_{Euler}$ is a finite region of absolute stability in form of a circle on the left of the complex plane (see figure \ref{fig:expl_euler_stab_reg}).
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.7\textwidth]{figures/explicit_euler_stability_region.svg}\hfill
+  \caption{Region of absolute stability of the Explicit Euler method.}
+  \label{fig:expl_euler_stab_reg}
+\end{figure}
+
+\problem{While in this example the stability constraint is easy to fulfill (we get a good solution for a reasonably large step-size), in problems
+with different timescales, with explicit Euler we must resolve the fastest one, even if its completely negligible (\textit{stiff problems}).}
+
+\subsection{Introduction of the Problem of Stiffness and Implicit Euler to the help}
+\subsubsection{Introducing stiffness at the hand of a simple example}
+\label{sec:stiffness_example}
+Consider the following ODE system (following \cite[chapter 17.5]{press07})
+\[
+  \begin{aligned}
+    \partial_t y_1 &= 998 y_1 + 1998 y_2 \\
+    \partial_t y_2 &= -999y_1 - 1999 y_2
+  \end{aligned}
+\]
+with initial conditions $y_1(0) = 1$ and $y_2(0) = 0$. The system can be represented in matrix form as
+
+\[
+  \partial_t \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} = \mat{A} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \quad \mat{A} = \begin{pmatrix} 998 & 1998 \\ -999 & -1999 \end{pmatrix}
+\]
+
+The eigenvalues of $\mat{A}$ are $\lambda_1 = -1$ and $\lambda_2 = -1000$. The eigenvectors are $\vec{e}_1 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$ and $\vec{e}_2 = \begin{pmatrix} 2 \\ -1 \end{pmatrix}$. The solution of the system is then
+
+\[
+  \begin{pmatrix} y_1(t) \\ y_2(t) \end{pmatrix} = \exp{\left(\mat{A}t\right)} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} 2 \\ -1 \end{pmatrix} \exp{\left(-1t\right)}  + \begin{pmatrix} -1 \\ 1 \end{pmatrix} \exp{\left(-1000t\right)}
+\]
+
+Let us now apply the Explicit Euler method to this system for different time-steps $\Delta t$. The result is shown in figure \ref{fig:simple_stiffness}.
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=1\textwidth]{figures/stiff_expl.svg}\hfill
+  \caption{Numerical solution to the linear system $\partial_t \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} = \mat{A} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}$ with $\mat{A} = \begin{pmatrix} 998 & 1998 \\ -999 & -1999 \end{pmatrix}$ and $y_1(0) = 1$, $y_2(0) = 0$ using the Explicit Euler method for different time-steps $\Delta t$. The left panel shows the solution for $\Delta t = 0.0005$, the central one for $\Delta t = 0.002$ and the right one for $\Delta t = 0.004$.}
+  \label{fig:simple_stiffness}
+\end{figure}
+
+Let us think back to the linear stability analysis of the Explicit Euler scheme for $\partial_t y = \alpha y, Re(\alpha) < 0, y(0) = y_0$. We had obtained
+
+\begin{itemize}
+  \item $\Delta t < -\frac{1}{\alpha}  \rightarrow$ we observe monotonous decrease (ok)
+  \item $-\frac{1}{\alpha} < \Delta t < -\frac{2}{\alpha} \rightarrow $ oscillation (regarding the sign) but still decrease in the absolute value (problematic)
+  \item $-\frac{2}{\alpha} < \Delta t \rightarrow $ an increasing, oscillating solution (very bad)
+\end{itemize}
+
+The same result holds in principle for our linear system - but with $\alpha$ replaced by the eigenvalue of largest magnitude of $\mat{A}$, here $\lambda_2 = -1000$ (for the proof see \cite[chapter 17.5]{press07}).
+
+As we move away from the origin, the fastest decreasing term $\propto \exp{\left( -\lambda_2 t\right)}$ in the true solution is completely negligible. However, in the explicit scheme it still sets the timescale that has to be resolved for a stable solution.
+
+In the setting of $\partial_t y = \alpha y, Re(\alpha) < 0$ the stability constraint for $\Delta t$ is not too problematic because the resulting step-size is reasonable compared to the timescale of the problem. In the case of an ODE with different timescales in the solution, however, we are often interested in the timescale of the slowest processes but in the explicit scheme we still need to resolve the fastest timescale which quickly becomes infeasable. This is the problem of stiffness and can - in such a linear setting with all negative eigenvalues of $\mat{A}$ - be characterized by the stiffness ratio
+
+\[
+  \text{stiffness ratio} := \frac{\max_{\text{eigenvalues } \lambda_i \text{ of } \mat{A}}{\left| \text{Re } \lambda_i \right|}}{\min_{\text{eigenvalues } \lambda_i \text{ of } \mat{A}}{\left| \text{Re } \lambda_i \right|}} = \frac{\lambda_2}{\lambda_1} = 1000
+\]
+
+A large stiffness ratio indicates that an explicit scheme like the Explicit Euler method would be very inefficient for following the slowest process.
+
+\subsubsection{A \textit{definition} of stiffness} \label{sec:stiffness_definition}
+As discussed in \cite{lambert91} a hard mathematical definition of stiffness is difficult and we therefore resort to the broad practical definition \citep*[chapter 6]{lambert91}
+
+\begin{quote}
+  \enquote{If a \textcolor{blue}{numerical method with a finite region of absolute stability}, applied to a system with any initial conditions, is forced to use in a certain interval of integration a \textcolor{red}{step length which is excessively small in relation to the smoothness of the exact solution} in that interval, then the system is said to be stiff in that interval.}
+\end{quote}
+
+An example for a numerical method with a finite region of absolute stability is the Explicit Euler method (see figure \ref{fig:expl_euler_stab_reg}). In the example above, in spite of the fact that the solution is very smooth and the term $\propto \exp{\left( -\lambda_2 t\right)}$ is quickly negligible, we have to use excessively small steps.
+
+\subsubsection{Implicit Euler to the help}
+\label{sec:implicit_euler}
+At the core of dealing with stiffness are implicit methods, the simplest representative being Implicit Euler.
+
+An Implicit Euler step for solving $\partial_t \vec{y} = \vec{f} \left(\vec{y} \right)$ is given by
+
+\[
+    \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n + 1)} \right) \Delta t \quad\mathrm{where}\quad   \vec{y}^{(0)} = \vec{y}_0
+\]
+
+which is an implicit equation as $\vec{f}$ is evaluated at the new time step $\vec{y}^{(n+1)}$.
+
+\greenbox{\textbf{Intuition behind implicit Euler:} We can write the implicit Euler step as $\vec{y}^{(n+1)} - \vec{f} \left( \vec{y}^{(n + 1)} \right) \Delta t = \vec{y}^{(n)}$, so which is the point where when I sit on it and shoot back with the corresponding slope, I get back to where I am coming from. This is illustrated in figure \ref{fig:implicit_euler_intuition}.}
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=0.7\textwidth]{figures/implicit_euler_int.svg}\hfill
+  \caption{Illustration of the implicit Euler step.}
+  \label{fig:implicit_euler_intuition}
+\end{figure}
+
+\note{Implicit Euler is often referred to as backward Euler and the explicit Euler as forward Euler.}
+
+\problem{Note that implicit Euler is also a first order accurate scheme.}
+
+\subsubsection*{Region of absolute stability of the Implicit Euler method}
+
+As for the Explicit Euler method, we perform a linear stability analysis of the Implicit Euler method for $\partial_t y = \alpha y, Re(\alpha) < 0, y(0) = y_0$. We obtain
+
+\[
+  y^{(n+1)} = y^{(n)} + \alpha y^{(n+1)} \Delta t \quad \Rightarrow \quad y^{(n+1)} = \frac{1}{1 - \alpha \Delta t} y^{(n)}
+\]
+
+which decreases for any $\Delta t > 0$ (illustrated in figure \ref{fig:imp_eul_lin_stab}). For large time-steps, the result is inaccurate (Implicit Euler is a first order scheme) but the solution remains stable. As of the stability function $R(z) = \frac{1}{1 - z}$ the region of absolute stability is given by
+
+\[ 
+  \mathcal{D}_{\text{implicit euler}} = \left\{ z \in \mathbb{C} \mid \left| R(z) \right| < 1 \right\} = \left\{ z \in \mathbb{C} \mid \left| 1 - z \right| > 1 \right\}
+\]
+
+which is illustrated in figure \ref{fig:imp_eul_stab_reg}. The whole left half plane is included in the region of absolute stability and the method is therefore unconditionally stable.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includesvg[width=.92\linewidth]{figures/imp_euler.svg}
+    \caption[width=.92\linewidth]{Linear stability of Implicit Euler.}
+    \label{fig:imp_eul_lin_stab}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includesvg[width=.92\linewidth]{figures/implicit_euler_stability_region.svg}
+    \caption[width=.92\linewidth]{Region of absolute stability of the Implicit Euler method (shaded in green).}
+    \label{fig:imp_eul_stab_reg}
+  \end{subfigure}
+  \caption{Stability of the Implicit Euler scheme.}
+  \label{fig:imp_eul_total}
+\end{figure}
+
+\subsubsection*{Implicit Euler for stiff linear ODEs}
+As Implicit Euler is unconditionally stable, the fast oscillating terms resulting from
+\[
+  \partial_t \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} = \mat{A} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \quad \mat{A} = \begin{pmatrix} 998 & 1998 \\ -999 & -1999 \end{pmatrix}
+\]
+
+with initial conditions $y_1(0) = 1$ and $y_2(0) = 0$ are no problem as illustrated in figure \ref{fig:simple_stiffness_impl}, where in spite of the relatively large time-step a good approximation of the solution is obtained.
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=1\textwidth]{figures/stiff_impl.svg}\hfill
+  \caption{The same problem as in figure \ref{fig:simple_stiffness} is now approached using the Implicit Euler method and a relatively large time-step of $\Delta t = 0.01$.}
+  \label{fig:simple_stiffness_impl}
+\end{figure}
+
+The implicit step for such a linear system $\partial_t \vec{y} = \mat{A} \vec{y}$ is
+
+\[
+  \vec{y}^{(n+1)} = \vec{y}^{(n)} + \mat{A} \vec{y}^{(n+1)} \Delta t \quad \Rightarrow \quad \left( \mat{1} - \mat{A} \Delta t \right) \vec{y}^{(n+1)} = \vec{y}^{(n)}
+\]
+
+which means that to make a step we have to solve a linear system which is usually done by matrix decomposition (like LU decomposition).
+
+\subsubsection*{But how can we approach non-linear ODEs using the Implicit Euler method?}
+To perform an implicit step 
+\[
+  \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n+1)} \right) \Delta t
+\]
+for a non-linear system $\partial_t \vec{y} = \vec{f} \left( \vec{y} \right)$ like the Davis-Skodje equation
+
+\[ 
+\begin{aligned}
+& \dot{y}_1(t)=-y_1(t) \\
+& \dot{y}_2(t)=-\gamma y_2(t)+\frac{(\gamma-1) y_1(t)+\gamma y_1^2(t)}{\left(1+y_1(t)\right)^2}
+\end{aligned}
+\]
+
+where $\gamma$ is a measure for the stiffness (see \cite[chapter 2.4]{heiter12}) we reformulate the implicit step as a root-finding problem
+
+% 0 ̲=▁y^((n+1) )−▁y^((n) )−Δt ▁f (▁y^((n+1) ) )=:g ̲(�� ̲ )
+\[
+  \vec{0} = \vec{y}^{(n+1)} - \vec{y}^{(n)} - \Delta t \vec{f} \left( \vec{y}^{(n+1)} \right), \quad \vec{g} \left( \vec{\xi} \right) := \vec{\xi} - \vec{y}^{(n)} - \Delta t \vec{f} \left( \vec{\xi} \right)
+\]
+\[
+  \rightarrow \vec{0} = \vec{g} \left( \vec{\xi} \right) \Leftrightarrow \vec{\xi} = \vec{y}^{(n+1)}
+\]
+
+where each of those time-steps is solved using Newton's method (or quasi-Newton)
+
+% ξ ̲_(k+1)=ξ ̲_k−J ̳_g ̲^(−1) (ξ ̲_k )  g(ξ ̲_k ),  J ̳_g ̲ =1 ̳−γ(Δt)  J ̳_( f ̲ )
+
+\[
+  \vec{\xi}_{k+1} = \vec{\xi}_k - \mat{J}_{\vec{g}}^{-1} \left( \vec{\xi}_k \right) \vec{g} \left( \vec{\xi}_k \right), \quad \mat{J}_{\vec{g}} = \mat{1} - \Delta t \gamma \left( \vec{\xi}_k \right) \mat{J}_{\vec{f}}
+\]
+% ξ ̲_0=▁y^((n) ),  ξ ̲_m →┬(m→∞) ▁y^((n+1) )
+
+\[
+  \vec{\xi}_0 = \vec{y}^{(n)}, \quad \vec{\xi}_m \rightarrow \vec{y}^{(n+1)} \quad \text{for} \quad m \rightarrow \infty
+\]
+  
+where $\mat{J}_{\vec{f}}$ is the Jacobian of $\vec{f}$. In Quasi-Newton the Jacobian is only recalculated once per time-step in the Euler method
+
+% alternatively quasi−Newton ξ ̲_(k+1)=ξ ̲_k−J ̳_g ̲^(−1) (ξ ̲_0 )  g(ξ ̲_k )
+\[
+  \vec{\xi}_{k+1} = \vec{\xi}_k - \mat{J}_{\vec{g}}^{-1} \left( \vec{\xi}_0 \right) \vec{g} \left( \vec{\xi}_k \right)
+\]
+
+For the Davis-Skodje problem mentioned above some Implicit Euler steps are drawn into the stream plot of the equation in figure \ref{fig:davis_skodje}. Here, one can also see the intuition behind Implicit Euler steps: One searches a point where the derivative is such that shooting back with this slope leads back to the point we are coming from, as
+
+\[
+  \vec{y}^{(n)} = \vec{y}^{(n+1)} - \vec{f} \left( \vec{y}^{(n+1)} \right) \Delta t
+\]
+
+\begin{figure}[!htb]
+  \centering
+  \includesvg[width=1\textwidth]{figures/davis_skodje.svg}\hfill
+  \caption{Stream plot of the Davis-Skodje equation with some Implicit Euler steps also drawn. The direction of the Implicit Euler steps is from right (starting at (4, 0)) to left.}
+  \label{fig:davis_skodje}
+\end{figure}
+
+The steps of the Newton iteration done for each Implicit Euler step can most intuitively be understood in the formulation as the linear equation
+
+% b ̲:=g ̲(�� ̲_k )=J ̳_g ̲^  (�� ̲_k−�� ̲_(k+1) )=J ̳_g ̲^  a ̲
+\[
+  \vec{b} := \vec{g} \left( \vec{\xi}_k \right) = \mat{J}_{\vec{g}} \left( \vec{\xi}_k - \vec{\xi}_{k+1} \right) = \mat{J}_{\vec{g}} \vec{a}, \quad \vec{a} := \vec{\xi}_k - \vec{\xi}_{k+1}
+\]
+
+which is also the equation solved on the computer using matrix decomposition. $\mat{J}_{\vec{g}} \vec{a}$ is the directional derivative of $\vec{g}$ in the direction of $\vec{a}$ and in a step of the Newton iteration we search for a step $\vec{a}$ that gets us from $\vec{0}$ to $\vec{b}$ in other words $\vec{\xi}_{k+1} = \vec{\xi}_{k} - \vec{a}$.
+
+\problem{While the Implicit Euler method is unconditionally stable, performing the implicit step for non-linear ODEs requires solving a non-linear equation with some root-finding algorithm, which can be even more costly than doing small explicit steps if no proper care (e.g. smart forward differentiation in the root finding) is taken.}
+
