@@ -129,7 +129,7 @@ $$5/3 = 1; -5/3 = -1; 5/-3 = -1$$
 $$5\%3 = 2; -5\%3 = -2; 5\%-3 = -2$$
 }
 
-\redbox{\textbf{Implicit type conversion:} In C, the type can implicitly be converted up to signed int, which can avoid overflow, as illustrated in table \ref{tab:type_conversion}.
+\redbox{\textbf{Implicit type conversion:} In C, the type can implicitly be converted up to unsigned int, which can avoid overflow, as illustrated in table \ref{tab:type_conversion}.
 }
 \begin{table}[!htb]
     \centering
@@ -153,7 +153,7 @@ $$5\%3 = 2; -5\%3 = -2; 5\%-3 = -2$$
     printf("%llu\n", c); // 1705032704
         \end{minted}
         As $2^{32} - 1 \approx 4\cdot 10^9 < 6 \cdot 10^9 < 2^{33} - 1$ (unsigned ranges) we overflow to the 33rd-bit, which is cut-off,
-        giving the signed result of $6 \cdot 10^9 - 2^{32} = 1705032704$.
+        giving the unsigned result of $6 \cdot 10^9 - 2^{32} = 1705032704$.
         \end{minipage}
         &
         \begin{minipage}[t]{0.3\textwidth}
@@ -203,7 +203,7 @@ Based on the representation in scientific notation, we can store a floating poin
 \end{itemize}
 where for single precision (32-bit)
 \begin{itemize}
-    \item the exponent is stored in 8 bits, $b = 127$, $e_min = -126$, $e_max = 127$ with $E = 255$ and $E = 0$ reserved for special cases
+    \item the exponent is stored in 8 bits, $b = 127$, $e_{min} = -126$, $e_{max} = 127$ with $E = 255$ and $E = 0$ reserved for special cases
     \item the mantissa is stored in 23 bits, with the first bit being implicitly $1$ (\textbf{normalization}), which can always be assumed by appropriately choosing the exponent (floating point representations are not unique), so we have $p = 23(+1)$ bits of precision encoding an integer $M$ but need a special representation for $0$
 \end{itemize}
 where based on the exponent we differentiate between
@@ -212,7 +212,8 @@ where based on the exponent we differentiate between
     \begin{equation}
         \begin{multlined}
             V = (-1)^s \cdot \left(1 + \frac{M}{2^p}\right) \cdot 2^{E-b}, \quad \text{sign bit } s\\
-            \text{ biased exponent } E = e + b, \quad \text{ integer representation of mantissa } M
+            \text{ biased exponent } E = e + b, \quad \text{ integer representation of mantissa } M \\
+            \text{ precision } p = \#\text{mantissa bits} + 1 \text{ implicit bit}
         \end{multlined}
     \end{equation}
     \item \textbf{denormalized values for $E = 0$} with value of the floating point number
@@ -281,7 +282,7 @@ representable number (computation is done at higher (typically double or higher)
 \end{equation}
 with the common pitfalls
 \begin{itemize}
-    \item \textcolor{red1}{\textbf{Limitation of machine precision:}} $a+b=a$ typically for $|b| < \epsilon_{\text{mach}} |a|$, i.e. when $b$ cannot be resolved by the mantissa of $a$
+    \item \textcolor{red1}{\textbf{Limitation of machine precision:}} $a+b=a$ typically for $|b| < \epsilon_{\text{mach}} |a|$, i.e. when $b$ cannot be resolved by the mantissa of $a$, e.g. $(1+0.5\epsilon) - 0.5\epsilon$ in floating point arithmetic yields $0.9999999999999999$ not $1$.
     \item \textcolor{red1}{\textbf{Associativity is not guarantueed:}} $(a+b)+c \explain{\ne}{i.A.} a+(b+c)$, e.g. $(2.3 + 1e20) - 1e20$ yields $0.0$ but $2.3 + (1e20 - 1e20)$ yields $2.3$
     \item \textcolor{red1}{\textbf{Problems of representability:}} As e.g. $0.1$ is not exactly representable in base $\beta = 2$, $x/10 \ne 0.1 \cdot x$ in general while $x/2.0 = 0.5 \cdot x$ is exact. The compiler may automatically choose the multiplication variant as multiplication is faster than division.
     \item \textcolor{red1}{\textbf{Cancellation:}} For $x = a - b$ subtractive cancellation causes relative errors already present in $\hat{a}$ and $\hat{b}$ to be (relatively) amplified, when $a$ and $b$ are of similar size. Significant digits are lost and the relative error explodes. Consider e.g. $a = 1.75682, b = 1.75471$ with $\hat{a} = 1.76$ and $\hat{b} = 1.75$. While $\hat{a},\hat{b}$ have small relative errors (3 digits precision\footnote{$\hat{x}$ is said to approximate $x$ to the r-th digit, if the absolute error is at most $\frac{1}{2}$ in the r-th digit, so 

@@ -46,13 +46,44 @@
 
 \usepackage{subcaption}
 
-% Paragraph as subsubsubsection
-\usepackage{titlesec}
-\setcounter{secnumdepth}{4}
-\titleformat{\paragraph}
-{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titlespacing*{\paragraph}
+%%%%%% Proper subsubsubsection %%%%%%%
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
 {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% better paragraphs
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{0.5em}
+
+\newcommand{\nparagraph}[1]{\paragraph{#1}\mbox{}\\}
 
 % Good settings for Floats
 \renewcommand{\textfraction}{0.2}
@@ -166,6 +197,10 @@
 % define modern green and modern red
 \definecolor{green1}{HTML}{00b894}
 \definecolor{red1}{HTML}{d63031}
+\definecolor{yellow1}{HTML}{7F6000}
+
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
 
 % Enable highlight-boxes
 \usepackage[most]{tcolorbox}
@@ -188,15 +223,24 @@
 \newtcolorbox{noteBox}{textmarker,
     borderline west={6pt}{0pt}{green},
     colback=green!10!white}
+% define bluebox
+\newtcolorbox{blueBox}{textmarker,
+    borderline west={6pt}{0pt}{blue1},
+    colback=blue1!10!white}
+
 
 % define commands for easy access
-\newcommand{\note}[1]{\begin{noteBox} \textbf{Note:} #1 \end{noteBox}}
-\newcommand{\idea}[1]{\begin{hintBox} \textbf{Idea:} #1 \end{noteBox}}
+\newcommand{\note}[1]{\begin{hintBox} \textbf{Note:} #1 \end{hintBox}}
+\newcommand{\idea}[1]{\begin{noteBox} \textbf{Idea:} #1 \end{noteBox}}
 \newcommand{\problem}[1]{\begin{importantBox} \textbf{Problem:} #1 \end{importantBox}}
 
 \newcommand{\greenbox}[1]{\begin{noteBox} #1 \end{noteBox}}
 \newcommand{\redbox}[1]{\begin{importantBox} #1 \end{importantBox}}
 \newcommand{\yellowbox}[1]{\begin{hintBox} #1 \end{hintBox}}
+
+\newcommand{\bluebox}[1]{\begin{blueBox} #1 \end{blueBox}}
+
+\usepackage{makecell}
 
 % Enable multirow tables
 \usepackage{booktabs,multirow,array}
@@ -266,6 +310,11 @@
   \scriptscriptfont\fi\fi\fi 3
 }
 \makeatother
+
+\newcommand{\skipthis}{\textsuperscript{\textasteriskcentered}}
+
+\usepackage{mdframed}
+\mdfdefinestyle{padded}{skipabove = 10pt, skipbelow = 10pt}
 
 % vectors and matrices
 \renewcommand{\vec}[1]{{%
@@ -382,7 +431,7 @@
 
 
 \begin{abstract}
-\todo[inline]{TODO: write abstract}
+Computation - quickly crunching billions of numbers - can give us a new perspective and understanding of physical systems. This book aims to equip the reader with fundamental knowledge of numerics, computation and statistics as well as tools to tackle problems from physics (and many other disciplines).
 \end{abstract}
 % \vspace{3cm}
 % \begin{abstract}
@@ -393,6 +442,8 @@
 
 \pagebreak
 
+\thispagestyle{plain}
+
 \tableofcontents
 
 \thispagestyle{empty}
@@ -402,12 +453,17 @@
 \setcounter{page}{1} % Set the page counter to 1
 
 
-\import{sections/}{0-notes.tex}
+% \import{sections/}{0-notes.tex}
 \import{sections/}{1-introduction.tex}
 \import{sections/}{2_0-computation.tex}
 \import{sections/}{2_1-numbers.tex}
 \import{sections/}{3_0_simulation.tex}
 \import{sections/}{3_1_odes.tex}
+\import{sections/}{3_2_qm_to_fluid.tex}
+\import{sections/}{3_3_fluid_basics.tex}
+\import{sections/}{3_4_eulerian.tex}
+\import{sections/}{3_5_sph.tex}
+\import{sections/}{3_6_fem.tex}
 
 \pagebreak
 \thispagestyle{plain}

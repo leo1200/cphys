@@ -1,0 +1,110 @@
+\section{Simulation of Physical Systems - from Quantum Mechanics to Fluid Dynamics}
+\thispagestyle{plain}
+\label{sec:qm_to_fluid}
+
+\subsection{Different levels of modelling from Quantum Mechanics to Kinetic Gas theory}
+Our aim is simulating real-world physical systems with two of
+our fundamental tools being modeling and model order reduction.
+When we model a fluid, we will probably not model every particle
+let alone the underlying quantum mechanics\footnote{Except for
+instance when we want to analyse shocks in Warm Dense Matter
+in Neutron Stars or inertial confinement fusion based on
+Quantum hydrodynamics \citep{bonitz22}}.
+
+\paragraph{Starting off with Quantum Mechanics} Consider we would
+model the whole wave function of a system of particles $\Phi(\vec{x}_1,\dots,\vec{x}_N)$
+(giving the joint probability $|\Phi|^2$ of finding all particles at $\vec{x}_1,\dots,\vec{x}_N$
+with single particle probabilities being the margins)
+with possibly more degrees of freedom (like spin) and evolve it using e.g. the Schrödinger equation
+with particle interaction being represented in the potential of the Hamiltonian. If we would
+discretize each dimension with $1000$ cells, the simulation would have $1000^{3N}$ cells - quickly
+infeasible (we model a too large probability space). First reduction steps could be
+\begin{itemize}
+    \item use symmetries, e.g. particles of a type are indistinguishable reducing the degrees of freedom
+    \item in given potentials approximate the particle wave as a sum of standing waves and evolve the coefficients
+    \item ...
+\end{itemize}
+
+\paragraph{Molecular dynamics} Quantum mechanical simulation is infeasible (and unnecessary)
+for larger systems. A first step is to decouple the electrons and protons (Born-Oppenheimer approximation)
+as the electrons move on much quicker timescales and describe the atoms as localized particles in phase-space.
+Based on the positions of the nuclei forming a fixed potential, we can calculate the lowest energy wave function
+of the electrons (which will occur in \textit{no time} for the protons), from there forces on the nuclei with which
+we move them and so on. The next step is to model the interatomic interactions using inter-atomic potentials (e.g. Morse, Lenard-Jones)
+with the potential parameters for instance adapted to match quantum mechanical simulations or for a system as a whole to portray
+correct behavior.
+
+\paragraph{Kinetic Gas theory} Let us assume, the "free flight" between interactions is much larger
+than the interaction time. We can model \textit{molecule-particles} with some effective interaction
+radius which only exhibit collisions. Note that while when modeling the potentials, at a sufficiently
+large collision parameter, particles do a kind of slingshot maneuver (attractive potential), which
+can never be modelled in a pure collision system. But this can be fine - with the right parameters
+our system can work globally in spite of local differences. 
+
+\subsection{From a classical particle description to the Boltzmann equation}
+\label{subsec:particle_to_boltzmann}
+
+Consider we start of with classical point-like particles in phase space (e.g. the molecules) $\{ \vec{x}_i,\vec{p}_i \}_{i=1}^N$ with a force term
+\begin{equation}
+    \frac{d}{dt}\vec{p}_i = \vec{f}(\vec{x}_i(t),t) \explain{=}{e.g. for ions} q_i \cdot \left( \vec{E}_m(\vec{x}_i(t),t) + \frac{1}{m_i} \vec{p}_i(t) \times \vec{B}_m (\vec{x}_i(t),t) \right)  
+\end{equation}
+where the forces depend on the particle positions and momenta themselves (e.g. via Maxwells equations where the particle positions inform the charge
+density and thus the electric field and the velocities the currents and thus the magnetic field).
+
+For as many particles as in a fluid (a mol has $\sim 6\cdot10^{23}$ particles and e.g. water has roughly $18$ grams per mol) this is still unfeasible for simulation.
+It turns out to be smarter to model a phase space density. The exact classical phase space density is
+
+\begin{equation}
+    \mathcal{F}(\vec{x},\vec{p},t) = \sum_{i=1}^{N} \delta (\vec{x} - \vec{x}_i) \delta (\vec{p} - \vec{p}_i)
+\end{equation}
+
+Phase space conservation (Liouville theorem) (previously visualized for the pendulum) means that
+
+\begin{equation}
+    \frac{d}{dt} \mathcal{F}(\vec{x},\vec{u},t) = \partial_t \mathcal{F} + \vec{v} \vec{\nabla}_\vec{x} \mathcal{F} + \vec{\mathcal{A}} \vec{\nabla}_\vec{u} \mathcal{F} = 0
+\end{equation}
+
+with the local acceleration $\vec{\mathcal{A}}$ following from the local force and mass. Let us use a mean phase space density and acceleration instead.
+
+\begin{equation}
+    \begin{aligned}
+        \mathcal{F}(\vec{x},\vec{u},t) &= f(\vec{x},\vec{p},t) + \delta \mathcal{F}(\vec{x},\vec{u},t), \quad f(\vec{x},\vec{u},t) = \langle \mathcal{F}(\vec{x},\vec{u},t) \rangle \\
+        \vec{\mathcal{A}}(\vec{x},\vec{u},t) &= \vec{a}(\vec{x},\vec{u},t) + \delta \vec{\mathcal{A}}(\vec{x},\vec{u},t), \quad \vec{a}(\vec{x},\vec{u},t) = \langle \vec{\mathcal{A}}(\vec{x},\vec{u},t) \rangle
+    \end{aligned}
+\end{equation}
+
+which we have also done for the acceleration, separating a mean effect on a \textit{fluid parcel} from the direct particle-particle interactions. With this we
+get
+\begin{equation}
+    \partial_t f + \vec{v}\cdot \vec{\nabla}_{\vec{x}}f + \vec{a} \cdot \vec{\nabla}_{\vec{u}}f = -\langle \delta \vec{\mathcal{A}} \cdot \vec{\nabla}_{\vec{u}} \delta \mathcal{F} \rangle =: \left. \frac{df}{dt} \right|_c
+\end{equation}
+which is the Boltzmann equation, where we identified the local fluctuations with collisions $\left. \frac{df}{dt} \right|_c$ from a kinetic gas theory perspective.
+
+\subsection{Emergence of irreversibility in the Boltzmann equation}
+Consider a classical simulation of colliding spheres (interaction time $\ll$ free flight time), where
+we start out with the particles concentrated at the center of our box. As of their thermal motion,
+the particles will spread out and fill the box. Now consider we start with this end state
+and reverse all velocities - the particles will clump up - anti-dissipation. Such things can
+happen miscroscopically, they are simply very unlikely.
+\yellowbox{Something unlikely miscroscopically is virtually impossible macroscopically.}
+But based on the Boltzmmann equation, this will never happen - the Boltzmann equation is
+\textit{irreversible} and will never show anti-dissipation. 
+% So when we later discritize
+% the Boltzmann equation and use it to forward our system, we can simulate macroscopically
+% realistic behavior without lots of particles.
+\yellowbox{\enquote{The derivation of the Boltzmann equation (BE) from the Hamiltonian equations of motion of 
+a hard spheres gas is a key topic on irreversibility (Sklar 1993, p.32; Uffink 2007, Section 4). 
+Although the Hamiltonian equations of motion are invariant under time reversal, the BE is not. Moreover, 
+this equation allows us to derive the H-theorem, which states that a function H monotonically decreases with
+ time, and thus, that the minus-H function increases, in agreement with the second law of thermodynamics. The 
+ derivation of the BE thus raises the question of irreversibility, since this equation exhibits irreversibility 
+ even though the microscopic description of the gas is based on reversible equations.} from \cite{ardourel17}
+ where the emergence of irreversibility is discussed in detail.}
+
+We can try to understand the emergence of irreversibility based on going from
+the exact information of the positions and momenta of the particles to an averaged
+phase space density:
+
+\greenbox{\enquote{In other words, when the particles are described by the Boltzmann equation, our knowledge is incomplete, since the positions and momenta of all the particles remain unknown, in contrast to the description by means of Hamilton canonical equations or Liouville equation. And this lack of knowledge makes the evolution of the one-particle distribution function f irreversible. The irreversibility is then explicitly expressed by the collision integral in the Boltzmann equation. The second law of thermodynamics thus emerges from completely reversible dynamics when our description is incomplete (not seeing all positions and momenta of the particles).} from \cite{Kincl23}}
+
+\pagebreak

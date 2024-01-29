@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+        \PYG{k}{for} \PYG{n}{sph\PYGZus{}particle\PYGZus{}i} \PYG{o+ow}{in} \PYG{n}{sph\PYGZus{}particles}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{} reconstruct density $\rho_i$ at $\vec{x}_i$}
+        \PYG{k}{for} \PYG{n}{sph\PYGZus{}particle\PYGZus{}i} \PYG{o+ow}{in} \PYG{n}{sph\PYGZus{}particles}\PYG{p}{:}
+            \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} viscous\PYGZhy{}force calculation in case of a viscous fluid}
+            \PYG{c+c1}{\PYGZsh{} / to make shocks resolvable using artificial viscosity}
+            \PYG{c+c1}{\PYGZsh{} compute $\vec{a}_i^{\text{viscosity}}$ in the incomp. case $= \nu \vec{\nabla}^2 \vec{v}_i$}
+            \PYG{c+c1}{\PYGZsh{} $\vec{v}_i^* = \vec{v}_i + \Delta t (\vec{a}_i^{\text{viscosity}} + \vec{g})$, external accelerations $\vec{g}$}
+
+            \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} pressure force calculation}
+            \PYG{c+c1}{\PYGZsh{} compute $\vec{a}_i^{\text{pressure}} = -\frac{1}{\rho_i} \vec{\nabla} P$}
+
+            \PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} forward the particles, here using symplectic Euler}
+            \PYG{c+c1}{\PYGZsh{} $\vec{v}_i(t+\Delta t) = \vec{v}_i^* + \Delta t \cdot \vec{a}_i^{\text{pressure}}$}
+            \PYG{c+c1}{\PYGZsh{} $\vec{x}_i(t+\Delta t) = \vec{x}_i + \Delta t \cdot \vec{v}_i(t+\Delta t)$}
+\end{Verbatim}
