@@ -1,0 +1,1 @@
+float x = 1e20; float y = x * x; float z = y / x
