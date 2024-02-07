@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      \PYG{n}{inverse\PYGZus{}transform\PYGZus{}method} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,} \PYG{n}{F\PYGZus{}inv}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+          \PYG{c+c1}{\PYGZsh{} Draw n samples from a distribution with CDF F}
+          \PYG{c+c1}{\PYGZsh{} given its inverse F\PYGZus{}inv.}
+          \PYG{n}{u} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{runif}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} draw n samples from U(0,1)}
+          \PYG{n+nf}{return}\PYG{p}{(}\PYG{n+nf}{F\PYGZus{}inv}\PYG{p}{(}\PYG{n}{u}\PYG{p}{))} \PYG{c+c1}{\PYGZsh{} apply the inverse transform}
+      \PYG{p}{\PYGZcb{}}
+\end{Verbatim}

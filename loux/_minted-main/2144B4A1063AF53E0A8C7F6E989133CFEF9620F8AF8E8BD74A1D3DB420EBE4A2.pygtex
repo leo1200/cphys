@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      \PYG{c}{\PYGZsh{} cyclic convolution in real space}
+      \PYG{k}{function} \PYG{n}{DirectCyclicConv1D}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{N} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+          \PYG{n}{Conv} \PYG{o}{=} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{p}{)}
+
+          \PYG{k}{for} \PYG{n}{n} \PYG{k}{in} \PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{p}{,} \PYG{n}{m} \PYG{k}{in} \PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+              \PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}
+                  \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{+} \PYG{n}{f}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]} \PYG{o}{*} \PYG{n}{g}\PYG{p}{[}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}
+              \PYG{k}{else}
+                  \PYG{c}{\PYGZsh{} make g periodic}
+                  \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{+} \PYG{n}{f}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]} \PYG{o}{*} \PYG{n}{g}\PYG{p}{[}\PYG{n}{N}\PYG{o}{+}\PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)]}
+              \PYG{k}{end}
+          \PYG{k}{end}
+
+          \PYG{k}{return} \PYG{n}{Conv}
+
+      \PYG{k}{end}
+
+      \PYG{c}{\PYGZsh{} cyclic convolution in Fourier space}
+      \PYG{n}{FastCyclicConv1D}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)} \PYG{o}{=} \PYG{n}{ifft}\PYG{p}{(}\PYG{n}{fft}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}\PYG{o}{.*}\PYG{n}{fft}\PYG{p}{(}\PYG{n}{g}\PYG{p}{))}
+\end{Verbatim}

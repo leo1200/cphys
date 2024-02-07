@@ -211,6 +211,7 @@ Common methods are
 \end{equation}
 where adding both yields
 \begin{equation}
+    \label{eq:2nd_disc}
     \partial_x^2 u(x) \approx \frac{u(x+\Delta x) - 2u(x) + u(x-\Delta x)}{\Delta x^2}
 \end{equation}
 }
@@ -899,6 +900,18 @@ In the 2nd order accurate scheme, doubling the number of cells will quarter our 
 
 \subsubsection{2nd order extension to Godunov's scheme by changing the reconstruction step from piecewise-constant to linear}
 
+\bluebox{\textbf{Godunov's theorem states:} Linear numerical 
+schemes for solving partial differential equations (PDE's), 
+having the property of not generating new extrema (monotone 
+scheme), can be at most first-order accurate\footnote{In Godunov's scheme the dissipation is
+just strong enough to damp shorter waves before they get too much out of step and
+show up as oscillations on top of the larger features.}. Bram van Leer (and Vladimir P. Kolgan\footnote{Already in 1972, he developed a scheme 2nd order in space (using the (\textit{crude}) minmod limiter) but only first order in time, using Forward Euler. Sadly, he succumbed to lung cancer in 1978, at the
+age of 37.})
+first succeeded in \textbf{circumventing this} by nolinearly limiting the second order
+term as a function of the non-smoothness of the numerical solution (sustaining monotonicity)
+(a non-linear technique even for a linear equation, see flux limiters later on)
+(so we have (at least) 2nd order accuracy where the flow is smooth) (e.g. \cite{leer79}).}
+
 \begin{enumerate}
     \item Estimate the fluid variables gradients, e.g. $\partial_x\rho$ (e.g. based on the averages on the neighboring cells)
     \item Slope limit these gradients as otherwise we could introduce quite extreme values of the fluid variables at the cell boundaries, especially in case real fluid discontinuities are present
@@ -949,7 +962,7 @@ Let us use the Euler equation in 1D ($x$ is a scalar)
 \end{equation}
 \begin{mdframed}[style=padded]
 We can therefore estimate the derivative in time based on our estimation $\partial_x \vec{U}$ of the derivative in space, yielding
-the \textcolor{blue1}{MUSCL-Hancock scheme}
+the \textcolor{blue1}{MUSCL-Hancock scheme} (Monotonic Upstream Scheme for Conservation Laws)
 \begin{equation}
     \begin{aligned}
     & \vec{U}_{i+\frac{1}{2}}^L=\vec{U}_i+\left[\frac{\Delta x}{2} \underline{\underline{1}}-\mat{A}(\vec{U}) \frac{\Delta t}{2}\right]\mathcolor{yellow1}{\left(\partial_x \vec{U}\right)_{i}} \\
@@ -1096,3 +1109,4 @@ which means no oscillation will appear but real ocscillations
 in the system will also not grow but rather smeared out.
 Minmod is TVD.
 
+\pagebreak

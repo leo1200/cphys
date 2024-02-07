@@ -1,0 +1,520 @@
+\section{Collisionless particle systems}
+\thispagestyle{plain}
+
+\subsection{Introduction of collisionless systems in the context of fluid modeling}
+
+Let us widen our view to collisionless systems (\textit{collisionless \enquote{fluids}}) and recapitulate
+on fluid dynamics to avoid confusion.
+
+\textcolor{blue1}{Important fluid concepts are}
+
+\begin{itemize}
+    \item \textbf{Boltzmann: }starting from the view of lots of interacting particles one can derive the Boltzmann equation (and we will repeat on this) in the collisionless case $\left( \left. \frac{df}{dt} \right|_\text{coll} = 0 \right)$ called Vlasov equation
+    \item \textbf{Navier-Stokes: }based on the moments of the Boltzmann equation one can derive a continuity, momentum and energy equation - Navier-Stokes equation for a collisional and Jeans equation for a \textit{collisionless} fluid
+    \item \textbf{Euler: }in case viscosity and conductivity can be ignored, the Navier stokes equations can be reduced to the Euler equations
+    \item \textbf{Fluid variables: }\textit{fluid elements} can be characterized by six hydrodynamical variables: density $\rho$, fluid velocity $\vec{u}$ (of a fluid element, not to be confused with the velocity of individual particles), pressure $P$ and specific internal energy $\epsilon$
+    \item \textbf{Closure: }The Euler equations give 5 relations of the fluid variables - one continuum equation, three momentum equations (vector-equation), one energy equation; we need a further constitutive relation - almost always an equation of state $P = P(\rho,\epsilon)$
+    \item \textbf{Perspectives: } The Eulerian view is fixed in space, in the Lagrangian view, the description co-moves with the fluid flow
+\end{itemize}
+
+\textcolor{blue1}{where we have explored some solvers for the Navier-Stokes / Euler equation with respective closure}
+
+\begin{itemize}
+    \item \textbf{Eulerian methods: } Based on a mesh / accounting volumes, the evolution of the fluid variables is e.g. calculated based on intercell fluxes
+    \item \textbf{Lagrangian methods: } In Smoothed Particle Hydrodynamics we introduce SPH-particles (macroscopic, describing the fluid) forwarded based on the Euler / Navier Stokes equation
+\end{itemize}
+
+\textit{Collisionless fluids} are very different from our standard collisional fluids in that
+\begin{itemize}
+    \item their behavior is not collision dominated, if one would want to use a description based on fluid variables,
+    one would at least have to use a local anisotropic pressure described via a stress tensor - as there are 
+    no frequent collisions that would act to isotropize the local pressure
+    \item no equation of state exists for a collisionless fluid, so one can never
+    close the set of fluid equations, unless one makes a number of simplifying assumptions
+    \item no fluid element can be defined for a collisionless fluid (one in which the continuum hypothesis would hold) - the macroscopic fluid perspective
+    for deriving fluid laws cannot be used
+\end{itemize}
+
+Let us give examples for collisional and collisionless systems
+
+\begin{itemize}
+    \item Systems that can be described as (collisional) fluid
+    \begin{itemize}
+        \item stars - to good approximation the equation of state of a star is that of an ideal gas
+        \item giant gaseous planets
+        \item planet atmospheres
+        \item ...
+    \end{itemize}
+    \item Collisionless systems
+    \begin{itemize}
+        \item Galaxies (stellar component) - two stars in a galaxy - to a good approximation - will never collide
+        \item Dark matter (halos) - assumed to be collisionless
+    \end{itemize}
+\end{itemize}
+
+\note{\textbf{Complex systems often have collisional and collisionless components}: In galaxies
+the gaseous component can be described with classic hydrodynamic equations (enough collisions
+to isotropize the local pressure), but stellar and dark matter lack collisions, where one
+could use a local anisotropic pressure (extending classical hydrodynamic simulations) but N-body 
+simulations have shown to be more stable. For instance \cite{nigel12} write \enquote{For simulations that deal 
+only with dark matter or stellar systems, the conventional N-body technique is fast, 
+memory efficient and relatively simple to implement. However when extending simulations 
+to include the effects of gas physics, mesh codes are at a distinct disadvantage compared to 
+Smooth Particle Hydrodynamics (SPH) codes. Whereas implementing the N-body approach into SPH 
+codes is fairly trivial, the particle-mesh technique used in mesh codes to couple 
+collisionless stars and dark matter to the gas on the mesh has a series of significant 
+scientific and technical limitations. These include spurious entropy generation resulting 
+from discreteness effects [...]} and introduce a method to use \enquote{collisionless Boltzmann moment 
+equations as a means to model the collisionless material as a fluid on the mesh}.}
+
+\greenbox{\textbf{Model reduction for collisionless systems}:
+While we cannot directly apply the solvers discussed so far to collisionless systems,
+central ideas remain important: For instance to represent the system based on artificial / 
+fiducial particles with larger masses in very high-N systems.\footnote{A low N system would be the planets in the solar system, 
+a medium-N system stellar clusters with $N \sim 10^2$ stars and high N systems could be globular clusters.}
+For instance in the large dark-matter-only N-body \textit{millenium} simulation (Springel, 2005), in a cube with 
+sidelength $2 \cdot 10^9$ lightyears, $2160^3 \approx 10^{10}$ fiducial particles where used 
+on which $10^{18}$ solar masses were equally distributed.}
+
+\subsection{Structure of the following considerations}
+
+In the following we will consider
+
+\begin{itemize}
+    \item From a phase space view, what is a collisionless system and how can it be described?
+    \item What systems can be assumed to be collisionless?
+    \item N-body model of collisionless systems
+\end{itemize}
+
+\subsection{General N-particle ensembles | one-, two-, three, ..., particle distribution | BBKGY chain}
+The exact particle distribution of $N$ particles is given by (exact Klimontovich-Dupree representation)
+
+\begin{equation}
+    F(\vec{x}, \vec{v}, t) = \sum_{i=1}^{N} \delta(\vec{x}-\vec{x}_i(t)) \cdot \delta(\vec{v}-\vec{v}_i(t))
+\end{equation}
+
+Let $p$ be the $N$ particle phase space probability at time $t$
+
+\begin{equation}
+    p\left(\vec{x}_1, \ldots, \vec{x}_N, \vec{v}_1, \ldots, \vec{v}_N\right) d \vec{x}_1 \cdots d \vec{x}_N d \vec{v}_1 \cdots d \vec{v}_N
+\end{equation}
+
+The mean phase space density (\textcolor{blue1}{ensemble-averaged one particle distribution}) is
+
+\begin{equation}
+    \begin{gathered}
+        f_1(\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}, t)=\langle F(\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}, t)\rangle=\int F(\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}, t) \cdot p d \vec{x}_1 \cdots d \vec{x}_N d \vec{v}_1 \cdots d \vec{v}_N \\
+        \underset{\text { plug in } F \rightarrow N \text { terms }}{=} N \int p\left(\mathcolor{green1}{\vec{x}}, \vec{x}_2, \ldots, \vec{x}_N, \mathcolor{green1}{\vec{v}}, \vec{v}_2, \ldots, \vec{v}_N\right) d \vec{x}_2 \cdots d \vec{x}_N d \vec{v}_2 \cdots d \vec{v}_N
+    \end{gathered}
+\end{equation}
+
+with $f_1(\vec{x}, \vec{v}, t)$ being the mean number of particles in the phase space volume $d\vec{x} d\vec{v}$ around $(\vec{x},\vec{v})$.
+The form is quite natural, if we want the probability of one particle being at a certain phase-space coordinate, we have to integrate
+out the others (marginalize) (as we know from quantum mechanics).
+
+\textcolor{blue1}{Ensemble-averaged two-particle distribution: } What do we expect the mean of the product
+of the number of particles at two phase-space coordinates $(\vec{x},\vec{v})$ and $(\vec{x}',\vec{v}')$ to be?
+
+\begin{equation}
+    \begin{aligned}
+        f_2\left(\vec{x}, \vec{v}, \vec{x}^{\prime}, \vec{v}^{\prime}, t\right) &= \left\langle F(\vec{x}, \vec{v}, t) F\left(\vec{x}^{\prime}, \vec{v}^{\prime}, t\right)\right\rangle \\
+        &= N \cdot(N-1) \int p\left(\vec{x}, \vec{x}^{\prime}, \vec{x}_3, \ldots, \vec{x}_N, \vec{v}, \vec{v}^{\prime}, \vec{v}_3, \ldots, \vec{v}_N\right) d \vec{x}_3 \cdots d \vec{x}_N d \vec{v}_3 \cdots d \vec{v}_N
+        \end{aligned}
+\end{equation}
+
+$f_1, f_2, f_3, \dots$ is the so called BBGKY chain. The Boltzmann equation is e.g. a model for $f_1$.
+
+\subsection{Uncorrelated (collisionless) systems | multiplication closure to the BBGKY chain}
+Consider the simplest closure to the BBGKY hierarchy
+
+\begin{equation}
+    f_2\left(\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}, \mathcolor{yellow1}{\vec{x}^{\prime}}, \mathcolor{yellow1}{\vec{v}^{\prime}}, t\right)=f_1(\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}, t) f_1\left(\mathcolor{yellow1}{\vec{x}^{\prime}}, \mathcolor{yellow1}{\vec{v}^{\prime}}, t\right)
+\end{equation}
+
+i.e. we \textcolor{blue1}{assume the particles to be uncorrelated}, i.e. a particle at $\mathcolor{yellow1}{\vec{x}^{\prime}}, \mathcolor{yellow1}{\vec{v}^{\prime}}$
+does not effect one at $\mathcolor{green1}{\vec{x}}, \mathcolor{green1}{\vec{v}}$.
+
+\note{This is akin to $P(A,B) = P(A) \cdot P(B)$ for independent events $A,B$.}
+
+Still particles are effected by the global effect
+of all others. For instance electrons in a plasma can be assumed uncorrelated.
+
+\subsubsection{General Continuity equation for probability in phase space}
+Let $\vec{w}=\left(\vec{x}_1, \ldots, \vec{x}_N, \vec{v}_1, \ldots, \vec{v}_N\right)$ be the phase space state, so $p = p(\vec{w})$.
+As the particles themselves, probability is conserved as captured in the 
+continuity equation
+
+\begin{equation}
+    \begin{gathered}
+        \partial_t p+\vec{\nabla}_{\vec{w}} \cdot(p \cdot \vec{\dot{w}})=0 \\
+        \partial_t p+p \vec{\nabla}_{\vec{w}} \vec{\dot{w}}+\vec{\dot{w}} \vec{\nabla}_{\vec{w}} p=0
+    \end{gathered}
+\end{equation}
+
+so in terms of the particle velocities and positions (apply the chain rule)
+
+\begin{equation}
+    \frac{\partial p}{\partial t}+\sum_i\left(p \frac{\partial \dot{\vec{x}}_i}{\partial \vec{x}_i}+\frac{\partial p}{\partial \vec{x}_i} \cdot \dot{\vec{x}}_i+p \frac{\partial \dot{\vec{v}}_i}{\partial \vec{v}_i}+\frac{\partial p}{\partial \vec{v}_i} \cdot \dot{\vec{v}}_i\right)=0
+\end{equation}
+
+\subsubsection{Liouville equation for the general evolution of phase space probability}
+
+Based on the Hamiltonian equations\footnote{$\dot{\vec{x}} = \partial_t \vec{x} = \partial_\vec{p} H, \quad \dot{\vec{p}} = -\partial_\vec{x} H$}
+one gets $\partial_\vec{x} \dot{\vec{x}} = - \partial_\vec{v} \dot{\vec{v}}$ and so
+
+\begin{equation}
+    \frac{d \rho}{d t}=\partial_t p+\sum_i\left(\vec{v}_i \cdot \frac{\partial p}{\partial \vec{x}_i}+\vec{a}_i \cdot \frac{\partial p}{\partial \vec{v}_i}\right)=0, \quad \vec{a}_i=\vec{v}_i=\frac{F_i}{m_i} \text { (Liouville's eqn) }
+\end{equation}
+
+\subsubsection{Vlasov equation for collisionless systems}
+In the collisionless / uncorrelated limit, one obtains the Vlasov equation
+for $f := f_1$ (multiply Lioville's equation by $F$ and integrate)
+
+\begin{equation}
+    \frac{\partial f}{\partial t}+\vec{v} \cdot \frac{\partial f}{\partial \vec{x}}+\vec{a} \cdot \frac{\partial f}{\partial \vec{v}}=0
+\end{equation}
+
+- the phase space density along trajectories is constant in the collisionless case. We can also understand
+the Vlasov equation based on the Boltzmann equation in eq. \ref{eq:boltzmann1}, where we assume the fluctuations
+in accelerations and change of phase space density to be decoupled.
+
+\subsubsection{Accelerations in collisionless systems - including gravity into the Vlasov equation}
+Collective effects like self gravity can still be described in collisionless systems. Based on the density
+
+\begin{equation}
+    \rho(\vec{x},t) = m \int f(\vec{x},\vec{v},t) d\vec{v}
+\end{equation}
+
+we can calculate the gravitational potential via Poisson's equation and thus an acceleration
+
+\begin{equation}
+    \vec{\nabla}^2 \phi = 4\pi G \rho \rightarrow \vec{a} = -\vec{\nabla}_\vec{x} \phi
+\end{equation}
+
+so the Vlasov equation
+
+\begin{equation}
+    \frac{\partial f}{\partial t}+\vec{v} \cdot \frac{\partial f}{\partial \vec{x}} - \vec{\nabla}_\vec{x} \phi \cdot \frac{\partial f}{\partial \vec{v}}=0
+\end{equation}
+
+\bluebox{As of the Vlasov equation we do not describe single particles anymore 
+but rather directly model the phase space density. For discretization we later 
+reintroduce particles - but not the physical ones rather macro-particles sampling 
+the phase space in a Monte-Carlo fashion (Monte-Carlo comes later).}
+
+\subsection{When is a gravitational system collisionless?}
+
+\idea{In every system collisions happen, 
+but if the time of our simulation is shorter 
+than the timescale on which collisions 
+have a meaningful impact $t_\text{relax}$ we can assume the system
+to be collisionless. \textbf{We thus view a system as
+collisionless if}
+\begin{equation}
+    \begin{gathered}
+        t_\text{relax} \gg t_\text{of interest for the simulation}, \quad \text{final result } t_\text{relax} = \frac{N}{8 \log N} t_{cross} \\
+        \text{number of particles in the system } N, \quad \text{typical time to cross the system } t_\text{cross}
+    \end{gathered}
+\end{equation}
+Where we will derive and explain $t_\text{relax}$ in the following. We can already see the surprising result:
+\textbf{For two gravitational systems with the same mass and size, the one with more
+smaller particles has a longer relaxation time so acts \textit{more collisionless} as a whole.}
+\begin{equation}
+    \text{overall potential more averaged } \gg \text{ more frequent encounters}
+\end{equation}
+}
+
+\subsubsection{Relaxation time in a gravitational system}
+
+But what is the relaxation time $t_\text{relax}$? Consider a system of 
+size $R$ with $N$ particles of (average) mass $m$. Consider a particle
+moving at speed $v$ through it. Assume we would know the mean
+squared perpendicular velocity $\langle (\Delta v_\perp)^2 \rangle$
+a particle would accumulate as of collisions by crossing the whole
+system and the time $t_\text{cross}$ to cross the system.
+
+We can then reasonably define the \textcolor{blue1}{relaxation time} as
+
+\begin{equation}
+    t_{\text{relax}} \equiv \frac{v^2}{\langle (\Delta v_\perp)^2 \rangle \slash t_\text{cross}}
+\end{equation}
+
+so the time at which perturbations have added up to a perpendicular velocity
+of the order of the velocity the particles move with - where collisions can surely not
+be neglected anymore.
+
+Our next steps therefore are
+\begin{itemize}
+    \item find an expression for $t_\text{cross}$
+    \item find an expression for $\langle (\Delta v_\perp)^2 \rangle$
+\end{itemize}
+
+\subsubsection{Crossing time}
+
+Consider a system of size $R$ with $N$ particles. It takes the particles
+roughly
+
+\begin{equation}
+    t_{\text {cross }}=\frac{R}{v} \sim \frac{R^{\frac{3}{2}}}{\sqrt{G M}}
+\end{equation}
+
+to cross the system, where we used
+
+\begin{equation}
+    v^2 \simeq \frac{G M}{R}, \quad M=N m, \text{(avg.) particle mass } m
+\end{equation}
+
+for the typical speed $v$ of a field star is 
+roughly that of a particle in a circular 
+orbit at the edge of the galaxy.
+
+\note{$t_\text{cross}$ depends on the total mass and 
+size of the system but not the individual masses directly.}
+
+\subsubsection{Change in perpendicular velocity when crossing the system}
+For the change in perpendicular velocity, we can approximate
+\begin{equation}
+    \begin{gathered}
+        \langle (\Delta v_\perp)^2 \rangle \approx v^2 \langle \theta^2 \rangle \\
+        \text{mean squared deflection angle over the whole system } \langle \theta^2 \rangle \\
+        \text{typical velocity of a particle } v
+    \end{gathered}
+\end{equation}
+
+We will
+\begin{itemize}
+    \item calculate the deflection in one interactions
+    \item calculate $\langle \theta^2 \rangle$ assuming small angle interactions
+    \item justify that most of the total deflection stems from many small deflections, justifying using $\langle \theta^2 \rangle$ under the assumption of small angle deflections
+\end{itemize}
+
+\subsubsubsection{Size of one small angle deflections based on the impact parameter}
+Consider the deflection scenario sketched in figure \ref{fig:deflection}.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.5\textwidth]{figures/deflection2.svg}
+    \caption{Gravitational deflection}
+    \label{fig:deflection}
+\end{figure}
+
+In the small angle (here small deflection) approximation, we get
+
+\begin{equation}
+    \theta_d \approx \sin \theta_d \approx \frac{\Delta v_\perp}{v}
+\end{equation}
+
+where the change in perpendicular velocity as of the gravitational field
+of the other particle is calculated as if the particle would have moved
+in a straight line (small deflection, Born approximation)
+
+\begin{equation}
+    \begin{gathered}
+        \Delta p_\perp = m \Delta v_\perp = - m \explain{\int_{-\infty}^{\infty} \vec{\nabla}_\perp \phi \, dt}{deflection as of grav. field} \approx - m \int_{-\infty}^{\infty} \explain{\partial_b \left( \frac{Gm}{\sqrt{b^2+v^2 t^2}} \right)}{Born approximation} \, dt \\
+        = \dots = \frac{2Gm^2}{bv}
+    \end{gathered}
+\end{equation}
+
+so the deflection angle is
+
+\begin{equation}
+    \theta_d \approx \frac{b_0}{b} \text{ with critical impact parameter } b_0 = \frac{2Gm}{v^2} \ll b \text{ as of our small angle approximation}
+\end{equation}
+
+where we would have $b=b_0$ for $\Delta v_\perp = v$.
+
+\subsubsubsection{Mean squared deflection for many small deflections}
+Over many interaction we accumulate
+
+\begin{equation}
+    \left\langle\theta^2\right\rangle=\sum_{\text {all encounters }} \theta_d^2=\sum_{\text {all encounters }}\left(\frac{b_0}{b}\right), \quad \langle \theta \rangle = 0 \text{ as of symmetry}
+\end{equation}
+
+and write
+
+\begin{equation}
+    \left\langle\theta^2\right\rangle=\int_{b_{\min }}^{b_{\max }} \theta_d^2 d N, \quad \text{number of encounters } dN = n \, vt \, 2\pi b \, db \text{ with } b \in [b, b+db]
+\end{equation}
+
+(for $dN$ see figure \ref{fig:impact_cylinder}) so (plug in and integrate)
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.5\textwidth]{figures/impact_cylinder.svg}
+    \caption{Impact cylinder}
+    \label{fig:impact_cylinder}
+\end{figure}
+
+\begin{equation}
+    \boxed{\left\langle\theta^2\right\rangle=n 2 \pi b_0^2 v t \ln \Lambda, \quad \text { Coulomb logarithm } \ln \Lambda=\ln \frac{b_{\max }}{b_{\min }}}
+\end{equation}
+
+\subsubsubsection{Many small deflections are more important than few large ones}
+\note{In the following we will compare deflection frequencies. The frequency in the
+small angle case is the frequency with which small deflections add up to e.g. $1$ or
+$\frac{\pi}{2}$, so that a higher frequency means that small deflection are overall
+more important (otherwise small deflections have a higher \textit{frequency} without
+calculation).}
+
+Based on our previous result for \textbf{small deflections} we can calculate the time
+$t$ until $\langle \theta^2 \rangle \approx 1$ (equivalent to one deflection with $b = b_0$),
+to get a deflection frequency
+
+\begin{equation}
+    \nu_d \equiv \frac{1}{t_d} = n \, 2 \pi b_0^2 v \ln \Lambda
+\end{equation}
+
+Let us continue with the \textbf{mean deflection frequency based on large deflections}.
+Large deflections are those for $b \lessapprox b_0$. The mean deflection frequency
+can be calculated as
+
+\begin{equation}
+    \begin{gathered}
+        \nu_{\text{d, single}} \equiv \frac{1}{t_\text{d, single}} = \frac{v}{\lambda_{mfp}} = n\underbrace{\sigma}_{\approx\,\pi b_0^2} v \approx n \pi b_0^2 v \\
+        \text{cross section } \sigma, \quad \text{mean free path } \lambda_{mfp}, \quad \text{number density } n
+    \end{gathered}
+\end{equation}
+
+so we can relate
+
+\begin{equation}
+    \frac{\nu_d} = \nu_{\text{d, single}} {\ln \Lambda}, \quad \text{typically } 20 \leq \ln \Lambda \leq 30
+\end{equation}
+
+so \textcolor{blue1}{the deflection frequency based on lots of small deflections adding up is
+larger than the one based on single big scattering event} which based on our definition of the
+deflection frequency means that small angle deflections are more important. This is also reflected
+in
+
+\begin{equation}
+    \frac{\sigma_{\text {many small deflections adding to } \frac{\pi}{2}}}{\sigma_{\text {one } \frac{\pi}{2} \text { deflection }}}=8 \ln \Lambda
+\end{equation}
+
+\subsubsubsection{Finally the calculation of $\langle (\Delta v_\perp)^2 \rangle$}
+We can now use the result for many small deflections
+\begin{equation}
+    \left\langle\theta^2\right\rangle=n 2 \pi b_0^2 v t \ln \Lambda
+\end{equation}
+in
+
+\begin{equation}
+    \langle (\Delta v_\perp)^2 \rangle \approx v^2 \langle \theta^2 \rangle = v^2 n 2 \pi b_0^2 v t \ln \Lambda \underbrace{=}_{N = vt \, \pi R^2 \, n} = 2N \frac{vb_0}{R}^2 \ln \Lambda
+\end{equation}
+
+justified by the higher meaning of many small deflections.
+
+\subsubsubsection{How to choose $b_{min}$ and $b_{max}$ in the Coulomb logarithm?}
+We choose $b_{max} = R$ (the system size) and $b_{min} \approx b_0 = \frac{2Gm}{v^2}$ (the critical impact parameter)
+(as large deflections with $b \lessapprox b_0$ are rare).
+
+Using the typical velocity $v^2 \approx \frac{GM}{R}$ and $N = \frac{M}{m}$ we can write
+
+\begin{equation}
+    \boxed{\log \lambda \approxeq \log \frac{N}{2} \approxeq \log N}
+\end{equation}
+
+Which gets us to the initially stated result for the relaxation time.
+
+\subsubsection{Examples of astrophysical relaxation times}
+
+As a reference for determining if collisionless or not dependent on the relaxation time, we 
+use the age of the universe $t_{age} = \frac{1}{H_0} \sim 10 \text{ Gyr}$. So while
+here the globular star cluster is not collisionless, on a more usual timescale 
+it is. The relaxation times are in table \ref{tab:relaxation_times} - as previously
+noted systems of lots of small particles or more collisionless.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|l|c|c|c|l|}
+        \hline System & \begin{tabular}{l} 
+        Number of \\
+        bodies $\sim$
+        \end{tabular} & \begin{tabular}{l} 
+        Crossing time \\
+        $\sim$
+        \end{tabular} & \begin{tabular}{l} 
+        Relaxation time \\
+        $\approx \frac{{N}}{8 \ln {N}} {t}_{\text {cross }} \sim$
+        \end{tabular} & \begin{tabular}{l} 
+        Collisionless \\
+        over age of \\
+        universe \\
+        ${t}_{\text {relax }} \gg {t}_{\text {age }}$
+        \end{tabular} \\
+        \hline \begin{tabular}{l} 
+        Globular star \\
+        clusters
+        \end{tabular} & $10^5$ & $0.5 {Myr}$ & $0.5 {Gyr}$ & No \\
+        \hline \begin{tabular}{l} 
+        Stars in \\
+        typical galaxy
+        \end{tabular} & $10^{11}$ & $\frac{1}{100 {H}_0}$ & $5 \cdot 10^6 {t}_{\text {age }}$ & Yes \\
+        \hline \begin{tabular}{l} 
+        Dark matter in \\
+        galaxy
+        \end{tabular} & $10^{77}$ & $\frac{1}{10 {H}_0}$ & $10^{73} {t}_{\text {age }}$ & Absolutely \\
+        \hline
+        \end{tabular}
+    \caption{Relaxation times}
+    \label{tab:relaxation_times}
+\end{table}
+
+\subsection{N-body models of collisionless systems}
+\greenbox{\textbf{Idea for modelling a collisionless system - N-body simulation: }Use the standard gravitational equations of motion (not fluid equations) but for fiducial heavier macro particles
+than in the original system.}
+
+We introduce non-physical 
+macro particles, to discretize 
+the collisionless fluid described 
+by the Poisson-Vlasov system. We use 
+far fewer macro particles than particles 
+in the real system - the macro particles 
+are heavier (/ have more charge). \textcolor{blue1}{The 
+macro-particles follow the equations}
+
+\begin{equation}
+    \begin{gathered}
+        \vec{\ddot{x}}=-\vec{\nabla} \phi\left(\vec{x}_i\right), \quad \phi(\vec{x})=-G \sum_{j=1}^N \frac{m_j}{\left[\left(\vec{x}-\vec{x}_j\right)^2+\epsilon^2\right]^{\frac{1}{2}}} \\
+        \text{softening length } \epsilon
+    \end{gathered}
+\end{equation}
+
+\yellowbox{\textbf{Validity-note:} The real system we model is composed of much more particles than our $N$
+and is collisionless (remember $t_\text{relax} = \frac{N}{8 \log N} t_{cross}$). For our model to be valid,
+it also has to be collisionless, so with our lower $N$ we still need to fulfill $t_\text{relax} \gg t_\text{of interest for the simulation}$ (and to have a sufficiently smooth gravitational potential (/ well described compared to the real \textit{smooth-potential} system)).}
+
+\bluebox{Assume that our fiducial particles sufficiently well create the gravitational potential of the real system. 
+Then a fiducial particle at any point, will have the same acceleration as a real particle there
+(the force is higher but also the inertial, cancelling to given the same acceleration) - so the
+fiducial particles will follow valid real-particle trajectories.}
+
+\problem{We only retrieve one (noisy) realization of the one-point function $f_1$ by one $N$-particle simulation}
+\idea{We can combine multiple simulation results for ensemble averages. 
+The details of $f_1$ are critical. For instance, for multiple crossings 
+of a shock front we would have a high energy tail 
+in the velocity distribution.}
+
+\subsubsection{The softening length $\epsilon$}
+There is a softening length in 
+the denominator \textcolor{blue1}{that reduces the 
+potential for distances very close 
+to other particles}. This is especially 
+important if we choose large 
+macro-particles - the softening 
+length gives a smallest impact parameter 
+on a macro scale.
+
+\begin{itemize}
+    \item This avoids large angle scattering (as strong potential interaction $\rightarrow$ strong deflection)
+    \item \textcolor{green1}{Avoid numerically expensive singularities}: Without softening, there would be singularities in the potentials, which would cause high numerical effort when integrating the orbits (as of the large numbers)
+    \item \textcolor{green1}{Avoid bound particle pairs}: When gravitational particles can come very close to each other they can form highly interactive / correlated pairs - and we want a collisionless system not highly correlated particles.
+    Bounded pairs are avoided if
+    \begin{equation}
+        \langle v^2 \rangle \gg \frac{Gm}{\epsilon}
+    \end{equation}
+\end{itemize}
+
+\bluebox{\textbf{The softening length introduces a smallest resolved scale / smallest trustworthy scale}. We must make a compromise between spatial resolution, computational cost and the points discussed above.}
+
+
+\pagebreak

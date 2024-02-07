@@ -2398,10 +2398,17 @@
     <bcf:citekey order="34" intorder="1">rackauckas17</bcf:citekey>
     <bcf:citekey order="35" intorder="1">Courant1928</bcf:citekey>
     <bcf:citekey order="36" intorder="1">chou07</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">Kincl23</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">leer79</bcf:citekey>
     <bcf:citekey order="38" intorder="1">Kincl23</bcf:citekey>
     <bcf:citekey order="39" intorder="1">Kincl23</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">lewis2004</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">Kincl23</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">lewis2004</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">springel23</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">nigel12</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">press07</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">matsumoto98</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">box58</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">particle2020</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

@@ -149,6 +149,10 @@
 
 \usepackage{mathtools}
 
+% ceils and floors
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
 \usepackage{amsthm}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -178,6 +182,7 @@
 % Relations with text beneath
 \newcommand{\isEquivTo}[1]{\underset{#1}{\sim}}
 
+\usepackage{aligned-overset}
 
 % Prevent figures from jumping between sections / subsections
 \usepackage{placeins}
@@ -464,6 +469,12 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{3_4_eulerian.tex}
 \import{sections/}{3_5_sph.tex}
 \import{sections/}{3_6_fem.tex}
+\import{sections/}{3_7_diff.tex}
+\import{sections/}{3_8_iter.tex}
+\import{sections/}{3_9_fourier.tex}
+\import{sections/}{3_10_collisionless.tex}
+\import{sections/}{3_11_forces.tex}
+\import{sections/}{3_12_MC.tex}
 
 \pagebreak
 \thispagestyle{plain}

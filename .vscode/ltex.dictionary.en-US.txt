@@ -1,1 +1,7 @@
 bitvector
+collisionless
+collisional
+Collisionless
+ergodicity
+memorylessnes
+ergodic

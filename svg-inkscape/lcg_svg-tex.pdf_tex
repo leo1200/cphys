@@ -1,0 +1,265 @@
+%% Creator: Inkscape 1.2.1 (9c6d41e410, 2022-07-14), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'lcg_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{453.75bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.3338843)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lcg_svg-tex.pdf}}%
+    \put(0.07543868,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}seed \end{tabular}}}}%
+    \put(0.12105256,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.13625736,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{lcg_svg-tex.pdf}}%
+    \put(0.17251405,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.2263157,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{lcg_svg-tex.pdf}}%
+    \put(0.20467769,0.30247934){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{lcg_svg-tex.pdf}}%
+    \put(0.21520496,0.29917355){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{lcg_svg-tex.pdf}}%
+    \put(0.26608264,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.31988264,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{lcg_svg-tex.pdf}}%
+    \put(0.30526281,0.29752066){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{lcg_svg-tex.pdf}}%
+    \put(0.30643306,0.27933884){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{lcg_svg-tex.pdf}}%
+    \put(0.35964959,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.41344959,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}8\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{lcg_svg-tex.pdf}}%
+    \put(0.39766116,0.28264463){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{lcg_svg-tex.pdf}}%
+    \put(0.37543802,0.29752066){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{lcg_svg-tex.pdf}}%
+    \put(0.45321653,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.50701818,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}7\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{lcg_svg-tex.pdf}}%
+    \put(0.47134545,0.29586777){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{lcg_svg-tex.pdf}}%
+    \put(0.46783636,0.28760331){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{lcg_svg-tex.pdf}}%
+    \put(0.54678347,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.60058512,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{lcg_svg-tex.pdf}}%
+    \put(0.5649124,0.28760331){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{lcg_svg-tex.pdf}}%
+    \put(0.57660826,0.27603306){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{lcg_svg-tex.pdf}}%
+    \put(0.64035041,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.69415207,0.23801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{lcg_svg-tex.pdf}}%
+    \put(0.67134545,0.27933884){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{lcg_svg-tex.pdf}}%
+    \put(0.67485455,0.30578512){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{lcg_svg-tex.pdf}}%
+    \put(0.00935673,0.30578512){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{m}\end{tabular}}}}%
+    \put(0.03391818,0.30578512){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.30578512){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}9\end{tabular}}}}%
+    \put(0.01228069,0.28264463){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{a}\end{tabular}}}}%
+    \put(0.03391818,0.28264463){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.28264463){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.0128655,0.25950413){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{c}\end{tabular}}}}%
+    \put(0.03391818,0.25950413){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.25950413){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{lcg_svg-tex.pdf}}%
+    \put(0.07543868,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}seed \end{tabular}}}}%
+    \put(0.12105256,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.13625736,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{lcg_svg-tex.pdf}}%
+    \put(0.17251405,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.2263157,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}6\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{lcg_svg-tex.pdf}}%
+    \put(0.21403471,0.17355372){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{lcg_svg-tex.pdf}}%
+    \put(0.19298182,0.16033058){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{lcg_svg-tex.pdf}}%
+    \put(0.26608264,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.31988264,0.12066116){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{lcg_svg-tex.pdf}}%
+    \put(0.28888926,0.16363636){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{lcg_svg-tex.pdf}}%
+    \put(0.31111074,0.17190083){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{lcg_svg-tex.pdf}}%
+    \put(0.00935673,0.18842975){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{m}\end{tabular}}}}%
+    \put(0.03391818,0.18842975){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.18842975){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}9\end{tabular}}}}%
+    \put(0.01228069,0.16528926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{a}\end{tabular}}}}%
+    \put(0.03391818,0.16528926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.16528926){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.0128655,0.14214876){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{c}\end{tabular}}}}%
+    \put(0.03391818,0.14214876){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.14214876){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=29]{lcg_svg-tex.pdf}}%
+    \put(0.07543868,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}seed \end{tabular}}}}%
+    \put(0.12105256,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.13625736,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=30]{lcg_svg-tex.pdf}}%
+    \put(0.17251405,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.2263157,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=31]{lcg_svg-tex.pdf}}%
+    \put(0.21052562,0.07933884){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=32]{lcg_svg-tex.pdf}}%
+    \put(0.26608264,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.31988264,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=33]{lcg_svg-tex.pdf}}%
+    \put(0.29824628,0.0677686){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=34]{lcg_svg-tex.pdf}}%
+    \put(0.3087719,0.06446281){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=35]{lcg_svg-tex.pdf}}%
+    \put(0.31461983,0.05289256){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=36]{lcg_svg-tex.pdf}}%
+    \put(0.3087719,0.03801653){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=37]{lcg_svg-tex.pdf}}%
+    \put(0.29590579,0.02975207){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=38]{lcg_svg-tex.pdf}}%
+    \put(0.35964959,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.41344959,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=39]{lcg_svg-tex.pdf}}%
+    \put(0.39064298,0.0446281){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=40]{lcg_svg-tex.pdf}}%
+    \put(0.39415207,0.07107438){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=41]{lcg_svg-tex.pdf}}%
+    \put(0.37660826,0.04297521){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=42]{lcg_svg-tex.pdf}}%
+    \put(0.40935702,0.0661157){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=43]{lcg_svg-tex.pdf}}%
+    \put(0.41403471,0.05289256){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=44]{lcg_svg-tex.pdf}}%
+    \put(0.45321653,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.50701818,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=45]{lcg_svg-tex.pdf}}%
+    \put(0.49473719,0.05619835){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=46]{lcg_svg-tex.pdf}}%
+    \put(0.4736843,0.04297521){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=47]{lcg_svg-tex.pdf}}%
+    \put(0.47719339,0.07438017){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=48]{lcg_svg-tex.pdf}}%
+    \put(0.50526281,0.05123967){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=49]{lcg_svg-tex.pdf}}%
+    \put(0.49941488,0.03801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=50]{lcg_svg-tex.pdf}}%
+    \put(0.54678347,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.60058512,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}8\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=51]{lcg_svg-tex.pdf}}%
+    \put(0.58479504,0.04793388){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=52]{lcg_svg-tex.pdf}}%
+    \put(0.56257355,0.06280992){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=53]{lcg_svg-tex.pdf}}%
+    \put(0.59532231,0.05289256){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=54]{lcg_svg-tex.pdf}}%
+    \put(0.55438678,0.05454545){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=55]{lcg_svg-tex.pdf}}%
+    \put(0.55438678,0.06942149){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=56]{lcg_svg-tex.pdf}}%
+    \put(0.64035041,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.69415207,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}6\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=57]{lcg_svg-tex.pdf}}%
+    \put(0.65847934,0.06115702){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=58]{lcg_svg-tex.pdf}}%
+    \put(0.65497025,0.05289256){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=59]{lcg_svg-tex.pdf}}%
+    \put(0.65731074,0.04297521){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=60]{lcg_svg-tex.pdf}}%
+    \put(0.66900661,0.03471074){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=61]{lcg_svg-tex.pdf}}%
+    \put(0.65380165,0.03801653){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=62]{lcg_svg-tex.pdf}}%
+    \put(0.73391736,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.78771901,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}7\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=63]{lcg_svg-tex.pdf}}%
+    \put(0.75672562,0.04628099){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=64]{lcg_svg-tex.pdf}}%
+    \put(0.77894711,0.05454545){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=65]{lcg_svg-tex.pdf}}%
+    \put(0.75789421,0.07438017){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=66]{lcg_svg-tex.pdf}}%
+    \put(0.74853884,0.03966942){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=67]{lcg_svg-tex.pdf}}%
+    \put(0.73918182,0.05289256){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=68]{lcg_svg-tex.pdf}}%
+    \put(0.82748595,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.88128595,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=69]{lcg_svg-tex.pdf}}%
+    \put(0.84561322,0.05289256){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=70]{lcg_svg-tex.pdf}}%
+    \put(0.85730909,0.04132231){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=71]{lcg_svg-tex.pdf}}%
+    \put(0.87602314,0.05289256){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=72]{lcg_svg-tex.pdf}}%
+    \put(0.86666612,0.07768595){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=73]{lcg_svg-tex.pdf}}%
+    \put(0.87953223,0.06942149){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=74]{lcg_svg-tex.pdf}}%
+    \put(0.92105289,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}output \end{tabular}}}}%
+    \put(0.97485455,0.00330579){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=75]{lcg_svg-tex.pdf}}%
+    \put(0.96023471,0.06280992){\color[rgb]{0.6,0.6,0.6}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{1}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=76]{lcg_svg-tex.pdf}}%
+    \put(0.96140331,0.0446281){\color[rgb]{0.8,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{2}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=77]{lcg_svg-tex.pdf}}%
+    \put(0.93801157,0.04297521){\color[rgb]{0,0.6,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{3}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=78]{lcg_svg-tex.pdf}}%
+    \put(0.93216364,0.06942149){\color[rgb]{0,0,1}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{4}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=79]{lcg_svg-tex.pdf}}%
+    \put(0.94269091,0.07933884){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{c}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=80]{lcg_svg-tex.pdf}}%
+    \put(0.00935673,0.07107438){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{m}\end{tabular}}}}%
+    \put(0.03391818,0.07107438){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.07107438){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}9\end{tabular}}}}%
+    \put(0.01228069,0.04793388){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{a}\end{tabular}}}}%
+    \put(0.03391818,0.04793388){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.04793388){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0.0128655,0.02479339){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{c}\end{tabular}}}}%
+    \put(0.03391818,0.02479339){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}= \end{tabular}}}}%
+    \put(0.04912281,0.02479339){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=81]{lcg_svg-tex.pdf}}%
+  \end{picture}%
+\endgroup%

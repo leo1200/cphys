@@ -419,7 +419,7 @@ which is an implicit equation as $\vec{f}$ is evaluated at the new time step $\v
 
 \problem{Note that implicit Euler is also a first order accurate scheme.}
 
-\subsubsection*{Region of absolute stability of the Implicit Euler method}
+\subsubsection{Region of absolute stability of the Implicit Euler method}
 
 As for the Explicit Euler method, we perform a linear stability analysis of the Implicit Euler method for $\partial_t y = \alpha y, Re(\alpha) < 0, y(0) = y_0$. We obtain
 
@@ -453,7 +453,8 @@ which is illustrated in figure \ref{fig:imp_eul_stab_reg}. The whole left half p
   \label{fig:imp_eul_total}
 \end{figure}
 
-\subsubsection*{Implicit Euler for stiff linear ODEs}
+\subsubsection{Implicit Euler for stiff linear ODEs}
+\label{sssec:implicit_euler_linear}
 As Implicit Euler is unconditionally stable, the fast oscillating terms resulting from
 \[
   \partial_t \begin{pmatrix} y_1 \\ y_2 \end{pmatrix} = \mat{A} \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}, \quad \mat{A} = \begin{pmatrix} 998 & 1998 \\ -999 & -1999 \end{pmatrix}
@@ -476,7 +477,8 @@ The implicit step for such a linear system $\partial_t \vec{y} = \mat{A} \vec{y}
 
 which means that to make a step we have to solve a linear system which is usually done by matrix decomposition (like LU decomposition).
 
-\subsubsection*{But how can we approach non-linear ODEs using the Implicit Euler method?}
+\subsubsection{But how can we approach non-linear ODEs using the Implicit Euler method?}
+\label{sssec:implicit_euler_nonlinear}
 To perform an implicit step 
 \[
   \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n+1)} \right) \Delta t
@@ -1037,7 +1039,7 @@ Let us look at another physical problem, the pendulum, as it lends itself well t
 
 \begin{figure}[!htb]
   \centering
-  \includesvg[width=1\textwidth]{figures/phase_spaceB.svg}\hfill
+  \includegraphics[width=1\textwidth]{figures/phase_spaceB.pdf}\hfill
   \caption{The left panel shows solutions to the pendulum problem at different points in time for different initial values as obtained by the RK2 scheme. The initial values are chosen so that they initially span a square in phase space. The right panel shows the phase space area spanned by the solutions as a function of time.}
   \label{fig:pend_phase_rk2}
 \end{figure}
@@ -1279,7 +1281,7 @@ Symplecticity (so area conservation in phase space) is illustrated at the hand o
 
 \begin{figure}[!htb]
   \centering
-  \includesvg[width=1\textwidth]{figures/phase_spaceA.svg}\hfill
+  \includegraphics[width=1\textwidth]{figures/phase_spaceA.pdf}\hfill
   \caption{The same situation as in figure \ref{fig:pend_phase_rk2} is shown but now with the result of the leapfrog method added. The leapfrog scheme preserves the area in phase space while the RK2 scheme does not.}
   \label{fig:pend_phase_lf}
 \end{figure}

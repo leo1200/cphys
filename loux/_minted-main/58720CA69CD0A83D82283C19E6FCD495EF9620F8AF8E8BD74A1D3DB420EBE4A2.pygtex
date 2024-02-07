@@ -1,0 +1,45 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      \PYG{c}{\PYGZsh{} simple linear convolution in real space}
+      \PYG{k}{function} \PYG{n}{conv1d}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{n} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+          \PYG{n}{m} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{y} \PYG{o}{=} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{n} \PYG{o}{+} \PYG{n}{m} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
+          \PYG{k}{for} \PYG{n}{i} \PYG{k}{in} \PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{n}
+              \PYG{k}{for} \PYG{n}{j} \PYG{k}{in} \PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{m}
+                  \PYG{n}{y}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{n}{j} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{f}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{*} \PYG{n}{g}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}
+              \PYG{k}{end}
+          \PYG{k}{end}
+          \PYG{k}{return} \PYG{n}{y}
+      \PYG{k}{end}
+
+      \PYG{c}{\PYGZsh{} zero padded linear convolution in real space}
+      \PYG{c}{\PYGZsh{} note that this zero padded version is equivalent}
+      \PYG{c}{\PYGZsh{} to the cyclic convolution with zero padding}
+      \PYG{k}{function} \PYG{n}{DirectLinearConvolution}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{N} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+          \PYG{n}{M} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+
+          \PYG{n}{g\PYGZus{}pad} \PYG{o}{=} \PYG{p}{[} \PYG{n}{g}\PYG{p}{;} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{]}     \PYG{c}{\PYGZsh{} length N+M\PYGZhy{}1}
+          \PYG{n}{f\PYGZus{}pad} \PYG{o}{=} \PYG{p}{[} \PYG{n}{f}\PYG{p}{;} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{]}     \PYG{c}{\PYGZsh{} length N+M\PYGZhy{}1}
+
+          \PYG{n}{Conv} \PYG{o}{=} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+          \PYG{k}{for} \PYG{n}{n}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+              \PYG{k}{for} \PYG{n}{m}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+                  \PYG{k}{if} \PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}
+                      \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{=} \PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]} \PYG{o}{+} \PYG{n}{f\PYGZus{}pad}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]} \PYG{o}{*} \PYG{n}{g\PYGZus{}pad}\PYG{p}{[}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}
+                  \PYG{k}{end}
+                  \PYG{c}{\PYGZsh{} n+1 \PYGZlt{}= m}
+              \PYG{k}{end}
+          \PYG{k}{end}
+          \PYG{k}{return} \PYG{n}{Conv}
+      \PYG{k}{end}
+
+      \PYG{c}{\PYGZsh{} fast linear convolution in Fourier space}
+      \PYG{k}{function} \PYG{n}{FastLinearConvolution}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{N} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+          \PYG{n}{M} \PYG{o}{=} \PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+          \PYG{n}{f\PYGZus{}pad} \PYG{o}{=} \PYG{p}{[} \PYG{n}{f}\PYG{p}{;} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{]}
+          \PYG{n}{g\PYGZus{}pad} \PYG{o}{=} \PYG{p}{[} \PYG{n}{g}\PYG{p}{;} \PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{]}
+          \PYG{k}{return} \PYG{n}{FastCyclicConv1D}\PYG{p}{(} \PYG{n}{f\PYGZus{}pad}\PYG{p}{,} \PYG{n}{g\PYGZus{}pad} \PYG{p}{)}
+      \PYG{k}{end}
+\end{Verbatim}

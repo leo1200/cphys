@@ -1,3 +1,309 @@
 \section{Diffusion}
 \thispagestyle{plain}
 
+On a micro scale diffusion is a random walk with the mean free path as the step size.
+\textcolor{blue1}{Intuitive example}: Imagine a region with high density. It is more likely that a particle
+within this region takes a step out of it than a particle outside stepping in (as of the 
+difference in density). Physically, the entropy cannot decrease.
+
+\subsection{Thermodynamic Basics of Diffusion}
+\bluebox{How quickly do thermalized, randomly moving particles spread?}
+\subsubsection{Mean squared velocity and mean squared relative velocity}
+Assume the particles follow a Maxwell-Boltzmann distribution (we assume only one particle species with mass $m$ and temperature $T$)
+\begin{equation}
+    \begin{gathered}
+    f(\vec{v}) d^3 v=\left(\frac{m}{2 \pi k_B T}\right)^{\frac{3}{2}} \exp \left(\frac{-\frac{1}{2} m v^2}{k_B T}\right) d^3 v \\
+    f(v) d v=4 \pi v^2\left(\frac{m}{2 \pi k_B T}\right)^{\frac{3}{2}} \exp \left(\frac{-\frac{1}{2} m v^2}{k_B T}\right) d v, \quad v=|\vec{v}|
+    \end{gathered}
+\end{equation}
+Based on the equipartition theorem, the mean squared velocity is
+\begin{equation}
+    \langle \frac{1}{2} m \vec{v}^2 \rangle = \frac{3}{2} k_B T \quad \rightarrow \quad \langle \vec{v}^2 \rangle = \frac{3k_B T}{m},  \quad v:= \sqrt{\langle \vec{v}^2 \rangle}
+\end{equation}
+so the mean squared relative velocity is higher (avg here over velocity space)
+\begin{equation}
+    \langle \vec{v}_{rel}^2 \rangle = \langle (\vec{v} - \vec{v}')^2 \rangle = \langle \vec{v}^2 \rangle + \langle \vec{v'}^2 \rangle - \underbrace{2 \langle \vec{v} \cdot \vec{v'} \rangle}_{=0 \text{ avg. over uncorrelated}} = \quad \langle \vec{v}^2 \rangle = \frac{6 k_B T}{m}
+\end{equation}
+% = \int (\vec{v}-\vec{v'})^2 f(\vec{v}) f(\vec{v'}) d^3v d^3v'
+where we shorthand use $v_{rel} = \sqrt{\langle \vec{v}_{rel}^2 \rangle}$.
+
+\subsubsection{Mean free path and relaxation time}
+Consider a fluid with particle density $n$ (in $\m^{-3}$) of particles with effective radius $r$ so effective
+cross-section $\sigma = \pi r^2$. In sec. \ref{ssssec:mean_free_path}, we already devised (under particle
+movement with the root-mean-square velocity)
+\begin{equation}
+    \begin{gathered}
+        \text{particle moving through stationary particles: } \lambda_{mfp} = \frac{1}{n\sigma} \\
+        \text{relative particle movement: } \lambda_{mfp} = \frac{1}{\sqrt{2} n\sigma}
+    \end{gathered}
+\end{equation}
+and the relaxation time (mean time until a particle collides with another)
+\begin{equation}
+    t_{rel} = \frac{\lambda_{mfp}}{v} = \frac{1}{n\pi r^2} \sqrt{\frac{m}{6k_B T}}
+\end{equation}
+\redbox{\cite{springel23} - I would say wrongly - uses $\lambda_{mfp} = \frac{1}{n\sigma}$ and with this
+defines $t_{scat} = \frac{\lambda_{mfp}}{v}$ and $t_{rel} = \frac{\lambda_{mfp}}{v_{rel}}$, which
+is equivalent to our $t_{rel}$ with our $\lambda_{mfp}$.}
+
+\subsubsection{Random Walk | spreading Gaussian distribution in space}
+\greenbox{\textbf{Central Limit Theorem:} Let $w(s) ds$ be the probability
+of taking a step with length between $s$ and $s+ds$ with mean
+$\langle s \rangle$ and variance $\sigma_s^2$. We make $N$ steps,
+so the final position along one dimension is
+\begin{equation}
+    x = s_1 + s_2 + s_3 + \dots + s_N
+\end{equation}
+By the rules of the mean and variance, one finds
+\begin{equation}
+    \begin{gathered}
+        \langle x \rangle = N \langle s \rangle, \quad \langle s \rangle = \int_{-\infty}^{\infty} s \cdot w(s) \, ds \\
+        (\Delta x)^2 = \sigma_x^2 = \langle (x - \langle x \rangle)^2 \rangle = N \sigma_s^2
+    \end{gathered}
+\end{equation}
+And the \textbf{Central Limit Theorem} states
+\begin{equation}
+    \label{eq:central_limit_theorem}
+    \boxed{P(x) = \frac{1}{\sqrt{2\pi}\Delta x} \exp{\left( -\frac{(x-\langle x \rangle)^2}{2(\Delta x)^2} \right)}}
+\end{equation}
+if the moments $\langle s^n \rangle = \int_{-\infty}^{\infty} s^n w(s) \, ds$ are finite. The basis reasoning
+is that one can show that for added random variables their sum converges to one distribution, and as added random
+variables are distributed according to the convolution of their distributions and the convolution of two Gaussians is
+a Gaussian, the sum of many random variables is a Gaussian.}
+
+Consider particles starting out at the origin with equal probability of
+going left or right with $\lambda_{mfp}$. We have
+\begin{equation}
+    w(s) = \frac{1}{2} \delta(s-\lambda_{mfp}) + \frac{1}{2} \delta(s+\lambda_{mfp}), \quad \langle s \rangle = 0, \quad \sigma_s^2 = \lambda_{mfp}^2
+\end{equation}
+so therefore, estimating $N = \frac{t}{t_{rel}}$
+\begin{equation}
+    \langle x \rangle = 0, \quad \langle x^2 \rangle = N \sigma_s^2 = \frac{\lambda_{mfp}^2}{t_{rel}} t \rightarrow \boxed{\sqrt{\langle x^2 \rangle} \propto \sqrt{t}}
+\end{equation}
+So the distribution flattens and spreads in time. As $\langle (\Delta x)^2 \rangle$ is time dependent, so is $p(x,t)$.
+
+\subsection{Diffusion equation}
+\subsubsection{Derivation of the diffusion equation | Fick's law from the microscopic consideration}
+Consider the evolution of a system from $t \rightarrow t + \Delta t$. For a change $\Delta t$ let
+$\Delta x$ be the according change of a particle position, distributed according to $p(\Delta x, \Delta t)$.
+We can therefore write
+\begin{equation}
+    \begin{gathered}
+        n(x,t+\Delta t) = \langle n(x-\Delta x,t) \rangle \underset{\text{Taylor}}{=} n(x,t) - \partial_x n \cdot \langle \Delta x \rangle + \frac{1}{2} \partial_x^2 n \cdot \langle \Delta x^2 \rangle + \dots \\
+        \underset{\text{vanishing uneven moments}}{=} n(x,t) + \frac{1}{2} \partial_x^2 n \cdot \langle \Delta x^2 \rangle + \mathcal{O}(\Delta x^4)
+    \end{gathered}
+\end{equation}
+Taylor expansion with respect to time yields
+\begin{equation}
+    n(x,t+\Delta t) = n(x,t) + \partial_t n \cdot \Delta t
+\end{equation}
+So combined, we get (ignoring the higher order terms, so it's really an approximation)
+\begin{equation}
+    \boxed{\partial_t n(x,t) = \mathcolor{blue1}{\frac{\Delta x^2}{2 \Delta t}} \partial_x^2 n(x,t) = \mathcolor{blue1}{D} \partial_X^2 n(x,t)}
+\end{equation}
+with
+\begin{equation}
+    \mathcolor{blue1}{\text{diffusion coefficient } D = \frac{\Delta x^2}{2 \Delta t} \propto \frac{\lambda_{mfp}^2}{t_{rel}}}
+\end{equation}
+
+We can rewrite this as a conservation equation (introducing the flux $J$) (Fick's law of diffusion)
+
+\begin{equation}
+    \partial_t n(x,t) = -\partial_x J(x,t), \quad J(x,t) = -D \partial_x n(x,t)
+\end{equation}
+
+where the same principle applies to heat, energy and momentum diffusion.
+
+\subsubsection{Analytical Solution to the diffusion equation via Fourier transform}
+Using the Fourier transform in space in the convention
+\begin{equation}
+    n(x, t)=\frac{1}{2 \pi} \int_{-\infty}^{\infty} \hat{n}(k, t) \exp (-i k x) d k, \quad \hat{n}(k, t)=\int_{-\infty}^{\infty} n(x, t) \exp (i k x) d x
+\end{equation}
+we yield an ODE in Fourier space with trivial solution
+\begin{equation}
+    \partial_t \hat{n}(k, t)=-D k^2 \hat{n}(k, t) \quad \rightarrow \quad \hat{n}(k, t)=\hat{n}\left(k, t_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)
+\end{equation}
+\subsubsubsection{Solution for an initial delta peak in the density over space}
+Consider
+\begin{equation}
+    n\left(x, t_0\right)=n_0 \delta\left(x-x_0\right), \quad \hat{n}\left(x, t_0\right)=n_0 \int_{-\infty}^{\infty} \delta\left(x-x_0\right) \exp (i k x) d x=n_0 \exp \left(i k x_0\right)
+\end{equation}
+yielding the solution in Fourier space
+\begin{equation}
+    \rightarrow \hat{n}(k, t)=\hat{n}\left(k, t_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)=n_0 \exp \left(i k x_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)
+\end{equation}
+so with the inverse Fourier transform (completing the square and using that a Gaussian distribution is normed)
+\begin{equation}
+    \text{a Gaussian } n(x, t)=\frac{n_0}{\sqrt{4 \pi D\left(t-t_0\right)}} \exp \left(-\frac{\left(x-x_0\right)^2}{4 D\left(t-t_0\right)}\right)
+\end{equation}
+\greenbox{\textbf{Conservation:} As the Gaussian is normalized, $n_0$ stays constant irrespective of time implying particle 
+number conservation (or energy conservation for the diffusion of heat (heat conduction))}
+\redbox{\textbf{Problem of particle propagation: } As the solution is a Gaussian with infinite wings, 
+there must have been infinitely fast particle transport starting from the initial situation - unphysical.
+\textbf{Reason - approximation in diffusion equation}: Our diffusion equation is based on a random walk with well-behaved 
+steps but in finding the diffusion equation we have done a truncated Taylor expansion, leaving away $\mathcal{O}(\Delta x^4)$. 
+In numerical schemes we will use limited flux.}
+
+\redbox{\textbf{Infinite Signal Speeds: } In contrast to advection with a given signal speed the diffusion equation and also
+Poisson equation (e.g. for Gravity) have infinite domains of influence - an event at $(\vec{x},t)$ depends on the fill domain.
+In the case of diffusion we will later introduce limited flux aka tempered diffusion.}
+
+\subsection{Numerical solutions}
+Let us change the notation $n \rightarrow u$ to be consistent with previously introduced schemes.
+We indicate with the convention $u_{\text{space}}^{\text{(time)}}$.
+
+\bluebox{In the following we discuss multiple possible discretizations.}
+
+The general grid in space and time is illustrated in figure \ref{fig:diff_grid}.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/diff_grid.svg}
+    \caption{Grid in space and time for the diffusion equation.}
+    \label{fig:diff_grid}
+\end{figure}
+
+\subsubsection{Forward in time, central in space}
+\subsubsubsection{Discretized diffusion equation}
+Based on the central approximation of $\partial_x^2 u$ (from Taylor in 
+both directions, see eq. \ref{eq:2nd_disc}) at the current
+time $j$ and forward difference in time, we get
+\begin{equation}
+    \frac{u_i^{(j+1)} - u_i^{(j)}}{\Delta t} = D \frac{u_{i+1}^{(j)}-2 u_{i}^{(j)}+u_{i-1}^{(j)}}{\Delta x^2}
+\end{equation}
+
+\subsubsubsection{Explicit scheme for performing a time step}
+Defining $\alpha = \frac{D \Delta t}{\Delta x^2}$, we get
+\begin{equation}
+    u_i^{(j+1)} = u_i^{(j)} + \alpha \left( u_{i+1}^{(j)} - 2 u_i^{(j)} + u_{i-1}^{(j)} \right)
+\end{equation}
+an explicit scheme for forwarding. The information flow is illustrated in 
+figure \ref{fig:diff_explicit}.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/diff_grid_central_forward.svg}
+    \caption{Information flow for the central in space, forward in time scheme.}
+    \label{fig:diff_explicit}
+\end{figure}
+
+\subsubsubsection{Stability of the central in space, forward in time scheme for diffusion}
+Let us make a simple stability analysis considering $u_{i+1}^{(j)} = u_{i-1}^{(j)} = 0$.
+In such a scenario it does not make sense for there to be a sign change from
+$u_i^{(j)}$ to $u_i^{(j+1)}$. This requires (just plug conditions in)
+\begin{equation}
+    \alpha \leq \frac{1}{2} \leftrightarrow \Delta t \leq \frac{1}{2} \frac{\Delta x^2}{D}
+\end{equation}
+\bluebox{\textbf{Physical intuition and connection to CFL: } In diffusion, density spreads with $\Delta x = \sqrt{2 D \Delta t}$,
+so when we impose a CFL criterion - we only use information from the left and right grid points next to the grid point of
+interest, so $\Delta t$ must not be so large, that further information would in reality be necessary - we get
+the same criterion as above.}
+\redbox{\textbf{Problem of scaling the resolution:} If we want to double the spatial resolution, we must quadruple 
+the resolution in time, i. e. in total the 1D simulation is 8x more expensive (in 3D double spatial resolution means 
+8x more points in a certain volume so 32x more cost in total).}
+
+\subsubsection{Backward in time, central in space}
+\subsubsubsection{Discretized implicit scheme}
+We now evaluate the spatial derivative at time $j+1$ instead of $j$.
+\begin{equation}
+    \frac{u_i^{(j+1)} - u_i^{(j)}}{\Delta t} = D \frac{u_{i+1}^{(j+1)}-2 u_{i}^{(j+1)}+u_{i-1}^{(j+1)}}{\Delta x^2}
+\end{equation}
+This can be rewritten as
+\begin{equation}
+     -\alpha u_{i+1}^{(j+1)} + (1+2\alpha) u_i^{(j+1)} - \alpha u_{i-1}^{(j+1)} = u_i^{(j)}
+\end{equation}
+- a linear system of equations for $u_i^{(j+1)}$.
+\subsubsubsection{Matrix equation}
+The exact matrix depends on the boundary conditions we choose. For periodic boundary conditions\footnote{The point before the 
+first point is the last point and the point after the last point is the first point.} we get
+\begin{equation}
+    \begin{gathered}
+        \mat{A} \vec{u}^{(j+1)} = \vec{u}^{(j)}, \quad \vec{u}_i^{(j)} = \left( \begin{array}{c}
+            u_1^{(j)} \\
+            u_2^{(j)} \\
+            \vdots \\
+            u_{N}^{(j)}
+        \end{array} \right) \\
+        \mat{A} = \begin{pmatrix}
+            1+2\alpha & -\alpha & 0 & \dots &  & 0 & -\alpha \\
+            -\alpha & 1+2\alpha & -\alpha & 0 & \dots &  &  \\
+            0 & -\alpha & 1+2\alpha & -\alpha & 0 & \dots &  \\
+             &  & \ddots & \ddots & \ddots &  &  \\
+            &  &  & \ddots & \ddots & \ddots &  \\
+            & &  & & \ddots  & \ddots  & \ddots  \\
+            -\alpha & 0 & \dots &  & 0 & -\alpha & 1+2\alpha
+        \end{pmatrix}
+    \end{gathered}
+\end{equation}
+which we can solve for $\vec{u}^{(j+1)} = \mat{A}^{-1} \vec{u}^{(j)}$.
+\problem{This is unconditionally stable but only first order in time $\mathcal{O}(\Delta x^2, \Delta t)$.}
+
+\subsubsection{Crank-Nicolson method}
+\idea{Evaluate the spatial derivative at $j+\frac{1}{2}$, constructed as an average of $j$ and $j+1$.}
+\begin{equation}
+    \frac{u_i^{(j+1)}-u_i^{(j)}}{\Delta t}=D \frac{u_{i+1}^{\left(j+\frac{1}{2}\right)}-2 u_i^{\left(j+\frac{1}{2}\right)}+u_{i-1}^{\left(j+\frac{1}{2}\right)}}{\Delta x^2}, \quad \text { use avg. } u_i^{\left(j+\frac{1}{2}\right)}=\frac{u_i^{(j+1)}+u_i^{(j)}}{2}
+\end{equation}
+yielding
+\begin{equation}
+    -\alpha u_{i+1}^{(j+1)}+(1+2 \alpha) u_i^{(j+1)}-\alpha u_{i-1}^{(j+1)}=\alpha u_{i+1}^{(j)}+(1-2 \alpha) u_i^{(j)}+\alpha u_{i-1}^{(j)}
+\end{equation}
+So again a matrix problem over the whole spatial domain
+\begin{equation}
+    \mat{A} \vec{u}^{(j+1)} = \vec{b}, \quad \mat{A} \text{ as before}, \quad b_i = \alpha u_{i+1}^{(j)}+(1-2 \alpha) u_i^{(j)}+\alpha u_{i-1}^{(j)}
+\end{equation}
+where again we can solve for $\vec{u}^{(j+1)} = \mat{A}^{-1} \vec{b}$. Note for non-periodic boundary conditions
+e.g. Dirichlet boundaries (fixed), $\mat{A}$ is tridiagonal, so very easy to solve.
+\greenbox{Advantage of Crank-Nicolson: $\mathcal{O}( \Delta x^2, \Delta t^2)$ (2nd order in space and time) and unconditionally stable.}
+
+\subsection{Flux-limited diffusion (\textit{tempered})}
+As of the approximation in the diffusion equation infinitely large signal speeds 
+(unphysical) can result. Instead of including higher order terms in the Taylor expansion 
+($\rightarrow$ hyperbolic system with finite information speed) \textcolor{blue1}{we limit the speed by hand 
+using a limited diffusion flux}.
+\idea{Express the flux as a product of density and velocity and limit this velocity akin to Special Relativity (based on a momentum consideration), e.g. to the speed of sound.}
+Let us start with the diffusion equation
+\begin{equation}
+    \partial_t u = - \partial_x J, \quad J = - D \partial_x u
+\end{equation}
+We make the Ansatz
+\begin{equation}
+    J(x,t) = u(x,t) \cdot v, \quad text{characteristic velocity } v
+\end{equation}
+and define a \textit{negative specific diffusion momentum}, really just the negative of the
+not-yet-limited velocity $v$.
+\begin{equation}
+    -v = -\frac{J}{u} = \frac{D\partial_x u}{u} \equiv R
+\end{equation}
+Now we ask ourselves: What if $R$ was a relativistic momentum? What velocity $\tilde{v}$ would have brought forth 
+this relativistic momentum will
+naturally be limited to be smaller than $c$. So drawing from $p = \gamma m v, v<c$ we write
+\begin{equation}
+    R = - \frac{\tilde{v}}{\sqrt{1-\frac{\tilde{v}^2}{c^2}}} \quad \leftrightarrow \quad \tilde{v} = -\frac{R}{\sqrt{1+\frac{R^2}{c^2}}}
+\end{equation}
+so we use the altered flux
+\begin{equation}
+    \tilde{J} = u \tilde{v}, \quad \partial_t u = \partial_x \tilde{J}
+\end{equation}
+
+\subsection{Diffusion in three dimensions}
+In 3D, we have
+\begin{equation}
+    \partial_t u(\vec{x}, t) = -\vec{\nabla} \cdot \vec{J}(\vec{x},t), \quad \text{flux vector } \vec{J}(\vec{x},t) = - \mat{D}\cdot \vec{\nabla} u(\vec{x},t), \quad \text{diffusion matrix } \mat{D}
+\end{equation}
+For a magnetized plasma, movement is mostly 
+along the magnetic field lines (diffusion 
+along the lines is dampened by collisions, 
+diffusion perpendicular can only exist as of 
+collisions).
+
+\begin{equation}
+    \begin{gathered}
+        \vec{B}=B \vec{\hat{e}}_Z \rightarrow D=\left(\begin{array}{ccc}
+            D_{\perp} & 0 & 0 \\
+            0 & D_{\perp} & 0 \\
+            0 & 0 & D_{\|}
+            \end{array}\right) \\
+            \text { typically in MHD: } D_{\perp} \ll D_{\|} \rightarrow \partial_t \vec{u}(\vec{x}, t)=\vec{\nabla} \cdot D_{\|} \vec{\hat{e}}_z\left(\vec{\hat{e}}_z \vec{\nabla} \vec{u}(\vec{x}, t)\right)
+    \end{gathered}
+\end{equation}
+
+\pagebreak

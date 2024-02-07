@@ -590,7 +590,7 @@ In the words from \cite{Kincl23}: \enquote{In summary, if we see all the positio
     \label{fig:reversible_dam}
 \end{figure}
 
-\yellowbox{\textbf{Note the different levels at play:} The SPH-particles are artificial in that they describe the fluid not the fluid particles. So while the SPH-particles start out resting, there is still temperature and pressure. However, in the dam experiment (fig. \ref{fig:reversible_dam}) (and generally) the SPH particles themselves thermalize to a Boltzmann distribution (they start out in non-equilibrium), fitting to the equilibrium Boltzmann entropy (although we do not add any heat, Boltzmann entropy of the SPH-particles increases as we go from non-equilibrium to equilibrium). Note that this is not the same as the specific thermodynamic entropy of the fluid, as previously described.}
+\yellowbox{\textbf{Note the different levels at play:} The SPH-particles are artificial in that they describe the fluid not the fluid particles. So while the SPH-particles start out resting, there is still temperature and pressure. However, in the dam experiment (fig. \ref{fig:reversible_dam}) (and generally) the SPH particles themselves thermalize to a Boltzmann distribution (they start out in non-equilibrium), fitting to the equilibrium Boltzmann entropy (although we do not add any heat, Boltzmann entropy of the SPH-particles (\textbf{based on their phase space distribution}) increases as we go from non-equilibrium to equilibrium). Note that this is not the same as the specific thermodynamic entropy of the fluid, as previously described.}
 
 \subsection{Notes on the conservative formulation using Lagrange multipliers}
 Starting with the Lagrangian for inviscid, compressible flow
@@ -652,3 +652,5 @@ Advantages and disadvantages of SPH are summarized in table \ref{tab:advantages_
     \caption{Advantages and disadvantages of SPH.}
     \label{tab:advantages_disadvantages_sph}
 \end{table}
+
+\pagebreak
