@@ -202,7 +202,7 @@ From
 we can devise an $\mathcal{O}(N^3)$ algorithm to calculate $\mat{L}$ and $\mat{R}$,
 see code \ref{code:lu_decomposition}.
 
-\begin{codebox}[H]
+\begin{codebox}[!htb]
     \begin{minted}{julia}
         # in-place decomposition of A into L and R, the upper-right part of A is overwritten by R,
         # the lower-left part of A is overwritten by L without diagonal (set to 1)

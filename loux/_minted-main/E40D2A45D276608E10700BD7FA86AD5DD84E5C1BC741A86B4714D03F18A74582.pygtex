@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+  \PYG{k}{for} \PYG{n}{time} \PYG{o+ow}{in} \PYG{n}{times}\PYG{p}{:}
+   \PYG{n}{get\PYGZus{}ghost\PYGZus{}cells}\PYG{p}{()}
+   \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{xs}\PYG{p}{:}
+    \PYG{k}{for} \PYG{n}{y} \PYG{o+ow}{in} \PYG{n}{ys}\PYG{p}{:}
+      \PYG{n}{density}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+      \PYG{n}{momentum}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+      \PYG{n}{energy}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+    \PYG{n}{communicate}\PYG{o}{...}
+\end{Verbatim}

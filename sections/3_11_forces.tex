@@ -556,4 +556,34 @@ yields
     \vec{F}_{12} = - \vec{F}_{21} \quad \rightarrow \quad \vec{F}_{12} + \vec{F}_{21} = 0
 \end{equation}
 
+\subsection{Outlook - combining the particle mesh and tree method}
+
+\greenbox{The particle mesh method the elegant property of providing
+periodic boundary condiditons (when the Poisson equation is solved in Fourier space) and natural force softening
+ensuring collisionless behavior by default.}
+\redbox{However the natural force softening on the grid-scale means that
+the force resolution is rather poor.}
+\greenbox{The tree method on the other hand has high force resolution
+but does not provide periodic boundary conditions.}
+
+To carry out large-scale N-body simulations
+to study the formation of large scale structures
+in the universe, one might want to combine the particle
+mesh and (oct)-tree method \citep{Bagla02}, 
+
+The main idea is to split the gravitational potential
+in Fourier space
+\begin{equation}
+    \begin{aligned}
+        \varphi_k & =-\frac{4 \pi G \varrho_k}{k^2} \\
+        & =\underbrace{-\frac{4 \pi G \varrho_k}{k^2} \exp \left(-k^2 r_s^2\right)}_{\text{long range part } \phi_k^l}-\underbrace{\frac{4 \pi G \varrho_k}{k^2}\left(1-\exp \left(-k^2 r_s^2\right)\right)}_{\text{short range part } \phi_k^s}
+    \end{aligned}
+\end{equation}
+where the longrange potential (and from this force on our particles) is calculated in Fourier space as
+in the Particle Mesh method and the short force is calculated in
+real space as
+\begin{equation}
+    \vec{f}^s(\vec{r})=-\frac{G m \vec{r}}{r^3}\left(\operatorname{erfc}\left(\frac{r}{2 r_s}\right)+\frac{r}{r_s \sqrt{\pi}} \exp \left(-\frac{r^2}{4 r_s^2}\right)\right)
+\end{equation}
+
 \pagebreak

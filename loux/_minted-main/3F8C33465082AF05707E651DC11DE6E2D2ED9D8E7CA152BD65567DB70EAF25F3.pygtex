@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{k+kd}{var}\PYG{+w}{ }\PYG{n+nx}{wg}\PYG{+w}{ }\PYG{n+nx}{sync}\PYG{p}{.}\PYG{n+nx}{WaitGroup}
+\PYG{+w}{      }\PYG{n+nx}{wg}\PYG{p}{.}\PYG{n+nx}{Add}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{for}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{p}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{o}{++}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{k}{go}\PYG{+w}{ }\PYG{k+kd}{func}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{              }\PYG{n+nb}{println}\PYG{p}{(}\PYG{n+nx}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{// race on i!}
+\PYG{+w}{              }\PYG{c+c1}{// when goroutine reads i}
+\PYG{+w}{              }\PYG{c+c1}{// its already incremented}
+\PYG{+w}{              }\PYG{n+nx}{wg}\PYG{p}{.}\PYG{n+nx}{Done}\PYG{p}{()}
+\PYG{+w}{          }\PYG{p}{\PYGZcb{}()}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{n+nx}{wg}\PYG{p}{.}\PYG{n+nx}{Wait}\PYG{p}{()}
+\PYG{+w}{      }\PYG{c+c1}{// output e.g.: 2 5 5 5 5}
+\PYG{+w}{      }\PYG{c+c1}{// solution, pass i as argument}
+\end{Verbatim}

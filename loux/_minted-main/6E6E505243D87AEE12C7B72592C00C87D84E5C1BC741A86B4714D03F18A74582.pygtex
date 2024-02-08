@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+          \PYG{k}{for} \PYG{n}{time} \PYG{o+ow}{in} \PYG{n}{times}\PYG{p}{:}
+              \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{xs}\PYG{p}{:}
+                  \PYG{k}{for} \PYG{n}{y} \PYG{o+ow}{in} \PYG{n}{ys}\PYG{p}{:}
+                      \PYG{k}{if} \PYG{n}{at\PYGZus{}boundary}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{):}
+                          \PYG{n}{neighbors} \PYG{o}{=} \PYG{n}{get\PYGZus{}neighbors\PYGZus{}from\PYGZus{}other\PYGZus{}processes}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{)}
+                      \PYG{k}{else}\PYG{p}{:}
+                          \PYG{n}{neighbors} \PYG{o}{=} \PYG{o}{...}
+                      \PYG{n}{density}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+                      \PYG{n}{momentum}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+                      \PYG{n}{energy}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{]} \PYG{o}{=} \PYG{o}{...}
+\end{Verbatim}

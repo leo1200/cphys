@@ -166,6 +166,8 @@
 \setminted[C]{frame=single, obeytabs=true, tabsize=4, linenos, breaklines}
 \setminted[python3]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
 \setminted[julia]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
+\setminted[cpp]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
+\setminted[go]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
 
 \usepackage{tocbasic}
 
@@ -233,11 +235,17 @@
     borderline west={6pt}{0pt}{blue1},
     colback=blue1!10!white}
 
+\newtcolorbox{greyBox}{textmarker,
+    borderline west={6pt}{0pt}{blue1},
+    colback=gray!10!white}
+
 
 % define commands for easy access
 \newcommand{\note}[1]{\begin{hintBox} \textbf{Note:} #1 \end{hintBox}}
 \newcommand{\idea}[1]{\begin{noteBox} \textbf{Idea:} #1 \end{noteBox}}
 \newcommand{\problem}[1]{\begin{importantBox} \textbf{Problem:} #1 \end{importantBox}}
+% greyBox
+\newcommand{\greybox}[1]{\begin{greyBox} #1 \end{greyBox}}
 
 \newcommand{\greenbox}[1]{\begin{noteBox} #1 \end{noteBox}}
 \newcommand{\redbox}[1]{\begin{importantBox} #1 \end{importantBox}}
@@ -475,6 +483,7 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{3_10_collisionless.tex}
 \import{sections/}{3_11_forces.tex}
 \import{sections/}{3_12_MC.tex}
+\import{sections/}{3_13_para.tex}
 
 \pagebreak
 \thispagestyle{plain}

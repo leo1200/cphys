@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{add\PYGZus{}one}\PYG{p}{(}\PYG{n+nx}{x}\PYG{+w}{ }\PYG{o}{*}\PYG{k+kt}{int}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{o}{*}\PYG{n+nx}{x}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{o}{*}\PYG{n+nx}{x}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{c+c1}{// really three instructions}
+\PYG{+w}{          }\PYG{c+c1}{// 1. dereference pointer, 2. add 1, 3. assign to x}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{      }\PYG{k+kd}{func}\PYG{+w}{ }\PYG{n+nx}{main}\PYG{p}{()}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{n+nx}{x}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{          }\PYG{k}{for}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{o}{:=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{+w}{ }\PYG{p}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{1000}\PYG{p}{;}\PYG{+w}{ }\PYG{n+nx}{i}\PYG{o}{++}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{              }\PYG{k}{go}\PYG{+w}{ }\PYG{n+nx}{add\PYGZus{}one}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n+nx}{x}\PYG{p}{)}
+\PYG{+w}{          }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{          }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Sleep}\PYG{p}{(}\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n+nx}{time}\PYG{p}{.}\PYG{n+nx}{Second}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n+nb}{println}\PYG{p}{(}\PYG{n+nx}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{// e.g. 990}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

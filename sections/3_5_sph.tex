@@ -89,7 +89,7 @@ semi-implicit aka symplectic Euler\footnote{The PySPH package for
 instance uses a second order predictor-corrector method.}. Pressure and viscosity
 forces are calculated separately. We still have to mind the CFL criterion (more on this later).
 
-\begin{codebox}
+\begin{codebox}[!htb]
     \begin{minted}[escapeinside=||,mathescape=true]{python3}
         for sph_particle_i in sph_particles:
             # reconstruct density $\rho_i$ at $\vec{x}_i$
@@ -625,6 +625,7 @@ Advantages and disadvantages of SPH are summarized in table \ref{tab:advantages_
         \hline \\
         \begin{itemize}
             \item versatile and simple
+            \item avoids numerical diffusion issues arising when advection is not aligned with the mesh
             \item automatically adaptive resolution, can cover large ranges in density and space
             \item excellent conservation properties (energy, linear and angular momentum, not guarantueed in Eulerian codes)
             \item inherent mass conservation
@@ -636,6 +637,7 @@ Advantages and disadvantages of SPH are summarized in table \ref{tab:advantages_
         \end{itemize} &
         \begin{itemize}
             \item limited accuracy in multi-D flow
+            \item The number of neighboring particles (based on the neighbors positions we calculate the density and then equations of motion at the particle of interest) in SPH is far greater than the number of neighboring nodes in mesh based methods
             \item low density regions are more poorly resolved
             \item poorly handles shocks
             \item noise as of discrete sums over limited neighbor set
@@ -652,5 +654,43 @@ Advantages and disadvantages of SPH are summarized in table \ref{tab:advantages_
     \caption{Advantages and disadvantages of SPH.}
     \label{tab:advantages_disadvantages_sph}
 \end{table}
+
+\subsection{Outlook: Machine-learning enhanced multiscale-physics SPH simulation}
+Consider a SPH simulation of the Milky Way. In the N-body/SPH simulation
+individual SPH particles represent a clump of dark matter, gas or a group of stars.
+
+\greenbox{It is desirable do use particles with as small mass as possible, the current 
+state of the art is $10^3 M_{\odot}$\footnote{$1 M_{\odot}$ is the mass of the sun.}. \cite{hirashima2023}
+push for a model with resolution $~1 M_{\odot}$ for galaxy formation and evolution.}
+
+\problem{Such high resolution galaxy evolution simulations consider multi-scale physics - 
+a tiny fraction of short timescale regions (e.g. Supernovae) becomes the bottleneck
+for large scale parallel computation due to \textbf{Ahmdals law} (discussed later).}
+
+\idea{Replace the direct simulation of short time-step regions with a \textit{surrogate} machine learning model (that can directly do a large physically adequate time-step)
+that learns from supernova simulations in turbulent gas clouds.}
+
+\problem{The machine learning model (e.g. U-Net) needs a voxel (grid) representation. Density temperature
+and 3D velocity can e.g. be represented as $5$ scalar fields on a 3D grid.}
+
+\idea{Based on the SPH particles we can construct a 3D grid representation that we can feed
+into our ML model (e.g. U-Net) in the respective regions. After doing the larger timestep with 
+U-Net, we get back from the Eulerian voxel / field representation to SPH-particles by Gibbs-Sampling\footnote{A technique for generating samples of the marginals based on the conditional distributions in a multivariate setting.
+Consider e.g. we have a probability distribution for particles in $3$D, $p(x,y,z)$. Imagine that one can easily
+sample from the conditionals but not easily from the known joint distribution. \textbf{Gibbs sampling}:
+\begin{enumerate}
+    \item Choose an initial state $(x_0, y_0, z_0)$
+    \item Do an iteration with $t = 1,2,\dots,N$:
+    \begin{enumerate}
+        \item Sample $x^{(t)}$ from $p(x|y^{(t-1)}, z^{(t-1)})$
+        \item Sample $y^{(t)}$ from $p(y|x^{(t)}, z^{(t-1)})$
+        \item Sample $z^{(t)}$ from $p(z|x^{(t)}, y^{(t)})$
+    \end{enumerate}
+\end{enumerate}
+Where the conditionals just follow from the joint distribution $p(x,y,z)$ by plugging in the calculated values for the other variables. A burn in of $\sim 1000$ iterations is often used.
+\textbf{Note that a standard \textit{global} Metropolis Hastings algorithm can get us (multivariate) samples from the total joint distribution directly, not by sampling from the marginals seperately.}
+The rough rationale behind Gibbs sampling is that it might be easier to propose updates to one variable at a time than to all simultaneously as in such a Metropolis Hastings algorithm (Gibbs sampling is also
+a special case of a Metropolis Hastings algorithm).
+} (a Marcov Chain Monte Carlo method).}
 
 \pagebreak

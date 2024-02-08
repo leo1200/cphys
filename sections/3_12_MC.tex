@@ -828,6 +828,9 @@ This conditional transition property has the natural properties
     \int W_f(x \rightarrow x') \, dx' = 1, \quad W_f(x \rightarrow x') \geq 0
 \end{equation}
 
+\greenbox{Memorylessness also means that if you imagine two frogs hopping on the Markov chain, once they meet, they will be coupled (in love) forever.
+\textit{Ergodicity} means that they will eventually meet in finite time.}
+
 \subsubsubsection{Transitioning the probability distribution}
 The probability of a value $x'$ depending on the prior distribution $p(x)$ is
 \begin{equation}
@@ -884,7 +887,7 @@ state. If there were two fixed-point distributions, as of the above properties, 
 from one fixed-point distribution to the other - and they therefore would not be fixed-point distributions in the first place.
 So it is really $||p' - p_{eq}|| \mathcolor{green1}{<} ||p - p_{eq}||$.}
 
-\note{Ergodicity is more easily followed by $f$ in practice than one might imagine.}
+\note{Ergodicity is more easily followed by $f$ in practice than one might imagine. A Markov chain is ergodic if and only if it has at most one recurrent class\footnote{State $i$ is recurrent, if for all states $j$ for which there is a non-zero probability to get to $i$ the same is true the other way around. A set of recurrent states is a recurrent class.} and is aperiodic.}
 
 \subsubsubsection{Detailed balance | Common condition for the update steps}
 A stronger version of $p_{eq}$ must be a fix-point of the update step is
@@ -917,6 +920,8 @@ Starting from a current state $x$ we want to go to the next one $x'$. Let $p$ be
             \text{distribution } p \text{ we want to sample from.}
         \end{gathered}
     \end{equation}
+    \greenbox{This is the only place where the probability we want to sample from, $p$, comes into play.
+    Note that the normalization of $p$ cancels out, so we do not need to normalize $p$ in the Metropolis Hastings algorithm.}
     \item Accept $x'$ with probability $r$, i.e. draw a random number $u \in [0,1)$ and
     \begin{enumerate}
         \item $r\geq u$: accept $x'$ as the next state
@@ -929,7 +934,332 @@ We want to show detailed balance, so
 \begin{equation}
     p_{eq}(x) W_f(x\rightarrow x') = p_{eq}(x') W_f(x'\rightarrow x) \quad \rightarrow \quad p_{eq} \text{ is fix-point under } f
 \end{equation}
-For this let us calculate $W_f(x)
+For this let us start by calculating $W_f(x \rightarrow x')$ assuming $r<1$
+($r = 1$ follows analogously)
 
+\begin{equation}
+    W_f\left(x \rightarrow x^{\prime}\right)=q\left(x \rightarrow x^{\prime}\right) \frac{p\left(x^{\prime}\right) q\left(x^{\prime} \rightarrow x\right)}{p(x) q\left(x \rightarrow x^{\prime}\right)}=q\left(x^{\prime} \rightarrow x\right) \frac{p\left(x^{\prime}\right)}{p(x)}
+\end{equation}
+
+Notice that based on the definition of the Hastings ratio, for $r<1$ we have $r' = 1$, as
+\begin{equation}
+    \text { assumption } r<1 \rightarrow \frac{p\left(x^{\prime}\right) q\left(x^{\prime} \rightarrow x\right)}{p(x) q\left(x \rightarrow x^{\prime}\right)}<1 \rightarrow r^{\prime}=\min \left(1, \frac{p(x) q\left(x \rightarrow x^{\prime}\right)}{p\left(x^{\prime}\right) q\left(x^{\prime} \rightarrow x\right)}\right)=1
+\end{equation}
+
+So for $W_f(x' \rightarrow x)$ we get
+
+\begin{equation}
+    W_f\left(x^{\prime} \rightarrow x\right)=q\left(x^{\prime} \rightarrow x\right) \cdot 1
+\end{equation}
+
+which together with the expression for $W_f(x \rightarrow x')$ we obtain detailed balance.
+
+\subsubsubsection{Metropolic update | for a symmetric proposal operator the Hasings ratio simplifies}
+Consider the case of a symmetric proposal operator (e.g. the one already introduced)
+\begin{equation}
+    q(x' \rightarrow x) = q(x \rightarrow x')
+\end{equation}
+so the Hastings ratio (acceptance probability) becomes
+\begin{equation}
+    r = \min{\left(1, \frac{p(x')}{p}\right)}
+\end{equation}
+\note{For a symmetric proposal operator we always accept the new state if it has higher
+probability than the current one. Moves to states with lower probability are still possible.}
+
+\subsubsection{Example: Stochastic Sampling from a Gaussian}
+\bluebox{\textbf{Aim:} We want to sample from a Gaussian
+\begin{equation}
+    p(x) \propto \exp{\left(-\frac{x^2}{2} \right)}
+\end{equation}
+using the Metropolis algorithm. We do not need the normalization in the Metropolis algorithm.
+}
+\subsubsubsection{Choosing a symmetric proposal function}
+Consider the symmetric proposal function
+\begin{equation}
+    q(x \rightarrow x'): x' = x + \frac{2u-1}{10}, \quad u \text{ drawn uniformly from } [0,1)
+\end{equation}
+
+\subsubsubsection{Metropolis Hastings Algorithm for sampling from a Gaussian}
+\begin{enumerate}
+    \item start with some $x$ with $p(x) > 0$
+    \item Draw $u$ and calculate the proposal $x'$
+    \item Compute $r = \min{\left(1,\frac{p(x')}{p(x)} \right)} = \min{\left(1,\frac{\exp{\left(-\frac{x'^2}{2} \right)}}{\exp{\left(-\frac{x^2}{2} \right)}} \right)}$ (the normalization cancels out)
+    \item Draw another random number $u'$ from $[0,1)$
+    \begin{enumerate}
+        \item accept $x'$ as new state in the chain if $u' \leq r$
+        \item otherwise add $x$ again to the chain
+    \end{enumerate}
+    \item Repeat until the chain is sufficiently long
+\end{enumerate}
+
+\note{
+\begin{enumerate}
+    \item the higher the rejection rate, the higher the repition rate
+    \item subsequent entries are highly correlated $\rightarrow$ the sequence is not random (ensemble sampling might be advantagoues)
+    \item for $N \rightarrow \infty$ the total distribution of $x_1, \dots, x_N$ will be perfectly Gaussian
+\end{enumerate}
+}
+The distribution of the whole sequence is illustrated in figure \ref{fig:mcmc}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/mcmc.svg}\hfill
+ \caption{Marcov Chain Monte Carlo for sampling from a Gaussian; different chain lengths $N$.}
+ \label{fig:mcmc}
+\end{figure}
+
+\subsection{Monte Carlo Simulations of Thermodynamic Systems}
+Consider a thermodynamic system at an externally given temperature $T$
+with a given Hamiltonian $H(\vec{\phi})$ ($\rightarrow$ canonical ensemble), with
+
+\begin{equation}
+    \text{configuration space coordinates }\vec{\phi} = \left( \begin{array}{c}
+        \vec{\phi}_1 \\
+        \vdots \\
+        \vec{\phi}_N
+    \end{array}\right)
+\end{equation}
+
+usually very high dimensional.
+
+\bluebox{\textbf{Aim: } We are interested in ensemble averages of physical quantities
+for instance the mean energy $\langle E \rangle$.}
+Remember that states in the canonical ensemble have relative probabilities given 
+by the Boltzmann factor
+\begin{equation}
+    \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}
+\end{equation}
+(higher energy states are more unlikely at lower temperatures).
+
+Thermodynamic ensemble averages consequently follow from
+
+\begin{equation}
+    \begin{gathered}
+        \langle A \rangle = \frac{1}{Z} \int A(\vec{\phi}) \exp{\left( - \frac{H(\vec{\phi})}{k_BT}\right)} \, [d\vec{\phi}] \\
+        \text{canonical partition function } Z = \int \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)} [d\vec{\phi}] \\
+        [d\vec{\phi}] = d\vec{\phi}_1 \, d\vec{\phi}_2 \, \dots \, d\vec{\phi}_N
+    \end{gathered}
+\end{equation}
+
+\greenbox{Nearly all thermodynamic quantities like the entropy or free energy can be derived from the
+partition function.}
+
+for instance the mean energy
+
+\begin{equation}
+    \langle E \rangle = \frac{1}{Z} \int H(\vec{\phi}) \exp{\left( - \frac{H(\vec{\phi})}{kT}\right)} \, [d\phi]
+\end{equation}
+
+\problem{Directly calculating this ensemble average would require to calculate $Z$ and this integral - both infeasibly high-dimensional.}
+
+\subsubsection{Calculating the ensemble average $\langle A \rangle$ using importance sampling
+powered by a stochastic process}
+\idea{Imagine we would sample states $\vec{\phi}_i$ distributed according to the Boltzmann factor $\exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}$
+and approximate $\langle A \rangle$ by the average of the $A(\vec{\phi}_i)$. This is exactly Monte Carlo integration with
+importance sampling. And if we use MCMC we do not even need the normalization $Z$.}
+
+\subsubsubsection{Sampling the states $\vec{\phi}_i$ using the Metropolis-Hastings algorithm}
+We want to sample $\vec{\phi}_i$ such that $p(\vec{\phi}) \propto \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}$.
+
+For a symmetric proposal operator
+\begin{equation}
+    q(\vec{\phi}' \rightarrow \vec{\phi}) = q(\vec{\phi} \rightarrow \vec{\phi}')
+\end{equation}
+
+the Hastings ratio is
+
+\begin{equation}
+    r=\min \left(1, \frac{p\left(\vec{\phi}^{\prime}\right)}{p(\vec{\phi})}\right)=\min \left(1, \exp \left(-\frac{H\left(\vec{\phi}^{\prime}\right)-H(\vec{\phi})}{k T}\right)\right)
+\end{equation}
+
+\greybox{\textbf{Alternative direct specification of $W(\vec{\phi} \rightarrow \vec{\phi'})$ - Gibbs sampler}: One can use
+    \begin{equation}
+        W_f\left(\vec{\phi} \rightarrow \vec{\phi}^{\prime}\right)=C \exp \left(-\frac{H\left(\vec{\phi}^{\prime}\right)}{k T}\right)
+    \end{equation}
+not dependent on the current state $\vec{\phi}$.
+}
+
+\subsubsection{Example thermodynamic model: Ising Model}
+More details on the following can be found in \cite[chapter 17]{gould96}.
+
+Consider a discrete spin model where on each lattice point $\vec{x}$ the spin
+can either be up or down, $s_\vec{x} = \pm 1$ (\textit{Ising Model}). A magnetic
+field $\vec{B}$ and a temperature $T = \frac{1}{\beta}$ are externally given.
+
+In this setting one obtains for the canonical partition function
+
+\begin{equation}
+    Z=\sum_{\left\{s_{\vec{x}}\right\}} \exp \left[-\beta\left(\frac{1}{2} \explain{\sum_{\langle\vec{x}, \vec{y}\rangle}\left(1-s_{\vec{x}} s_{\vec{y}}\right)}{sum over pairs of nearest neighbors}+B \sum_{\vec{x}} s_{\vec{x}}\right)\right]
+\end{equation}
+
+\subsubsubsection{Exemplary parameter of interest: Critical temperature under which spontaneous magnetization occurs}
+Consider the case without an external magnetic field, $\vec{B} = 0$. In more than one dimension ($d>1$)
+such a system will - under a critical temperature (the curie temperature) $T_c = \frac{1}{\beta_c}$ - show spontaneous
+magnetization (such as ferromagnetic materials such as iron and nickel do).
+\bluebox{For temperatures $>T_c$ the magnetization vanishes, thus $T_c$ separates the disordered phase with
+$T>T_c$ from the ordered one $T<T_c$.}
+
+\problem{While for $d = 2$ one can calculate $\beta_c = \log(1+\sqrt{2})$, in higher dimensions
+we do not have such a formula.}
+
+\idea{Consider the mean magnetization
+\begin{equation}
+    M = \frac{1}{V} \sum_i s_i
+\end{equation}
+then it will show a characteristic temperature dependence, as shown in figure 
+\ref{fig:isingM}. So if we can numerically simulate the system at different
+temperatures, we can e.g. from the mean magnetization curve find $T_c$.
+}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/isingM.svg}\hfill
+ \caption{Temperature dependence of the mean magnetization for the infinite lattice 2D Ising model.}
+ \label{fig:isingM}
+\end{figure}
+
+\subsubsubsection{Metropolis algorithm for simulating the spin configuration on the lattice (and so the partition function and magnetization, ...)}
+\begin{enumerate}
+    \item Select a single lattice site $\vec{x}$ randomly or in red-black ordering
+    \item Propose and update $s_\vec{x} \rightarrow s_\vec{x}'$ to the opposite spin direction
+    \item Compute the local energy functional $E_\vec{x}$ (all terms in the interaction energy involving the selected spin)
+    \item Accept the new state / reuse the old one based on the Hastings ratio
+    \begin{equation}
+        r = \min{\left( 1,\exp{(-\beta \Delta E_\vec{x})} \right)}, \quad \Delta E_\vec{x} = E_\vec{x}(s_\vec{x}') - E_\vec{x}(s_\vec{x})
+    \end{equation}
+    Where the update is always accepted, if the change led to a lower energy (but also energy increasing updates can be accepted, its just less likely)
+    \item After a long MC chain has been generated, thermal equilibrium states at the prescribed temperature will eventually be reached
+\end{enumerate}
+
+\greybox{Alternatively a \textbf{heat-bath update} can be performed, where the new spin direction is based on
+\begin{equation}
+    p\left(s_{\vec{x}}\right)=\frac{\exp \left(-\beta E_{\vec{x}}\left(s_{\vec{x}}=+1\right)\right)}{\exp \left(-\beta E_{\vec{x}}\left(s_{\vec{x}}=+1\right)\right)+\exp \left(-\beta E_{\vec{x}}\left(s_{\vec{x}}=-1\right)\right)}
+\end{equation}
+where we draw a random number $u$ uniformly from $[0,1]$ and pick
+\begin{equation}
+    s_\vec{x} = \left\{ \begin{array}{l}
+        1 \text{ if } p(s_\vec{x}) > u \\
+        0 \text{ else}
+    \end{array} \right.
+\end{equation}
+}
+
+\subsubsubsection{More thermodynamic properties that might be of interest\skipthis}
+\begin{equation}
+    \begin{gathered}
+        \text { specific heat } C_V=\frac{1}{V} \frac{\partial E}{\partial T}=\left\langle E^2\right\rangle-\langle E\rangle^2 \\
+        \text { Magnetic susceptibility } \chi_M=\frac{1}{V} \frac{\partial M}{\partial T}=\left\langle M^2\right\rangle-\langle M\rangle^2
+    \end{gathered}
+\end{equation}
+
+\subsection{Monte Carlo Markov Chains in Parameter Estimation}
+Consider we have collected data $\{x_i\}_{i=1}^N$.
+We want to model this data using $f(\vec{x}|\vec{\mu})$ - a parametric
+model with parameters $\vec{\mu}$. The model could for instance
+be a Gaussian with the parameters being the mean and standard deviation.
+\bluebox{\textbf{How can we find parameters of a model from data?}}
+The two principal ways of obtaining parameter estimtes are maximizing
+the \textit{likelihood} and maximizing the \textit{posterior}.
+
+\subsubsection{Maximum Likelihood Estimation}
+The probability of our data given the model and its parameters (so assuming
+the model and parameters to be true) is called likelihood.
+
+Under certain parameters $\mu$ and a given sample $\vec{x} = \{x_i\}_{i=1}^N$
+assuming the entries of the sample to be independent and identically
+distributed (i.i.d), we get the easy to calculate likelihood
+\begin{equation}
+    \mathcal{L}(\vec{x}|\vec{\mu}) = \mathcal{L}_\vec{\mu}(\{x_i\}_{i=1}^N) \underset{x_i \text{ i.i.d.}}{=} \prod_{i=1}^{N} f(x_i|\vec{\mu})
+\end{equation}
+and therefore the maximum likelihood estimation
+\begin{equation}
+    \hat{\mu}_\text{MLE} = \argmax_{\mu} \mathcal{L}(\vec{x}|\vec{\mu})
+\end{equation}
+where one usually finds the parameters by minimizing the negative log-likelihood numerically,
+e.g. using gradient descent. See figure \ref{fig:mle_mc} for an illustration.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/mle_mc.svg}\hfill
+    \caption{Maximum Likelihood Estimation}
+    \label{fig:mle_mc}
+\end{figure}
+
+\subsubsubsection{Estimating parameters based on the posterior}
+Consider we would know the probability distribution of the parameters $\vec{\mu}$
+given the data $\vec{x}$, so $\Pi(\vec{\mu}|\vec{x})$.
+\bluebox{\textbf{Bayes theorem:} We can calculate the conditional probability 
+of an unobserved variable using Bayes theorem
+\begin{equation}
+    \begin{gathered}
+        \text{posterior} = \Pi(\vec{\mu}|\vec{x}) = \frac{\mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu})}{h(\vec{x})} = \frac{\text{likelihood } \cdot \text{ prior}}{\text{evidence}} \\
+        \text{posterior} \propto \text{likelihood} \cdot \text{prior}
+    \end{gathered}
+\end{equation}
+where $\Pi,p,g,h$ denote probability distributions, possibly of different form (for conjugate priors, prior and posterior have the same form).
+}
+
+\begin{itemize}
+    \item $g(\vec{\mu})$ is the prior encoding knowledge already present
+    about the parameters $\mu$ even before the data is taken. This can be constraints
+    (e.g. not allowing negative values) of knowledge from prior experiments. If we know nothing,
+    we choose a flat distribution as our prior. E.g. in classification where the question becomes
+    \textit{what is the class given the data}, the prior of a class $\vec{\mu}$ is usually
+    taken as the abundance of this class in our classified data.
+    \item $\mathcal{L}(\vec{x}|\vec{\mu})$ is the likelihood, the probability of obtaining the data given the 
+    parameters $\mu$, easy to calculate
+    \item $\Pi(\vec{\mu}|\vec{x})$ is the posterior, encoding the information we have gained about the
+    parameters given our sample $\vec{x}$
+    \item $h(\vec{x}) = \int p(\vec{x},\vec{\mu}) \, d\vec{\mu} = \int \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu}) \, d\vec{\mu}$ is called model evidence giving the probability distribution function of the data
+\end{itemize}
+
+\greenbox{If we know $\Pi(\vec{\mu}|\vec{x})$ we can e.g. take the parameters with the 
+largest posterior, as our estimate, $\vec{\mu}_{MAP} = \argmax_\vec{\mu} \Pi(\vec{\mu}|\vec{x}) = \argmax_\vec{\mu} \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\theta})$ (the
+normalization (posterior) $h(\vec{x})$ is the same no matter $\mu$, so it can be left out in the $\argmax$),
+or the expectation value $\hat{\vec{\mu}}_{MMSE} = \int \vec{\mu} \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}$.
+}
+
+\bluebox{\textbf{Aim:} We want to calculate integrals of the form 
+\begin{equation}
+    I = E_\Pi (u(\vec{\mu})) = \int u(\vec{\mu}) \Pi(\vec{\mu}|\vec{x}) \, d\vec{u} = \frac{1}{h(x)} \int u(\vec{\mu}) \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu}) \, d\vec{u}
+\end{equation}
+which for the identity $u(\vec{\mu}) = \vec{\mu}$ is just the minimum mean squared error (MMSE) $\hat{\vec{\mu}}_{MMSE}$.
+}
+
+\problem{The integral for $I$ as well as that for $h(\vec{x})$ will usually not be approachable analytically or with the other usual means.}
+
+\idea{When we can sample parameters $\{\vec{\mu}_i\}_{i=1}^N$ from the posterior without using $h(\vec{x})$, then we can aproximately calculate
+expectations over the posterior distribution (like $\hat{\vec{\mu}}_{MMSE}$) simply by the Monte Carlo Estimator
+\begin{equation}
+    \label{eq:post_int}
+    \hat{I}_N = \sum_{i=1}^{N} u(\vec{\mu}_i)
+\end{equation}
+}
+
+\subsubsection{Monte Carlo Markov Chain that samples the posterior as an equilibrium distribution}
+\problem{We want to calculate integrals involving the posterior $\Pi(\vec{\mu}|\vec{x})$ where
+the likelihood and prior are unproblematic but the evidence $h(\vec{x})$ is a complicated integral
+- just like the integrals we want to calculate.}
+So we seek a method to sample from the posterior $\Pi(\vec{\mu}|\vec{x})$ without knowing the evidence
+$h(\vec{x})$.
+\idea{Via the Markov Monte Carlo chain we can sample from $\Pi(\vec{\mu}|\vec{x})$ without knowing the evidence
+$h(\vec{x})$ as it cancels out in the Hastings ratio.}
+\textcolor{blue1}{Procedure}
+\begin{itemize}
+    \item Adopt a proposal function $q(\vec{\mu} \rightarrow \vec{\mu}') = q(\vec{\mu}' | \vec{\mu})$ only depending
+    on the current point in the chain (not the previous history, MCMC is memoryless)
+    \item Compute the acceptence propability (Hastings ratio)
+    \begin{equation}
+        r=\min \left(1, \frac{\mathcolor{yellow1}{\Pi\left(\vec{\mu}^{\prime} \mid \vec{x}\right)} q\left(\vec{\mu} \mid \vec{\mu}^{\prime}\right)}{\mathcolor{yellow1}{\Pi(\vec{\mu} \mid \vec{x})} q\left(\vec{\mu}^{\prime} \mid \vec{\mu}\right)}\right)=\min \left(1, \frac{\mathcolor{yellow1}{\mathcal{L}\left(\vec{x} \mid \vec{\mu}^{\prime}\right) g\left(\vec{\mu}^{\prime}\right)} q\left(\vec{\mu} \mid \vec{\mu}^{\prime}\right)}{\mathcolor{yellow1}{\mathcal{L}(\vec{x} \mid \vec{\mu}) g(\vec{\mu})} q\left(\vec{\mu}^{\prime} \mid \vec{\mu}\right)}\right)
+    \end{equation}
+    where the evidence $h(\vec{x})$ drops out. We keep the proposal $\vec{\mu'}$ with this probability and
+    re-use the old point otherwise as before. \textcolor{green1}{The normalizations of prior and likelihood also drop out.}
+\end{itemize}
+Based on our chain of $\vec{\mu}_i$ (or analogous ensemble sampling), we can calculate the expectation values over the posterior (eq. \ref{eq:post_int}).
+
+\subsubsection{Caveat of MCMC | we never know when the chain is long enough}
+It is difficult to estimate, when the chain is long enough, that the results we 
+can obtain from it (also for instance regarding the thermodynamic quantities in our 
+Ising model) are good, there are some heuristics on convergence though.
 
 \pagebreak

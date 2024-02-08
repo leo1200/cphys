@@ -51,6 +51,50 @@
       \field{pages}{471\bibrangedash 489}
       \range{pages}{19}
     \endentry
+    \entry{Bagla02}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}{%
+           family={Bagla},
+           familyi={B\bibinitperiod},
+           given={J.\bibnamedelimi S.},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media LLC}%
+      }
+      \strng{namehash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \strng{fullhash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \strng{bibnamehash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \strng{authorbibnamehash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \strng{authornamehash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \strng{authorfullhash}{e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0973-7758}
+      \field{journaltitle}{Journal of Astrophysics and Astronomy}
+      \field{month}{12}
+      \field{number}{3–4}
+      \field{title}{TreePM: A code for cosmological N-body simulations}
+      \field{volume}{23}
+      \field{year}{2002}
+      \field{pages}{185\bibrangedash 196}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1007/bf02702282
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/BF02702282
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/BF02702282
+      \endverb
+    \endentry
     \entry{biamonte2017quantum}{article}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=392818d7b034b0b53362804f322ab7a5}{%
@@ -294,6 +338,68 @@
       \verb{url}
       \verb https://doi.org/10.1007/BF01448839
       \endverb
+    \endentry
+    \entry{gould96}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=48b7065868685fa8de1482e6df40ce77}{%
+           family={Gould},
+           familyi={G\bibinitperiod},
+           given={Harvey},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=113863d9c4a11cfebe0de7a56daa9458}{%
+           family={Tobochnik},
+           familyi={T\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aee89fe490fcfa2a16e7b8a7a8334d85}{%
+           family={Meredith},
+           familyi={M\bibinitperiod},
+           given={Dawn\bibnamedelima C},
+           giveni={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aaad8cbf98a3e02d64949ddaca0428d5}{%
+           family={Koonin},
+           familyi={K\bibinitperiod},
+           given={Steven\bibnamedelima E},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d81f104179bdb7cd59c0907be9b9389}{%
+           family={McKay},
+           familyi={M\bibinitperiod},
+           given={Susan\bibnamedelima R},
+           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fb8ecf6ee88930b13c2ee30811bbc5e1}{%
+           family={Christian},
+           familyi={C\bibinitperiod},
+           given={Wolfgang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {American Institute of Physics}%
+      }
+      \strng{namehash}{2995d9b817b145c468b1e9c45323d11d}
+      \strng{fullhash}{7a45d99a69de3b8c3db4d28d2297a0e6}
+      \strng{bibnamehash}{2995d9b817b145c468b1e9c45323d11d}
+      \strng{authorbibnamehash}{2995d9b817b145c468b1e9c45323d11d}
+      \strng{authornamehash}{2995d9b817b145c468b1e9c45323d11d}
+      \strng{authorfullhash}{7a45d99a69de3b8c3db4d28d2297a0e6}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers in Physics}
+      \field{number}{4}
+      \field{title}{An introduction to computer simulation methods: applications to physical systems}
+      \field{volume}{10}
+      \field{year}{1996}
+      \field{pages}{349\bibrangedash 349}
+      \range{pages}{1}
     \endentry
     \entry{bonitz22}{article}{}
       \name{author}{4}{}{%
@@ -644,6 +750,71 @@
       \endverb
       \verb{url}
       \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718027
+      \endverb
+    \endentry
+    \entry{hirashima2023}{misc}{}
+      \name{author}{7}{}{%
+        {{un=0,uniquepart=base,hash=a0f898105be40bb55e1797c89f7fa870}{%
+           family={Hirashima},
+           familyi={H\bibinitperiod},
+           given={Keiya},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=660f7999e3d88078aeaf650d7abd858a}{%
+           family={Moriwaki},
+           familyi={M\bibinitperiod},
+           given={Kana},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1767d5da8c86f192e8cabae7498dfd5d}{%
+           family={Fujii},
+           familyi={F\bibinitperiod},
+           given={Michiko\bibnamedelima S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2ce0269f91bc9877ea75b8b5f0bbea2d}{%
+           family={Hirai},
+           familyi={H\bibinitperiod},
+           given={Yutaka},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dd52e2ce811f9c8321d12d78d12ec931}{%
+           family={Saitoh},
+           familyi={S\bibinitperiod},
+           given={Takayuki\bibnamedelima R.},
+           giveni={T\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=46544c28ea0f756ad66ec1098486386d}{%
+           family={Makino},
+           familyi={M\bibinitperiod},
+           given={Junichiro},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3b755f0738ae9e96bfddd2247581347f}{%
+           family={Ho},
+           familyi={H\bibinitperiod},
+           given={Shirley},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{0edf14f476dc0b53ae643fea27daff1c}
+      \strng{fullhash}{8701cbd1eb9298d022aa9692bef19795}
+      \strng{bibnamehash}{0edf14f476dc0b53ae643fea27daff1c}
+      \strng{authorbibnamehash}{0edf14f476dc0b53ae643fea27daff1c}
+      \strng{authornamehash}{0edf14f476dc0b53ae643fea27daff1c}
+      \strng{authorfullhash}{8701cbd1eb9298d022aa9692bef19795}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{astro-ph.GA}
+      \field{eprinttype}{arXiv}
+      \field{title}{Surrogate Modeling for Computationally Expensive Simulations of Supernovae in High-Resolution Galaxy Simulations}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2311.08460
       \endverb
     \endentry
     \entry{Kincl23}{article}{}

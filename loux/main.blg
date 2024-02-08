@@ -1,18 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.blg'
-[160] biber-MSWIN64:340> INFO - === 
-[231] Biber.pm:419> INFO - Reading 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf'
-[414] Biber.pm:979> INFO - Found 30 citekeys in bib section 0
-[437] Biber.pm:4419> INFO - Processing section 0
-[454] Biber.pm:4610> INFO - Looking for bibtex file 'bibs/bib.bib' for section 0
-[518] bibtex.pm:1713> INFO - LaTeX decoding ...
-[621] bibtex.pm:1519> INFO - Found BibTeX data source 'bibs/bib.bib'
-[1345] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1345] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1345] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[1345] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[1443] bbl.pm:660> INFO - Writing 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl' with encoding 'UTF-8'
-[2106] bbl.pm:763> INFO - Output to C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl
-[2106] Biber.pm:131> WARN - legacy month field 'Jun' in entry 'Margolin2023' is not an integer - this will probably not sort properly.
-[2106] Biber.pm:131> WARN - legacy month field 'Dec' in entry 'Courant1928' is not an integer - this will probably not sort properly.
-[2106] Biber.pm:133> INFO - WARNINGS: 2
+[107] biber-MSWIN64:340> INFO - === 
+[142] Biber.pm:419> INFO - Reading 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf'
+[255] Biber.pm:979> INFO - Found 33 citekeys in bib section 0
+[270] Biber.pm:4419> INFO - Processing section 0
+[282] Biber.pm:4610> INFO - Looking for bibtex file 'bibs/bib.bib' for section 0
+[335] bibtex.pm:1713> INFO - LaTeX decoding ...
+[410] bibtex.pm:1519> INFO - Found BibTeX data source 'bibs/bib.bib'
+[969] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[969] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[969] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[969] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[1030] bbl.pm:660> INFO - Writing 'C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl' with encoding 'UTF-8'
+[1556] bbl.pm:763> INFO - Output to C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl
+[1557] Biber.pm:131> WARN - legacy month field 'Jun' in entry 'Margolin2023' is not an integer - this will probably not sort properly.
+[1557] Biber.pm:131> WARN - legacy month field 'Dec' in entry 'Courant1928' is not an integer - this will probably not sort properly.
+[1557] Biber.pm:133> INFO - WARNINGS: 2
