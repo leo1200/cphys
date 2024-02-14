@@ -1,0 +1,256 @@
+\section{Numerical Methods for Parameter Estimation}
+\thispagestyle{plain}
+
+\subsection{Overview on strategies for parameter estimation}
+Consider we have a model $F_\vec{\theta}$ with parameters $\vec{\theta}$ which 
+we want to estimate based on
+
+\begin{itemize}
+    \item a sample $X = \{\vec{x}_i \}_{i=1}^N$ in the setting where we model a distribution
+    \item a sample $D = \{y_i, \vec{x}_i \}_{i=1}^N$ in the setting where we model a relation
+    between independent (fixed) variables $\vec{x}_i$ and dependent (random) variables $y_i$,
+    so the probability model is $p(y_i | \vec{x}_i, \vec{\theta})$, and model $y_i = f_\vec{\theta}(\vec{x}_i) + 
+    \epsilon_i$, random part $\epsilon_i$.
+\end{itemize}
+
+\paragraph*{Maximum Likelihood Estimation (MLE)} A common approach to estimate $\vec{\theta}$
+is to maximize the likelihood function
+\begin{equation}
+    \mathcal{L}_X(\vec{\theta}) = \prod_{i=1}^N p(\vec{x}_i | \vec{\theta}), \quad \mathcal{L}_D(\vec{\theta}) = \prod_{i=1}^N p(y_i | \vec{x}_i, \vec{\theta})
+\end{equation}
+which we in any case formulate as minimizing the loss $L_\text{MLE}$
+\begin{equation}
+    \vec{\hat{\theta}} = \argmin_{\vec{\theta}} L_\text{MLE}(\vec{\theta}) = \argmin_{\vec{\theta}} -\mathcal{LL}(\vec{\theta}) = \argmin_{\vec{\theta}} -\log \mathcal{L}(\vec{\theta})
+\end{equation}
+(equivalence to maximizing the likelihood follows as the logarithm is strictly monotonous, so it leaves order relations intact, and by the sign we go to minimization).
+
+This is illustrated in figure \ref{fig:mle_opt}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/mle_opt.svg}
+    \caption{Illustration of the optimization problem for MLE.}
+    \label{fig:mle_opt}
+\end{figure}
+
+\paragraph*{Least Squares Estimation (LSE)} In the case of a relation between independent and dependent variables,
+we can minimize
+\begin{equation}
+    \vec{\hat{\theta}} = \argmin_{\vec{\theta}} L_\text{SSQ}(\vec{\theta}) = \argmin_{\vec{\theta}} \sum_{i=1}^N (y_i - f_\vec{\theta}(\vec{x}_i))^2
+\end{equation}
+
+\note{While in Bayesian statistics (where compared to the frequentist approach
+we use information from a prior\footnote{If the prior assigns the same probability to all parameters, we are back at MLE.}) one could use the MAP, $\vec{\hat{\theta}} = \argmax_{\vec{\theta}} p(\vec{\theta} | X)$,
+which we could also write as the minimization of a loss, this is not usual. One more commonly uses the
+expectation of the posterior distribution as an estimator if necessary 
+(which has lower a-posteriori variance than the MAP). More later.}
+
+\subsection{Overview on numerical methods for minimizing the loss (in the MLE setting)}
+The basic methods are to either numerically minimize the loss function directly, e.g.
+\begin{itemize}
+    \item gradient descent
+\end{itemize}
+or to apply root-finding methods to the gradient of the loss function, in the MLE
+setting the gradient of the log-likelihood, \textbf{the score}
+\begin{equation}
+    \vec{s}(\vec{\theta}) = \nabla_{\vec{\theta}} \log \mathcal{L}(\vec{\theta})
+\end{equation}
+with methods like
+\begin{itemize}
+    \item Newton-Raphson
+    \item Fisher scoring\footnote{Like Newton-Raphson but with the Fisher information matrix in place of the Hessian.
+    \begin{equation}
+        \mat{I}(\vec{\theta}) = E(\vec{s} \vec{s}^T) =-E \left( \frac{\partial^2 \log \mathcal{L}}{\partial \vec{\theta} \partial \vec{\theta}^T} \right)
+    \end{equation}
+    (the negative expectation of the Hessian of the log-likelihood)
+    (which is not a function of any particular observation as the random variable $X$ was 
+    averaged out).}
+\end{itemize}
+
+\subsection{Gradient Descent}
+Here we just walk down the gradient of the loss function, starting at some initial guess $\vec{\theta}_0$, so
+\begin{equation}
+    \begin{gathered}
+        \vec{\hat{\theta}}^{(n+1)}=\vec{\hat{\theta}}^{(n)}-\left.\gamma \vec{\nabla}_{\vec{\theta}} L\right|_{\vec{\theta}=\vec{\widehat{\theta}}^{(n)}}, \quad \text{learning rate } \gamma \\
+        \text{until } \left|L\left(\vec{\hat{\theta}}^{(n+1)}\right)-L\left(\vec{\hat{\theta}}^{(n)}\right)\right|<\epsilon \text{ or \# steps } >N_{\text {max }}
+    \end{gathered}
+\end{equation}
+where $\epsilon$ is a small number and $N_{\text{max}}$ is the maximum number of steps, set by
+the user. Alternatively, one can stop when $||\vec{\theta}^{(n+1)} - \vec{\theta}^{(n)}|| < \epsilon$.
+
+\redbox{\textbf{Problems of standard gradient descent:}
+\begin{itemize}
+    \item finds local minima
+    \item how to choose the learning rate
+    \item gets stuck on plateaus
+\end{itemize}
+}
+
+\subsubsection{Improvements to standard gradient descent}
+\begin{itemize}
+    \item to combat local minima, we can start from multiple initial conditions and take the best final result
+    \item we prefer an approximate global optimum over an exact local one $\rightarrow$ use stochasticity, 
+    (e.g. injected noise $\rightarrow$ jump out of local but not global minima); simulated annealing (probabilistically 
+    move to some state or stay in the current one, even locally suboptimal steps are allowed)
+    \item \textbf{stochastic gradient descent}: consider we want to minimize an additive function
+    \begin{equation}
+        Q(\vec{\theta}) = \frac{1}{N} \sum_{i=1}^N Q_i(\vec{\theta}), \quad \text{e.g.} L(\vec{\theta}) = -\mathcal{LL}(\vec{\theta}) = \sum_{i=1}^N -\log p(\vec{x}_i | \vec{\theta})
+    \end{equation}
+    We do the gradient descent steps by
+    \begin{equation}
+        \vec{\hat{\theta}}^{(n+1)}=\vec{\hat{\theta}}^{(n)}-\frac{\gamma}{k} \vec{\nabla}_{\vec{\theta}} \sum_{\substack{\text { random subset } \\ \text { of size } k}} Q_k(\vec{\theta})
+    \end{equation}
+    so we only consider the loss following from a subset of data points - which can avoid local minima (noise
+    in the data itself is used)
+    \item adaptive learning rage $\gamma$ (reduce for steep gradients) (e.g. AdaGrad, RMSProp, Adam)
+\end{itemize}
+
+\subsection{Newton-Raphson}
+
+\subsubsection{Standard Newton iteration for root finding}
+Consider we want to find the root of a function $g(\xi)$. We linearly approximate
+$g$ around the current guess $\xi_k$ and solve for the root.
+\begin{equation}
+    \begin{gathered}
+    g\left(\xi_{k+1}\right) \approx g\left(\xi_k\right)+\left.\left(\xi_{k+1}-\xi_k\right) \partial_{\xi} g\right|_{\xi=\xi_k}=0 \\
+    \rightarrow \xi_{k+1}=\xi_k-\frac{g\left(\xi_k\right)}{\left.\partial_{\xi} g\right|_{\xi=\xi_k}}
+    \end{gathered}
+\end{equation}
+so in the multivariate case, $g: \mathbb{R}^n \rightarrow \mathbb{R}^m$, we have
+\begin{equation}
+    \vec{\xi}_{k+1}=\vec{\xi}_k-\mat{J}_{\vec{g}}^{-1}\left(\vec{\xi}_k\right) \vec{g}\left(\vec{\xi}_k\right), \quad \mat{J} \vec{g}=\left(\begin{array}{ccc}
+    - & \vec{\nabla}_{\vec{\xi}} g_1 & - \\
+    \vdots & \vdots & \vdots \\
+    - & \vec{\nabla}_{\vec{\xi}} g_n & -
+    \end{array}\right)
+\end{equation}
+Which is illustrated in figure \ref{fig:newton_raphson}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/newton_raphson.svg}
+    \caption{Illustration of the Newton-Raphson method.}
+    \label{fig:newton_raphson}
+\end{figure}
+
+\subsubsection{Newton's method in optimization}
+We now want to find critical values $\xi_{\text{crit}}$ of a function $g$, where
+\begin{equation}
+    \left. \partial_{\xi} g \right|_{\xi_{\text{crit}}} = 0
+\end{equation}
+\redbox{These can be minima, maxima or saddle points.}
+Using Newton iteration, we get
+\begin{equation}
+    \xi_{k+1}=\xi_k-\frac{\left.\partial_{\xi} g\right|_{\xi=\xi_k}}{\left.\partial_{\xi}^2 g\right|_{\xi=\xi_k}}
+\end{equation}
+\greenbox{\textbf{Intuition of Newton-optimization:} At
+$\xi_k$, a parabola is fitted to the function $g$ and we move the 
+the extremum (in higher dimension this can be a saddle point) of it.}
+
+In higher dimensions $g: \mathbb{R}^n \rightarrow \mathbb{R}$, we get
+\begin{equation}
+    \vec{\xi}_{k+1} = \vec{\xi}_k - \mat{H}_{\vec{g}}^{-1}(\vec{\xi}_k) \vec{\nabla}_{\vec{\xi}} g(\vec{\xi}_k)
+\end{equation}
+with the numerically costly Hessian
+\begin{equation}
+    \mat{H}_g = \mat{J}_{\vec{\nabla}_{\vec{\xi}} g}
+\end{equation}
+best analytically found or calculated based on Automatic 
+Differentiation (AD).
+\greenbox{In our loss-optimization we simply have $g(\vec{\xi}) = L(\vec{\theta})$.}
+
+\subsubsubsection{Advantages of Newton optimization}
+\begin{itemize}
+    \item In the convex / concave setting the usage of curvature information
+    by Newton iteration leads to faster convergation than gradient descent, as
+    illustrated in figure \ref{fig:newton_vs_gd}.
+    \item step-size is automatically adaptive
+    \begin{itemize}
+        \item \textit{small Hessian} $\rightarrow$ automatically larger steps
+        \item \textit{large Hessian} $\rightarrow$ automatically smaller steps
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.4\textwidth]{figures/newton_vs_gd.svg}
+    \caption{Newton optimization (\textcolor{green1}{green}), gradient descent (\textcolor{red1}{red}).}
+    \label{fig:newton_vs_gd}
+\end{figure}
+
+\subsubsubsection{Disadvantages of Newton optimization}
+\begin{itemize}
+    \item strictly only applies to convex / concave functions $g$
+    \item at the inflection point of a non-convex function, the Hessian is indefinite
+    so in the 1D case $\partial_{\xi}^2 g = 0$ and Newton optimization breaks down
+    \item it searches critical points, not minima, if $\partial_{\xi}^2 g < 0$ and $\partial_{\xi} g > 0$,
+    we go uphill, see figure \ref{fig:newton_crit}.
+\end{itemize}
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.6\textwidth]{figures/newton_crit.svg}
+    \caption{Newton optimization breaks down at the inflection point and goes uphill right of it.}
+    \label{fig:newton_crit}
+\end{figure}
+
+\subsection{Numerical Parameter Estimates in a Bayesian Setting}
+Consider we have collected data $\{x_i\}_{i=1}^N$.
+We want to model this data using $f(\vec{x}|\vec{\mu})$ - a parametric
+model with parameters $\vec{\mu}$. The model could for instance
+be a Gaussian with the parameters being the mean and standard deviation.
+
+\greenbox{In Bayesian statistic we assume we somehow have prior knowledge in form
+of a distribution $g(\vec{\mu})$ over the parameters.}
+
+\begin{equation}
+    \begin{gathered}
+        \text{posterior} = \Pi(\vec{\mu}|\vec{x}) = \frac{\mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu})}{h(\vec{x})} = \frac{\mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu})}{\int \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\mu}) \, d\vec{\mu}} = \frac{\text{likelihood } \cdot \text{ prior}}{\text{evidence}} \\
+        \text{posterior} \propto \text{likelihood} \cdot \text{prior}
+    \end{gathered}
+\end{equation}
+
+\subsubsection{Maximum A Posteriori (MAP) Estimation}
+The MAP estimator is the mode of the posterior distribution
+\begin{equation}
+    \vec{\hat{\mu}}_{MAP} = \argmax_\vec{\mu} \Pi(\vec{\mu}|\vec{x}) = \argmax_\vec{\mu} \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\theta})
+\end{equation}
+which for $g(\vec{\mu}) \sim \operatorname{Beta}(1,1)$ (uniform, no prior knowledge) 
+is equivalent to MLE.
+\problem{In e.g. a bimodal distribution, the mode is uncharacteristic 
+of the majority of the distribution (imagine a \textit{Gaussian with a random peak at on of the tails}).
+From this it makes sense to expect this estimator to have a relatively high variance (low precision).}
+
+\subsubsection{A-posteriori Expectation}
+\bluebox{\textbf{Bayes estimator}: In general, a bayes estimator is given by
+\begin{equation}
+    \vec{\hat{\mu}}_{\text{Bayes}} = \argmin_{\vec{\tilde{\mu}}} E(\ell(\vec{\tilde{\mu}}, \vec{\mu}) | \vec{x}) = \int \ell(\vec{\tilde{\mu}}, \vec{\mu}) \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}
+\end{equation}
+}
+For $\ell(\vec{\tilde{\mu}}, \vec{\mu}) = (\vec{\tilde{\mu}} - \vec{\mu})^2$, the Bayes estimator is the
+expectation of the posterior distribution
+
+\begin{equation}
+    \vec{\hat{\mu}}_{\text{PLSQ}} = \int \vec{\mu} \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}
+\end{equation}
+which can be derived from
+\begin{equation}
+    \left. \partial_\vec{\tilde{\mu}} E(\ell(\vec{\tilde{\mu}}, \vec{\mu}) | \vec{x}) \right|_{\vec{\tilde{\mu}} = \vec{\hat{\mu}}_{\text{PLSQ}}} = 0
+\end{equation}
+
+\bluebox{$\vec{\hat{\mu}}_{\text{PLSQ}}$ is the point around which the posterior distribution has the lowest expected squared
+deviation (a kind of inertia).}
+
+\problem{But how to calculate this expected value? The integrals, that for the expectation and that for the evidence are often
+intractable (very high-dimensional).}
+
+\idea{By Marcov-Chain Monte Carlo, we can sample from the posterior and calculate
+\begin{equation}
+    \begin{gathered}
+        \vec{\hat{\mu}}_{\text{PLSQ}} \approx \frac{1}{N} \sum_{i=1}^N \vec{\mu}_i \\
+        \text{samples from the posterior } \vec{\mu}_i \sim \Pi(\vec{\mu}|\vec{x})
+    \end{gathered}
+\end{equation}
+where for the MCMC sampling the evidence drops out. See section \ref{ssec:mcmc_parameter_estimation}.}
+
+\pagebreak

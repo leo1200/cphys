@@ -482,6 +482,16 @@ balance unnecessary, for an ideal gas this is
     P = (\gamma - 1) \rho e_{th}, \quad \gamma = \text{ specific heat ratio } = \frac{c_p}{c_v}, \quad \text{ for monoatomic gas } \gamma = \frac{f+2}{f} = \frac{5}{3}
 \end{equation}
 
+\bluebox{\textbf{Intuition:} Let us consider the $x$-component of the momentum equation to
+get a better understanding (the others are analogous). We have
+\begin{equation}
+    \partial_t (\rho v_x) + \explain{\partial_x P}{pressure gradient force} + \explain{\partial_x (v_x \cdot (\rho v_x)) + \partial_y (v_y \cdot (\rho v_x)) + \partial_z (v_z \cdot (\rho v_x))}{advection of x-momentum from all directions}= 0
+\end{equation}
+so x-momentum (density) at a given position (Eulerian) changes due to pressure gradients,
+and because of the advection of x-momentum from all directions to the given position.
+\textbf{Density, pressure and energy advect with the flow in the Eulerian view}.
+}
+
 \subsubsection{Navier-Stokes equation}
 In real fluids, viscosity transforms relative motion into heat. For
 \begin{itemize}

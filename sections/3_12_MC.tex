@@ -1153,6 +1153,7 @@ where we draw a random number $u$ uniformly from $[0,1]$ and pick
 \end{equation}
 
 \subsection{Monte Carlo Markov Chains in Parameter Estimation}
+\label{ssec:mcmc_parameter_estimation}
 Consider we have collected data $\{x_i\}_{i=1}^N$.
 We want to model this data using $f(\vec{x}|\vec{\mu})$ - a parametric
 model with parameters $\vec{\mu}$. The model could for instance
@@ -1214,7 +1215,7 @@ where $\Pi,p,g,h$ denote probability distributions, possibly of different form (
 \end{itemize}
 
 \greenbox{If we know $\Pi(\vec{\mu}|\vec{x})$ we can e.g. take the parameters with the 
-largest posterior, as our estimate, $\vec{\mu}_{MAP} = \argmax_\vec{\mu} \Pi(\vec{\mu}|\vec{x}) = \argmax_\vec{\mu} \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\theta})$ (the
+largest posterior, as our estimate, $\vec{\hat{\mu}}_{MAP} = \argmax_\vec{\mu} \Pi(\vec{\mu}|\vec{x}) = \argmax_\vec{\mu} \mathcal{L}(\vec{x}|\vec{\mu}) g(\vec{\theta})$ (the
 normalization (posterior) $h(\vec{x})$ is the same no matter $\mu$, so it can be left out in the $\argmax$),
 or the expectation value $\hat{\vec{\mu}}_{MMSE} = \int \vec{\mu} \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}$.
 }
@@ -1261,5 +1262,8 @@ Based on our chain of $\vec{\mu}_i$ (or analogous ensemble sampling), we can cal
 It is difficult to estimate, when the chain is long enough, that the results we 
 can obtain from it (also for instance regarding the thermodynamic quantities in our 
 Ising model) are good, there are some heuristics on convergence though.
+
+\greenbox{We cut of the burn-in time and as in a sequence of $\vec{\mu}$'s sequential one are not independent,
+we thin out, e.g. only retain every n-th $\vec{\mu}$ in the chain.}
 
 \pagebreak

@@ -6,3 +6,4 @@ ergodicity
 memorylessnes
 ergodic
 Memorylessness
+frequentist

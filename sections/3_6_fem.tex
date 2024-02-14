@@ -25,7 +25,7 @@ turns into equations for the (finitely many) weights of those basis functions.}
 \subsubsection{The solution is represented by weighted base functions on nodes within finite elements}
 The central ideas are
 \begin{itemize}
-    \item \textcolor{blue1}{Division of space:} The space on which the solution sits is divided onto smaller regions called elements (e.g. segments in 1D, rectangles in 2D, cubes, octahedra, ... in 3D).  Every element contains a certain number of points called nodes.
+    \item \textcolor{blue1}{Division of space:} The space on which the solution sits is divided into smaller regions called elements (e.g. segments in 1D, rectangles in 2D, cubes, octahedra, ... in 3D).  Every element contains a certain number of points called nodes.
     \item \textcolor{blue1}{Elementwise solution approximation:} We element-wise approximate the solution with a set of linearly independent (not necessarily orthogonal) basis functions evaluated on nodes.
 \end{itemize}
 On an element we could for instance use a polynomial basis
@@ -88,7 +88,7 @@ we have a generally non-zero residual.
 
 \subsubsubsection{Finding the expansion coefficients by minimizing the residual in some sense}
 We want to choose expansion coefficients minimizing the residual in some sense.
-\paragraph{Ritz method:} Here we require the integral over the residual to vanishes
+\paragraph{Ritz method:} Here we require the integral over the residual to vanish
 \begin{equation}
     \int_{\text{domain}}{R} \, dx = 0
 \end{equation}
@@ -96,32 +96,36 @@ where here we consider the whole problem domain, to readily find the whole
 system of linear equations (but this might also be just an element).
 Therefore
 \begin{equation}
-    R = R\left(x;\sum_{i=1}^{\mathcal{N}} \phi_i \right)
+    R = R\left(x;\{\phi_i\}_{i=1}^\mathcal{N} \right)
 \end{equation}
 
 \paragraph{Weighted residual method} Compared to the Ritz method weighting functions
 $w_i(x)$ are introduced
 \begin{equation}
-    \int_{\text{domain}} {w_i(x) R} \, dx = 0, \quad i = 1,\dots,\mathcal{N}
+    \int_{\text{domain}} {w_i(x) R\left(x;\{\phi_i\}_{i=1}^\mathcal{N} \right)} \, dx = 0, \quad i = 1,\dots,\mathcal{N}
 \end{equation}
 which leads to
 \begin{itemize}
-    \item \textcolor{blue1}{collocation method}: Residuum is required to vanish at $n$ points $x_i$ inside the domain, $w_i = \delta(x-x_i)$
+    \item \textcolor{blue1}{collocation method}: Residuum is required to vanish at $\mathcal{N}$ points $x_i$ inside the domain, $w_i = \delta(x-x_i)$
     \item \textcolor{blue1}{least-square method}: $w_i = \partial_{\phi_i} R \rightarrow \int_{\text{domain}} (\partial_{\phi_i} R) R \, dx = \frac{1}{2} \partial_{\phi_i} \int_{\text{domain}} R^2 \, dx = 0$
     \item \textcolor{blue1}{Galerkin method}: Choose basis functions themselves as weights, so $w_i(x) = N_i(x)$, so
     \begin{equation}
-        \int_{\text{domain}} N_i(x) R \, dx = 0
+        \int_{\text{domain}} N_i(x) R\left(x;\{\phi_i\}_{i=1}^\mathcal{N} \right) \, dx = 0, \quad i = 1,\dots,\mathcal{N}
     \end{equation}
 \end{itemize}
 
-\yellowbox{The general Galerkin principle is to multiple an equation by arbitrary test functions and describe the unknown field with the same set of basis functions.}
+\yellowbox{The general Galerkin principle is to multiply an equation by arbitrary test functions and describe the unknown field with the same set of basis functions.}
 
 \subsubsubsection{A linear system for $\phi_1,\dots,\phi_\mathcal{N}$ in the Galerkin scheme}
 Based on
 \begin{equation}
     \begin{gathered}
-        \forall i \in 1,\dots,\mathcal{N}: 0 = \int_{\text {domain }} N_i(x) R\left(\sum_j \phi_j N_j(x)\right) d x=\int_{\text {domain }} N_i(x) \cdot L\left(\sum_j \phi_j N_j(x)\right) +s d x \\
-        \underbrace{=}_\text { L linear } \sum_j \phi_j \underbrace{\int_{\text {domain }} N_i(x) L\left(N_j(x)\right) \, d x}_{A_{ij}}-\underbrace{\int_{\text {domain }}-N_i(x) s \, d x}_{b_i} \\
+        \forall i \in 1,\dots,\mathcal{N}: \\
+        \begin{aligned}
+            0 &= \int_{\text {domain }} N_i(x) \cdot R\left(\sum_j \phi_j N_j(x)\right) d x \\
+              &=\int_{\text {domain }} N_i(x) \cdot \left( L\left(\sum_j \phi_j N_j(x)\right) +s \right) \, d x \\
+              \underset{\text{L linear}}&= \sum_j \phi_j \underbrace{\int_{\text {domain }} N_i(x) L\left(N_j(x)\right) \, d x}_{A_{ij}}-\underbrace{\int_{\text {domain }}-N_i(x) s \, d x}_{b_i} \\
+        \end{aligned} \\
         \rightarrow \sum_j \phi_j A_{ij} = b_i
     \end{gathered}
 \end{equation}
@@ -177,14 +181,17 @@ we calculate the residual as
 so using the Galerkin weighting we get
 
 \begin{equation}
-    \forall i=1,...,\mathcal{N}: \int_{x_L}^{x_R} S_i(x) \left( \partial_x^2 \phi(x) - 4\pi G \rho(x) \right) \, dx = 0 \rightarrow \int_{x_L}^{x_R} S_i(x) \partial_x^2 \phi(x) \, dx = \int_{x_L}^{x_R} S_i(x) 4\pi G \rho(x) \, dx
+    \begin{gathered}
+        \forall i=1,...,\mathcal{N}: \int_{x_L}^{x_R} S_i(x) \left( \partial_x^2 \phi(x) - 4\pi G \rho(x) \right) \, dx = 0 \\
+        \rightarrow \int_{x_L}^{x_R} S_i(x) \partial_x^2 \phi(x) \, dx = \underbrace{\int_{x_L}^{x_R} S_i(x) 4\pi G \rho(x) \, dx}_{:=\, -b_i \text{ as } \rho,\, S_i \text{ known}}
+    \end{gathered}
 \end{equation}
 
 The LHS can be rewritten by integration over parts (mind $\left.\partial_x \phi\right|_{x_L}=\left.\partial_x \phi\right|_{x_R}=0$)
 \begin{equation}
-    \int_{x_L}^{x_R} S_i(x) \partial_x^2 \phi(x) d x=-\int_{x_L}^{x_R} \partial_x S_i(x) \partial_x \phi(x) d x=-\int_{x_L}^{x_R} S_i(x) 4 \pi G \rho(x) d x=b_i
+    \int_{x_L}^{x_R} S_i(x) \partial_x^2 \phi(x) d x=-\int_{x_L}^{x_R} \partial_x S_i(x) \partial_x \phi(x) d x
 \end{equation}
-so the with the RHS
+so in total we get the linear equation
 \begin{equation}
     \int_{x_L}^{x_R} \partial_x S_i(x) \partial_x \sum \phi_j S_j(x) d x=\sum \phi_j \underbrace{\int_{x_L}^{x_R} \partial_x S_i(x) \partial_x S_j(x) d x}_{A_{ij}}=\sum \phi_j A_{i j}=b_i
 \end{equation}

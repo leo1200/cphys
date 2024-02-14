@@ -1078,7 +1078,7 @@ So the rebound N-body simulation package actually uses IAS15 (implicit integrato
 \subsubsection{Verlet Scheme}
 Consider we want to solve the Newtonian equation of movement
 \begin{equation}
-  \partial_t^2 \vec{s} = \vec{a}(\vec(s))
+  \partial_t^2 \vec{s} = \vec{a}(\vec{s})
 \end{equation}
 - a classical physical problem with a particle at position $\vec{s}$ with velocity $\vec{v}$ and an acceleration $\vec{a}$ that depends only on the position.
 
@@ -1257,6 +1257,9 @@ We integrate from $\left( \vec{s}_n, \vec{v}_{n-\frac{1}{2}} \right)$ to $\left(
   \vec{v}_{\text{fin}}=\mathcolor{green1}{\vec{v}_{n+\frac{1}{2}}}-\vec{a}_n \Delta t=\mathcolor{green1}{\vec{v}_{n+\frac{1}{2}}+\vec{a}_n \Delta t}-\vec{a}_n \Delta t=\vec{v}_{n-\frac{1}{2}}
   \end{gathered}
 \end{equation}
+
+\greenbox{The flow is also reversible - inverting the direction of initial velocity does not change
+the solution trajectory, it just inverts the direction (if the acceleration only depends on the position).}
 
 So leapfrog is symmetric (time-reversible), different from e.g. explicit Euler (see figure \ref{fig:euler_symm}).
 

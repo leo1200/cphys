@@ -129,6 +129,9 @@
 \usepackage[colorinlistoftodos, color = Dandelion, prependcaption={TODO: }]{todonotes}
 \setuptodonotes{inline}
 
+% allow footnotes in tables
+\usepackage{tablefootnote}
+
 % Bibliography settings
 \usepackage[style=authoryear,backend=biber, natbib=true,maxcitenames=2]{biblatex} %biblatex mit biber laden
 \ExecuteBibliographyOptions{
@@ -205,6 +208,7 @@
 \definecolor{green1}{HTML}{00b894}
 \definecolor{red1}{HTML}{d63031}
 \definecolor{yellow1}{HTML}{7F6000}
+\definecolor{pink1}{HTML}{7030a0}
 
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -234,7 +238,12 @@
 \newtcolorbox{blueBox}{textmarker,
     borderline west={6pt}{0pt}{blue1},
     colback=blue1!10!white}
+% define pinkBox
+\newtcolorbox{pinkBox}{textmarker,
+    borderline west={6pt}{0pt}{pink1},
+    colback=pink1!10!white}
 
+% define greyBox
 \newtcolorbox{greyBox}{textmarker,
     borderline west={6pt}{0pt}{blue1},
     colback=gray!10!white}
@@ -246,6 +255,8 @@
 \newcommand{\problem}[1]{\begin{importantBox} \textbf{Problem:} #1 \end{importantBox}}
 % greyBox
 \newcommand{\greybox}[1]{\begin{greyBox} #1 \end{greyBox}}
+% pinkBox
+\newcommand{\pinkbox}[1]{\begin{pinkBox} #1 \end{pinkBox}}
 
 \newcommand{\greenbox}[1]{\begin{noteBox} #1 \end{noteBox}}
 \newcommand{\redbox}[1]{\begin{importantBox} #1 \end{importantBox}}
@@ -484,6 +495,11 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{3_11_forces.tex}
 \import{sections/}{3_12_MC.tex}
 \import{sections/}{3_13_para.tex}
+\import{sections/}{4_0_stat.tex}
+\import{sections/}{4_1_prob.tex}
+\import{sections/}{4_2_inf.tex}
+\import{sections/}{4_3_num.tex}
+\import{sections/}{4_4_regr.tex}
 
 \pagebreak
 \thispagestyle{plain}

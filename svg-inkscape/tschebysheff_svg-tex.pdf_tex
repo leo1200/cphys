@@ -1,0 +1,239 @@
+%% Creator: Inkscape 1.2.1 (9c6d41e410, 2022-07-14), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'tschebysheff_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{233.11768636bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.47933857)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{tschebysheff_svg-tex.pdf}}%
+    \put(0.49482597,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.61511929,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.62750896,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.64067398,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.73850761,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.7509005,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.76406552,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.77568304,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.78342699,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.87157667,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.88396633,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.89713136,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.90874888,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.91649282,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.34897797,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.36136763,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.37453266,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.20622625,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.2186172,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.23178255,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.24339911,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.25114337,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.07315623,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.08554718,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.09871253,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.11032876,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.11807335,0.0265331){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.12101843,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.13186059,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.13805607,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.14812352,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.15896568,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.16825873,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.17445421,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ \end{tabular}}}}%
+    \put(0.18916866,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.2038828,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.22169483,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.23640897,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.24647674,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.25731858,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.26661195,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.27280743,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.28287487,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.29371704,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.30843117,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}68\end{tabular}}}}%
+    \put(0.32701696,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.33166268,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}27 \end{tabular}}}}%
+    \put(0.35489772,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.12101843,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.13186059,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.13805607,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.14812352,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.15896568,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.16825873,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.17445421,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ \end{tabular}}}}%
+    \put(0.18916866,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.2038828,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.22169483,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.23640897,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.24647674,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.25731858,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.26661195,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.27280743,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.28287487,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.29371704,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.30843117,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}95\end{tabular}}}}%
+    \put(0.32701696,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.33166268,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}45 \end{tabular}}}}%
+    \put(0.35489772,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.12101843,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.13186059,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.13805607,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.14812352,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}−\end{tabular}}}}%
+    \put(0.15896568,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.16825873,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.17445421,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ \end{tabular}}}}%
+    \put(0.18916866,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.2038828,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.22169483,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.23640897,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.24647674,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.25731858,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.26661195,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.27280743,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.28287487,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.29371704,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.30843117,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}99\end{tabular}}}}%
+    \put(0.32701696,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.33166268,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}73 \end{tabular}}}}%
+    \put(0.35489772,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.395699,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.40654117,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.41273439,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.43054835,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.44526088,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.4553309,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) = \end{tabular}}}}%
+    \put(0.48166095,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}50 \end{tabular}}}}%
+    \put(0.50489278,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\% = \end{tabular}}}}%
+    \put(0.54051749,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.55135965,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.55755609,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.57536684,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≥ \end{tabular}}}}%
+    \put(0.59007937,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.60014939,0.00401229){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l})\end{tabular}}}}%
+    \put(0.63408182,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.64492398,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.6511172,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.66893117,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.68364369,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.6937105,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.70455266,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.71384732,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.72004376,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.73011057,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.74095273,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.75566526,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}84\end{tabular}}}}%
+    \put(0.77425136,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.7789003,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13 \end{tabular}}}}%
+    \put(0.80213213,0.40295242){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.63408182,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.64492398,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.6511172,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.66893117,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.68364369,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.6937105,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.70455266,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.71384732,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.72004376,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.73011057,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.74095273,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.75566526,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}97\end{tabular}}}}%
+    \put(0.77425136,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.7789003,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}72 \end{tabular}}}}%
+    \put(0.80213213,0.3804316){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.63408182,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}P\end{tabular}}}}%
+    \put(0.64492398,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(\end{tabular}}}}%
+    \put(0.6511172,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X \end{tabular}}}}%
+    \put(0.66893117,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≤ \end{tabular}}}}%
+    \put(0.68364369,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}μ\end{tabular}}}}%
+    \put(0.6937105,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+\end{tabular}}}}%
+    \put(0.70455266,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.71384732,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}·\end{tabular}}}}%
+    \put(0.72004376,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}σ\end{tabular}}}}%
+    \put(0.73011057,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}) \end{tabular}}}}%
+    \put(0.74095273,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}≈ \end{tabular}}}}%
+    \put(0.75566526,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}99\end{tabular}}}}%
+    \put(0.77425136,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.7789003,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}87 \end{tabular}}}}%
+    \put(0.80213213,0.35791079){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.03040973,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.03970285,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.04434954,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13 \end{tabular}}}}%
+    \put(0.06758265,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.17755211,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.18684516,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.19149185,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}14 \end{tabular}}}}%
+    \put(0.21472496,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.27048392,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13\end{tabular}}}}%
+    \put(0.28907035,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.29371704,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}59 \end{tabular}}}}%
+    \put(0.31694983,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.40601032,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34\end{tabular}}}}%
+    \put(0.42459643,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.42924215,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13\end{tabular}}}}%
+    \put(0.44782825,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.53843914,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}34\end{tabular}}}}%
+    \put(0.55702525,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.56167097,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13\end{tabular}}}}%
+    \put(0.58025707,0.22278591){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.66931724,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13\end{tabular}}}}%
+    \put(0.68790335,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.69254907,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}59 \end{tabular}}}}%
+    \put(0.71578411,0.1133991){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.77154243,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.78083387,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.78548281,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}14 \end{tabular}}}}%
+    \put(0.80871464,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+    \put(0.92410486,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}0\end{tabular}}}}%
+    \put(0.93339952,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l},\end{tabular}}}}%
+    \put(0.93804524,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}13 \end{tabular}}}}%
+    \put(0.96127707,0.06514021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\%\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

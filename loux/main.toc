@@ -80,7 +80,7 @@
 \contentsline {subsubsubsection}{\numberline {3.7.5.3}Advantages of the Leapfrog scheme}{61}{subsubsubsection.3.7.5.3}%
 \contentsline {subsubsubsection}{\numberline {3.7.5.4}Leapfrog is symmetric (time reversible)}{61}{subsubsubsection.3.7.5.4}%
 \contentsline {subsubsubsection}{\numberline {3.7.5.5}Symplecticity of the leapfrog scheme I: Intuition and Meaning}{62}{subsubsubsection.3.7.5.5}%
-\contentsline {subsubsubsection}{\numberline {3.7.5.6}Symplecticity of the leapfrog scheme II: Proof}{62}{subsubsubsection.3.7.5.6}%
+\contentsline {subsubsubsection}{\numberline {3.7.5.6}Symplecticity of the leapfrog scheme II: Proof}{64}{subsubsubsection.3.7.5.6}%
 \contentsline {paragraph}{Operator splitting}{64}{section*.41}%
 \contentsline {paragraph}{Constructing leapfrog}{64}{section*.42}%
 \contentsline {paragraph}{Error Hamiltonian}{65}{section*.43}%
@@ -137,25 +137,25 @@
 \contentsline {subsection}{\numberline {5.3}Euler Equation and Navier-Stokes equation}{90}{subsection.5.3}%
 \contentsline {subsubsection}{\numberline {5.3.1}Euler Equations}{90}{subsubsection.5.3.1}%
 \contentsline {paragraph}{Hierarchy and closure}{91}{section*.58}%
-\contentsline {subsubsection}{\numberline {5.3.2}Navier-Stokes equation}{91}{subsubsection.5.3.2}%
-\contentsline {subsubsubsection}{\numberline {5.3.2.1}Simplification of the Navier-Stokes equations for incompressible fluids (${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax \nabla _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \nabla $}\sbox 2{$\mathsurround \z@ \displaystyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \nabla $}\sbox 2{$\mathsurround \z@ \textstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \nabla $}\sbox 2{$\mathsurround \z@ \scriptstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \nabla $}\sbox 2{$\mathsurround \z@ \scriptscriptstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} \cdot {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax v_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle v$}\sbox 2{$\mathsurround \z@ \displaystyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle v$}\sbox 2{$\mathsurround \z@ \textstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle v$}\sbox 2{$\mathsurround \z@ \scriptstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle v$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} = 0$)}{92}{subsubsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Navier-Stokes equation}{92}{subsubsection.5.3.2}%
+\contentsline {subsubsubsection}{\numberline {5.3.2.1}Simplification of the Navier-Stokes equations for incompressible fluids (${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax \nabla _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \nabla $}\sbox 2{$\mathsurround \z@ \displaystyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \nabla $}\sbox 2{$\mathsurround \z@ \textstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \nabla $}\sbox 2{$\mathsurround \z@ \scriptstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \nabla $}\sbox 2{$\mathsurround \z@ \scriptscriptstyle \nabla _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} \cdot {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax v_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle v$}\sbox 2{$\mathsurround \z@ \displaystyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle v$}\sbox 2{$\mathsurround \z@ \textstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle v$}\sbox 2{$\mathsurround \z@ \scriptstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle v$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle v_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} = 0$)}{93}{subsubsubsection.5.3.2.1}%
 \contentsline {subsubsubsection}{\numberline {5.3.2.2}Characterizing flow | Reynolds number}{93}{subsubsubsection.5.3.2.2}%
 \contentsline {subsection}{\numberline {5.4}Shocks}{94}{subsection.5.4}%
-\contentsline {subsubsection}{\numberline {5.4.1}Propagation of disturbances 1: Speed of sound}{94}{subsubsection.5.4.1}%
-\contentsline {subsubsection}{\numberline {5.4.2}Characteristics of Perturbations}{95}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.1}Propagation of disturbances 1: Speed of sound}{95}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Characteristics of Perturbations}{96}{subsubsection.5.4.2}%
 \contentsline {subsubsection}{\numberline {5.4.3}Formation of a shock}{97}{subsubsection.5.4.3}%
 \contentsline {subsubsubsection}{\numberline {5.4.3.1}Formation as a pressure driven compressive disturbance}{97}{subsubsubsection.5.4.3.1}%
 \contentsline {subsubsubsection}{\numberline {5.4.3.2}Causes for shocks}{97}{subsubsubsection.5.4.3.2}%
 \contentsline {subsubsection}{\numberline {5.4.4}Collisional and collisionless shocks | shock front}{97}{subsubsection.5.4.4}%
 \contentsline {subsubsection}{\numberline {5.4.5}Properties at fluid discontinuities}{98}{subsubsection.5.4.5}%
 \contentsline {subsubsubsection}{\numberline {5.4.5.1}(Rankine-Hugoniot) Jump conditions I: Assumptions}{98}{subsubsubsection.5.4.5.1}%
-\contentsline {subsubsubsection}{\numberline {5.4.5.2}(Rankine-Hugoniot) Jump conditions II: Jump condition from the continuity equation}{98}{subsubsubsection.5.4.5.2}%
+\contentsline {subsubsubsection}{\numberline {5.4.5.2}(Rankine-Hugoniot) Jump conditions II: Jump condition from the continuity equation}{99}{subsubsubsection.5.4.5.2}%
 \contentsline {subsubsubsection}{\numberline {5.4.5.3}(Rankine-Hugoniot) Jump conditions III: Jump condition from the momentum equation}{99}{subsubsubsection.5.4.5.3}%
 \contentsline {subsubsubsection}{\numberline {5.4.5.4}(Rankine-Hugoniot) Jump conditions IV: Jump condition from the energy equation}{100}{subsubsubsection.5.4.5.4}%
 \contentsline {subsubsubsection}{\numberline {5.4.5.5}Types of dicontinuities: contact discontinuity vs. shock}{100}{subsubsubsection.5.4.5.5}%
-\contentsline {subsubsection}{\numberline {5.4.6}Characterizing the Shock strength - Mach number}{100}{subsubsection.5.4.6}%
+\contentsline {subsubsection}{\numberline {5.4.6}Characterizing the Shock strength - Mach number}{101}{subsubsection.5.4.6}%
 \contentsline {subsubsubsection}{\numberline {5.4.6.1}Occurence of the Mach number in the continuity equation}{101}{subsubsubsection.5.4.6.1}%
-\contentsline {subsubsubsection}{\numberline {5.4.6.2}Rewriting the Rankine-Hugoniot jump conditions in terms of $\mathcal {M}_1$ - relating pre- and post-shock quantities}{101}{subsubsubsection.5.4.6.2}%
+\contentsline {subsubsubsection}{\numberline {5.4.6.2}Rewriting the Rankine-Hugoniot jump conditions in terms of $\mathcal {M}_1$ - relating pre- and post-shock quantities}{102}{subsubsubsection.5.4.6.2}%
 \contentsline {subsubsubsection}{\numberline {5.4.6.3}Conversion of kinetic to thermal energy in the shock}{102}{subsubsubsection.5.4.6.3}%
 \contentsline {subsubsubsection}{\numberline {5.4.6.4}Conservation of energy in the shock}{102}{subsubsubsection.5.4.6.4}%
 \contentsline {subsubsubsection}{\numberline {5.4.6.5}Connection between pre- and post-shock Mach number}{104}{subsubsubsection.5.4.6.5}%
@@ -188,322 +188,465 @@
 \contentsline {subsubsection}{\numberline {6.2.3}Classification of linear 2nd order PDEs with more unknowns}{115}{subsubsection.6.2.3}%
 \contentsline {subsubsection}{\numberline {6.2.4}Linear systems of 1st order homogeneous PDEs}{116}{subsubsection.6.2.4}%
 \contentsline {subsubsubsection}{\numberline {6.2.4.1}Extension to conservation laws}{116}{subsubsubsection.6.2.4.1}%
-\contentsline {subsection}{\numberline {6.3}Solution schemes for PDEs}{116}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Advection - Keep information flow in the physical system in mind}{118}{subsection.6.4}%
-\contentsline {subsubsubsection}{\numberline {6.4.0.1}Analytic solution to the advection equation}{118}{subsubsubsection.6.4.0.1}%
+\contentsline {subsection}{\numberline {6.3}Solution schemes for PDEs}{117}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Advection - Keep information flow in the physical system in mind}{119}{subsection.6.4}%
+\contentsline {subsubsubsection}{\numberline {6.4.0.1}Analytic solution to the advection equation}{119}{subsubsubsection.6.4.0.1}%
 \contentsline {subsubsubsection}{\numberline {6.4.0.2}Simple but wrong approach | we need to consider the flow of information}{119}{subsubsubsection.6.4.0.2}%
 \contentsline {subsubsubsection}{\numberline {6.4.0.3}Directional splitting / upwind scheme to the rescue}{120}{subsubsubsection.6.4.0.3}%
-\contentsline {subsubsubsection}{\numberline {6.4.0.4}Where does the smoothing in the upwind scheme come from?}{120}{subsubsubsection.6.4.0.4}%
+\contentsline {subsubsubsection}{\numberline {6.4.0.4}Where does the smoothing in the upwind scheme come from?}{122}{subsubsubsection.6.4.0.4}%
 \contentsline {subsubsubsection}{\numberline {6.4.0.5}What is the maximum timestep we can take? | Courant-Friedrichs-Lewy (CFL) criterion}{122}{subsubsubsection.6.4.0.5}%
 \contentsline {subsubsubsection}{\numberline {6.4.0.6}Hyperbolic conservation laws | changing upwind direction}{123}{subsubsubsection.6.4.0.6}%
-\contentsline {subsubsubsection}{\numberline {6.4.0.7}What if identifying the local characteristics is very difficult?}{123}{subsubsubsection.6.4.0.7}%
-\contentsline {subsection}{\numberline {6.5}Intermezzo: CFL like criterion and connection to stiffness in a reaction diffusion system}{123}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Riemann problem | Riemann solvers}{126}{subsection.6.6}%
-\contentsline {subsubsection}{\numberline {6.6.1}Structure of the solution of the Euler-Riemann-Problem}{127}{subsubsection.6.6.1}%
-\contentsline {subsubsubsection}{\numberline {6.6.1.1}Characteristics of the three waves}{127}{subsubsubsection.6.6.1.1}%
-\contentsline {subsubsubsection}{\numberline {6.6.1.2}Example Riemann-Problem situation}{127}{subsubsubsection.6.6.1.2}%
-\contentsline {subsubsubsection}{\numberline {6.6.1.3}Properties of shock, contact discontinuity and rarefaction wave}{128}{subsubsubsection.6.6.1.3}%
-\contentsline {subsection}{\numberline {6.7}Finite volume discretization | Reducing a hyperbolic conservation law to a Riemann problem | Godunov scheme}{130}{subsection.6.7}%
-\contentsline {subsubsection}{\numberline {6.7.1}Problem | solve a hyperbolic conservation law PDE}{130}{subsubsection.6.7.1}%
-\contentsline {subsubsection}{\numberline {6.7.2}Deriving a finite volume scheme where only Riemann problems are left to solve}{130}{subsubsection.6.7.2}%
-\contentsline {subsubsubsection}{\numberline {6.7.2.1}Caveats of the Godunov scheme}{132}{subsubsubsection.6.7.2.1}%
-\contentsline {subsubsection}{\numberline {6.7.3}Godunov's method and Riemann solver | reconstruct - evolve - average (REA)}{132}{subsubsection.6.7.3}%
-\contentsline {subsection}{\numberline {6.8}Approximate Riemann solvers | HLL solver}{133}{subsection.6.8}%
-\contentsline {subsubsection}{\numberline {6.8.1}1D Riemann problem to solve}{133}{subsubsection.6.8.1}%
-\contentsline {subsubsection}{\numberline {6.8.2}Basic HLL assumptions and problem statement}{133}{subsubsection.6.8.2}%
-\contentsline {subsubsection}{\numberline {6.8.3}Deriving the solution of the Riemann problem in the HLL scheme}{134}{subsubsection.6.8.3}%
-\contentsline {subsubsubsection}{\numberline {6.8.3.1}Derivation of the middle state $u^{HLL}$ at $t = T$}{134}{subsubsubsection.6.8.3.1}%
-\contentsline {subsubsubsection}{\numberline {6.8.3.2}Deriving the intercell flux $f^{HLL} = f^*$}{135}{subsubsubsection.6.8.3.2}%
-\contentsline {subsubsection}{\numberline {6.8.4}Final HLL solution}{135}{subsubsection.6.8.4}%
-\contentsline {subsubsection}{\numberline {6.8.5}Mind that the extreme velocities can point into the same direction}{136}{subsubsection.6.8.5}%
-\contentsline {subsubsection}{\numberline {6.8.6}Godunov scheme with HLL solver}{136}{subsubsection.6.8.6}%
-\contentsline {subsubsection}{\numberline {6.8.7}Pointers to extensions of the HLL scheme}{137}{subsubsection.6.8.7}%
-\contentsline {subsubsection}{\numberline {6.8.8}Ansätze for the maximum wave velocities $S_L$ and $S_R$}{138}{subsubsection.6.8.8}%
-\contentsline {subsection}{\numberline {6.9}Extension of Eulerian hydrodynamics to multiple dimensions}{138}{subsection.6.9}%
-\contentsline {subsubsection}{\numberline {6.9.1}Dimensional splitting Ansatz}{139}{subsubsection.6.9.1}%
-\contentsline {subsubsubsection}{\numberline {6.9.1.1}1st order ansatz}{140}{subsubsubsection.6.9.1.1}%
-\contentsline {subsubsubsection}{\numberline {6.9.1.2}2nd order accurate in 2D examples}{140}{subsubsubsection.6.9.1.2}%
-\contentsline {subsubsection}{\numberline {6.9.2}2nd order accurate in 3D example}{140}{subsubsection.6.9.2}%
-\contentsline {subsubsection}{\numberline {6.9.3}Unsplit schemes}{141}{subsubsection.6.9.3}%
-\contentsline {subsection}{\numberline {6.10}Extensions for high-oder accuracy}{142}{subsection.6.10}%
-\contentsline {subsubsection}{\numberline {6.10.1}What even is a schemes order?}{142}{subsubsection.6.10.1}%
-\contentsline {subsubsection}{\numberline {6.10.2}2nd order extension to Godunov's scheme by changing the reconstruction step from piecewise-constant to linear}{142}{subsubsection.6.10.2}%
-\contentsline {subsubsubsection}{\numberline {6.10.2.1}How to estimate the \textcolor {blue1}{time derivatives $(\partial _t {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax U_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle U$}\sbox 2{$\mathsurround \z@ \displaystyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle U$}\sbox 2{$\mathsurround \z@ \textstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle U$}\sbox 2{$\mathsurround \z@ \scriptstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle U$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }})_i$}? | MUSCL-Hancock scheme}{144}{subsubsubsection.6.10.2.1}%
-\contentsline {subsubsection}{\numberline {6.10.3}Idea and discussion of even higher order methods}{144}{subsubsection.6.10.3}%
-\contentsline {subsubsubsection}{\numberline {6.10.3.1}Discussion of higher order methods}{145}{subsubsubsection.6.10.3.1}%
-\contentsline {subsection}{\numberline {6.11}Flux / slope limiters | adaptively switching between a high and low order method}{146}{subsection.6.11}%
-\contentsline {subsubsection}{\numberline {6.11.1}Possibly advantageous properties of the flux limiter}{148}{subsubsection.6.11.1}%
-\contentsline {section}{\numberline {7}Smoothed Particle Hydrodynamics - Lagrangian Particle Method}{149}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Lagrangian fluid equations (i.e. as material derivatives)}{150}{subsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Continuity equation}{150}{subsubsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Navier-Stokes equation | Conservation law of Linear Momentum}{150}{subsubsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Energy equation}{150}{subsubsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}A simple SPH fluid simulator\textsuperscript {\textasteriskcentered }}{151}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Smooth then discretize - smoothing kernels and their usage}{152}{subsection.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.1}Properties of the smoothing | approach for calculating derivatives of the smoothed fluid quantities}{152}{subsubsection.7.3.1}%
-\contentsline {subsubsection}{\numberline {7.3.2}Discrete formulation of the smoothing}{153}{subsubsection.7.3.2}%
-\contentsline {subsubsection}{\numberline {7.3.3}Why a kernel with compact support is preferred?}{153}{subsubsection.7.3.3}%
-\contentsline {subsubsection}{\numberline {7.3.4}How to make the smoothing length $h$ variable in space to account for variations in the density? | sampling procedure in SPH - scatter and gather approach}{156}{subsubsection.7.3.4}%
-\contentsline {subsubsubsection}{\numberline {7.3.4.1}How to choose $h_i$?}{157}{subsubsubsection.7.3.4.1}%
-\contentsline {subsection}{\numberline {7.4}SPH continuity equation and equations of motion}{159}{subsection.7.4}%
-\contentsline {subsubsection}{\numberline {7.4.1}SPH continuity equation}{159}{subsubsection.7.4.1}%
-\contentsline {subsubsection}{\numberline {7.4.2}Gradients in SPH}{160}{subsubsection.7.4.2}%
-\contentsline {subsubsection}{\numberline {7.4.3}SPH Euler equation | The central ingredient to making our simple fluid simulator work}{161}{subsubsection.7.4.3}%
-\contentsline {subsubsection}{\numberline {7.4.4}Including further accelerations}{161}{subsubsection.7.4.4}%
-\contentsline {subsection}{\numberline {7.5}Artificial Viscosity}{162}{subsection.7.5}%
-\contentsline {subsubsection}{\numberline {7.5.1}Viscous Pressure}{162}{subsubsection.7.5.1}%
-\contentsline {subsubsection}{\numberline {7.5.2}Adding the artificial viscosity to the equation of motion}{162}{subsubsection.7.5.2}%
-\contentsline {subsubsection}{\numberline {7.5.3}Shear-Flow-Balsara correction}{163}{subsubsection.7.5.3}%
-\contentsline {subsubsection}{\numberline {7.5.4}Further viscosity switches}{163}{subsubsection.7.5.4}%
-\contentsline {subsection}{\numberline {7.6}SPH energy equation with artificial viscosity}{164}{subsection.7.6}%
-\contentsline {subsection}{\numberline {7.7}SPH Entropy equation}{164}{subsection.7.7}%
-\contentsline {subsection}{\numberline {7.8}Maximum timestep - CFL criterion}{165}{subsection.7.8}%
-\contentsline {subsection}{\numberline {7.9}Notes on boundary modeling\textsuperscript {\textasteriskcentered }}{165}{subsection.7.9}%
-\contentsline {subsection}{\numberline {7.10}Reversibility in the context of viscosity-free, weakly-compressible SPH\textsuperscript {\textasteriskcentered }}{165}{subsection.7.10}%
-\contentsline {subsection}{\numberline {7.11}Notes on the conservative formulation using Lagrange multipliers}{168}{subsection.7.11}%
-\contentsline {subsection}{\numberline {7.12}Further improvements}{168}{subsection.7.12}%
-\contentsline {subsection}{\numberline {7.13}Advantages and Disadvantages of SPH}{168}{subsection.7.13}%
-\contentsline {subsection}{\numberline {7.14}Outlook: Machine-learning enhanced multiscale-physics SPH simulation}{169}{subsection.7.14}%
-\contentsline {section}{\numberline {8}Finite Element Methods}{171}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Finite element methods for linear PDEs}{171}{subsection.8.1}%
-\contentsline {subsubsection}{\numberline {8.1.1}The solution is represented by weighted base functions on nodes within finite elements}{171}{subsubsection.8.1.1}%
-\contentsline {subsubsubsection}{\numberline {8.1.1.1}Example 1D linear reconstruction}{172}{subsubsubsection.8.1.1.1}%
-\contentsline {subsubsection}{\numberline {8.1.2}From the PDE to an algebraic equation for the expansion coefficients $\phi _1, \dots , \phi _n$}{173}{subsubsection.8.1.2}%
-\contentsline {subsubsubsection}{\numberline {8.1.2.1}Inserting the finite element approximation into the PDE yields a residuum}{173}{subsubsubsection.8.1.2.1}%
-\contentsline {subsubsubsection}{\numberline {8.1.2.2}Finding the expansion coefficients by minimizing the residual in some sense}{174}{subsubsubsection.8.1.2.2}%
-\contentsline {paragraph}{Ritz method:}{174}{section*.101}%
-\contentsline {paragraph}{Weighted residual method}{174}{section*.102}%
-\contentsline {subsubsubsection}{\numberline {8.1.2.3}A linear system for $\phi _1,\dots ,\phi _\mathcal {N}$ in the Galerkin scheme}{175}{subsubsubsection.8.1.2.3}%
-\contentsline {subsubsubsection}{\numberline {8.1.2.4}Example Application of Galerkin FEM}{175}{subsubsubsection.8.1.2.4}%
-\contentsline {subsection}{\numberline {8.2}Discontinuous Galerkin Method}{177}{subsection.8.2}%
-\contentsline {subsubsection}{\numberline {8.2.1}Problem we want to tackle | Euler equations}{177}{subsubsection.8.2.1}%
-\contentsline {subsubsection}{\numberline {8.2.2}Steps in formulating the Dicontinuous Galerkin (DG) scheme}{178}{subsubsection.8.2.2}%
-\contentsline {subsubsection}{\numberline {8.2.3}Subdivision and Representation | modal vs nodal}{178}{subsubsection.8.2.3}%
-\contentsline {subsubsubsection}{\numberline {8.2.3.1}Example for an orthogonal polynomial basis: Legendre polynomials}{180}{subsubsubsection.8.2.3.1}%
-\contentsline {subsubsection}{\numberline {8.2.4}Solving for the weights}{181}{subsubsection.8.2.4}%
-\contentsline {subsubsubsection}{\numberline {8.2.4.1}What even is Gauss-Legendre quadrature?\textsuperscript {\textasteriskcentered }}{181}{subsubsubsection.8.2.4.1}%
-\contentsline {subsubsection}{\numberline {8.2.5}Finding initial weights - just apply the determination of weights to the initial state}{182}{subsubsection.8.2.5}%
-\contentsline {subsubsection}{\numberline {8.2.6}Evolution equation for the weights}{183}{subsubsection.8.2.6}%
-\contentsline {subsubsection}{\numberline {8.2.7}Efficiency of DG and refinement schemes}{183}{subsubsection.8.2.7}%
-\contentsline {section}{\numberline {9}Diffusion}{185}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Thermodynamic Basics of Diffusion}{185}{subsection.9.1}%
-\contentsline {subsubsection}{\numberline {9.1.1}Mean squared velocity and mean squared relative velocity}{185}{subsubsection.9.1.1}%
-\contentsline {subsubsection}{\numberline {9.1.2}Mean free path and relaxation time}{185}{subsubsection.9.1.2}%
-\contentsline {subsubsection}{\numberline {9.1.3}Random Walk | spreading Gaussian distribution in space}{186}{subsubsection.9.1.3}%
-\contentsline {subsection}{\numberline {9.2}Diffusion equation}{187}{subsection.9.2}%
-\contentsline {subsubsection}{\numberline {9.2.1}Derivation of the diffusion equation | Fick's law from the microscopic consideration}{187}{subsubsection.9.2.1}%
-\contentsline {subsubsection}{\numberline {9.2.2}Analytical Solution to the diffusion equation via Fourier transform}{188}{subsubsection.9.2.2}%
-\contentsline {subsubsubsection}{\numberline {9.2.2.1}Solution for an initial delta peak in the density over space}{188}{subsubsubsection.9.2.2.1}%
-\contentsline {subsection}{\numberline {9.3}Numerical solutions}{189}{subsection.9.3}%
-\contentsline {subsubsection}{\numberline {9.3.1}Forward in time, central in space}{189}{subsubsection.9.3.1}%
-\contentsline {subsubsubsection}{\numberline {9.3.1.1}Discretized diffusion equation}{189}{subsubsubsection.9.3.1.1}%
-\contentsline {subsubsubsection}{\numberline {9.3.1.2}Explicit scheme for performing a time step}{189}{subsubsubsection.9.3.1.2}%
-\contentsline {subsubsubsection}{\numberline {9.3.1.3}Stability of the central in space, forward in time scheme for diffusion}{190}{subsubsubsection.9.3.1.3}%
-\contentsline {subsubsection}{\numberline {9.3.2}Backward in time, central in space}{191}{subsubsection.9.3.2}%
-\contentsline {subsubsubsection}{\numberline {9.3.2.1}Discretized implicit scheme}{191}{subsubsubsection.9.3.2.1}%
-\contentsline {subsubsubsection}{\numberline {9.3.2.2}Matrix equation}{191}{subsubsubsection.9.3.2.2}%
-\contentsline {subsubsection}{\numberline {9.3.3}Crank-Nicolson method}{191}{subsubsection.9.3.3}%
-\contentsline {subsection}{\numberline {9.4}Flux-limited diffusion (\textit {tempered})}{192}{subsection.9.4}%
-\contentsline {subsection}{\numberline {9.5}Diffusion in three dimensions}{193}{subsection.9.5}%
-\contentsline {section}{\numberline {10}Solving Linear Equations with Iterative Solvers and the Multigrid Technique}{194}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Motivational Example 1: From the Poisson equation we can get a possibly big linear system}{194}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Poisson equation and solving a tridiagonal system}{195}{subsection.10.2}%
-\contentsline {subsubsection}{\numberline {10.2.1}1D heat Diffusion equation with Dirichlet boundaries in matrix form}{195}{subsubsection.10.2.1}%
-\contentsline {subsubsection}{\numberline {10.2.2}Forward elimination backward substitution method for solving a tridiagonal system}{196}{subsubsection.10.2.2}%
-\contentsline {subsection}{\numberline {10.3}Classical Exact Solution: LU-decomposition\textsuperscript {\textasteriskcentered }}{197}{subsection.10.3}%
-\contentsline {subsubsection}{\numberline {10.3.1}Solving the linear system for ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax x_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle x$}\sbox 2{$\mathsurround \z@ \displaystyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle x$}\sbox 2{$\mathsurround \z@ \textstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ when we already know the LU-decomposition}{197}{subsubsection.10.3.1}%
-\contentsline {subsubsection}{\numberline {10.3.2}Calculating the LU-decomposition in $\mathcal {O}(N^3)$}{198}{subsubsection.10.3.2}%
-\contentsline {subsection}{\numberline {10.4}Jacobi iteration | a splitting method}{199}{subsection.10.4}%
-\contentsline {subsubsection}{\numberline {10.4.1}When does the Jacobi iteration converge?}{199}{subsubsection.10.4.1}%
-\contentsline {subsubsubsection}{\numberline {10.4.1.1}Derivation of the convergence criterion}{200}{subsubsubsection.10.4.1.1}%
-\contentsline {subsubsection}{\numberline {10.4.2}Example Jacobi Step}{200}{subsubsection.10.4.2}%
-\contentsline {subsection}{\numberline {10.5}Gauss-Seidel iteration | better splitting method}{200}{subsection.10.5}%
-\contentsline {subsubsection}{\numberline {10.5.1}Motivational Example}{201}{subsubsection.10.5.1}%
-\contentsline {subsubsection}{\numberline {10.5.2}Gauss-Seidel update}{201}{subsubsection.10.5.2}%
-\contentsline {subsubsection}{\numberline {10.5.3}The problem of parallelization in Gauss-Seidel and red-black ordering}{202}{subsubsection.10.5.3}%
-\contentsline {subsection}{\numberline {10.6}Relaxation problem | Poisson equation in red-black ordering}{203}{subsection.10.6}%
-\contentsline {subsubsection}{\numberline {10.6.1}Formulating an elliptic equation as an equilibrium of a relaxation problem}{203}{subsubsection.10.6.1}%
-\contentsline {subsubsection}{\numberline {10.6.2}Red-black ordering for the 2D Poisson equation}{204}{subsubsection.10.6.2}%
-\contentsline {subsection}{\numberline {10.7}Multigrid technique}{204}{subsection.10.7}%
-\contentsline {subsubsection}{\numberline {10.7.1}Getting finer and coarser | prolongation and restriction}{205}{subsubsection.10.7.1}%
-\contentsline {subsubsubsection}{\numberline {10.7.1.1}Coarse-to-fine | interpolation called prolongation}{206}{subsubsubsection.10.7.1.1}%
-\contentsline {subsubsubsection}{\numberline {10.7.1.2}Fine-to-coarse | restriction}{207}{subsubsubsection.10.7.1.2}%
-\contentsline {subsubsubsection}{\numberline {10.7.1.3}Relation of restriction and prolongation}{207}{subsubsubsection.10.7.1.3}%
-\contentsline {subsubsubsection}{\numberline {10.7.1.4}Short-hand stencil notation}{209}{subsubsubsection.10.7.1.4}%
-\contentsline {subsubsection}{\numberline {10.7.2}Multigrid V-cycle}{209}{subsubsection.10.7.2}%
-\contentsline {subsubsubsection}{\numberline {10.7.2.1}Initial definitions}{210}{subsubsubsection.10.7.2.1}%
-\contentsline {subsubsubsection}{\numberline {10.7.2.2}Coarse-grid correction scheme}{210}{subsubsubsection.10.7.2.2}%
-\contentsline {subsubsubsection}{\numberline {10.7.2.3}V-cycle}{211}{subsubsubsection.10.7.2.3}%
-\contentsline {subsubsubsection}{\numberline {10.7.2.4}Full multigrid method}{212}{subsubsubsection.10.7.2.4}%
-\contentsline {subsection}{\numberline {10.8}Krylow subspace methods}{213}{subsection.10.8}%
-\contentsline {subsubsection}{\numberline {10.8.1}Motivation for the need of Krylow subspace methods in the context of non-linear root-finding of big systems\textsuperscript {\textasteriskcentered }}{214}{subsubsection.10.8.1}%
-\contentsline {subsubsection}{\numberline {10.8.2}Motivation | solving a system of linear equations using a gradient method}{214}{subsubsection.10.8.2}%
-\contentsline {subsubsection}{\numberline {10.8.3}Krylov subspace and construction of iterative methods for solving ${\mskip 0.5mu\relax \@@underline {\mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptscriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }}\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle A$}\sbox 2{$\mathsurround \z@ \displaystyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle A$}\sbox 2{$\mathsurround \z@ \textstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle A$}\sbox 2{$\mathsurround \z@ \scriptstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle A$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}{\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax x_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle x$}\sbox 2{$\mathsurround \z@ \displaystyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle x$}\sbox 2{$\mathsurround \z@ \textstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} = {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax b_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle b$}\sbox 2{$\mathsurround \z@ \displaystyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle b$}\sbox 2{$\mathsurround \z@ \textstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle b$}\sbox 2{$\mathsurround \z@ \scriptstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle b$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{217}{subsubsection.10.8.3}%
-\contentsline {subsubsection}{\numberline {10.8.4}Conjugate gradients method}{218}{subsubsection.10.8.4}%
-\contentsline {section}{\numberline {11}Fourier methods}{219}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Convolution problems | solving Poisson's equation using Fourier methods}{219}{subsection.11.1}%
-\contentsline {subsubsubsection}{\numberline {11.1.0.1}The solution to the Poisson equation is a convolution}{219}{subsubsubsection.11.1.0.1}%
-\contentsline {subsubsubsection}{\numberline {11.1.0.2}A convolution in real space turns into a multiplication in Fourier space}{220}{subsubsubsection.11.1.0.2}%
-\contentsline {subsubsubsection}{\numberline {11.1.0.3}For periodic boundaries, the Fourier transform turns from an integral to a sum}{220}{subsubsubsection.11.1.0.3}%
-\contentsline {subsubsubsection}{\numberline {11.1.0.4}Solution to the Poisson equation in Fourier space}{221}{subsubsubsection.11.1.0.4}%
-\contentsline {subsection}{\numberline {11.2}Discrete Fourier Transform (DFT)}{222}{subsection.11.2}%
-\contentsline {subsubsubsection}{\numberline {11.2.0.1}The spatial discretization (and periodicity) limits the number of ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ vectors that lead to possibly different $\hat {\rho }_{\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{222}{subsubsubsection.11.2.0.1}%
-\contentsline {subsubsubsection}{\numberline {11.2.0.2}Resulting discrete Fourier transform}{223}{subsubsubsection.11.2.0.2}%
-\contentsline {subsubsubsection}{\numberline {11.2.0.3}Different conventions for the wave vector ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ and Nyquist frequency}{223}{subsubsubsection.11.2.0.3}%
-\contentsline {subsubsubsection}{\numberline {11.2.0.4}Plancherel's theorem}{225}{subsubsubsection.11.2.0.4}%
-\contentsline {subsubsubsection}{\numberline {11.2.0.5}Normalization factor}{225}{subsubsubsection.11.2.0.5}%
-\contentsline {subsubsection}{\numberline {11.2.1}Computational Complexity and Fast Fourier Transform (FFT)}{226}{subsubsection.11.2.1}%
-\contentsline {subsection}{\numberline {11.3}DFT storage conventions}{226}{subsection.11.3}%
-\contentsline {subsection}{\numberline {11.4}DFT and Linear and Cyclic Convolution}{230}{subsection.11.4}%
-\contentsline {subsection}{\numberline {11.5}Non-periodic problems with \textit {zero-padding} in 2D}{236}{subsection.11.5}%
-\contentsline {subsection}{\numberline {11.6}Power spectra and correlation functions}{237}{subsection.11.6}%
-\contentsline {subsubsection}{\numberline {11.6.1}Definition of the power spectrum}{237}{subsubsection.11.6.1}%
-\contentsline {subsubsection}{\numberline {11.6.2}Definition of the correlation function}{238}{subsubsection.11.6.2}%
-\contentsline {subsubsection}{\numberline {11.6.3}Connection by Fourier Transform}{238}{subsubsection.11.6.3}%
-\contentsline {subsubsection}{\numberline {11.6.4}Power function and variance of a smoothed field}{238}{subsubsection.11.6.4}%
-\contentsline {subsection}{\numberline {11.7}Projections in Fourier space}{239}{subsection.11.7}%
-\contentsline {subsubsection}{\numberline {11.7.1}Fundamental theorem of vector analysis | Helmholtz decomposition}{239}{subsubsection.11.7.1}%
-\contentsline {subsubsection}{\numberline {11.7.2}Proof in Fourier space}{239}{subsubsection.11.7.2}%
-\contentsline {subsubsection}{\numberline {11.7.3}Applications of the Helmholtz decomposition}{240}{subsubsection.11.7.3}%
-\contentsline {subsubsection}{\numberline {11.7.4}Sidenote: Importance of dimensionality}{240}{subsubsection.11.7.4}%
-\contentsline {section}{\numberline {12}Collisionless particle systems}{241}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Introduction of collisionless systems in the context of fluid modeling}{241}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Structure of the following considerations}{243}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}General N-particle ensembles | one-, two-, three, ..., particle distribution | BBKGY chain}{243}{subsection.12.3}%
-\contentsline {subsection}{\numberline {12.4}Uncorrelated (collisionless) systems | multiplication closure to the BBGKY chain}{244}{subsection.12.4}%
-\contentsline {subsubsection}{\numberline {12.4.1}General Continuity equation for probability in phase space}{245}{subsubsection.12.4.1}%
-\contentsline {subsubsection}{\numberline {12.4.2}Liouville equation for the general evolution of phase space probability}{245}{subsubsection.12.4.2}%
-\contentsline {subsubsection}{\numberline {12.4.3}Vlasov equation for collisionless systems}{245}{subsubsection.12.4.3}%
-\contentsline {subsubsection}{\numberline {12.4.4}Accelerations in collisionless systems - including gravity into the Vlasov equation}{246}{subsubsection.12.4.4}%
-\contentsline {subsection}{\numberline {12.5}When is a gravitational system collisionless?}{246}{subsection.12.5}%
-\contentsline {subsubsection}{\numberline {12.5.1}Relaxation time in a gravitational system}{247}{subsubsection.12.5.1}%
-\contentsline {subsubsection}{\numberline {12.5.2}Crossing time}{247}{subsubsection.12.5.2}%
-\contentsline {subsubsection}{\numberline {12.5.3}Change in perpendicular velocity when crossing the system}{248}{subsubsection.12.5.3}%
-\contentsline {subsubsubsection}{\numberline {12.5.3.1}Size of one small angle deflections based on the impact parameter}{248}{subsubsubsection.12.5.3.1}%
-\contentsline {subsubsubsection}{\numberline {12.5.3.2}Mean squared deflection for many small deflections}{249}{subsubsubsection.12.5.3.2}%
-\contentsline {subsubsubsection}{\numberline {12.5.3.3}Many small deflections are more important than few large ones}{250}{subsubsubsection.12.5.3.3}%
-\contentsline {subsubsubsection}{\numberline {12.5.3.4}Finally the calculation of $\langle (\Delta v_\perp )^2 \rangle $}{250}{subsubsubsection.12.5.3.4}%
-\contentsline {subsubsubsection}{\numberline {12.5.3.5}How to choose $b_{min}$ and $b_{max}$ in the Coulomb logarithm?}{251}{subsubsubsection.12.5.3.5}%
-\contentsline {subsubsection}{\numberline {12.5.4}Examples of astrophysical relaxation times}{251}{subsubsection.12.5.4}%
-\contentsline {subsection}{\numberline {12.6}N-body models of collisionless systems}{252}{subsection.12.6}%
-\contentsline {subsubsection}{\numberline {12.6.1}The softening length $\epsilon $}{252}{subsubsection.12.6.1}%
-\contentsline {section}{\numberline {13}Force calculations | tree algorithms and particle mesh technique}{254}{section.13}%
-\contentsline {subsection}{\numberline {13.1}Calculating the forces | Direct summation}{254}{subsection.13.1}%
-\contentsline {subsection}{\numberline {13.2}Overview on faster, approximate force calculation schemes}{254}{subsection.13.2}%
-\contentsline {subsection}{\numberline {13.3}Faster method I | Multipole expansion | tree algorithms}{255}{subsection.13.3}%
-\contentsline {subsubsection}{\numberline {13.3.1}Deriving the multipole expansion}{256}{subsubsection.13.3.1}%
-\contentsline {subsubsection}{\numberline {13.3.2}Multipole expansion}{257}{subsubsection.13.3.2}%
-\contentsline {subsubsection}{\numberline {13.3.3}Hierarchical grouping | baseline for smart force calculations}{257}{subsubsection.13.3.3}%
-\contentsline {subsubsubsection}{\numberline {13.3.3.1}Cosntructing the tree | Barnes and Hut oct-tree}{258}{subsubsubsection.13.3.3.1}%
-\contentsline {subsubsection}{\numberline {13.3.4}Tree walk - force calculation with adaptive group resolution}{260}{subsubsection.13.3.4}%
-\contentsline {subsubsubsection}{\numberline {13.3.4.1}Tree walk algorithm}{261}{subsubsubsection.13.3.4.1}%
-\contentsline {subsubsubsection}{\numberline {13.3.4.2}Derivation of the cost of the tree based force calculation | $\mathcal {O}(N \log N)$}{262}{subsubsubsection.13.3.4.2}%
-\contentsline {subsubsubsection}{\numberline {13.3.4.3}Expected typical force errors in a monopole approximation | $(\Delta F_{\text {tot}}) \propto \theta _c^7$}{262}{subsubsubsection.13.3.4.3}%
-\contentsline {subsection}{\numberline {13.4}Faster method II | Particle mesh technique for efficiently computing long-ranged forces}{263}{subsection.13.4}%
-\contentsline {subsubsection}{\numberline {13.4.1}Schematic particle mesh algorithm}{263}{subsubsection.13.4.1}%
-\contentsline {subsubsection}{\numberline {13.4.2}Mass / charge assignment of particles to mesh cells}{263}{subsubsection.13.4.2}%
-\contentsline {paragraph}{Question}{264}{section*.145}%
-\contentsline {subsubsubsection}{\numberline {13.4.2.1}Assignment scheme I | Nearest grid point (NGP) assignment | $\delta $-shape function}{265}{subsubsubsection.13.4.2.1}%
-\contentsline {subsubsubsection}{\numberline {13.4.2.2}Assignment scheme II | Cloud in cell (CIC) assignment | top-hat shape function}{266}{subsubsubsection.13.4.2.2}%
-\contentsline {subsubsubsection}{\numberline {13.4.2.3}Assignment scheme III | Triangular shaped cloud (TSC) assignment | triangular shape function}{267}{subsubsubsection.13.4.2.3}%
-\contentsline {subsubsubsection}{\numberline {13.4.2.4}Comparing the assignment schemes in terms of continuity}{267}{subsubsubsection.13.4.2.4}%
-\contentsline {subsubsection}{\numberline {13.4.3}Solving the Poisson equation for the potential on the mesh based on the meshed density}{268}{subsubsection.13.4.3}%
-\contentsline {subsubsection}{\numberline {13.4.4}Calculating the force field on the mesh}{268}{subsubsection.13.4.4}%
-\contentsline {subsubsubsection}{\numberline {13.4.4.1}On the choice of the order of the finite difference scheme for the force calculation}{269}{subsubsubsection.13.4.4.1}%
-\contentsline {subsubsection}{\numberline {13.4.5}Interpolating the force from the mesh to the particles}{269}{subsubsection.13.4.5}%
-\contentsline {subsubsubsection}{\numberline {13.4.5.1}We assign forces to the particles' positions using the same assignment kernel used to assign mass of the particles to the grid points}{269}{subsubsubsection.13.4.5.1}%
-\contentsline {subsubsubsection}{\numberline {13.4.5.2}Proof that for the same assignment kernel in the density and force assignment there is \underline {no self-force occuring}}{270}{subsubsubsection.13.4.5.2}%
-\contentsline {subsubsubsection}{\numberline {13.4.5.3}Proof that for the same assignment kernel in the density and force assignment, the forces between particle paris are pair-wise antisymmetric}{272}{subsubsubsection.13.4.5.3}%
-\contentsline {subsection}{\numberline {13.5}Outlook - combining the particle mesh and tree method}{272}{subsection.13.5}%
-\contentsline {section}{\numberline {14}Random Number Generation and Monte Carlo Techniques}{274}{section.14}%
-\contentsline {subsection}{\numberline {14.1}Random Number Generation and Sampling}{274}{subsection.14.1}%
-\contentsline {subsubsection}{\numberline {14.1.1}An intuitive introduction to sampling}{274}{subsubsection.14.1.1}%
-\contentsline {subsubsection}{\numberline {14.1.2}Random Number Generators - Base of all sampling methods: Sampling from the uniform distribution is \textit {easy}}{274}{subsubsection.14.1.2}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.1}Advantages of Pseudo-Random Number Generators over True Random Number Generators}{275}{subsubsubsection.14.1.2.1}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.2}Desirable properties of good pseudo-random number generators}{275}{subsubsubsection.14.1.2.2}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.3}A simple class of pseudo-random number generators: Linear Congruential Generators}{275}{subsubsubsection.14.1.2.3}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.4}A first improvement | Combining multiple LCGs}{277}{subsubsubsection.14.1.2.4}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.5}Lagged Fibonacci Generators}{277}{subsubsubsection.14.1.2.5}%
-\contentsline {subsubsubsection}{\numberline {14.1.2.6}Roughly evenly spaced sampling - blue noise}{278}{subsubsubsection.14.1.2.6}%
-\contentsline {subsubsection}{\numberline {14.1.3}Inverse Transform Method | sampling from distributions with algebraically invertible cumulative distribution functions (CDFs)}{278}{subsubsection.14.1.3}%
-\contentsline {subsubsubsection}{\numberline {14.1.3.1}Alternative derivation from the transformation between probability distributions\textsuperscript {\textasteriskcentered }}{279}{subsubsubsection.14.1.3.1}%
-\contentsline {subsubsubsection}{\numberline {14.1.3.2}Example: Inverse Transform Method applied to the standard Laplace distribution\textsuperscript {\textasteriskcentered }}{280}{subsubsubsection.14.1.3.2}%
-\contentsline {subsubsubsection}{\numberline {14.1.3.3}Sampling from a Gaussian using exact inversion | Box-Muller trick}{280}{subsubsubsection.14.1.3.3}%
-\contentsline {subsubsubsection}{\numberline {14.1.3.4}Sampling from a discrete distribution\textsuperscript {\textasteriskcentered }}{282}{subsubsubsection.14.1.3.4}%
-\contentsline {subsubsection}{\numberline {14.1.4}Acceptance-rejection method}{283}{subsubsection.14.1.4}%
-\contentsline {subsubsubsection}{\numberline {14.1.4.1}Example: Sampling uniformly from a sphere}{284}{subsubsubsection.14.1.4.1}%
-\contentsline {subsubsubsection}{\numberline {14.1.4.2}Example II: Sampling from a conditioned Gamma distribution\textsuperscript {\textasteriskcentered }}{285}{subsubsubsection.14.1.4.2}%
-\contentsline {subsection}{\numberline {14.2}Monte Carlo Estimation}{287}{subsection.14.2}%
-\contentsline {subsubsection}{\numberline {14.2.1}A basic intuition for estimation}{287}{subsubsection.14.2.1}%
-\contentsline {subsubsection}{\numberline {14.2.2}Monte Carlo Estimation}{288}{subsubsection.14.2.2}%
-\contentsline {subsubsection}{\numberline {14.2.3}Distribution and Error of the Monte Carlo Estimator}{288}{subsubsection.14.2.3}%
-\contentsline {subsection}{\numberline {14.3}Monte Carlo Integration}{289}{subsection.14.3}%
-\contentsline {subsubsection}{\numberline {14.3.1}Intuition for Monte Carlo Integration}{289}{subsubsection.14.3.1}%
-\contentsline {subsubsection}{\numberline {14.3.2}Connection to the Monte Carlo Estimator}{290}{subsubsection.14.3.2}%
-\contentsline {subsubsection}{\numberline {14.3.3}Intuition from calculating the area of a shape}{290}{subsubsection.14.3.3}%
-\contentsline {subsubsection}{\numberline {14.3.4}Error in Monte Carlo Integration - scaling with $\frac {1}{\sqrt {N}}$}{290}{subsubsection.14.3.4}%
-\contentsline {subsubsection}{\numberline {14.3.5}Distribution of $\hat {I}_N$ and derivation of the central limit theorem\textsuperscript {\textasteriskcentered }}{291}{subsubsection.14.3.5}%
-\contentsline {paragraph}{Derivation of the Central Limit Theorem by Fourier Transform}{292}{section*.167}%
-\contentsline {subsubsection}{\numberline {14.3.6}Illustrative Example of Monte Carlo Integration}{293}{subsubsection.14.3.6}%
-\contentsline {subsubsection}{\numberline {14.3.7}Comparison to other techniques - when to use Monte Carlo integration?}{294}{subsubsection.14.3.7}%
-\contentsline {paragraph}{Intuition for the better scaling}{295}{section*.170}%
-\contentsline {subsubsection}{\numberline {14.3.8}Reducing the variance of the Monte Carlo Estimator}{296}{subsubsection.14.3.8}%
-\contentsline {subsubsubsection}{\numberline {14.3.8.1}Antithetic Estimators\textsuperscript {\textasteriskcentered }}{296}{subsubsubsection.14.3.8.1}%
-\contentsline {subsubsubsection}{\numberline {14.3.8.2}Importance Sampling}{297}{subsubsubsection.14.3.8.2}%
-\contentsline {subsection}{\numberline {14.4}Sampling with a stochastic process}{301}{subsection.14.4}%
-\contentsline {subsubsection}{\numberline {14.4.1}Markov Process and Markov chain | Monte Carlo Markov Chain (MCMC)}{301}{subsubsection.14.4.1}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.1}Characterizing property of the Markov process | Memorylessness}{301}{subsubsubsection.14.4.1.1}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.2}Transitioning the probability distribution}{302}{subsubsubsection.14.4.1.2}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.3}Properties demanded of the update step $f$ | stochastic process has equilibrium distribution | ergodicity}{302}{subsubsubsection.14.4.1.3}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.4}Nice consequences of the demanded properties of the update step}{302}{subsubsubsection.14.4.1.4}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.5}Proof that updating the probability distribution converges to its fixed-point equilibrium distribution $p_{eq}$}{303}{subsubsubsection.14.4.1.5}%
-\contentsline {subsubsubsection}{\numberline {14.4.1.6}Detailed balance | Common condition for the update steps}{303}{subsubsubsection.14.4.1.6}%
-\contentsline {subsubsection}{\numberline {14.4.2}Metropolis Hastings algorithm - simple and generic construction of the transition $f$}{304}{subsubsection.14.4.2}%
-\contentsline {subsubsubsection}{\numberline {14.4.2.1}The Metropolis Hastings Algorithm fulfills detailed balance}{304}{subsubsubsection.14.4.2.1}%
-\contentsline {subsubsubsection}{\numberline {14.4.2.2}Metropolic update | for a symmetric proposal operator the Hasings ratio simplifies}{305}{subsubsubsection.14.4.2.2}%
-\contentsline {subsubsection}{\numberline {14.4.3}Example: Stochastic Sampling from a Gaussian}{305}{subsubsection.14.4.3}%
-\contentsline {subsubsubsection}{\numberline {14.4.3.1}Choosing a symmetric proposal function}{306}{subsubsubsection.14.4.3.1}%
-\contentsline {subsubsubsection}{\numberline {14.4.3.2}Metropolis Hastings Algorithm for sampling from a Gaussian}{306}{subsubsubsection.14.4.3.2}%
-\contentsline {subsection}{\numberline {14.5}Monte Carlo Simulations of Thermodynamic Systems}{307}{subsection.14.5}%
-\contentsline {subsubsection}{\numberline {14.5.1}Calculating the ensemble average $\langle A \rangle $ using importance sampling powered by a stochastic process}{308}{subsubsection.14.5.1}%
-\contentsline {subsubsubsection}{\numberline {14.5.1.1}Sampling the states ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax \phi _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \phi $}\sbox 2{$\mathsurround \z@ \displaystyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \phi $}\sbox 2{$\mathsurround \z@ \textstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \phi $}\sbox 2{$\mathsurround \z@ \scriptstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \phi $}\sbox 2{$\mathsurround \z@ \scriptscriptstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}_i$ using the Metropolis-Hastings algorithm}{308}{subsubsubsection.14.5.1.1}%
-\contentsline {subsubsection}{\numberline {14.5.2}Example thermodynamic model: Ising Model}{309}{subsubsection.14.5.2}%
-\contentsline {subsubsubsection}{\numberline {14.5.2.1}Exemplary parameter of interest: Critical temperature under which spontaneous magnetization occurs}{309}{subsubsubsection.14.5.2.1}%
-\contentsline {subsubsubsection}{\numberline {14.5.2.2}Metropolis algorithm for simulating the spin configuration on the lattice (and so the partition function and magnetization, ...)}{310}{subsubsubsection.14.5.2.2}%
-\contentsline {subsubsubsection}{\numberline {14.5.2.3}More thermodynamic properties that might be of interest\textsuperscript {\textasteriskcentered }}{311}{subsubsubsection.14.5.2.3}%
-\contentsline {subsection}{\numberline {14.6}Monte Carlo Markov Chains in Parameter Estimation}{311}{subsection.14.6}%
-\contentsline {subsubsection}{\numberline {14.6.1}Maximum Likelihood Estimation}{311}{subsubsection.14.6.1}%
-\contentsline {subsubsubsection}{\numberline {14.6.1.1}Estimating parameters based on the posterior}{312}{subsubsubsection.14.6.1.1}%
-\contentsline {subsubsection}{\numberline {14.6.2}Monte Carlo Markov Chain that samples the posterior as an equilibrium distribution}{314}{subsubsection.14.6.2}%
-\contentsline {subsubsection}{\numberline {14.6.3}Caveat of MCMC | we never know when the chain is long enough}{314}{subsubsection.14.6.3}%
-\contentsline {section}{\numberline {15}Parallelization Techniques}{316}{section.15}%
-\contentsline {subsection}{\numberline {15.1}Why do we need to parallelize?}{316}{subsection.15.1}%
-\contentsline {subsection}{\numberline {15.2}Hardware perspective and parallelism}{316}{subsection.15.2}%
-\contentsline {subsubsection}{\numberline {15.2.1}We should write code reducing memory access | row and column major storing convention for matrices}{316}{subsubsection.15.2.1}%
-\contentsline {subsubsection}{\numberline {15.2.2}General computer architectures in increasing complexity\textsuperscript {\textasteriskcentered }}{317}{subsubsection.15.2.2}%
-\contentsline {subsubsection}{\numberline {15.2.3}CPU vs GPU}{318}{subsubsection.15.2.3}%
-\contentsline {subsubsubsection}{\numberline {15.2.3.1}When and how to use GPUs}{318}{subsubsubsection.15.2.3.1}%
-\contentsline {subsubsection}{\numberline {15.2.4}Vector cores}{319}{subsubsection.15.2.4}%
-\contentsline {subsubsection}{\numberline {15.2.5}Hyperthreading}{319}{subsubsection.15.2.5}%
-\contentsline {subsection}{\numberline {15.3}Types and challenges of concurrency and parallelism}{320}{subsection.15.3}%
-\contentsline {subsubsection}{\numberline {15.3.1}Shared memory and message passing concurrency}{320}{subsubsection.15.3.1}%
-\contentsline {subsubsection}{\numberline {15.3.2}Challenges of concurrency}{320}{subsubsection.15.3.2}%
-\contentsline {subsection}{\numberline {15.4}Shared memory parallelization (with OpenMP)}{321}{subsection.15.4}%
-\contentsline {subsubsection}{\numberline {15.4.1}Simplest parallelization - parallel for loop of independent iterations}{321}{subsubsection.15.4.1}%
-\contentsline {subsubsection}{\numberline {15.4.2}OpenMP's fork-join model}{321}{subsubsection.15.4.2}%
-\contentsline {subsubsection}{\numberline {15.4.3}Race conditions}{322}{subsubsection.15.4.3}%
-\contentsline {subsubsubsection}{\numberline {15.4.3.1}Race conditions in the context of non-atomic operations}{322}{subsubsubsection.15.4.3.1}%
-\contentsline {subsubsection}{\numberline {15.4.4}Using the same variable where it is not intended}{323}{subsubsection.15.4.4}%
-\contentsline {subsection}{\numberline {15.5}Message passing concurrency enabling distributed memory parallelization (with MPI)}{324}{subsection.15.5}%
-\contentsline {subsubsection}{\numberline {15.5.1}Architecture of an MPI program}{325}{subsubsection.15.5.1}%
-\contentsline {subsubsection}{\numberline {15.5.2}MPI program structure and basic communication}{325}{subsubsection.15.5.2}%
-\contentsline {subsubsubsection}{\numberline {15.5.2.1}Point-to-point communication}{325}{subsubsubsection.15.5.2.1}%
-\contentsline {subsubsubsection}{\numberline {15.5.2.2}Collective communication}{326}{subsubsubsection.15.5.2.2}%
-\contentsline {subsubsubsection}{\numberline {15.5.2.3}More complex communication}{327}{subsubsubsection.15.5.2.3}%
-\contentsline {subsubsection}{\numberline {15.5.3}Pinning - distribution of processes on cores and nodes}{327}{subsubsection.15.5.3}%
-\contentsline {subsection}{\numberline {15.6}Parallel computing for physical simulations}{327}{subsection.15.6}%
-\contentsline {subsubsection}{\numberline {15.6.1}Parallelized hydrodynamics}{327}{subsubsection.15.6.1}%
-\contentsline {subsection}{\numberline {15.7}Scaling of the processing time with increasing parallelism and Ahmdal's law}{331}{subsection.15.7}%
-\contentsline {subsection}{\numberline {15.8}Examples of parallel algorithms}{331}{subsection.15.8}%
-\contentsline {subsection}{\numberline {15.9}Smartly scheduling work}{331}{subsection.15.9}%
-\contentsline {section}{References}{334}{subsection.15.9}%
+\contentsline {subsubsubsection}{\numberline {6.4.0.7}What if identifying the local characteristics is very difficult?}{124}{subsubsubsection.6.4.0.7}%
+\contentsline {subsection}{\numberline {6.5}Intermezzo: CFL like criterion and connection to stiffness in a reaction diffusion system}{124}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Riemann problem | Riemann solvers}{127}{subsection.6.6}%
+\contentsline {subsubsection}{\numberline {6.6.1}Structure of the solution of the Euler-Riemann-Problem}{128}{subsubsection.6.6.1}%
+\contentsline {subsubsubsection}{\numberline {6.6.1.1}Characteristics of the three waves}{128}{subsubsubsection.6.6.1.1}%
+\contentsline {subsubsubsection}{\numberline {6.6.1.2}Example Riemann-Problem situation}{128}{subsubsubsection.6.6.1.2}%
+\contentsline {subsubsubsection}{\numberline {6.6.1.3}Properties of shock, contact discontinuity and rarefaction wave}{129}{subsubsubsection.6.6.1.3}%
+\contentsline {subsection}{\numberline {6.7}Finite volume discretization | Reducing a hyperbolic conservation law to a Riemann problem | Godunov scheme}{131}{subsection.6.7}%
+\contentsline {subsubsection}{\numberline {6.7.1}Problem | solve a hyperbolic conservation law PDE}{131}{subsubsection.6.7.1}%
+\contentsline {subsubsection}{\numberline {6.7.2}Deriving a finite volume scheme where only Riemann problems are left to solve}{131}{subsubsection.6.7.2}%
+\contentsline {subsubsubsection}{\numberline {6.7.2.1}Caveats of the Godunov scheme}{133}{subsubsubsection.6.7.2.1}%
+\contentsline {subsubsection}{\numberline {6.7.3}Godunov's method and Riemann solver | reconstruct - evolve - average (REA)}{133}{subsubsection.6.7.3}%
+\contentsline {subsection}{\numberline {6.8}Approximate Riemann solvers | HLL solver}{134}{subsection.6.8}%
+\contentsline {subsubsection}{\numberline {6.8.1}1D Riemann problem to solve}{134}{subsubsection.6.8.1}%
+\contentsline {subsubsection}{\numberline {6.8.2}Basic HLL assumptions and problem statement}{134}{subsubsection.6.8.2}%
+\contentsline {subsubsection}{\numberline {6.8.3}Deriving the solution of the Riemann problem in the HLL scheme}{135}{subsubsection.6.8.3}%
+\contentsline {subsubsubsection}{\numberline {6.8.3.1}Derivation of the middle state $u^{HLL}$ at $t = T$}{135}{subsubsubsection.6.8.3.1}%
+\contentsline {subsubsubsection}{\numberline {6.8.3.2}Deriving the intercell flux $f^{HLL} = f^*$}{136}{subsubsubsection.6.8.3.2}%
+\contentsline {subsubsection}{\numberline {6.8.4}Final HLL solution}{136}{subsubsection.6.8.4}%
+\contentsline {subsubsection}{\numberline {6.8.5}Mind that the extreme velocities can point into the same direction}{137}{subsubsection.6.8.5}%
+\contentsline {subsubsection}{\numberline {6.8.6}Godunov scheme with HLL solver}{137}{subsubsection.6.8.6}%
+\contentsline {subsubsection}{\numberline {6.8.7}Pointers to extensions of the HLL scheme}{138}{subsubsection.6.8.7}%
+\contentsline {subsubsection}{\numberline {6.8.8}Ansätze for the maximum wave velocities $S_L$ and $S_R$}{139}{subsubsection.6.8.8}%
+\contentsline {subsection}{\numberline {6.9}Extension of Eulerian hydrodynamics to multiple dimensions}{139}{subsection.6.9}%
+\contentsline {subsubsection}{\numberline {6.9.1}Dimensional splitting Ansatz}{140}{subsubsection.6.9.1}%
+\contentsline {subsubsubsection}{\numberline {6.9.1.1}1st order ansatz}{141}{subsubsubsection.6.9.1.1}%
+\contentsline {subsubsubsection}{\numberline {6.9.1.2}2nd order accurate in 2D examples}{141}{subsubsubsection.6.9.1.2}%
+\contentsline {subsubsection}{\numberline {6.9.2}2nd order accurate in 3D example}{141}{subsubsection.6.9.2}%
+\contentsline {subsubsection}{\numberline {6.9.3}Unsplit schemes}{142}{subsubsection.6.9.3}%
+\contentsline {subsection}{\numberline {6.10}Extensions for high-oder accuracy}{143}{subsection.6.10}%
+\contentsline {subsubsection}{\numberline {6.10.1}What even is a schemes order?}{143}{subsubsection.6.10.1}%
+\contentsline {subsubsection}{\numberline {6.10.2}2nd order extension to Godunov's scheme by changing the reconstruction step from piecewise-constant to linear}{143}{subsubsection.6.10.2}%
+\contentsline {subsubsubsection}{\numberline {6.10.2.1}How to estimate the \textcolor {blue1}{time derivatives $(\partial _t {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax U_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle U$}\sbox 2{$\mathsurround \z@ \displaystyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle U$}\sbox 2{$\mathsurround \z@ \textstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle U$}\sbox 2{$\mathsurround \z@ \scriptstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle U$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle U_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }})_i$}? | MUSCL-Hancock scheme}{145}{subsubsubsection.6.10.2.1}%
+\contentsline {subsubsection}{\numberline {6.10.3}Idea and discussion of even higher order methods}{145}{subsubsection.6.10.3}%
+\contentsline {subsubsubsection}{\numberline {6.10.3.1}Discussion of higher order methods}{146}{subsubsubsection.6.10.3.1}%
+\contentsline {subsection}{\numberline {6.11}Flux / slope limiters | adaptively switching between a high and low order method}{147}{subsection.6.11}%
+\contentsline {subsubsection}{\numberline {6.11.1}Possibly advantageous properties of the flux limiter}{149}{subsubsection.6.11.1}%
+\contentsline {section}{\numberline {7}Smoothed Particle Hydrodynamics - Lagrangian Particle Method}{150}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Lagrangian fluid equations (i.e. as material derivatives)}{151}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Continuity equation}{151}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Navier-Stokes equation | Conservation law of Linear Momentum}{151}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Energy equation}{151}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}A simple SPH fluid simulator\textsuperscript {\textasteriskcentered }}{152}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Smooth then discretize - smoothing kernels and their usage}{153}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}Properties of the smoothing | approach for calculating derivatives of the smoothed fluid quantities}{153}{subsubsection.7.3.1}%
+\contentsline {subsubsection}{\numberline {7.3.2}Discrete formulation of the smoothing}{154}{subsubsection.7.3.2}%
+\contentsline {subsubsection}{\numberline {7.3.3}Why a kernel with compact support is preferred?}{154}{subsubsection.7.3.3}%
+\contentsline {subsubsection}{\numberline {7.3.4}How to make the smoothing length $h$ variable in space to account for variations in the density? | sampling procedure in SPH - scatter and gather approach}{157}{subsubsection.7.3.4}%
+\contentsline {subsubsubsection}{\numberline {7.3.4.1}How to choose $h_i$?}{158}{subsubsubsection.7.3.4.1}%
+\contentsline {subsection}{\numberline {7.4}SPH continuity equation and equations of motion}{160}{subsection.7.4}%
+\contentsline {subsubsection}{\numberline {7.4.1}SPH continuity equation}{160}{subsubsection.7.4.1}%
+\contentsline {subsubsection}{\numberline {7.4.2}Gradients in SPH}{161}{subsubsection.7.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.3}SPH Euler equation | The central ingredient to making our simple fluid simulator work}{162}{subsubsection.7.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.4}Including further accelerations}{162}{subsubsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.5}Artificial Viscosity}{163}{subsection.7.5}%
+\contentsline {subsubsection}{\numberline {7.5.1}Viscous Pressure}{163}{subsubsection.7.5.1}%
+\contentsline {subsubsection}{\numberline {7.5.2}Adding the artificial viscosity to the equation of motion}{163}{subsubsection.7.5.2}%
+\contentsline {subsubsection}{\numberline {7.5.3}Shear-Flow-Balsara correction}{164}{subsubsection.7.5.3}%
+\contentsline {subsubsection}{\numberline {7.5.4}Further viscosity switches}{164}{subsubsection.7.5.4}%
+\contentsline {subsection}{\numberline {7.6}SPH energy equation with artificial viscosity}{165}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}SPH Entropy equation}{165}{subsection.7.7}%
+\contentsline {subsection}{\numberline {7.8}Maximum timestep - CFL criterion}{166}{subsection.7.8}%
+\contentsline {subsection}{\numberline {7.9}Notes on boundary modeling\textsuperscript {\textasteriskcentered }}{166}{subsection.7.9}%
+\contentsline {subsection}{\numberline {7.10}Reversibility in the context of viscosity-free, weakly-compressible SPH\textsuperscript {\textasteriskcentered }}{166}{subsection.7.10}%
+\contentsline {subsection}{\numberline {7.11}Notes on the conservative formulation using Lagrange multipliers}{169}{subsection.7.11}%
+\contentsline {subsection}{\numberline {7.12}Further improvements}{169}{subsection.7.12}%
+\contentsline {subsection}{\numberline {7.13}Advantages and Disadvantages of SPH}{169}{subsection.7.13}%
+\contentsline {subsection}{\numberline {7.14}Outlook: Machine-learning enhanced multiscale-physics SPH simulation}{170}{subsection.7.14}%
+\contentsline {section}{\numberline {8}Finite Element Methods}{172}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Finite element methods for linear PDEs}{172}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}The solution is represented by weighted base functions on nodes within finite elements}{172}{subsubsection.8.1.1}%
+\contentsline {subsubsubsection}{\numberline {8.1.1.1}Example 1D linear reconstruction}{173}{subsubsubsection.8.1.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}From the PDE to an algebraic equation for the expansion coefficients $\phi _1, \dots , \phi _n$}{174}{subsubsection.8.1.2}%
+\contentsline {subsubsubsection}{\numberline {8.1.2.1}Inserting the finite element approximation into the PDE yields a residuum}{174}{subsubsubsection.8.1.2.1}%
+\contentsline {subsubsubsection}{\numberline {8.1.2.2}Finding the expansion coefficients by minimizing the residual in some sense}{175}{subsubsubsection.8.1.2.2}%
+\contentsline {paragraph}{Ritz method:}{175}{section*.101}%
+\contentsline {paragraph}{Weighted residual method}{175}{section*.102}%
+\contentsline {subsubsubsection}{\numberline {8.1.2.3}A linear system for $\phi _1,\dots ,\phi _\mathcal {N}$ in the Galerkin scheme}{176}{subsubsubsection.8.1.2.3}%
+\contentsline {subsubsubsection}{\numberline {8.1.2.4}Example Application of Galerkin FEM}{176}{subsubsubsection.8.1.2.4}%
+\contentsline {subsection}{\numberline {8.2}Discontinuous Galerkin Method}{178}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Problem we want to tackle | Euler equations}{178}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Steps in formulating the Dicontinuous Galerkin (DG) scheme}{179}{subsubsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.3}Subdivision and Representation | modal vs nodal}{179}{subsubsection.8.2.3}%
+\contentsline {subsubsubsection}{\numberline {8.2.3.1}Example for an orthogonal polynomial basis: Legendre polynomials}{181}{subsubsubsection.8.2.3.1}%
+\contentsline {subsubsection}{\numberline {8.2.4}Solving for the weights}{182}{subsubsection.8.2.4}%
+\contentsline {subsubsubsection}{\numberline {8.2.4.1}What even is Gauss-Legendre quadrature?\textsuperscript {\textasteriskcentered }}{182}{subsubsubsection.8.2.4.1}%
+\contentsline {subsubsection}{\numberline {8.2.5}Finding initial weights - just apply the determination of weights to the initial state}{183}{subsubsection.8.2.5}%
+\contentsline {subsubsection}{\numberline {8.2.6}Evolution equation for the weights}{184}{subsubsection.8.2.6}%
+\contentsline {subsubsection}{\numberline {8.2.7}Efficiency of DG and refinement schemes}{184}{subsubsection.8.2.7}%
+\contentsline {section}{\numberline {9}Diffusion}{186}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Thermodynamic Basics of Diffusion}{186}{subsection.9.1}%
+\contentsline {subsubsection}{\numberline {9.1.1}Mean squared velocity and mean squared relative velocity}{186}{subsubsection.9.1.1}%
+\contentsline {subsubsection}{\numberline {9.1.2}Mean free path and relaxation time}{186}{subsubsection.9.1.2}%
+\contentsline {subsubsection}{\numberline {9.1.3}Random Walk | spreading Gaussian distribution in space}{187}{subsubsection.9.1.3}%
+\contentsline {subsection}{\numberline {9.2}Diffusion equation}{188}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}Derivation of the diffusion equation | Fick's law from the microscopic consideration}{188}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Analytical Solution to the diffusion equation via Fourier transform}{189}{subsubsection.9.2.2}%
+\contentsline {subsubsubsection}{\numberline {9.2.2.1}Solution for an initial delta peak in the density over space}{189}{subsubsubsection.9.2.2.1}%
+\contentsline {subsection}{\numberline {9.3}Numerical solutions}{190}{subsection.9.3}%
+\contentsline {subsubsection}{\numberline {9.3.1}Forward in time, central in space}{190}{subsubsection.9.3.1}%
+\contentsline {subsubsubsection}{\numberline {9.3.1.1}Discretized diffusion equation}{190}{subsubsubsection.9.3.1.1}%
+\contentsline {subsubsubsection}{\numberline {9.3.1.2}Explicit scheme for performing a time step}{190}{subsubsubsection.9.3.1.2}%
+\contentsline {subsubsubsection}{\numberline {9.3.1.3}Stability of the central in space, forward in time scheme for diffusion}{191}{subsubsubsection.9.3.1.3}%
+\contentsline {subsubsection}{\numberline {9.3.2}Backward in time, central in space}{192}{subsubsection.9.3.2}%
+\contentsline {subsubsubsection}{\numberline {9.3.2.1}Discretized implicit scheme}{192}{subsubsubsection.9.3.2.1}%
+\contentsline {subsubsubsection}{\numberline {9.3.2.2}Matrix equation}{192}{subsubsubsection.9.3.2.2}%
+\contentsline {subsubsection}{\numberline {9.3.3}Crank-Nicolson method}{192}{subsubsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.4}Flux-limited diffusion (\textit {tempered})}{193}{subsection.9.4}%
+\contentsline {subsection}{\numberline {9.5}Diffusion in three dimensions}{194}{subsection.9.5}%
+\contentsline {section}{\numberline {10}Solving Linear Equations with Iterative Solvers and the Multigrid Technique}{195}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Motivational Example 1: From the Poisson equation we can get a possibly big linear system}{195}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Poisson equation and solving a tridiagonal system}{196}{subsection.10.2}%
+\contentsline {subsubsection}{\numberline {10.2.1}1D heat Diffusion equation with Dirichlet boundaries in matrix form}{196}{subsubsection.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.2.2}Forward elimination backward substitution method for solving a tridiagonal system}{197}{subsubsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.3}Classical Exact Solution: LU-decomposition\textsuperscript {\textasteriskcentered }}{198}{subsection.10.3}%
+\contentsline {subsubsection}{\numberline {10.3.1}Solving the linear system for ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax x_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle x$}\sbox 2{$\mathsurround \z@ \displaystyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle x$}\sbox 2{$\mathsurround \z@ \textstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ when we already know the LU-decomposition}{198}{subsubsection.10.3.1}%
+\contentsline {subsubsection}{\numberline {10.3.2}Calculating the LU-decomposition in $\mathcal {O}(N^3)$}{199}{subsubsection.10.3.2}%
+\contentsline {subsection}{\numberline {10.4}Jacobi iteration | a splitting method}{200}{subsection.10.4}%
+\contentsline {subsubsection}{\numberline {10.4.1}When does the Jacobi iteration converge?}{200}{subsubsection.10.4.1}%
+\contentsline {subsubsubsection}{\numberline {10.4.1.1}Derivation of the convergence criterion}{201}{subsubsubsection.10.4.1.1}%
+\contentsline {subsubsection}{\numberline {10.4.2}Example Jacobi Step}{201}{subsubsection.10.4.2}%
+\contentsline {subsection}{\numberline {10.5}Gauss-Seidel iteration | better splitting method}{201}{subsection.10.5}%
+\contentsline {subsubsection}{\numberline {10.5.1}Motivational Example}{202}{subsubsection.10.5.1}%
+\contentsline {subsubsection}{\numberline {10.5.2}Gauss-Seidel update}{202}{subsubsection.10.5.2}%
+\contentsline {subsubsection}{\numberline {10.5.3}The problem of parallelization in Gauss-Seidel and red-black ordering}{203}{subsubsection.10.5.3}%
+\contentsline {subsection}{\numberline {10.6}Relaxation problem | Poisson equation in red-black ordering}{204}{subsection.10.6}%
+\contentsline {subsubsection}{\numberline {10.6.1}Formulating an elliptic equation as an equilibrium of a relaxation problem}{204}{subsubsection.10.6.1}%
+\contentsline {subsubsection}{\numberline {10.6.2}Red-black ordering for the 2D Poisson equation}{205}{subsubsection.10.6.2}%
+\contentsline {subsection}{\numberline {10.7}Multigrid technique}{205}{subsection.10.7}%
+\contentsline {subsubsection}{\numberline {10.7.1}Getting finer and coarser | prolongation and restriction}{206}{subsubsection.10.7.1}%
+\contentsline {subsubsubsection}{\numberline {10.7.1.1}Coarse-to-fine | interpolation called prolongation}{207}{subsubsubsection.10.7.1.1}%
+\contentsline {subsubsubsection}{\numberline {10.7.1.2}Fine-to-coarse | restriction}{208}{subsubsubsection.10.7.1.2}%
+\contentsline {subsubsubsection}{\numberline {10.7.1.3}Relation of restriction and prolongation}{208}{subsubsubsection.10.7.1.3}%
+\contentsline {subsubsubsection}{\numberline {10.7.1.4}Short-hand stencil notation}{210}{subsubsubsection.10.7.1.4}%
+\contentsline {subsubsection}{\numberline {10.7.2}Multigrid V-cycle}{210}{subsubsection.10.7.2}%
+\contentsline {subsubsubsection}{\numberline {10.7.2.1}Initial definitions}{211}{subsubsubsection.10.7.2.1}%
+\contentsline {subsubsubsection}{\numberline {10.7.2.2}Coarse-grid correction scheme}{211}{subsubsubsection.10.7.2.2}%
+\contentsline {subsubsubsection}{\numberline {10.7.2.3}V-cycle}{212}{subsubsubsection.10.7.2.3}%
+\contentsline {subsubsubsection}{\numberline {10.7.2.4}Full multigrid method}{213}{subsubsubsection.10.7.2.4}%
+\contentsline {subsection}{\numberline {10.8}Krylow subspace methods}{214}{subsection.10.8}%
+\contentsline {subsubsection}{\numberline {10.8.1}Motivation for the need of Krylow subspace methods in the context of non-linear root-finding of big systems\textsuperscript {\textasteriskcentered }}{215}{subsubsection.10.8.1}%
+\contentsline {subsubsection}{\numberline {10.8.2}Motivation | solving a system of linear equations using a gradient method}{215}{subsubsection.10.8.2}%
+\contentsline {subsubsection}{\numberline {10.8.3}Krylov subspace and construction of iterative methods for solving ${\mskip 0.5mu\relax \@@underline {\mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \@@underline {\mskip -0.5mu\relax A_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptscriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }}\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle A$}\sbox 2{$\mathsurround \z@ \displaystyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle A$}\sbox 2{$\mathsurround \z@ \textstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle A$}\sbox 2{$\mathsurround \z@ \scriptstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle A$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle A_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}{\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax x_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle x$}\sbox 2{$\mathsurround \z@ \displaystyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle x$}\sbox 2{$\mathsurround \z@ \textstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle x$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }} = {\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax b_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle b$}\sbox 2{$\mathsurround \z@ \displaystyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle b$}\sbox 2{$\mathsurround \z@ \textstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle b$}\sbox 2{$\mathsurround \z@ \scriptstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle b$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle b_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{218}{subsubsection.10.8.3}%
+\contentsline {subsubsection}{\numberline {10.8.4}Conjugate gradients method}{219}{subsubsection.10.8.4}%
+\contentsline {section}{\numberline {11}Fourier methods}{220}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Convolution problems | solving Poisson's equation using Fourier methods}{220}{subsection.11.1}%
+\contentsline {subsubsubsection}{\numberline {11.1.0.1}The solution to the Poisson equation is a convolution}{220}{subsubsubsection.11.1.0.1}%
+\contentsline {subsubsubsection}{\numberline {11.1.0.2}A convolution in real space turns into a multiplication in Fourier space}{221}{subsubsubsection.11.1.0.2}%
+\contentsline {subsubsubsection}{\numberline {11.1.0.3}For periodic boundaries, the Fourier transform turns from an integral to a sum}{221}{subsubsubsection.11.1.0.3}%
+\contentsline {subsubsubsection}{\numberline {11.1.0.4}Solution to the Poisson equation in Fourier space}{222}{subsubsubsection.11.1.0.4}%
+\contentsline {subsection}{\numberline {11.2}Discrete Fourier Transform (DFT)}{223}{subsection.11.2}%
+\contentsline {subsubsubsection}{\numberline {11.2.0.1}The spatial discretization (and periodicity) limits the number of ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ vectors that lead to possibly different $\hat {\rho }_{\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{223}{subsubsubsection.11.2.0.1}%
+\contentsline {subsubsubsection}{\numberline {11.2.0.2}Resulting discrete Fourier transform}{224}{subsubsubsection.11.2.0.2}%
+\contentsline {subsubsubsection}{\numberline {11.2.0.3}Different conventions for the wave vector ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax k_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle k$}\sbox 2{$\mathsurround \z@ \displaystyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle k$}\sbox 2{$\mathsurround \z@ \textstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle k$}\sbox 2{$\mathsurround \z@ \scriptscriptstyle k_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ and Nyquist frequency}{224}{subsubsubsection.11.2.0.3}%
+\contentsline {subsubsubsection}{\numberline {11.2.0.4}Plancherel's theorem}{226}{subsubsubsection.11.2.0.4}%
+\contentsline {subsubsubsection}{\numberline {11.2.0.5}Normalization factor}{226}{subsubsubsection.11.2.0.5}%
+\contentsline {subsubsection}{\numberline {11.2.1}Computational Complexity and Fast Fourier Transform (FFT)}{227}{subsubsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.3}DFT storage conventions}{227}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}DFT and Linear and Cyclic Convolution}{231}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Non-periodic problems with \textit {zero-padding} in 2D}{237}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.6}Power spectra and correlation functions}{238}{subsection.11.6}%
+\contentsline {subsubsection}{\numberline {11.6.1}Definition of the power spectrum}{238}{subsubsection.11.6.1}%
+\contentsline {subsubsection}{\numberline {11.6.2}Definition of the correlation function}{239}{subsubsection.11.6.2}%
+\contentsline {subsubsection}{\numberline {11.6.3}Connection by Fourier Transform}{239}{subsubsection.11.6.3}%
+\contentsline {subsubsection}{\numberline {11.6.4}Power function and variance of a smoothed field}{239}{subsubsection.11.6.4}%
+\contentsline {subsection}{\numberline {11.7}Projections in Fourier space}{240}{subsection.11.7}%
+\contentsline {subsubsection}{\numberline {11.7.1}Fundamental theorem of vector analysis | Helmholtz decomposition}{240}{subsubsection.11.7.1}%
+\contentsline {subsubsection}{\numberline {11.7.2}Proof in Fourier space}{240}{subsubsection.11.7.2}%
+\contentsline {subsubsection}{\numberline {11.7.3}Applications of the Helmholtz decomposition}{241}{subsubsection.11.7.3}%
+\contentsline {subsubsection}{\numberline {11.7.4}Sidenote: Importance of dimensionality}{241}{subsubsection.11.7.4}%
+\contentsline {section}{\numberline {12}Collisionless particle systems}{242}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Introduction of collisionless systems in the context of fluid modeling}{242}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Structure of the following considerations}{244}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}General N-particle ensembles | one-, two-, three, ..., particle distribution | BBKGY chain}{244}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Uncorrelated (collisionless) systems | multiplication closure to the BBGKY chain}{245}{subsection.12.4}%
+\contentsline {subsubsection}{\numberline {12.4.1}General Continuity equation for probability in phase space}{246}{subsubsection.12.4.1}%
+\contentsline {subsubsection}{\numberline {12.4.2}Liouville equation for the general evolution of phase space probability}{246}{subsubsection.12.4.2}%
+\contentsline {subsubsection}{\numberline {12.4.3}Vlasov equation for collisionless systems}{246}{subsubsection.12.4.3}%
+\contentsline {subsubsection}{\numberline {12.4.4}Accelerations in collisionless systems - including gravity into the Vlasov equation}{247}{subsubsection.12.4.4}%
+\contentsline {subsection}{\numberline {12.5}When is a gravitational system collisionless?}{247}{subsection.12.5}%
+\contentsline {subsubsection}{\numberline {12.5.1}Relaxation time in a gravitational system}{248}{subsubsection.12.5.1}%
+\contentsline {subsubsection}{\numberline {12.5.2}Crossing time}{248}{subsubsection.12.5.2}%
+\contentsline {subsubsection}{\numberline {12.5.3}Change in perpendicular velocity when crossing the system}{249}{subsubsection.12.5.3}%
+\contentsline {subsubsubsection}{\numberline {12.5.3.1}Size of one small angle deflections based on the impact parameter}{249}{subsubsubsection.12.5.3.1}%
+\contentsline {subsubsubsection}{\numberline {12.5.3.2}Mean squared deflection for many small deflections}{250}{subsubsubsection.12.5.3.2}%
+\contentsline {subsubsubsection}{\numberline {12.5.3.3}Many small deflections are more important than few large ones}{251}{subsubsubsection.12.5.3.3}%
+\contentsline {subsubsubsection}{\numberline {12.5.3.4}Finally the calculation of $\langle (\Delta v_\perp )^2 \rangle $}{251}{subsubsubsection.12.5.3.4}%
+\contentsline {subsubsubsection}{\numberline {12.5.3.5}How to choose $b_{min}$ and $b_{max}$ in the Coulomb logarithm?}{252}{subsubsubsection.12.5.3.5}%
+\contentsline {subsubsection}{\numberline {12.5.4}Examples of astrophysical relaxation times}{252}{subsubsection.12.5.4}%
+\contentsline {subsection}{\numberline {12.6}N-body models of collisionless systems}{253}{subsection.12.6}%
+\contentsline {subsubsection}{\numberline {12.6.1}The softening length $\epsilon $}{253}{subsubsection.12.6.1}%
+\contentsline {section}{\numberline {13}Force calculations | tree algorithms and particle mesh technique}{255}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Calculating the forces | Direct summation}{255}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Overview on faster, approximate force calculation schemes}{255}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Faster method I | Multipole expansion | tree algorithms}{256}{subsection.13.3}%
+\contentsline {subsubsection}{\numberline {13.3.1}Deriving the multipole expansion}{257}{subsubsection.13.3.1}%
+\contentsline {subsubsection}{\numberline {13.3.2}Multipole expansion}{258}{subsubsection.13.3.2}%
+\contentsline {subsubsection}{\numberline {13.3.3}Hierarchical grouping | baseline for smart force calculations}{258}{subsubsection.13.3.3}%
+\contentsline {subsubsubsection}{\numberline {13.3.3.1}Cosntructing the tree | Barnes and Hut oct-tree}{259}{subsubsubsection.13.3.3.1}%
+\contentsline {subsubsection}{\numberline {13.3.4}Tree walk - force calculation with adaptive group resolution}{261}{subsubsection.13.3.4}%
+\contentsline {subsubsubsection}{\numberline {13.3.4.1}Tree walk algorithm}{262}{subsubsubsection.13.3.4.1}%
+\contentsline {subsubsubsection}{\numberline {13.3.4.2}Derivation of the cost of the tree based force calculation | $\mathcal {O}(N \log N)$}{263}{subsubsubsection.13.3.4.2}%
+\contentsline {subsubsubsection}{\numberline {13.3.4.3}Expected typical force errors in a monopole approximation | $(\Delta F_{\text {tot}}) \propto \theta _c^7$}{263}{subsubsubsection.13.3.4.3}%
+\contentsline {subsection}{\numberline {13.4}Faster method II | Particle mesh technique for efficiently computing long-ranged forces}{264}{subsection.13.4}%
+\contentsline {subsubsection}{\numberline {13.4.1}Schematic particle mesh algorithm}{264}{subsubsection.13.4.1}%
+\contentsline {subsubsection}{\numberline {13.4.2}Mass / charge assignment of particles to mesh cells}{264}{subsubsection.13.4.2}%
+\contentsline {paragraph}{Question}{265}{section*.145}%
+\contentsline {subsubsubsection}{\numberline {13.4.2.1}Assignment scheme I | Nearest grid point (NGP) assignment | $\delta $-shape function}{266}{subsubsubsection.13.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {13.4.2.2}Assignment scheme II | Cloud in cell (CIC) assignment | top-hat shape function}{267}{subsubsubsection.13.4.2.2}%
+\contentsline {subsubsubsection}{\numberline {13.4.2.3}Assignment scheme III | Triangular shaped cloud (TSC) assignment | triangular shape function}{268}{subsubsubsection.13.4.2.3}%
+\contentsline {subsubsubsection}{\numberline {13.4.2.4}Comparing the assignment schemes in terms of continuity}{268}{subsubsubsection.13.4.2.4}%
+\contentsline {subsubsection}{\numberline {13.4.3}Solving the Poisson equation for the potential on the mesh based on the meshed density}{269}{subsubsection.13.4.3}%
+\contentsline {subsubsection}{\numberline {13.4.4}Calculating the force field on the mesh}{269}{subsubsection.13.4.4}%
+\contentsline {subsubsubsection}{\numberline {13.4.4.1}On the choice of the order of the finite difference scheme for the force calculation}{270}{subsubsubsection.13.4.4.1}%
+\contentsline {subsubsection}{\numberline {13.4.5}Interpolating the force from the mesh to the particles}{270}{subsubsection.13.4.5}%
+\contentsline {subsubsubsection}{\numberline {13.4.5.1}We assign forces to the particles' positions using the same assignment kernel used to assign mass of the particles to the grid points}{270}{subsubsubsection.13.4.5.1}%
+\contentsline {subsubsubsection}{\numberline {13.4.5.2}Proof that for the same assignment kernel in the density and force assignment there is \underline {no self-force occuring}}{271}{subsubsubsection.13.4.5.2}%
+\contentsline {subsubsubsection}{\numberline {13.4.5.3}Proof that for the same assignment kernel in the density and force assignment, the forces between particle paris are pair-wise antisymmetric}{273}{subsubsubsection.13.4.5.3}%
+\contentsline {subsection}{\numberline {13.5}Outlook - combining the particle mesh and tree method}{273}{subsection.13.5}%
+\contentsline {section}{\numberline {14}Random Number Generation and Monte Carlo Techniques}{275}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Random Number Generation and Sampling}{275}{subsection.14.1}%
+\contentsline {subsubsection}{\numberline {14.1.1}An intuitive introduction to sampling}{275}{subsubsection.14.1.1}%
+\contentsline {subsubsection}{\numberline {14.1.2}Random Number Generators - Base of all sampling methods: Sampling from the uniform distribution is \textit {easy}}{275}{subsubsection.14.1.2}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.1}Advantages of Pseudo-Random Number Generators over True Random Number Generators}{276}{subsubsubsection.14.1.2.1}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.2}Desirable properties of good pseudo-random number generators}{276}{subsubsubsection.14.1.2.2}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.3}A simple class of pseudo-random number generators: Linear Congruential Generators}{276}{subsubsubsection.14.1.2.3}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.4}A first improvement | Combining multiple LCGs}{278}{subsubsubsection.14.1.2.4}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.5}Lagged Fibonacci Generators}{278}{subsubsubsection.14.1.2.5}%
+\contentsline {subsubsubsection}{\numberline {14.1.2.6}Roughly evenly spaced sampling - blue noise}{279}{subsubsubsection.14.1.2.6}%
+\contentsline {subsubsection}{\numberline {14.1.3}Inverse Transform Method | sampling from distributions with algebraically invertible cumulative distribution functions (CDFs)}{279}{subsubsection.14.1.3}%
+\contentsline {subsubsubsection}{\numberline {14.1.3.1}Alternative derivation from the transformation between probability distributions\textsuperscript {\textasteriskcentered }}{280}{subsubsubsection.14.1.3.1}%
+\contentsline {subsubsubsection}{\numberline {14.1.3.2}Example: Inverse Transform Method applied to the standard Laplace distribution\textsuperscript {\textasteriskcentered }}{281}{subsubsubsection.14.1.3.2}%
+\contentsline {subsubsubsection}{\numberline {14.1.3.3}Sampling from a Gaussian using exact inversion | Box-Muller trick}{281}{subsubsubsection.14.1.3.3}%
+\contentsline {subsubsubsection}{\numberline {14.1.3.4}Sampling from a discrete distribution\textsuperscript {\textasteriskcentered }}{283}{subsubsubsection.14.1.3.4}%
+\contentsline {subsubsection}{\numberline {14.1.4}Acceptance-rejection method}{284}{subsubsection.14.1.4}%
+\contentsline {subsubsubsection}{\numberline {14.1.4.1}Example: Sampling uniformly from a sphere}{285}{subsubsubsection.14.1.4.1}%
+\contentsline {subsubsubsection}{\numberline {14.1.4.2}Example II: Sampling from a conditioned Gamma distribution\textsuperscript {\textasteriskcentered }}{286}{subsubsubsection.14.1.4.2}%
+\contentsline {subsection}{\numberline {14.2}Monte Carlo Estimation}{288}{subsection.14.2}%
+\contentsline {subsubsection}{\numberline {14.2.1}A basic intuition for estimation}{288}{subsubsection.14.2.1}%
+\contentsline {subsubsection}{\numberline {14.2.2}Monte Carlo Estimation}{289}{subsubsection.14.2.2}%
+\contentsline {subsubsection}{\numberline {14.2.3}Distribution and Error of the Monte Carlo Estimator}{289}{subsubsection.14.2.3}%
+\contentsline {subsection}{\numberline {14.3}Monte Carlo Integration}{290}{subsection.14.3}%
+\contentsline {subsubsection}{\numberline {14.3.1}Intuition for Monte Carlo Integration}{290}{subsubsection.14.3.1}%
+\contentsline {subsubsection}{\numberline {14.3.2}Connection to the Monte Carlo Estimator}{291}{subsubsection.14.3.2}%
+\contentsline {subsubsection}{\numberline {14.3.3}Intuition from calculating the area of a shape}{291}{subsubsection.14.3.3}%
+\contentsline {subsubsection}{\numberline {14.3.4}Error in Monte Carlo Integration - scaling with $\frac {1}{\sqrt {N}}$}{291}{subsubsection.14.3.4}%
+\contentsline {subsubsection}{\numberline {14.3.5}Distribution of $\hat {I}_N$ and derivation of the central limit theorem\textsuperscript {\textasteriskcentered }}{292}{subsubsection.14.3.5}%
+\contentsline {paragraph}{Derivation of the Central Limit Theorem by Fourier Transform}{293}{section*.167}%
+\contentsline {subsubsection}{\numberline {14.3.6}Illustrative Example of Monte Carlo Integration}{294}{subsubsection.14.3.6}%
+\contentsline {subsubsection}{\numberline {14.3.7}Comparison to other techniques - when to use Monte Carlo integration?}{295}{subsubsection.14.3.7}%
+\contentsline {paragraph}{Intuition for the better scaling}{296}{section*.170}%
+\contentsline {subsubsection}{\numberline {14.3.8}Reducing the variance of the Monte Carlo Estimator}{297}{subsubsection.14.3.8}%
+\contentsline {subsubsubsection}{\numberline {14.3.8.1}Antithetic Estimators\textsuperscript {\textasteriskcentered }}{297}{subsubsubsection.14.3.8.1}%
+\contentsline {subsubsubsection}{\numberline {14.3.8.2}Importance Sampling}{298}{subsubsubsection.14.3.8.2}%
+\contentsline {subsection}{\numberline {14.4}Sampling with a stochastic process}{302}{subsection.14.4}%
+\contentsline {subsubsection}{\numberline {14.4.1}Markov Process and Markov chain | Monte Carlo Markov Chain (MCMC)}{302}{subsubsection.14.4.1}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.1}Characterizing property of the Markov process | Memorylessness}{302}{subsubsubsection.14.4.1.1}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.2}Transitioning the probability distribution}{303}{subsubsubsection.14.4.1.2}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.3}Properties demanded of the update step $f$ | stochastic process has equilibrium distribution | ergodicity}{303}{subsubsubsection.14.4.1.3}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.4}Nice consequences of the demanded properties of the update step}{303}{subsubsubsection.14.4.1.4}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.5}Proof that updating the probability distribution converges to its fixed-point equilibrium distribution $p_{eq}$}{304}{subsubsubsection.14.4.1.5}%
+\contentsline {subsubsubsection}{\numberline {14.4.1.6}Detailed balance | Common condition for the update steps}{304}{subsubsubsection.14.4.1.6}%
+\contentsline {subsubsection}{\numberline {14.4.2}Metropolis Hastings algorithm - simple and generic construction of the transition $f$}{305}{subsubsection.14.4.2}%
+\contentsline {subsubsubsection}{\numberline {14.4.2.1}The Metropolis Hastings Algorithm fulfills detailed balance}{305}{subsubsubsection.14.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {14.4.2.2}Metropolic update | for a symmetric proposal operator the Hasings ratio simplifies}{306}{subsubsubsection.14.4.2.2}%
+\contentsline {subsubsection}{\numberline {14.4.3}Example: Stochastic Sampling from a Gaussian}{306}{subsubsection.14.4.3}%
+\contentsline {subsubsubsection}{\numberline {14.4.3.1}Choosing a symmetric proposal function}{307}{subsubsubsection.14.4.3.1}%
+\contentsline {subsubsubsection}{\numberline {14.4.3.2}Metropolis Hastings Algorithm for sampling from a Gaussian}{307}{subsubsubsection.14.4.3.2}%
+\contentsline {subsection}{\numberline {14.5}Monte Carlo Simulations of Thermodynamic Systems}{308}{subsection.14.5}%
+\contentsline {subsubsection}{\numberline {14.5.1}Calculating the ensemble average $\langle A \rangle $ using importance sampling powered by a stochastic process}{309}{subsubsection.14.5.1}%
+\contentsline {subsubsubsection}{\numberline {14.5.1.1}Sampling the states ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax \phi _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \phi $}\sbox 2{$\mathsurround \z@ \displaystyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \phi $}\sbox 2{$\mathsurround \z@ \textstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \phi $}\sbox 2{$\mathsurround \z@ \scriptstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \phi $}\sbox 2{$\mathsurround \z@ \scriptscriptstyle \phi _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}_i$ using the Metropolis-Hastings algorithm}{309}{subsubsubsection.14.5.1.1}%
+\contentsline {subsubsection}{\numberline {14.5.2}Example thermodynamic model: Ising Model}{310}{subsubsection.14.5.2}%
+\contentsline {subsubsubsection}{\numberline {14.5.2.1}Exemplary parameter of interest: Critical temperature under which spontaneous magnetization occurs}{310}{subsubsubsection.14.5.2.1}%
+\contentsline {subsubsubsection}{\numberline {14.5.2.2}Metropolis algorithm for simulating the spin configuration on the lattice (and so the partition function and magnetization, ...)}{311}{subsubsubsection.14.5.2.2}%
+\contentsline {subsubsubsection}{\numberline {14.5.2.3}More thermodynamic properties that might be of interest\textsuperscript {\textasteriskcentered }}{312}{subsubsubsection.14.5.2.3}%
+\contentsline {subsection}{\numberline {14.6}Monte Carlo Markov Chains in Parameter Estimation}{312}{subsection.14.6}%
+\contentsline {subsubsection}{\numberline {14.6.1}Maximum Likelihood Estimation}{312}{subsubsection.14.6.1}%
+\contentsline {subsubsubsection}{\numberline {14.6.1.1}Estimating parameters based on the posterior}{313}{subsubsubsection.14.6.1.1}%
+\contentsline {subsubsection}{\numberline {14.6.2}Monte Carlo Markov Chain that samples the posterior as an equilibrium distribution}{315}{subsubsection.14.6.2}%
+\contentsline {subsubsection}{\numberline {14.6.3}Caveat of MCMC | we never know when the chain is long enough}{315}{subsubsection.14.6.3}%
+\contentsline {section}{\numberline {15}Parallelization Techniques}{317}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Why do we need to parallelize?}{317}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Hardware perspective and parallelism}{317}{subsection.15.2}%
+\contentsline {subsubsection}{\numberline {15.2.1}We should write code reducing memory access | row and column major storing convention for matrices}{317}{subsubsection.15.2.1}%
+\contentsline {subsubsection}{\numberline {15.2.2}General computer architectures in increasing complexity\textsuperscript {\textasteriskcentered }}{318}{subsubsection.15.2.2}%
+\contentsline {subsubsection}{\numberline {15.2.3}CPU vs GPU}{319}{subsubsection.15.2.3}%
+\contentsline {subsubsubsection}{\numberline {15.2.3.1}When and how to use GPUs}{320}{subsubsubsection.15.2.3.1}%
+\contentsline {subsubsection}{\numberline {15.2.4}Vector cores}{320}{subsubsection.15.2.4}%
+\contentsline {subsubsection}{\numberline {15.2.5}Hyperthreading}{320}{subsubsection.15.2.5}%
+\contentsline {subsection}{\numberline {15.3}Types and challenges of concurrency and parallelism}{321}{subsection.15.3}%
+\contentsline {subsubsection}{\numberline {15.3.1}Shared memory and message passing concurrency}{321}{subsubsection.15.3.1}%
+\contentsline {subsubsection}{\numberline {15.3.2}Challenges of concurrency}{322}{subsubsection.15.3.2}%
+\contentsline {subsection}{\numberline {15.4}Shared memory parallelization (with OpenMP)}{322}{subsection.15.4}%
+\contentsline {subsubsection}{\numberline {15.4.1}Simplest parallelization - parallel for loop of independent iterations}{322}{subsubsection.15.4.1}%
+\contentsline {subsubsection}{\numberline {15.4.2}OpenMP's fork-join model}{322}{subsubsection.15.4.2}%
+\contentsline {subsubsection}{\numberline {15.4.3}Race conditions}{323}{subsubsection.15.4.3}%
+\contentsline {subsubsubsection}{\numberline {15.4.3.1}Race conditions in the context of non-atomic operations}{323}{subsubsubsection.15.4.3.1}%
+\contentsline {subsubsection}{\numberline {15.4.4}Using the same variable where it is not intended}{324}{subsubsection.15.4.4}%
+\contentsline {subsection}{\numberline {15.5}Message passing concurrency enabling distributed memory parallelization (with MPI)}{325}{subsection.15.5}%
+\contentsline {subsubsection}{\numberline {15.5.1}Architecture of an MPI program}{326}{subsubsection.15.5.1}%
+\contentsline {subsubsection}{\numberline {15.5.2}MPI program structure and basic communication}{326}{subsubsection.15.5.2}%
+\contentsline {subsubsubsection}{\numberline {15.5.2.1}Point-to-point communication}{326}{subsubsubsection.15.5.2.1}%
+\contentsline {subsubsubsection}{\numberline {15.5.2.2}Collective communication}{327}{subsubsubsection.15.5.2.2}%
+\contentsline {subsubsubsection}{\numberline {15.5.2.3}More complex communication}{328}{subsubsubsection.15.5.2.3}%
+\contentsline {subsubsection}{\numberline {15.5.3}Pinning - distribution of processes on cores and nodes}{328}{subsubsection.15.5.3}%
+\contentsline {subsubsection}{\numberline {15.5.4}Notes on reading and writing}{328}{subsubsection.15.5.4}%
+\contentsline {subsection}{\numberline {15.6}Parallel computing for physical simulations}{329}{subsection.15.6}%
+\contentsline {subsubsection}{\numberline {15.6.1}Parallelized hydrodynamics}{329}{subsubsection.15.6.1}%
+\contentsline {subsubsubsection}{\numberline {15.6.1.1}Adaptive grid e.g. for the simulation if interstellar gas}{331}{subsubsubsection.15.6.1.1}%
+\contentsline {subsubsubsection}{\numberline {15.6.1.2}Inclusion of long-range forces | long range forces vs. parallelization}{332}{subsubsubsection.15.6.1.2}%
+\contentsline {subsection}{\numberline {15.7}Scaling of the processing time with increasing parallelism and Ahmdal's law}{333}{subsection.15.7}%
+\contentsline {subsection}{\numberline {15.8}Examples of parallel algorithms}{334}{subsection.15.8}%
+\contentsline {subsection}{\numberline {15.9}Notes on sheduling}{334}{subsection.15.9}%
+\contentsline {part}{III\hspace {1em}Computational Statistics and Data Analysis}{334}{part.3}%
+\contentsline {section}{\numberline {16}Basic probability theory}{335}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Basic definitions}{336}{subsection.16.1}%
+\contentsline {subsubsection}{\numberline {16.1.1}Sample space $\Omega $}{336}{subsubsection.16.1.1}%
+\contentsline {subsubsection}{\numberline {16.1.2}Set of events $E$ defined on the sample space}{336}{subsubsection.16.1.2}%
+\contentsline {subsubsection}{\numberline {16.1.3}Probability measure $P$}{336}{subsubsection.16.1.3}%
+\contentsline {subsubsubsection}{\numberline {16.1.3.1}Examples for the probabilities of events | discrete and continuous situations}{337}{subsubsubsection.16.1.3.1}%
+\contentsline {subsection}{\numberline {16.2}Basic probability laws}{337}{subsection.16.2}%
+\contentsline {subsubsection}{\numberline {16.2.1}Conditional and joint probability}{337}{subsubsection.16.2.1}%
+\contentsline {subsubsection}{\numberline {16.2.2}Bayes rule}{338}{subsubsection.16.2.2}%
+\contentsline {subsubsection}{\numberline {16.2.3}Probability of the union of events}{338}{subsubsection.16.2.3}%
+\contentsline {subsubsection}{\numberline {16.2.4}Independent events}{339}{subsubsection.16.2.4}%
+\contentsline {subsubsection}{\numberline {16.2.5}Example for throwing one dice (once)}{339}{subsubsection.16.2.5}%
+\contentsline {subsubsection}{\numberline {16.2.6}Probability of the complement}{340}{subsubsection.16.2.6}%
+\contentsline {subsubsection}{\numberline {16.2.7}Law of total probability | marginalization}{340}{subsubsection.16.2.7}%
+\contentsline {subsection}{\numberline {16.3}Random Variables (RVs)}{340}{subsection.16.3}%
+\contentsline {subsubsection}{\numberline {16.3.1}Examples for random variables}{341}{subsubsection.16.3.1}%
+\contentsline {subsubsection}{\numberline {16.3.2}Continuous and discrete Random variables}{341}{subsubsection.16.3.2}%
+\contentsline {subsubsection}{\numberline {16.3.3}Expectation values}{341}{subsubsection.16.3.3}%
+\contentsline {subsubsubsection}{\numberline {16.3.3.1}Properties of the expectation value}{341}{subsubsubsection.16.3.3.1}%
+\contentsline {subsubsubsection}{\numberline {16.3.3.2}Conditional expectation}{342}{subsubsubsection.16.3.3.2}%
+\contentsline {subsubsubsection}{\numberline {16.3.3.3}Law of total expectation}{343}{subsubsubsection.16.3.3.3}%
+\contentsline {subsubsection}{\numberline {16.3.4}Variance, Covariance and Correlations}{343}{subsubsection.16.3.4}%
+\contentsline {subsubsubsection}{\numberline {16.3.4.1}Variance}{343}{subsubsubsection.16.3.4.1}%
+\contentsline {subsubsubsection}{\numberline {16.3.4.2}Covariance and correlation}{344}{subsubsubsection.16.3.4.2}%
+\contentsline {subsubsection}{\numberline {16.3.5}Sample mean and variance}{346}{subsubsection.16.3.5}%
+\contentsline {subsection}{\numberline {16.4}Univariate probability distributions}{346}{subsection.16.4}%
+\contentsline {subsubsection}{\numberline {16.4.1}Discrete probability distributions}{346}{subsubsection.16.4.1}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.1}Discrete uniform distribution}{346}{subsubsubsection.16.4.1.1}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.2}Bernoulli distribution | probability distribution in a binary setting}{347}{subsubsubsection.16.4.1.2}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.3}Binomial distribution | probability of obtaining $m$ heads in $N$ coin tosses}{347}{subsubsubsection.16.4.1.3}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.4}Geometric distribution | probability of the first success at trial $k$}{349}{subsubsubsection.16.4.1.4}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.5}Hypergeometric distribution | $k$ successes in $r$ draws without replacement}{350}{subsubsubsection.16.4.1.5}%
+\contentsline {subsubsubsection}{\numberline {16.4.1.6}Poisson distribution | probability of $k$ events that have a mean rate occurring in a fixed interval}{352}{subsubsubsection.16.4.1.6}%
+\contentsline {subsubsection}{\numberline {16.4.2}Continuous probability distributions}{354}{subsubsection.16.4.2}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.1}Cumulative distribution function}{354}{subsubsubsection.16.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.2}Probability density function}{354}{subsubsubsection.16.4.2.2}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.3}Quantiles}{355}{subsubsubsection.16.4.2.3}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.4}Uniform distribution}{356}{subsubsubsection.16.4.2.4}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.5}Gaussian (normal) distribution}{356}{subsubsubsection.16.4.2.5}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.6}Beta distribution}{357}{subsubsubsection.16.4.2.6}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.7}Gamma distribution}{358}{subsubsubsection.16.4.2.7}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.8}Exponential distribution}{360}{subsubsubsection.16.4.2.8}%
+\contentsline {paragraph}{Usage - time until:}{360}{section*.229}%
+\contentsline {subsubsubsection}{\numberline {16.4.2.9}Exponential family distributions and conjugate priors}{360}{subsubsubsection.16.4.2.9}%
+\contentsline {subsection}{\numberline {16.5}Tschebysheff's theorem}{363}{subsection.16.5}%
+\contentsline {subsubsection}{\numberline {16.5.1}Proof of Tschebysheff's theorem}{364}{subsubsection.16.5.1}%
+\contentsline {subsection}{\numberline {16.6}Moment generating functions}{364}{subsection.16.6}%
+\contentsline {subsubsection}{\numberline {16.6.1}Calculating moments from the moment generating function}{365}{subsubsection.16.6.1}%
+\contentsline {subsubsection}{\numberline {16.6.2}Multidemensional moment generating function}{365}{subsubsection.16.6.2}%
+\contentsline {subsubsection}{\numberline {16.6.3}Example: Moment generating function of the Poisson distribution}{365}{subsubsection.16.6.3}%
+\contentsline {subsection}{\numberline {16.7}Multivariate probability distributions}{366}{subsection.16.7}%
+\contentsline {subsubsection}{\numberline {16.7.1}Multi-categorical distribution}{366}{subsubsection.16.7.1}%
+\contentsline {subsubsubsection}{\numberline {16.7.1.1}Encoding the category by 1-hot encoding}{366}{subsubsubsection.16.7.1.1}%
+\contentsline {subsubsubsection}{\numberline {16.7.1.2}Categorical distribution}{367}{subsubsubsection.16.7.1.2}%
+\contentsline {subsubsubsection}{\numberline {16.7.1.3}Expectation, variance and covariance of the categorical distribution}{368}{subsubsubsection.16.7.1.3}%
+\contentsline {subsubsection}{\numberline {16.7.2}Multinomial distribution}{368}{subsubsection.16.7.2}%
+\contentsline {subsubsubsection}{\numberline {16.7.2.1}Expectation, variance and covariance of the multinomial distribution}{368}{subsubsubsection.16.7.2.1}%
+\contentsline {subsubsection}{\numberline {16.7.3}Multivariate Gaussian distribution}{368}{subsubsection.16.7.3}%
+\contentsline {section}{\numberline {17}Statistical Inference}{372}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Introduction to Inference}{372}{subsection.17.1}%
+\contentsline {subsubsection}{\numberline {17.1.1}Statistics}{373}{subsubsection.17.1.1}%
+\contentsline {subsubsection}{\numberline {17.1.2}General Questions we ask ourselves in statistical modeling}{373}{subsubsection.17.1.2}%
+\contentsline {subsection}{\numberline {17.2}Examples of Statistical Models - baseline of statistical modeling}{374}{subsection.17.2}%
+\contentsline {subsubsection}{\numberline {17.2.1}General form of the models}{374}{subsubsection.17.2.1}%
+\contentsline {subsubsection}{\numberline {17.2.2}Example I: One- and two-factor univariate analysis; discrete RVs\textsuperscript {\textasteriskcentered }}{374}{subsubsection.17.2.2}%
+\contentsline {subsubsection}{\numberline {17.2.3}Example II: Linear regression model}{375}{subsubsection.17.2.3}%
+\contentsline {subsubsection}{\numberline {17.2.4}Example III: Generalized linear model}{375}{subsubsection.17.2.4}%
+\contentsline {subsubsection}{\numberline {17.2.5}Example IV: Autoregressive model}{376}{subsubsection.17.2.5}%
+\contentsline {subsection}{\numberline {17.3}Estimation of Model Parameters}{376}{subsection.17.3}%
+\contentsline {subsubsection}{\numberline {17.3.1}Properties of estimators}{377}{subsubsection.17.3.1}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.1}Bias of an estimator}{377}{subsubsubsection.17.3.1.1}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.2}Consistency of an estimator}{377}{subsubsubsection.17.3.1.2}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.3}Examples for bias and consistency at the hand of the mean}{378}{subsubsubsection.17.3.1.3}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.4}The naive sample variance estimation is a biased but consistent estimator}{378}{subsubsubsection.17.3.1.4}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.5}Sampling distribution}{379}{subsubsubsection.17.3.1.5}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.6}Standard error of an estimator}{379}{subsubsubsection.17.3.1.6}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.7}Sufficient statistic}{380}{subsubsubsection.17.3.1.7}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.8}Efficiency of an estimator}{380}{subsubsubsection.17.3.1.8}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.9}Precision of an estimator}{381}{subsubsubsection.17.3.1.9}%
+\contentsline {subsubsubsection}{\numberline {17.3.1.10}What characterizes a good estimator?}{381}{subsubsubsection.17.3.1.10}%
+\contentsline {subsubsection}{\numberline {17.3.2}Approaches to Statistical Parameter Estimation}{381}{subsubsection.17.3.2}%
+\contentsline {subsubsubsection}{\numberline {17.3.2.1}Least squared error}{382}{subsubsubsection.17.3.2.1}%
+\contentsline {subsubsubsection}{\numberline {17.3.2.2}Maximum likelihood estimation (MLE)}{383}{subsubsubsection.17.3.2.2}%
+\contentsline {subsubsubsection}{\numberline {17.3.2.3}Bayesian inference}{385}{subsubsubsection.17.3.2.3}%
+\contentsline {subsection}{\numberline {17.4}Hypothesis Testing}{389}{subsection.17.4}%
+\contentsline {subsubsection}{\numberline {17.4.1}Basic terms of statistical hypothesis testing}{389}{subsubsection.17.4.1}%
+\contentsline {subsubsubsection}{\numberline {17.4.1.1}Around the hypothesis}{389}{subsubsubsection.17.4.1.1}%
+\contentsline {subsubsubsection}{\numberline {17.4.1.2}Decision-making}{390}{subsubsubsection.17.4.1.2}%
+\contentsline {subsubsubsection}{\numberline {17.4.1.3}Validity of the decision}{390}{subsubsubsection.17.4.1.3}%
+\contentsline {subsubsubsection}{\numberline {17.4.1.4}Statements on tests}{391}{subsubsubsection.17.4.1.4}%
+\contentsline {subsubsection}{\numberline {17.4.2}Basic Null Hypothesis Significance Testing Procedure}{391}{subsubsection.17.4.2}%
+\contentsline {subsubsubsection}{\numberline {17.4.2.1}Type I and type II error}{393}{subsubsubsection.17.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {17.4.2.2}Bayesian perspective on hypothesis testing}{394}{subsubsubsection.17.4.2.2}%
+\contentsline {subsubsection}{\numberline {17.4.3}Overview on specific test procedures}{394}{subsubsection.17.4.3}%
+\contentsline {subsubsection}{\numberline {17.4.4}Hypothesis and statistics for typical tests}{395}{subsubsection.17.4.4}%
+\contentsline {subsubsection}{\numberline {17.4.5}Simple example for an application case of hypothesis testing}{396}{subsubsection.17.4.5}%
+\contentsline {subsubsection}{\numberline {17.4.6}Exact tests}{397}{subsubsection.17.4.6}%
+\contentsline {subsubsubsection}{\numberline {17.4.6.1}Sign test - testing the direction of change}{397}{subsubsubsection.17.4.6.1}%
+\contentsline {subsubsubsection}{\numberline {17.4.6.2}Mann-Whitney U test (aka Wilcoxon rank-sum test) - no strict pairing necessary}{398}{subsubsubsection.17.4.6.2}%
+\contentsline {subsubsection}{\numberline {17.4.7}Asymptotic test}{399}{subsubsection.17.4.7}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.1}Central limit theorem}{399}{subsubsubsection.17.4.7.1}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.2}Important distributions in testing I: $\chi ^2$ distribution}{400}{subsubsubsection.17.4.7.2}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.3}Important distributions in testing II: $t$-distribution}{401}{subsubsubsection.17.4.7.3}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.4}The Chi-Square Test - test on counts}{401}{subsubsubsection.17.4.7.4}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.5}Students $t$-test}{402}{subsubsubsection.17.4.7.5}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.6}Important distributions in testing III: $F$-distribution}{404}{subsubsubsection.17.4.7.6}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.7}The $F$-test - test on variances}{404}{subsubsubsection.17.4.7.7}%
+\contentsline {subsubsubsection}{\numberline {17.4.7.8}Likelihood ratio test principle - comparing models by likelihood}{405}{subsubsubsection.17.4.7.8}%
+\contentsline {subsection}{\numberline {17.5}Bootstrap methods}{407}{subsection.17.5}%
+\contentsline {subsubsection}{\numberline {17.5.1}Caveats of Bootstrap\textsuperscript {\textasteriskcentered }}{408}{subsubsection.17.5.1}%
+\contentsline {subsubsection}{\numberline {17.5.2}Bootstrap Confidence Intervals\textsuperscript {\textasteriskcentered }}{409}{subsubsection.17.5.2}%
+\contentsline {subsubsection}{\numberline {17.5.3}Standard Normal Bootstrap Confidence Interval}{409}{subsubsection.17.5.3}%
+\contentsline {subsubsubsection}{\numberline {17.5.3.1}Percentile Bootstrap Confidence Interval\textsuperscript {\textasteriskcentered }}{410}{subsubsubsection.17.5.3.1}%
+\contentsline {subsubsection}{\numberline {17.5.4}Bootstrap Hypothesis Testing}{410}{subsubsection.17.5.4}%
+\contentsline {subsubsubsection}{\numberline {17.5.4.1}1-sample test as an introductory example}{411}{subsubsubsection.17.5.4.1}%
+\contentsline {subsubsubsection}{\numberline {17.5.4.2}Calculation of $p$ values in Bootstrap Hypothesis Testing}{413}{subsubsubsection.17.5.4.2}%
+\contentsline {subsubsubsection}{\numberline {17.5.4.3}Bootstrap Hypothesis Test on the Difference of Means}{413}{subsubsubsection.17.5.4.3}%
+\contentsline {subsubsubsection}{\numberline {17.5.4.4}Bootstrap Hypothesis Test - Are two samples from different distributions?}{414}{subsubsubsection.17.5.4.4}%
+\contentsline {subsection}{\numberline {17.6}Multiple testing problem | significance by chance}{415}{subsection.17.6}%
+\contentsline {section}{\numberline {18}Numerical Methods for Parameter Estimation}{416}{section.18}%
+\contentsline {subsection}{\numberline {18.1}Overview on strategies for parameter estimation}{416}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Overview on numerical methods for minimizing the loss (in the MLE setting)}{417}{subsection.18.2}%
+\contentsline {subsection}{\numberline {18.3}Gradient Descent}{418}{subsection.18.3}%
+\contentsline {subsubsection}{\numberline {18.3.1}Improvements to standard gradient descent}{418}{subsubsection.18.3.1}%
+\contentsline {subsection}{\numberline {18.4}Newton-Raphson}{419}{subsection.18.4}%
+\contentsline {subsubsection}{\numberline {18.4.1}Standard Newton iteration for root finding}{419}{subsubsection.18.4.1}%
+\contentsline {subsubsection}{\numberline {18.4.2}Newton's method in optimization}{420}{subsubsection.18.4.2}%
+\contentsline {subsubsubsection}{\numberline {18.4.2.1}Advantages of Newton optimization}{421}{subsubsubsection.18.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {18.4.2.2}Disadvantages of Newton optimization}{421}{subsubsubsection.18.4.2.2}%
+\contentsline {subsection}{\numberline {18.5}Numerical Parameter Estimates in a Bayesian Setting}{423}{subsection.18.5}%
+\contentsline {subsubsection}{\numberline {18.5.1}Maximum A Posteriori (MAP) Estimation}{423}{subsubsection.18.5.1}%
+\contentsline {subsubsection}{\numberline {18.5.2}A-posteriori Expectation}{423}{subsubsection.18.5.2}%
+\contentsline {section}{\numberline {19}Regression}{425}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Multiple Linear Regression | the standard}{426}{subsection.19.1}%
+\contentsline {subsubsection}{\numberline {19.1.1}Model setup | what we model how under which assumptions}{426}{subsubsection.19.1.1}%
+\contentsline {subsubsubsection}{\numberline {19.1.1.1}Assumptions}{427}{subsubsubsection.19.1.1.1}%
+\contentsline {subsubsubsection}{\numberline {19.1.1.2}Matrix notation}{428}{subsubsubsection.19.1.1.2}%
+\contentsline {subsubsection}{\numberline {19.1.2}Two views on finding an estimator for ${\mskip 0.5mu\relax \underline {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox 2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox 2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox 2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox 2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}^*$}{428}{subsubsection.19.1.2}%
+\contentsline {subsubsection}{\numberline {19.1.3}Finding the model parameters minimizing the sum of squared errors}{429}{subsubsection.19.1.3}%
+\contentsline {section}{References}{432}{equation.19.984}%

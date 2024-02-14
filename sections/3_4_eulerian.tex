@@ -180,6 +180,67 @@ where $\vec{\nabla} \cdot$ here is a matrix divergence (a vector) with entries a
 is seems different to tell, often \textit{hyperbolic} is used as \textit{advection-dominated} (the advection equation is hyperbolic) and \textit{parabolic} as \textit{diffusion-dominated} (the diffusion equation is parabolic) and then the Navier
 stokes equation can be either depending on the Reynolds number.}
 
+\bluebox{\textbf{Solving an elliptic problem by solving a hyperbolic problem to steady state\skipthis:}
+Consider for instance the hyperbolic Poisson equation
+\begin{equation}
+    \vec{\nabla}^2 \phi = 4\pi G \rho
+\end{equation}
+from which hyperbolic gravity equations can be obtained as
+\begin{equation}
+    \begin{gathered}
+        \frac{\partial}{\partial \tau}\left[\begin{array}{c}
+            \phi \\
+            q_1 \\
+            q_2
+            \end{array}\right]+\frac{\partial}{\partial x}\left[\begin{array}{c}
+            -q_1 \\
+            -\phi / T_r \\
+            0
+            \end{array}\right]+\frac{\partial}{\partial y}\left[\begin{array}{c}
+            -q_2 \\
+            0 \\
+            -\phi / T_r
+            \end{array}\right]=\left[\begin{array}{l}
+            -4 \pi G \rho \\
+            -q_1 / T_r \\
+            -q_2 / T_r
+            \end{array}\right], \quad \left( \begin{array}{c}
+                q_1 \\ q_2
+            \end{array} \right) \approx \vec{\nabla} \phi  \\
+            \text{pseudotime } \tau, \text{ relaxation time } T_r
+    \end{gathered}
+\end{equation}
+which can then be used in the (compressible) Euler equations
+\begin{equation}
+    \begin{gathered}
+        \frac{\partial}{\partial t}\left[\begin{array}{c}
+            \rho \\
+            \rho v_1 \\
+            \rho v_2 \\
+            E
+            \end{array}\right]+\frac{\partial}{\partial x}\left[\begin{array}{c}
+            \rho v_1 \\
+            \rho v_1^2+p \\
+            \rho v_1 v_2 \\
+            (E+p) v_1
+            \end{array}\right]+\frac{\partial}{\partial y}\left[\begin{array}{c}
+            \rho v_2 \\
+            \rho v_1 v_2 \\
+            \rho v_2^2+p \\
+            (E+p) v_2
+            \end{array}\right]=\left[\begin{array}{c}
+            0 \\
+            -\rho \partial_x\phi \\
+            -\rho \partial_y\phi \\
+            -(\vec{v} \cdot \vec{\nabla} \phi) \rho
+            \end{array}\right] \\
+            p = (\gamma-1)\left(E-\frac{1}{2}\rho (v_1^2 + v_2^2)\right)
+    \end{gathered}
+\end{equation}
+to evolve a self-gravitating fluid only using a hyperbolic solver (e.g. a purely hyperbolic
+discontinuous Galerkin approach as in \cite{schlottke21}).
+}
+
 \subsection{Solution schemes for PDEs}
 There is no general approach but mutltiple general
 methods for different types or even only a certain PDE.

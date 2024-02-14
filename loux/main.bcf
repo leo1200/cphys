@@ -2391,27 +2391,38 @@
     <bcf:citekey order="27" intorder="1">Kincl23</bcf:citekey>
     <bcf:citekey order="28" intorder="1">Margolin2023</bcf:citekey>
     <bcf:citekey order="29" intorder="1">springel23</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">hairer93</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">Hairer1996</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">lefever71</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">Hairer1996</bcf:citekey>
-    <bcf:citekey order="34" intorder="1">rackauckas17</bcf:citekey>
-    <bcf:citekey order="35" intorder="1">Courant1928</bcf:citekey>
-    <bcf:citekey order="36" intorder="1">chou07</bcf:citekey>
-    <bcf:citekey order="37" intorder="1">leer79</bcf:citekey>
-    <bcf:citekey order="38" intorder="1">Kincl23</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">schlottke21</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">hairer93</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">Hairer1996</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">lefever71</bcf:citekey>
+    <bcf:citekey order="34" intorder="1">Hairer1996</bcf:citekey>
+    <bcf:citekey order="35" intorder="1">rackauckas17</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">Courant1928</bcf:citekey>
+    <bcf:citekey order="37" intorder="1">chou07</bcf:citekey>
+    <bcf:citekey order="38" intorder="1">leer79</bcf:citekey>
     <bcf:citekey order="39" intorder="1">Kincl23</bcf:citekey>
     <bcf:citekey order="40" intorder="1">Kincl23</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">hirashima2023</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">lewis2004</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">springel23</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">nigel12</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">Bagla02</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">press07</bcf:citekey>
-    <bcf:citekey order="47" intorder="1">matsumoto98</bcf:citekey>
-    <bcf:citekey order="48" intorder="1">box58</bcf:citekey>
-    <bcf:citekey order="49" intorder="1">particle2020</bcf:citekey>
-    <bcf:citekey order="50" intorder="1">gould96</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">Kincl23</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">hirashima2023</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">lewis2004</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">springel23</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">nigel12</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">Bagla02</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">press07</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">matsumoto98</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">box58</bcf:citekey>
+    <bcf:citekey order="50" intorder="1">particle2020</bcf:citekey>
+    <bcf:citekey order="51" intorder="1">gould96</bcf:citekey>
+    <bcf:citekey order="52" intorder="1">jagode06</bcf:citekey>
+    <bcf:citekey order="53" intorder="1">breiman01</bcf:citekey>
+    <bcf:citekey order="54" intorder="1">over04</bcf:citekey>
+    <bcf:citekey order="55" intorder="1">Efron1994</bcf:citekey>
+    <bcf:citekey order="56" intorder="1">Efron1994</bcf:citekey>
+    <bcf:citekey order="57" intorder="1">tim15</bcf:citekey>
+    <bcf:citekey order="58" intorder="1">Efron1994</bcf:citekey>
+    <bcf:citekey order="59" intorder="1">Efron1994</bcf:citekey>
+    <bcf:citekey order="60" intorder="1">tim15</bcf:citekey>
+    <bcf:citekey order="61" intorder="1">Efron1994</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

@@ -1,0 +1,1514 @@
+\section{Statistical Inference}
+\thispagestyle{plain}
+
+\subsection{Introduction to Inference}
+We assume the black box of nature
+to be some model\footnote{So we are more in the data modeling culture here.} $F_\theta$ where from a sample
+\begin{equation}
+    X_N = \left\{ x_1,\dots,x_N \right\}, \quad \text{sample size } N
+\end{equation}
+we would like to draw conclusions on a population
+\begin{equation}
+    \text{population size } K \gg N
+\end{equation}
+and estimate parameters $\hat{\theta}$, see figure \ref{fig:inference}.
+
+\bluebox{\textbf{Goal in statistical inference:} Find out about the underlying principles that generated the data by formulating
+models and inferring their parameters.}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/inference.svg}\hfill
+ \caption{Statistical inference}
+ \label{fig:inference}
+\end{figure}
+
+Each sample from the population has the probability
+
+\begin{equation}
+    p(x_N) = \frac{1}{\left( \begin{array}{c}
+        K \\ N
+    \end{array} \right)}
+\end{equation}
+
+\subsubsection{Statistics}
+Any quantity computed from values in a sample is called statistic
+\begin{equation}
+    T(x), \quad \text{e.g. } \bar{x}_N = \frac{1}{N} \sum_{i=1}^N x_i, s_N^2 = \frac{1}{N} \sum_{i=1}^N (x_i - \bar{x}_N)^2
+\end{equation}
+which is done
+\begin{itemize}
+    \item for estimating a population parameter (e.g. the mean)
+    \item or evaluating a hypothesis (does the calculated statistic on the sample conform to its assumed statistic under the hypothesis?)
+\end{itemize}
+We want those statistics to be maximally informative (sufficient) for the population parameters,
+and in the limit of the sample size $\rightarrow \infty$ to equal the population parameters, e.g.
+\begin{equation}
+    \lim_{N\rightarrow \infty} \bar{x} = E[x] =: \mu, \quad \lim_{N\rightarrow \infty} s_n^2 = \Var(x)
+\end{equation}
+more formally, the \textit{weak law of large numbers} state for the mean
+\begin{equation}
+    \bar{x}_N \overset{P}{\rightarrow} \mu \text{ meaning } \forall \epsilon > 0: \lim_{N \rightarrow \infty} p(|\bar{x}_N - \mu | > \epsilon) = 0, \quad \text{probability } p
+\end{equation}
+and the \textit{strong law of large numbers}
+\begin{equation}
+    \bar{x}_N \overset{a.s.}{\rightarrow} \mu \text{ meaning } p(\lim_{N\rightarrow \infty} \bar{x}_N = \mu) = 1
+\end{equation}
+where a. s. stands for almost surely.
+
+\subsubsection{General Questions we ask ourselves in statistical modeling}
+Consider we want to carry out an experiment, e.g. we measure lifetimes for a certain disease.
+\begin{itemize}
+    \item What model can we use for our data? Or should we better take an \textit{algorithmic approach} in the first place?
+    \item What are good statistics, i.e. what quantities should we compute from our sample?
+    \item How large should a sample be?
+    \item What is a good estimate for a population parameter $\theta$? How can we obtain an estimate $\hat{\theta}$?
+    \item How accurate do we assume this estimate to be?
+\end{itemize}
+
+\subsection{Examples of Statistical Models - baseline of statistical modeling}
+We formulate a supposedly underlying model of our data with population parameters (denoted in Greek letters)
+where from test statistics (Roman letters) we want to infer parameter estimates (Greek letters with hats)
+or test hypothesis on them.
+
+How can a statistical model look like?
+
+\subsubsection{General form of the models}
+A model has the general form
+\begin{equation}
+    \text{response } y_i(\text{features } \vec{x}_i) = \text{structural part}_\theta (\vec{x}_i) + \text{random part} \epsilon_i
+\end{equation}
+where the random part - under the assumption of many small additive errors - is usually modelled by
+\begin{equation}
+    \epsilon_i \sim \mathcal{N}(0,\sigma^2)
+\end{equation}
+
+\subsubsection{Example I: One- and two-factor univariate analysis; discrete RVs\skipthis}
+In the following we consider simple models where discrete characteristics (e.g. a disease is present)
+are modeled by constant terms across samples.
+\paragraph*{One-factor:} The virus load of patient $i$ medicated with drug $j$, $x_{ij}$ could be described by
+\begin{equation}
+    \begin{gathered}
+        x_{ij} = \mu + \tau_j + \epsilon_ij, \quad \text{random part } \epsilon_{ij} \sim \mathcal{N}(0,\sigma^2) \text{ i.i.d. so } \forall i,j \neq k,l: E[\epsilon_{ij}\epsilon_{ij}] = 0 \\
+        \text{mean contribution } \mu, \quad \text{drug specific effect } \tau_j \text{ (assume no patient specificity)}
+    \end{gathered}
+\end{equation}
+$\epsilon_{ij} \sim \mathcal{N}(0,\sigma^2)$ is a distributional assumption.
+\paragraph*{Two-factor:} Adding e.g. a gender ($k$) effect $\beta_k$ and cross effect $\alpha \beta_{jk}$ (present
+when the gender effect varies between drugs)
+\begin{equation}
+    x_{ijk} = \mu + \alpha_j + \beta_k + \alpha \beta_{jk} + \epsilon_{ijk}
+\end{equation}
+
+\subsubsection{Example II: Linear regression model}
+Consider a dataset
+\begin{equation}
+    D = \{\text{features, response}\}_{i=1}^N, \quad i = 1,\dots,N
+\end{equation}
+with a linear model being
+\begin{equation}
+    \begin{gathered}    
+        y(\vec{x}) = \vec{\beta}^* \cdot \vec{x} + \epsilon(x), \quad \text{true parameter } \vec{\beta}^* = \left( \begin{array}{c} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{array} \right) \\
+        \text{augmented independent variables} \left( \begin{array}{c} 1 \\ x_1 \\ \vdots \\ x_p \end{array} \right)
+    \end{gathered}
+\end{equation}
+so if there is only one feature $x_i$, we have
+\begin{equation}
+    y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \dots + \epsilon_i
+\end{equation}
+
+\note{A linear model is linear in the parameters, not necessarily the independent variables. For instance
+\begin{equation}
+    y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \dots + \epsilon_i
+\end{equation}
+is a linear model (polynomial regression).
+}
+
+\note{\textbf{How to check if a linear model breaks down?:} Often plots of the residuals are done. If they show a trend,
+i.e. they are not i.i.d. with zero mean, our model is probably not applicable.}
+
+\subsubsection{Example III: Generalized linear model}
+Here we generally assume the data was brought forth from a distribution from the exponential family
+\begin{equation}
+    \begin{multlined}
+        p(y | \theta) = \exp{\left( \frac{y\theta - b(\theta)}{a(\phi)} + c(y,\phi) \right)},  \\
+        \text{with real functions } a,b,c, \quad \text{ and parameters } \theta, \phi
+    \end{multlined}
+\end{equation}
+which mean we model.
+\begin{equation}
+    E[y_i\mid x_i] = \mu = g^{-1}(\eta_i) = \partial_\theta b, \quad \text{linear predictor } \eta_i = \vec{\beta}^T \vec{x}_i 
+\end{equation}
+\note{The notation is slightly different from before. For a \textit{canonical link} we have $\theta = \eta$ as before.}
+
+\subsubsection{Example IV: Autoregressive model}
+In the model for a time-series, e.g. the development
+\begin{equation}
+    x_t = \alpha x_{t-1} + \epsilon_t
+\end{equation}
+the $x_t$ are of course on i.i.d.
+
+\subsection{Estimation of Model Parameters}
+Consider we now have our model $F_\theta$. For instance, 
+we could assume a linear model for the yearly temperature mean
+on earth. We might be interested in
+\begin{itemize}
+    \item make point estimates for the parameters, e.g. the temperature increases by $0.06\K$ per decade
+    \item the estimated deviation of our estimator over many samples (see figure \ref{fig:dif_sam_dif_est}) (the \textit{sampling distribution}), called standard error, so \textbf{an error approximation for our estimator}
+    \item based on the standard error and distributional assumptions on the estimator, interval estimates for the parameters,
+    e.g. we are $95\%$ certain that the temperature increases by $0.05\K$ to $0.07\K$ per decade
+    \item hypothesis tests about model parameters (or other statistics from the data), for instance to test if there even is a linear trend
+    in the mean temperature, e.g. with \textit{null-hypothesis} (no difference, devils advocate): there is no global warming, $H_0:\mu = 0, H_1:\mu\neq 0$
+\end{itemize}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/dif_sam_dif_est.svg}\hfill
+ \caption{Different sample, different estimate - the estimator itself is a random variable}
+ \label{fig:dif_sam_dif_est}
+\end{figure}
+
+We will first consider what a good estimator is and then discuss strategies for estimation.
+
+\subsubsection{Properties of estimators}
+What makes a good estimator?
+
+\subsubsubsection{Bias of an estimator}
+If the expected value of our estimator over many samples
+\begin{equation}
+    E[\hat{\theta}_N] = \theta^* + c, \quad \text{true parameter } \theta^*, \text{bias } c
+\end{equation}
+does not equal the population parameter, it is called biased, for $c = 0$ unbiased.
+Good estimators are unbiased.
+
+\subsubsubsection{Consistency of an estimator}
+In the limit of an infinitely large sample, the
+estimator should in probability converge to the
+true parameters
+\begin{equation}
+    \forall \epsilon: \lim_{N \rightarrow \infty} p(|\hat{\theta}_N - \theta^*| < \epsilon) = 1
+\end{equation}
+
+\subsubsubsection{Examples for bias and consistency at the hand of the mean}
+\textbf{Aim:} We want to estimate the expectation $E[X]$ from an i.i.d. sample
+$\{x_i\}_{i=1}^N$. For the total population, we know
+\begin{equation}
+    E[X] = \mu = \frac{1}{K} \sum_{i=1}^{K} x_i, \quad \text{size of the total population } K
+\end{equation}
+We consider different estimators in table \ref{tab:bias_consist}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.3\linewidth}|p{0.3\linewidth}|p{0.3\linewidth}|}
+        \hline \textcolor{blue1}{Estimator} & \textcolor{blue1}{Bias} & \textcolor{blue1}{Consistency} \\
+        \hline
+        $$\hat{\mu}_I=x_i, \quad \text{random } i$$ 
+        &
+        Unbiased, as $E\left[\hat{\mu}_I\right]=\mu$. &
+        Inconsistent, $N \rightarrow \infty$ as
+        sample size makes no
+        difference as we pick a 
+        random value. \\
+        \hline
+        $$\hat{\mu}_{I I}=\frac{1}{N} \sum_{i=1}^N x_i+\frac{1}{N}$$ &
+        Biased as
+        $$E\left[\hat{\mu}_I\right]=\mu+E\left[\frac{1}{N}\right]$$
+        &
+        Consistent as for $N \rightarrow \infty$
+        $\frac{1}{N} \rightarrow 0$ and thus $\hat{\mu}_{I I} \rightarrow \mu$
+        \\
+        \hline
+        $$\hat{\mu}_{I I I}=\frac{1}{N} \sum_{i=1}^N x_i$$ & Unbiased & Consistent \\
+        \hline
+    \end{tabular}
+    \caption{Bias and consistency at the hand of estimators for the mean}
+    \label{tab:bias_consist}
+\end{table}
+
+\subsubsubsection{The naive sample variance estimation is a biased but consistent estimator}
+The population variance is
+\begin{equation}
+    \sigma^2=\frac{1}{K} \sum_{i=1}^K\left(x_i-\bar{x}\right)^2
+\end{equation}
+The analogue sample estimator for the population variance
+\begin{equation}
+    s_x^2=\frac{1}{N} \sum_{i=1}^N\left(x_i-\bar{x}\right)^2
+\end{equation}
+however is biased as of (proof later)
+
+\begin{equation}
+    E\left[s_x^2\right]=\frac{N-1}{N} \sigma^2
+\end{equation}
+
+so we use the \textit{Bessel-correction}
+\begin{equation}
+    \hat{\sigma}_{\text {unbiased }}^2=\frac{1}{N-1} \sum_{i=1}^N\left(x_i-\bar{x}\right)^2
+\end{equation}
+
+\greenbox{Our upscaled correction $\hat{\sigma}^2_\text{unbiased}$ takes into account that $\bar{x}$ is the sample estimate
+not the population parameter from which the values from the sample naturally deviate less than from the true mean.}
+
+\yellowbox{\textbf{While $\hat{\sigma}_{\text {unbiased }}^2$ is unbiased, $\hat{\sigma} = \sqrt{\hat{\sigma}_{\text {unbiased }}^2}$ generally is not.}
+This can be followed from Jenssens inequality
+\begin{equation}
+    \begin{gathered}
+        X \text{ a random variable, } \phi \text{ a convex function } \quad \rightarrow \quad \phi(E[X]) \leq E[\phi(X)] \\
+        \phi \text{ a concave function } \quad \rightarrow \quad \phi(E[X]) \geq E[\phi(X)]
+    \end{gathered}
+\end{equation}
+by
+\begin{equation}
+    \begin{gathered}
+        \text { assume we use } \hat{\sigma}=\sqrt{\frac{1}{N-1} s_x^2} \text { as our estimator, then } \\
+        E[\hat{\sigma}]=E\left[\sqrt{\frac{1}{N-1} s_x^2}\right] \underset{\text { Jennsens ineq. }}{\leq} \sqrt{E\left[\frac{1}{N-1} s_x^2\right]}=\sigma
+    \end{gathered}
+\end{equation}
+}
+
+\subsubsubsection{Sampling distribution}
+Consider we repeatedly draw samples of size $N$ and estimate $\hat{\theta}_N$. The distribution of
+those estimates is called sampling distribution, denoted $F_N(\hat{\theta})$.
+
+\subsubsubsection{Standard error of an estimator}
+Consider an estimator $\hat{\theta}_N$ with sampling distribution $F_N(\hat{\theta})$. We then call
+the standard deviation of the sampling distribution standard error.
+
+\begin{equation}
+    \text{variance in } \hat{\theta}_N \quad \rightarrow \quad \operatorname{SE}_{\hat{\theta}}(N) := \sqrt{E[(\hat{\theta}_N - E[\hat{\theta}_N])^2]}
+\end{equation}
+
+we can also define the \textbf{mean squared error}, accounting for bias and variance in $\hat{\theta}_N$
+\begin{equation}
+    \operatorname{MSE}(\hat{\theta}_N) = \sqrt{E\left[ (\hat{\theta}_N - \theta^*)^2 \right]}, \quad \text{true parameter } \theta^*
+\end{equation}
+
+where for an unbiased estimator ($E[\hat{\theta}_N] = \theta^*$) so $\operatorname{SE}_{\hat{\theta}}(N) = \operatorname{MSE}(\hat{\theta}_N)$.
+
+\paragraph*{Standard error of the means}
+\begin{equation}
+    \begin{gathered}
+        S E M=S E_{\widehat{\mu}}(N)=\sqrt{\operatorname{Var}\left(\bar{x}_N\right)}=\sqrt{\operatorname{Var}\left(\frac{1}{N} \sum_{i=1}^N x_i\right)} \\
+        \underset{\substack{\operatorname{Var}(a X+b)=a^2 \operatorname{Var}(X) \\
+        \sum_i \operatorname{Var}\left(X_i\right)} \underset{X_i \text{ independent}}{=} \sum_i \Var(X_i)}{=} \frac{1}{N} \sqrt{\sum_{i=1}^N \operatorname{Var}\left(x_i\right)}=\frac{1}{N} \sqrt{N \sigma}=\frac{\sigma}{\sqrt{N}}
+    \end{gathered}     
+\end{equation}
+
+\greenbox{\textbf{General estimation of standard errors by bootstrapping}: If for the statistic of interest there is no explicit formula
+for the standard error and we only have one sample at hand, we can estimate the standard error by the standard deviation
+of resampled samples from our sample (by choosing randomly from our sample with replacement). More on this later :)}
+
+\subsubsubsection{Sufficient statistic}
+A statistic or set of statistics $t(\vec{X})$ is sufficient if it contains all information there is in a sample
+about a population parameter $\theta$, so
+\begin{equation}
+   p(\vec{X} | t(\vec{X}), \theta) = p(\vec{X} | t(\vec{X}))
+\end{equation}
+so \textbf{the likelihood of the sample is independent of the population parameter given the sufficient statistic}.
+
+The smallest set of sufficient statistics is called minimally sufficient, e.g. for a Gaussian these
+are the sample mean $\mu$ and variance $\frac{N}{N-1} s_x^2$.
+
+\subsubsubsection{Efficiency of an estimator}
+Consider $\hat{\theta}_\text{opt}$ to be the estimator with the smallest variance (smallest standard error).
+The efficiency of any other estimator $\hat{\theta}_k$ is then
+\begin{equation}
+    \operatorname{Eff}_{\hat{\theta}_k} = \frac{\operatorname{Var}(\hat{\theta}_\text{opt})}{\operatorname{Var}(\hat{\theta}_k)} \in [0,1]
+\end{equation}
+\note{The maximum likelihood estimator (the estimator under which the observed data is most probable) is an efficient estimator.}
+
+\subsubsubsection{Precision of an estimator}
+We can define the precision of an estimator as
+\begin{equation}
+    \operatorname{Prec}(\hat{\theta}_N) = \frac{1}{\operatorname{SE}_{\hat{\theta}}(N)}
+\end{equation}
+- the less the estimator varies over many samples, the more precise it is. For an
+unbiased estimator, the precision is fundamentally limited by the \textit{Fisher information}\footnote{
+    The partial derivative of the logarithm of the likelihood $p(\vec{X} | \theta)$ with respect to $\theta$ is called score.
+    The Fisher information is the variance of the score, so
+    \begin{equation}
+        \mathcal{I}(\theta) = E\left[ \left( \frac{\partial}{\partial \theta} \log p(\vec{X} | \theta) \right)^2 \mid \theta \right] = \int \left( \frac{\partial}{\partial \theta} \log p(\vec{X} | \theta) \right)^2 p(\vec{X} | \theta) d\vec{X}
+    \end{equation}
+}, so
+\begin{equation}
+    \Var(\hat{\theta}_N) \geq \frac{1}{\mathcal{I}(\theta)}
+\end{equation}
+(Cramer-Rao bound).
+
+\subsubsubsection{What characterizes a good estimator?}
+A good estimator is
+\begin{itemize}
+    \item unbiased (its expected value is the population one)
+    \item consistent (in the limit of a large sample we get the population parameter)
+    \item efficient, so low standard error (it should not vary a lot between different samples)
+    \item minimally sufficient (it should extract all information from the sample with regards to the population parameter of interest)
+\end{itemize}
+
+\subsubsection{Approaches to Statistical Parameter Estimation}
+\bluebox{\textbf{Question:} What are the best model parameters for a given model which we can deduce from a sample?}
+
+Principal ways of parameter estimation are
+\begin{itemize}
+    \item Least squared error estimation (LSE), minimize the (mean) squared error between the response predicted by the model under the estimated parameters and the sample
+    \item maximum likelihoos estimation (MLE), choose parameters making the sample most likely
+    \item Bayesian inference (BI), estimate the whole posterior of the parameters $p(\vec{\theta}|\{\vec{x}_i\}_{i=1}^N)$
+    \item Maximum a posteriori (MAP), take the parameters maximizing the posterior $p(\vec{\theta}|\{\vec{x}_i\}_{i=1}^N)$
+\end{itemize}
+
+\subsubsubsection{Least squared error}
+For the general model
+\begin{equation}
+    y_i = f_\vec{\theta}(\vec{x}_i) + \epsilon_i
+\end{equation}
+in LSE, we calculate the sum of squares loss on the sample $\{ \vec{x}_i,y_i \}_{i=1}^N$ as
+\begin{equation}
+    \operatorname{SSQ}(\vec{\theta}) = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2, \quad \text{model estimate } \hat{y}_i = E\left[y_i \mid x_i\right]=E\left[f_{\vec{\theta}}\left(\vec{x}_i\right)\right]+\underbrace{E\left[\epsilon_i\right]}_{=0}=f_{\vec{\theta}}\left(\vec{x}_i\right)
+\end{equation}
+where here $\vec{\theta}$ denote some model parameters. As an estimate for the true parameters $\vec{\theta}^*$ we can use
+\begin{equation}
+    \vec{\hat{\theta}}_{LSE} = \argmin_{\vec{\theta}} \operatorname{SSQ}(\vec{\theta})
+\end{equation}
+
+\paragraph*{Least squared error estimation for linear regression} Let us write the sample $\{ \vec{x}_i,y_i \}_{i=1}^N$ in the form
+
+\begin{equation}
+    \vec{Y} \in \mathbb{R}^N, \quad \mat{X} \in \mathbb{R}^{N\times p}
+\end{equation}
+
+where $\vec{Y}$ is called response or measurement and $\mat{X}$ is the feature matrix (independent variables).
+
+We can then write the regression problem as
+
+\begin{equation}
+    \begin{gathered}
+        \vec{Y} = f_\vec{\beta}(\mat{X}) + \vec{\epsilon} = \mat{X}\vec{\beta} + \vec{\epsilon}, \quad \text{residuals } \vec{\epsilon} \\
+        \vec{\beta}=\left(\begin{array}{c}
+            \beta_0 \\
+            \vdots \\
+            \beta_p
+            \end{array}\right), \quad \text { feature matrix is augemented by prepended column of } 1 \text{s} \\
+            \vec{Y} \text { is a random variable by virtue of the residual } \vec{\epsilon}, \quad \epsilon_i \sim N\left(0, \sigma^2\right) \text { i.i.d. }
+    \end{gathered}
+\end{equation}
+
+We can calculate the sum of squares residual (a scalar) as
+
+\begin{equation}
+    \operatorname{SSQ}(\vec{\beta})=\|\vec{Y}-\mat{X} \vec{\beta}\|_2^2=(\vec{Y}-\mat{X} \vec{\beta})(\vec{Y}-\mat{X} \vec{\beta})^T=\|\vec{\epsilon}\|_2^2
+\end{equation}
+
+which is nicely convex, so we can find a unique minimum by
+
+\begin{equation}
+    \begin{gathered}
+    \frac{\partial \operatorname{SSQ}}{\partial \vec{\beta}}=-2 \mat{X}^T(\vec{Y}-\mat{X} \vec{\beta})_{!}=0 \\
+    \rightarrow \mat{X}^T \vec{Y}=\mat{X}^T \mat{X} \vec{\beta} \rightarrow \vec{\hat{\beta}}=\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \vec{Y} \text { (normal equation) }
+    \end{gathered}
+\end{equation}
+
+\note{For this to apply $\mat{X}^T \mat{X}$ must be invertible, so $\mat{X}$ must have rank $p$. This is e.g. not the case for the overparametrized 
+$p>N$. $\mat{X}^T \mat{X}$ measures covariance, assuming the columns of $\mat{X}$ to be centered, it is the sample
+covariance matrix (without a scaling factor), $\mat{\Sigma}_{XX} = \frac{1}{N-1} \mat{X}^T \mat{X} \in \mathbb{R}^{p\times p}$.}
+
+\greybox{\textbf{1D case:} For $y_i = \beta_0 + \beta_1 x_i + \epsilon_i$ one finds from $\partial_{\beta_0} \operatorname{SSQ} = 0$ and $\partial_{\beta_1} \operatorname{SSQ} = 0$
+\begin{equation}
+    \begin{gathered}
+        \hat{\beta}_0=\bar{y}-\hat{\beta}_1 \bar{x} \text{ interset as expected}\\
+        \beta_1=\frac{\frac{1}{N-1} \sum\left(x_i-\bar{x}\right)\left(y_i-\bar{y}\right)}{\frac{1}{N-1} \sum\left(x_i-\bar{x}\right)^2}=\frac{\widehat{\operatorname{Cov}}(x, y)}{\widehat{\operatorname{Var}}(x)}
+    \end{gathered}
+\end{equation}
+}
+
+\subsubsubsection{Maximum likelihood estimation (MLE)}
+The likelihood of a sample $\{ \vec{x}_i \}_{i=1}^N$ of $N$ i.i.d. data points
+under a model $F_\vec{\theta}$ which assigns each data point a probability $p(\vec{x}_i | \vec{\theta})$ is
+\begin{equation}
+    \mathcal{L}_X(\vec{\theta}) = \prod_{i=1}^N p(\vec{x}_i | \vec{\theta})
+\end{equation}
+\greenbox{For e.g. linear regression this model is hidden in the assumption of the residuals being i.i.d. Gaussian
+with variance $\sigma^2$, where
+\begin{equation}
+    p(y_i|\vec{x}_i,\vec{\beta}) = \mathcal{N}(\vec{\beta}^T \vec{x}_i, \sigma^2)
+\end{equation}
+In the generalized linear setting, this will not be a normal distribution but a distribution from the exponential family
+and the mean will be modelled by a link function (its inverse).
+}
+\greenbox{\textbf{Idea:} Model parameters under which the sample is likely are probably good.}
+
+\begin{equation}
+    \boxed{\vec{\hat{\theta}}_{MLE} = \argmax_{\vec{\theta}} \mathcal{L}_X(\vec{\theta})}
+\end{equation}
+
+\problem{The product of many small probabilities can numerically be problematic (underflow)}
+\idea{We can alternatively maximize the log-likelihood or minimize the negative log-likelihood
+\begin{equation}
+    \mathcal{LL}_X(\vec{\theta}) = \log \mathcal{L}_X(\vec{\theta}) = \sum_{i=1}^N \log p(\vec{x}_i | \vec{\theta})
+\end{equation}
+so
+\begin{equation}
+    \boxed{\vec{\hat{\theta}}_{MLE} = \argmax_{\vec{\theta}} \mathcal{LL}_X(\vec{\theta})}
+\end{equation}
+}
+
+\paragraph*{MLE for linear regression - same result as LSE} Again consider a dataset $\{ \vec{x}_i,y_i \}_{i=1}^N$
+with a linear model $y_i = \vec{\beta}^T \vec{x}_i + \epsilon_i$ and i.i.d. residuals $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
+The likelihood of the sample under some model parameters $\vec{\beta}$ is then
+\begin{equation}
+    \begin{gathered}
+    \mathcal{L}_X(\vec{\beta})=\prod_{i=1}^N p\left(y_i \mid \vec{\beta}\right)=\prod_{i=1}^N N\left(y_i-\vec{\beta}^T \vec{x}_i, \sigma^2\right)=\prod_{i=1}^N \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y_i-\vec{\beta}^T \vec{x}_i\right)^2}{2 \sigma^2}\right) \\
+    =\left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^N \exp \left(-\frac{\sum_{i=1}^N\left(y_i-\vec{\beta}^T \vec{x}_i\right)^2}{2 \sigma^2}\right)=\left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^N \exp \left(-\frac{S S Q(\vec{\beta})}{2 \sigma^2}\right) \\
+    \vec{\hat{\beta}}_{M L E}=\underset{\vec{\beta}}{\operatorname{argmax}} \mathcal{L}(\vec{\beta}) \Leftrightarrow \vec{\hat{\beta}}_{M L E}=\underset{\vec{\beta}}{\operatorname{argmin}} S S Q(\vec{\beta})=\vec{\hat{\beta}}_{L S E}
+    \end{gathered}
+\end{equation}
+
+\paragraph*{MLE for $\mu$ and $\sigma^2$ in a Gaussian model} Consider a sample $\{ x_i \}_{i=1}^N$ from a Gaussian distribution.
+What could be estimates for the mean $\mu$ and variance $\sigma^2$?
+
+From the univariate Gaussian distribution
+\begin{equation}
+    p(x_i | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x_i - \mu)^2}{2\sigma^2}\right)
+\end{equation}
+we calculate the log-likelihood $\mathcal{LL}_X(\mu,\sigma^2)$ and find
+\begin{equation}
+    \begin{gathered}
+        \left. \partial_{\mu} \mathcal{LL}_X\right|_{\mu=\hat{\mu}_{MLE}} = 0 \quad \rightarrow \quad \hat{\mu}_{MLE} = \frac{1}{N} \sum_{i=1}^N x_i \\
+        \left. \partial_{\sigma^2} \mathcal{LL}_X\right|_{\sigma^2=\hat{\sigma}^2_{MLE}} = 0 \quad \rightarrow \quad \hat{\sigma}^2_{MLE} = \frac{1}{N} \sum_{i=1}^N (x_i - \mu)^2
+    \end{gathered}
+\end{equation}
+(where we have carried out the calculations as if the other parameter was known). For $\mu = \hat{\mu}_{MLE}$, $\hat{\sigma}^2_{MLE}$ is the
+biased estimator for the population variance. Given the model estimate $\hat{y} = \vec{\beta}^T \vec{x}$, the \textbf{MLE for the variance
+in linear regression} is
+\begin{equation}
+    \hat{\sigma}^2_{MLE} = \frac{1}{N} \sum_{i=1}^N (y_i - \hat{y}_i)^2 = \frac{1}{N} \sum_{i=1}^N \epsilon_i^2
+\end{equation}
+
+\subsubsubsection{Bayesian inference}
+Consider we have measured a sample $\{ \vec{x}_i \}_{i=1}^N$ and 
+want to estimate the model parameters $\vec{\theta}$.
+\greenbox{By Bayes theorem we can calculate the full distribution of the parameters given the sample
+and prior knowledge $p(\vec{\theta})$. \textbf{From there we can e.g. take the parameters most likely given the
+data (MAP) or the expected value of the parameters, ...}. The prior (essentially a \textit{bias} or \textit{regularization})
+is especially useful when the sample size is small - we can update our previous knowledge with new evidence - the sample.}
+
+\begin{equation}
+    \begin{gathered}
+    \text { posterior }=p\left(\vec{\theta} \mid \vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N\right)=\frac{p\left(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N \mid \theta\right) p_{\vec{\alpha}}(\vec{\theta})}{h\left(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N\right)}=\frac{\text { likelihood } \cdot \text { prior }}{\text { evidence }} \\
+    =\frac{p\left(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N \mid \vec{\theta}\right) p_{\vec{\alpha}}(\vec{\theta})}{\int p\left(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N \mid \vec{\theta}^{\prime}\right) p_{\vec{\alpha}}(\vec{\theta}) d \vec{\theta}^{\prime}}, \quad \text { prior } p_{\vec{\alpha}} \text { with hyper-parameters } \alpha
+    \end{gathered}
+\end{equation}
+
+\paragraph*{Updating our knowledge on the distribution of the model parameters given the data - one experiment at a time}
+Consider we start out with the prior $p(\vec{\theta}) = p_{\vec{\alpha}}(\vec{\theta})$ with $\vec{\alpha}$ being the hyperparameters of
+the prior.
+\greybox{\textbf{Example:} For instance if our likelihood was a Binomial distribution (so the samples would consist of counts
+of successes in $N$ trials) and we would model the only parameter of the Binomial distribution, the success probability $\mu$,
+we could use a Beta prior, so that posterior and prior would be of the same distributional form (conjugacy). If we start out
+without knowledge, we could use a uniform prior, so a Beta distribution with $\alpha = \beta = 1$.}
+
+Consider $X$ is new data, the update to the prior is
+\begin{equation}
+    p^{(n)}(\vec{\theta} | X) = \frac{p(X | \vec{\theta}) p^{(n-1)}(\vec{\theta})}{h(X)}
+\end{equation}
+
+\paragraph*{MAP as a special case of Bayesian inference}
+Maximizing the posterior yields the MAP estimate - the mode of the posterior distribution
+\begin{equation}
+    \vec{\hat{\theta}}_{\text{MAP}} = \argmax_{\vec{\theta}} p(\vec{\theta} | \vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N) \underset{\text{Bayes}}{=} \argmax_{\vec{\theta}} \frac{p(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N | \vec{\theta}) p_{\vec{\alpha}}(\vec{\theta})}{h(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N)}
+\end{equation}
+which based on
+\begin{itemize}
+    \item i.i.d. assumption
+    \item seeing that the evidence $h(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N)$ is independent of $\vec{\theta}$
+\end{itemize}
+simplifies to
+\begin{equation}
+    \boxed{
+    \begin{aligned}
+    \vec{\hat{\theta}}_{M A P}&=\underset{\vec{\theta}}{\operatorname{argmax}} \frac{p_{\vec{\alpha}}(\vec{\theta}) \prod_{i=1}^N p\left(\vec{x}_i \mid \vec{\theta}\right)}{h\left(\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_N\right)}\\
+    &=\underset{\vec{\theta}}{\operatorname{argmax}}\left(p_{\vec{\alpha}}(\vec{\theta}) \prod_{i=1}^N p\left(\vec{x}_i \mid \vec{\theta}\right)\right) \\
+    &=\underset{\vec{\theta}}{\operatorname{argmax}}\left(\log p_{\vec{\alpha}}(\vec{\theta})+\sum_{i=1}^N \log p\left(\vec{x}_i \mid \vec{\theta}\right)\right)
+    \end{aligned}}
+\end{equation}
+
+\paragraph*{Pros and cons of Bayesian inference} See table \ref{tab:pros_cons_bayes}.
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.45\linewidth}|p{0.45\linewidth}|}
+        \hline \textcolor{green1}{Pros} & \textcolor{red1}{Cons} \\
+        \hline
+        \begin{itemize}
+            \item \textbf{Using previous knowledge:} The prior is a \textit{bias}\tablefootnote{In the sense that the model is not prejudice-free but has previous knowledge.} regularizing the model parameters (in the sense that a low data setting will not bring forth unrealistic parameters just by chance)
+            \item \textbf{Uncertainty quantification:} The full posterior distribution can be used to quantify the uncertainty in the model parameters (a flat posterior means we have little information about the parameters, a peaked one means we have a lot of information)
+            \item \textbf{Hypothesis testing:} Based on the full posterior distribution, we can test hypotheses about the model parameters
+            \item \textbf{Updating:} The prior can be updated with new evidence
+        \end{itemize}
+        &
+        \begin{itemize}
+            \item \textbf{Subjectivity of the prior:} Danger if prior is not reliable or incorrect\tablefootnote{This is a bias-variance trade-off: the stronger the bias, the less flexible the model but the less it will also vary for different samples.}
+            \item \textbf{Computational cost:} The full posterior distribution is often hard to calculate, for instance the evidence integral is often intractable\footnote{Integrals involving the posterior can still be approximated without knowing the evidence using MCMC}
+        \end{itemize}
+        \\
+        \hline
+    \end{tabular}
+    \caption{Pros and cons of Bayesian inference}
+    \label{tab:pros_cons_bayes}
+\end{table}
+
+\paragraph*{Bayesian inference for linear regression with normally distributed residuals} Consider we have a dataset
+$\{ \vec{x}_i,y_i \}_{i=1}^N$ and a linear model
+\begin{equation}
+    y_i = \vec{\beta}^T \vec{x}_i + \epsilon_i
+\end{equation}
+with i.i.d. residuals $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
+
+\bluebox{\textbf{Question:} What is the posterior distribution of the model parameters $\vec{\beta}$ and $\sigma^2$ given the sample?}
+
+Let us start with writing down the posterior (not denoting the fixed $\mat{X}$ (the colleciton of all $\vec{x}_i$) explicitly)
+\begin{equation}
+    \begin{aligned}
+        \text{posterior}&=p(\vec{\beta},\sigma^2 | \vec{y}) \\
+        &=\frac{p(\vec{y} | \vec{\beta},\sigma^2) \textcolor{green1}{p(\vec{\beta},\sigma^2)}}{h(\vec{y})} \\
+        &=\frac{p(\vec{y} | \vec{\beta},\sigma^2) \textcolor{green1}{p(\sigma^2) \cdot p(\vec{\beta} \mid \sigma^2)}}{h(\vec{y})}
+        &= \frac{\text{likelihood} \cdot \text{\textcolor{green1}{priors}}}{\text{evidence}}
+    \end{aligned}
+\end{equation}
+The likelihood is normal as we assumed normal residuals, so
+\begin{equation}
+    p\left(\vec{y} \mid \vec{\beta}, \sigma^2\right)=(2 \pi)^{-N / 2}\left|\sigma^2 \mat{1}\right|^{-1 / 2} \exp{\left(-\frac{1}{2}(\vec{y}-\mat{X} \vec{\beta})^T\left(\sigma^{-2} \mat{1}\right)(\vec{y}-\mat{X} \vec{\beta})\right)}
+\end{equation}
+
+\note{For a Gaussian likelihood (without $\sigma^2$ or $\mu$ being known a priori)
+the prior $p(\vec{\beta} \mid \sigma^2)$ can be chosen to be Gaussian as well, and 
+the prior $p(\sigma^2)$ can be chosen to be an inverse Gamma distribution (the total prior is
+their product), so that the posterior is of the same distributional form as the prior (conjugacy).}
+
+The prior for $\vec{\beta}$ is the Gaussian
+\begin{equation}
+    \text { Gaussian prior on } \vec{\beta} \text { : } p\left(\vec{\beta} \mid \sigma^2\right)=(2 \pi)^{-p / 2}\left|\sigma^{-2} \mat{\Lambda}_0\right|^{1 / 2} \exp{\left(-\frac{1}{2}\left(\vec{\beta}-\vec{\beta}_0\right)^T\left(\sigma^{-2} \mat{\Lambda}_0\right)\left(\vec{\beta}-\vec{\beta}_0\right)\right)}
+\end{equation}
+with
+\begin{itemize}
+    \item $\vec{\beta}_0$ being the mean of the prior of $\vec{\beta}$
+    \item $\mat{\Lambda}_0$ being the precision matrix (inverse covariance matrix) of the prior of $\vec{\beta}$
+    \item $\sigma^2$ being only a parameter here, convenient for later calculations
+\end{itemize}
+
+The prior for $\sigma^2$ is the inverse Gamma distribution
+\begin{equation}
+    \text { Inverse - Gamma prior on } \sigma^2: \quad p\left(\sigma^2\right)=\frac{\kappa^\alpha \sigma^{2(-\alpha-1)}}{\Gamma(\alpha)} e^{-\kappa / \sigma^2}
+\end{equation}
+
+Where the priors have been chosen so that the posterior
+
+\begin{equation}
+    \begin{aligned}
+        \text { posterior } &= \frac{\text { \textcolor{yellow1}{likelihood} } \cdot \text { \textcolor{green1}{priors} }}{\text { evidence }}\\
+        &=\frac{\text { \textcolor{yellow1}{gaussian} } \cdot \text { \textcolor{green1}{gaussian} } \cdot \text { \textcolor{green1}{inverse gamma} }}{\text { evidence }} \\
+        &=\text { gaussian } \cdot \text { inverse gamma }
+    \end{aligned}
+\end{equation}
+
+is of the same distributional form as the prior (conjugacy) (the Gaussian of the likelihood and the Gaussian of the prior for $\vec{\beta}$ can be combined to one Gaussian).
+
+\paragraph*{Update rules for the parameters from prior to posterior} Without proof, let us specify
+\begin{itemize}
+    \item the Gaussian distribution of $\vec{\beta}$ is updated by
+    \begin{equation}
+        \vec{\beta}_N = \left(\mat{X}^T \mat{X} + \mat{\Lambda}_0\right)^{-1} \left(\mat{X}^T \vec{y} + \mat{\Lambda}_0 \vec{\beta}_0\right), \quad \text{precision matrix } \mat{\Lambda}_N = \mat{X}^T \mat{X} + \mat{\Lambda}_0
+    \end{equation}
+    \item the inverse Gamma distribution of $\sigma^2$ is updated by
+    \begin{equation}
+        \alpha_N = \alpha_0 + \frac{N}{2}, \quad \kappa_N = \kappa_0 + \frac{1}{2} \left(\vec{y}^T \vec{y} + \vec{\beta}_0^T \mat{\Lambda}_0 \vec{\beta}_0 - \vec{\beta}_N^T \mat{\Lambda}_N \vec{\beta}_N\right)
+    \end{equation}
+    with the expectation of $\sigma^2$ being $E[\sigma^2 | \vec{y},\mat{X}] = \frac{\kappa_N}{\alpha_N - 1}$
+\end{itemize}
+
+\greenbox{For each subsequent update with new data $X$, the posterior of the parameters becomes the prior for the next update.}
+
+\subsection{Hypothesis Testing}
+\textbf{Aim of hypothesis testing\footnote{More specifically null hypothesis significance testing.}:} We want to decide 
+whether some data sufficiently supports a \textcolor{pink1}{hypothesis}.
+\pinkbox{\textbf{What is a hypothesis?}: A hypothesis is a statement about population (a) parameter(s) (not
+about a sample). We usually formulate a devil's advocate null hypothesis $H_0$ (no difference,
+as in $H_0:$ the drug we test had no effect, $H_0:$ there is no global warming, ...), under which we devise the
+distribution of a statistic and under this distribution check how likely it is to observe
+the statistic following from our sample. We are cautious and want to make sure that we have
+to reject the no-difference case to make our statement (e.g. $H_1:$ the drug has an effect).}
+
+\textbf{Example setting:} Consider we have a dataset $D=\{ x_i,y_i \}_{i=1}^N$ and assume a linear model
+\begin{equation}
+    \begin{gathered}
+        y_i = \beta_0 + \beta_1 x_i + \epsilon_i, \quad \epsilon_i \sim \mathcal{N}(0,\sigma^2) \\
+        \text{anthropogenic CO2 in the atmosphere } x_i, \quad \text{global temperature } y_i
+    \end{gathered}
+\end{equation}
+with the devil's advocate $H_0: \beta_1 = 0$ (climate change is a hoax). Neglecting
+$H_0$ means there is an impact of CO2 on temperature, a \textit{one-sided} can give
+clues about the direction of the impact.
+
+\problem{Null hypothesis significance testing is set up in a way that we crunch all our
+data into a single \textbf{accept-reject decision} with a \textit{$p$-value}, where one who
+lacks integrity might $p$-hack on. Bayesian statistics on the other hand gives a full
+distribution over the parameters, but here a problem lies in the subjectivity of the prior.}
+
+\subsubsection{Basic terms of statistical hypothesis testing}
+Let us first introduce basic terms of hypothesis testing.
+\subsubsubsection{Around the hypothesis}
+See table \ref{tab:terms_hypothesis}.
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.45\linewidth}|p{0.45\linewidth}|}
+        \hline \textcolor{blue1}{Term} & \textcolor{blue1}{Short explanation} \\
+        \hline
+        Statistical hypothesis & Statement about the parameters of a model describing a population, e.g. the parameters in a linear model \\
+        \hline
+        Test statistic $T$ & Generally any value calculated from a sample \\
+        \hline
+        Simple hypothesis & Hypothesis specifying the population distribution completely \\
+        \hline
+        Composite hypothesis & Hypothesis not specifying the population distribution completely. \\
+        \hline
+        Null hypothesis $H_0$ & The statement tested in the statistical significance test, usually a statement of \textit{no-effect} or \textit{no difference}, e. g. COVID19 measures had no effect on the virus's reproduction rate. \\
+        \hline
+        Alternative hypothesis $H_1$ & Against the null hypothesis $H_0$ (mutually exclusive statements, often exhaustive) the alternative hypothesis is tested and accepted when the null hypothesis is rejected; usually consistent with the research hypothesis; e. g.: COVID19 measures had an effect on the virus's reproduction rate. \\
+        \hline
+    \end{tabular}
+    \caption{Basic terms around the hypothesis}
+    \label{tab:terms_hypothesis}
+\end{table}
+
+\subsubsubsection{Decision-making}
+See table \ref{tab:dec_mak}.
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.45\linewidth}|p{0.45\linewidth}|}
+        \hline \textcolor{blue1}{Term} & \textcolor{blue1}{Short explanation} \\
+        \hline
+        Rejection region / ciritcal region & Set of values of the test statistic $t$ for which $H_0$ is rejected (this region is derived under $H_0$) \\
+        \hline
+        Acceptance region & Set of $t$-values where $H_0$ is accepted \\
+        \hline
+        Critical value & Boundary / boundaries of the acceptance region \\
+        \hline
+    \end{tabular}
+    \caption{Basic terms around the decision-making in hypothesis tests}
+    \label{tab:dec_mak}
+\end{table}
+
+\subsubsubsection{Validity of the decision}
+See table \ref{tab:dec_mak}.
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.45\linewidth}|p{0.45\linewidth}|}
+        \hline \textcolor{blue1}{Term} & \textcolor{blue1}{Short explanation} \\
+        \hline
+        Significance level $\alpha$ & Probability of rejecting the null hypothesis $H_0$ given it is true (type 1 error). $\alpha$ is a
+        parameter we choose and set the rejection region(s) accordingly. \\
+        $p$-value & Based on the distribution of the test statistic devised under $H_0$ it is the probability of observing a value
+        at least as extreme as $t$ in our sample. $p$ is used to check if we are in the rejection region. \\
+        \hline
+        Statistical significance & If $p\leq \alpha$ we reject $H_0$ at the $\alpha$ significance level. So the chance
+        that this sample was brought forth under the \textit{no-difference} assumption is less than $\alpha$.\\
+        \hline
+        Type 1 error, false positive (\textit{rejection is positive}) & Rejecting $H_0$ when it is true \\
+        \hline
+        Size of the test & Probability of a type 1 error, $\alpha$ \\
+        \hline
+        Power of a test, true positive & Probability of correctly rejecting $H_0$ when it is false, it is
+        the probability of the rejection region under the \textit{true} distribution \\
+        \hline
+    \end{tabular}
+    \caption{Basic terms around the decision-making in hypothesis tests}
+    \label{tab:dec_mak}
+\end{table}
+
+\subsubsubsection{Statements on tests}
+See table \ref{tab:test_stats}.
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.45\linewidth}|p{0.45\linewidth}|}
+        \hline \textcolor{blue1}{Term} & \textcolor{blue1}{Short explanation} \\
+        \hline
+        Exact test & The derivation of the distribution of the test statistic only depends on $H_0$ being
+        true. So if $H_0$ is true, we will by chance reject on average \textit{exactly} the proportion $\alpha$ of tests. \\
+        \hline
+        Most powerful test & The test with the highest power for a given size $\alpha$ \\
+        \hline
+    \end{tabular}
+    \caption{Basic terms around tests}
+    \label{tab:dec_mak}
+\end{table}
+
+\subsubsection{Basic Null Hypothesis Significance Testing Procedure}
+\idea{Based on a null hypothesis come up with a test statistic which distribution can be derived under $H_0$
+and check if the observed statistic can reasonably be assumed to have been brought forth under $H_0$.}
+\begin{enumerate}
+    \item We want to test a statement about model parameters for a population. We therefore state the null-hypothesis
+    $H_0$ and the alternative hypothesis $H_1$ in terms of these.
+    \begin{equation}
+        \begin{gathered}
+            \text{e.g. the two-sided } H_1: \beta_1 \neq 0, \quad H_0: \beta_1 = 0 \\
+            \text{e.g. the one-sided } H_1: \beta_1 > 0, \quad H_0: \beta_1 \leq 0
+        \end{gathered}
+    \end{equation}
+    \note{For the one-sided test we in effect mostly also use the \textit{no-difference} $\quad H_0: \beta_1 = 0$ (the most
+    \textit{extreme} version of $H_0: \beta_1 \leq 0$) to
+    devise the test statistic and then based on \textit{where} we reject\footnote{On the left or right side of the distribution. The test statistic is 1-dimensional, while our statement might be concerned with multiple parameters.}
+    can make a 1-sided statement.}
+    \item Define a test statistic $T$ which can be calculated from our sample (and for which we can find a distribution)
+    \begin{equation}
+        \text{e.g. } t=\hat{\beta}_1^\text{MLE} \quad \text{for the linear model}
+    \end{equation}
+    \item Derive the distribution of the test statistic under $H_0$ (and possibly further assumptions) (or construct it empirically via \textit{bootstrapping})
+    \begin{equation}
+        \text{e.g. } t \sim \mathcal{N}(0,\sigma^2 (\mat{X}^T \mat{X})^{-1}) \quad \text{for the linear model, e.g. with } \beta_0 \text{ marginalized out}
+    \end{equation}
+    \item Define a significance level $\alpha$ (e.g. $\alpha = 0.05$)
+    \item Partition the distribution of the test statistic $T$ into rejection and acceptance region. The rejection region is
+    chosen to have probability $\alpha$ under $H_0$.
+    \item Compute the observed value $t_{\text{obs}}$ of the test statistic $T$ from the sample
+    \item If $t_{\text{obs}}$ is in the rejection region, reject $H_0$ at the $\alpha$ significance level, otherwise accept $H_0$.
+\end{enumerate}
+Steps 5 to 7 can alternatively be formulated as
+\begin{enumerate}
+    \item Compute the $p$-value of the observed test statistic $t_{\text{obs}}$, i.e. the probability of obtaining a sample
+    at least as extreme as the observed sample under $H_0$.
+    \item Reject $H_0$ in favor of $_1$ if $p \leq \alpha$.
+\end{enumerate}
+
+The testing procedure is illustrated in figure \ref{fig:hypothesis_testing}.
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.95\textwidth]{figures/hypothesis_testing.svg}
+    \caption{Illustration of the hypothesis testing procedure}
+    \label{fig:hypothesis_testing}
+\end{figure}
+
+\paragraph*{Rejection in a two-sided test:} In a two-sided test we construct equally likely
+rejection regions on both sides of the distribution of the test statistic. Therefore, we reject
+$H_0$ if
+\begin{equation}
+    p\left(t \geq t_{o b s} \mid H_0\right) \leq \frac{\alpha}{2}, \quad p\left(t \leq t_{o b s} \mid H_0\right) \leq \frac{\alpha}{2}
+\end{equation}
+Formally the rejection region is given by (let $F(t)$ be the CDP of $p(t)$)
+\begin{equation}
+    R=\left[-\infty, F^{-1}\left(\frac{\alpha}{2}\right)\right] \cup\left[F^{-1}\left(1-\frac{\alpha}{2}\right), \infty\right]
+\end{equation}
+
+\subsubsubsection{Type I and type II error}
+\begin{itemize}
+    \item \textbf{Type I error:} Rejecting $H_0$ when it is true, by design the probability of a type I error is $\alpha$
+    \item \textbf{Type II error:} Not rejecting $H_0$ when it is false, the probability of a type II error is $\beta$ based on the true distribution of the test statistic
+\end{itemize}
+The errors are illustrated in figure \ref{fig:type_1_2_error}.
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.95\textwidth]{figures/table_hypothesis.svg}
+    \caption{Truth table of hypothesis testing.}
+    \label{fig:type_1_2_error}
+\end{figure}
+
+The most powerful test - the one with the highest probability of correctly rejecting $H_0$ at a given $\alpha$ - is chosen based on the Neyman-Pearson lemma\footnote{\textit{Roughly it says that a likelihood ratio test is the way to go for testing simple hypotheses against each other.}}.
+
+\subsubsubsection{Bayesian perspective on hypothesis testing}
+In Bayesian statistic we have the full posterior of the parameter of interest, so we can
+directly make statements about the parameters.
+
+\subsubsection{Overview on specific test procedures}
+\begin{itemize}
+    \item \textcolor{blue1}{Exact tests}: The underlying probability distribution is exactly known under $H_0$ (e.g. the binomial distribution for a coin flip). No further parameters need to be estimated $\rightarrow$ \textit{non-parametric}.
+    \item \textcolor{blue1}{Asymptotic tests}: Based on the central limit theorem, the distribution of the test statistic is derived under $H_0$. Parameters are estimated from the data as necessary.
+    \item \textcolor{blue1}{Bootstrapping}: The distribution of the test statistic is derived empirically (empirical distribution function) by resampling the data.
+\end{itemize}
+
+\subsubsection{Hypothesis and statistics for typical tests}
+Consider table \ref{tab:typical_tests}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{|p{0.2\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.2\linewidth}|}
+        \hline 
+        Test For & Null Hypothesis $(H_0)$ & Test Statistic & Distribution & Use When \\
+        \hline 
+        Population mean $(\mu)$ if variance $\sigma^2$ is known & $$\mu=\mu_0$$ & $$\frac{\left(\bar{x}-\mu_o\right)}{\sigma / \sqrt{n}}$$ & $Z$ & Normal distribution or $n>30 ; \sigma$ known \\
+        \hline 
+        Population mean $(\mu)$ if variance $\sigma^2$ must be estimated & $$\mu=\mu_0$$ & $$\frac{\left(\bar{x}-\mu_o\right)}{s / \sqrt{n}}$$ & $t_{n-1}$ & $n<30$, and/or $\sigma$ unknown \\
+        \hline
+        Difference of two means $(\mu_1-\mu_2)$ with $\sigma_1^2,\sigma_2^2$ known & $$\mu_1-\mu_2=0$$ (Test for $=c$ by replacing the $0$ accordingly.) & $$\frac{\left(\bar{x}_1-\bar{x}_2\right)-0}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}$$ & $Z$ & Both normal distributions, or $n_1, n_2 \geq 30 ; \sigma_1, \sigma_2$ known \\
+        \hline 
+        Difference of two means $(\mu_1-\mu_2)$ with $\sigma_1^2,\sigma_2^2$ estimated& $$\mu_1-\mu_2=0$$ & $$\frac{\left(\bar{x}_1-\bar{x}_2\right)-0}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$ & $t$ distribution with $df=$ the smaller of $n_1-1$ and $n_2-1$ & $n_1, n_2<30 ;$ and/or $\sigma_1, \sigma_2$ unknown \\
+        \hline 
+        Mean difference $\mu_d$ (of paired data $\{x^{(1)}_i,x^{(2)}_i\}_{i=1}^N, d_i=x^{(1)}_i-x^{(2)}_i$) & $$\mu_d=0$$ & $$\frac{\left(\bar{d}-\mu_d\right)}{s_d / \sqrt{n}}$$ & $t_{n-1}$ & $n<30$ pairs of data and/or $\sigma_d$ unknown \\
+        \hline
+    \end{tabular}
+    \caption{Hypothesis and test statistic for typical tests}
+    \label{tab:typical_tests}
+\end{table}
+
+\subsubsection{Simple example for an application case of hypothesis testing}
+
+Consider survival times of patients with breast cancer (sample $1$) and stomach cancer (sample $2$).
+
+\begin{equation}
+    \begin{aligned}
+        D^{(1)} &= (107, 353, 1764, 667, 990, 78, 667, 44, 9, 27), \quad n_1 = 10 \\
+        D^{(2)} &= (374, 253, 812, 246, 95, 367, 251, 309, 594, 826, 593, 97), \quad n_2 = 12
+    \end{aligned}
+\end{equation}
+
+We will work with the logged lifetimes $X^{(1)}, X^{(2)}, x^{(k)}_j=\log{d^{(k)}_j}$ (see e.g. \cite{over04}) and present kernel density estimates of
+both the original and log-transformed data in figure \ref{fig:surv_kde}. Note that in the sample $1$ we have an outlier at $1764$ which strongly
+pulls the mean of the non-logged data to higher values. The log-transforms crunches down especially the outlier, shifting the mean to lower values.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=1\linewidth]{figures/kde_log_kde.svg}
+    \caption{Kernel Density Estimates of the original and log-transformed data.}
+    \label{fig:surv_kde}
+\end{figure}
+
+\textbf{Question:} Do patients with stomach cancer live significantly longer than patients with breast cancer?
+
+As $\bar{X}^{(1)}$ is smaller than $\bar{X}^{(2)}$ (see figure \ref{fig:surv_kde}), we will consider $\mu_2 - \mu_1$.
+
+\textbf{Null hypothesis:} Therefore our \textit{no-difference hypothesis is:} $H_0:\mu_2 - \mu_1 \leq c$, some constant $c$.
+
+\textbf{Intuition}: While $\bar{X}^{(2)} - \bar{X}^{(1)} > 0.25$ we cannot reject $H_0$ fundamentally 
+as of the large stray in the distributions (see figure \ref{fig:surv_kde} again).
+
+\textbf{Test statistic:} The basic reasoning here is that we want an under $H_0$ centered test distribution,
+which takes into consideration that the scale on which means are to be compared is given
+by the standard error of the means (see again figure \ref{fig:surv_kde}, if the distributions
+would be more peaked, maybe $H_0$ could be rejected).
+
+\begin{equation}
+    \begin{multlined}
+    t_{\text{obs}} = \frac{\bar{X}^{(2)}_{\text{sample}} - \bar{X}^{(1)}_{\text{sample}} - c}{S_p\sqrt{\frac{1}{n^{(1)}} + \frac{1}{n^{(2)}}}} \\
+    S_p = \sqrt{\frac{\left(n^{(1)} - 1\right)\left(S^{(1)}\right)^2 + \left(n^{(2)} - 1\right)\left(S^{(2)}\right)^2}{n^{(1)} + n^{(2)} - 2}} \\
+    \end{multlined}
+\end{equation}
+
+The next step would be to calculate (derive / bootstrap) the distribution of the test statistic and see
+where the observed value falls. But before we get to this, we consider 
+\textit{exact tests}.
+
+\subsubsection{Exact tests}
+Here based on $H_0$ the distribution of the test statistic is exactly known.
+
+\subsubsubsection{Sign test - testing the direction of change}
+Consider \textbf{paired} observations $\{ x_i \in X, y_i \in Y \}_{i=1}^N$, e.g. Covid19 infection rates before
+($x_i$) and after ($y_i$) some restriction measures across multiple countries $i=1,\ldots,N$.
+\paragraph*{Sign testing procedure}
+\begin{enumerate}
+    \item We want to test if observations in $X$ are larger than those in $Y$ (e.g. Covid-measures
+    decreased infection rates) (or vice versa), ties are ignored / disregarded.
+    \item Consider the statistic $T_i = \sign(x_i-y_i)$ only based on the sign of the difference.
+    With this
+    \begin{equation}
+        H_0: E[T] = 0, \quad H_1: E[T] > 0
+    \end{equation}
+    or equivalently $H_0: p(T = +1) = 0.5, \quad H_1: p(T = +1) > 0.5$. Consider the test statistic
+    \begin{equation}
+        k_0 = \sum_{i=1}^N T_i + 1
+    \end{equation}
+    counting the number of positive signs.
+    \item Under $H_0$ we follow $k_0 \sim \text{Binomial}(N,0.5)$
+    \item We choose a significance level $\alpha = 0.05$
+    \item We want to reject $H_0$ on the right side so towards $H_1: E[T] > 0$. Therefore
+    the $p$-value of observing a $k$ more extreme than $k_0$ is (under $H_0$)
+    \begin{equation}
+        p\left(k \geq k_0 \mid H_0\right)=\sum_{i=k_0}^N\left(\begin{array}{c}
+        N \\
+        i
+        \end{array}\right)\left(\frac{1}{2}\right)^k\left(\frac{1}{2}\right)^{N-k}=\sum_{i=k_0}^N\left(\begin{array}{c}
+        N \\
+        i
+        \end{array}\right)\left(\frac{1}{2}\right)^N
+        \end{equation}
+    \item We accept $H_1$ if $p \leq \alpha$
+    \note{In the one-sided scenario the \enquote{we neglect the null hypothesis and therefore accept the alternative}
+    is not a nice formulation, if $H_0$ and $H_1$ are not exhaustive.}
+\end{enumerate}
+
+\redbox{\textbf{Problem of confounding factors:} Note that we strictly only make statements about data.
+E.g. the viral load decreased between measurements. If we want to make a statement like giving the
+drug caused the decrease, we need to control for confounding factors. For instance the reason for the change
+in viral load could also be that one measurement was in the morning, the other in the evening.}
+
+\paragraph*{Pro and con - sign test}
+\begin{itemize}
+    \item \textcolor{green1}{Pro}: as in general in exact tests, no further assumptions about the distribution of the statistic are done, except that $H_0$ holds
+    \item \textcolor{red1}{Con}:
+    \begin{itemize}
+        \item only sign information is used, not how large the differences are, not powerful, high $\beta$
+        \item other relations like correlations between $x_i$ and $y_i$ are not considered
+    \end{itemize}
+\end{itemize}
+
+\subsubsubsection{Mann-Whitney U test (aka Wilcoxon rank-sum test) - no strict pairing necessary}
+\textbf{Aim:} Test if two independent samples come from the same distribution. It is an 
+alternative to the \textit{unpaired two-sample t-test}.
+\textbf{Example Question:} Do marks of boys and girls in a test differ?
+\textbf{Concept:} The test is done base on ranks-sums. Order all
+observations from both samples in ascending order and assign ranks to them\footnote{For ties both get the same rank halfway between the next lower and higher rank.}. 
+Then sum the ranks of the observations from each sample respectively. One can find an exact distribution of the test statistic under $H_0$.
+
+\subsubsection{Asymptotic test}
+\subsubsubsection{Central limit theorem}
+Let $X_i, i=1,\ldots,N$ be independent random variables with 
+variance $\sigma^2$ and finite mean $\mu := E[X_i] < \infty$. Then
+\begin{equation}
+    \lim _{N \rightarrow \infty} \frac{\frac{1}{N} \sum_i\left(X_i-\mu\right)}{\sigma / \sqrt{N}} \sim \mathcal{N}(0,1)
+\end{equation}
+so when we repeatedly sample from some distribution (e.g. an exponential one)
+and calculate the mean of those samples, then those means will be normally distributed,
+as e.g. shown in figure \ref{fig:clt_exponential}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/clt_exponential.svg}
+    \caption{Central limit theorem for the exponential distribution.}
+    \label{fig:clt_exponential}
+\end{figure}
+
+\note{If $\mu$ and $\sigma$ are unknown, this - in the large $N$ limit - still holds true when the estimates of $\mu$ and $\sigma$ are used,
+even though the estimate of $\sigma$ is (potentially) biased, by \textit{Slutskys theorem} (for which it's enough that the estimate of 
+$\sigma$ converges in probability to $\sigma$). For smaller $N$ we have to be more careful.}
+
+\greenbox{\textbf{Usage in testing:} Being able to estimate the sampling distribution of a mean just from a sample is very useful when
+we want to compare means.}
+
+In the following we will introduce some important asymptotic distributions and asymptotic tests.
+
+\subsubsubsection{Important distributions in testing I: $\chi^2$ distribution}
+The sum of squares of a normally distributed variable $Z_i \sim \mathcal{N}(0,1)$ ($\{ Z_i \}_{i=1}^N$ i.i.d.) follows
+\begin{equation}
+    \sum_{i=1}^K Z_i^2 \sim \chi^2(k)
+\end{equation}
+where $N$ is the number of degrees of freedom (in the sample not the parameters),
+here the number of independent random variables. The $\chi^2$ distribution is shown in figure \ref{fig:chi2}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/chi2.svg}
+    \caption{The $\chi^2$ distribution for different degrees of freedom (numbers drawn per sample). For large $N$ we should approach a normal distribution again.}
+    \label{fig:chi2}
+\end{figure}
+
+\subsubsubsection{Important distributions in testing II: $t$-distribution}
+The $t_N$ distribution is defined on the ratio
+\begin{equation}
+    t_N = \frac{z}{\sqrt{\chi_N^2 / N}}, \quad z \sim \mathcal{N}(0,1)
+\end{equation}
+where $z$ and $\chi_N^2$ are independent. The $t$-distribution is shown in figure \ref{fig:t_dist}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/t.svg}
+    \caption{The $t$-distribution for different degrees of freedom (numbers drawn per sample). For large $N$ we should approach a normal distribution again.}
+    \label{fig:t_dist}
+\end{figure}
+
+\subsubsubsection{The Chi-Square Test - test on counts}
+\paragraph*{Setting} Consider an experiment of counts of categories, i.e. when tossing
+balls at boxes assuming non-changing probabilities of the categories (boxes) and
+independent throw.
+
+\paragraph*{Hypothesis} We make a hypothesis for all the probabilities of the 
+categories $p_i, i=1,\ldots,k$. For $n$ total throws, we expect (binomial distribution)
+$E(n_i) = n p_i$ hits per box in $n$ throws (counts per category).
+
+\paragraph*{Test statistic} The test statistic is the sum of squares of the differences
+between the observed and expected counts, normalized by the expected counts.
+
+\begin{equation}
+    X^2=\sum_{i=1}^k \frac{\left[n_i-E\left(n_i\right)\right]^2}{E\left(n_i\right)}=\sum_{i=1}^k \frac{\left[n_i-n p_i\right]^2}{n p_i} \underset{\text{N large}}{\sim} \chi^2_{df} \underset{\text{N large, approx.}}{\sim} \chi_{k-1}^2
+\end{equation}
+
+\yellowbox{\textbf{Why does this follow a $\chi^2$ distribution with $k-1$ degrees of freedom?}: For large $n$, $n_i$ will be approximately normally distributed, while $n$ and $p_i$ are just constants.
+While we sum over $k$ categories, we have the constraint that the $n_i$ sum up to $n$, so one degree of freedom is lost (equivalently $\sum p_i = 1$).}
+
+Given e.g. tabulated data of the $\chi^2$ distribution we can, based on the observed $X^2$ value, calculate the $p$-value and decide if we reject $H_0$.
+
+\subsubsubsection{Students $t$-test}
+We finally come back to tests on means, as introduced for the example of the survival times of breast and stomach cancer patients 
+(a \textit{two-sample t-test}).
+\bluebox{\textbf{Aim in t-tests:}
+\begin{itemize}
+    \item 1-sample t-test: Test a sample might come from a distribution with mean $\mu_0$
+    \item 2-sample t-test: Test whether two distributions come from a distribution with the same mean, e.g. $H_0:$ breast and 
+    stomach cancer patients have the same survival times.
+\end{itemize}
+}
+\note{Formulations where we test on a certain difference between means follow analogously.}
+
+\paragraph*{One-sample t-test} Consider we have measured $\{ x_i \}, i=1,\ldots,N$ and want to test against a known means $\mu_0$.
+\begin{equation}
+    H_0: \mu = \mu_0, \quad H_1: \mu \neq \mu_0, \quad \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i
+\end{equation}
+We use the test statistic
+\begin{equation}
+    \begin{gathered}
+        t = \frac{\bar{x} - \mu_0}{\hat{\sigma}_{\bar{x}}} \sim t_{N-1}, \quad \text{std. of mean } \hat{\sigma}_{\bar{x}} = \frac{s}{\sqrt{N}} \\
+        \text{corrected (but biased) sample std. } s = \sqrt{\frac{1}{N-1} \sum_{i=1}^N (x_i - \bar{x})^2}
+    \end{gathered}
+\end{equation}
+\note{While for large $N$ we have a normal distribution by Slutkys theorem, for lower $N$ we have to mind that $\hat{\sigma}_{\bar{x}}$ is an estimate.}
+The distribution according to $t_{N-1}$ can be seen from
+\begin{equation}
+    t=\frac{\bar{x}-\mu_0}{\hat{\sigma}_{\bar{x}}}=\frac{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}{\hat{\sigma}_{\bar{x}} /(\sigma / \sqrt{N})}=\frac{\overbrace{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}^{\sim \mathcal{N}(0,1)}}{\underbrace{\sqrt{\frac{1}{N-1} \sum_{i=1}^N\left(\frac{x_i-\bar{x}}{\sigma}\right)^2}}_{\sim \sqrt{\chi_{N-1}^2 \slash (N-1)}}} \sim t_{N-1}
+\end{equation}
+\greenbox{\textbf{Why is it $N-1$?} The reasoning for why it is $t_{N-1}$ here is the same as for
+the reasoning of $N-1$ in the Bessel correction. While we have $N$ independent observations in the sample
+we only have $N-1$ independent residuals, $x_i - \bar{x}$ as they must sum up to $1$ (by definition of the sample mean).}
+
+\paragraph*{Two-sample t-test} Consider we have two independent samples $X_1$ and $X_2$ of (possibly different) sizes $N_1$ and $N_2$ with means
+\begin{equation}
+    \bar{x}_1 = \frac{1}{N_1} \sum_{i=1}^{N_1} x_{1_i}, \quad \bar{x}_2 = \frac{1}{N_2} \sum_{i=1}^{N_2} x_{2_i}
+\end{equation}
+We want to test if the means \textbf{of the populations they come from} $\mu_1, \mu_2$ are significantly different (or e.g. larger than a threshold).
+\begin{equation}
+    H_0: \mu_1 = \mu_2, \quad H_1: \mu_1 \neq \mu_2
+\end{equation}
+
+For unequal sample sizes and similar variances, we get
+\begin{equation}
+    \begin{gathered}
+        t=\frac{\left(\bar{x}_1-\mu_1\right)-\left(\bar{x}_2-\mu_2\right)}{\hat{\sigma}_{\bar{x}_1-\bar{x}_2}} \underset{H_0: \mu_1 = \mu_2}{\approxeq} \frac{\bar{x}_1-\bar{x}_2}{\hat{\sigma}_{\text {pool }} \sqrt{\frac{1}{N_1}+\frac{1}{N_2}}}
+    \end{gathered}
+\end{equation}
+where the pooled standard deviation $\hat{\sigma}_{\text{pool}}$ is given by
+\begin{equation}
+    \hat{\sigma}_{\text {pool }}=\sqrt{\frac{\left(N_1-1\right) \hat{\sigma}_1^2+\left(N_2-1\right) \hat{\sigma}_2^2}{N_1+N_2-2}},\quad \left(\begin{array}{c}
+    \text { makes sense for } \\
+    \frac{1}{2}<\frac{\hat{\sigma}_1^2}{\hat{\sigma}_2^2}<2
+    \end{array}\right)
+\end{equation}
+where $\hat{\sigma}_1^2, \hat{\sigma}_2^2$ are the unbiased estimates of the population variances.
+
+\paragraph*{Why this complicated denominator and t-distribution?} The idea is that means have to be
+compared on the scale of their standard errors, as illustrated in figure \ref{fig:means_diff_std}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.7\textwidth]{figures/means_diff_std.svg}
+    \caption{It is not the absolute difference between means that counts.}
+    \label{fig:means_diff_std}
+\end{figure}
+
+\subsubsubsection{Important distributions in testing III: $F$-distribution}
+Let $\chi_1^2 \sim \chi_{N_1}^2$ and $\chi_2^2 \sim \chi_{N_2}^2$ be independent. Then the ratio
+\begin{equation}
+    F = \frac{\chi_1^2 \slash N_1}{\chi_2^2 \slash N_2} \sim F_{N_1,N_2}
+\end{equation}
+of these two $\chi^2$ distributed random variables divided by their degrees of freedom follows the $F$-distribution.
+
+\subsubsubsection{The $F$-test - test on variances}
+Assuming two independent samples $X_1$ and $X_2$ from two populations 
+(e.g. test scores of boys and girls), which we assume to come from populations
+with normal distribution with means $\mu_1, \mu_2$ and variances $\sigma_1^2, \sigma_2^2$.
+
+Based on the samples
+\begin{equation}
+    \{ x_{1_i} \}_{i=1}^{N_1}, \quad \{ x_{2_i} \}_{i=1}^{N_2}
+\end{equation}
+we want to test if the population variances 
+can reasonably be assumed to be equal, i.e. $H_0: \sigma_1^2 = \sigma_2^2$.
+
+The test statistic is given by
+
+\begin{equation}
+    F = \frac{s_1^2}{s_2^2} \sim F_{N_1-1,N_2-1}, \quad s_1^2 = \frac{1}{N_1-1} \sum_{i=1}^{N_1} (x_{1_i} - \bar{x}_1)^2, \quad s_2^2 = \frac{1}{N_2-1} \sum_{i=1}^{N_2} (x_{2_i} - \bar{x}_2)^2
+\end{equation}
+
+\paragraph*{Example of comparing two models based on explained variance} Consider data
+\begin{equation}
+    D=\left\{y_i, \vec{x}_i\right\}, \quad \vec{x}_i=\left(\begin{array}{c}
+    x_{i 1} \\
+    \vdots \\
+    x_{i p}
+    \end{array}\right)
+\end{equation}
+on which we try a full and reduced model
+\begin{equation}
+    \begin{gathered}
+        \text { full model }(I): y_i=\beta_0+\sum_{j=1}^p \beta_j^{(I)} x_{i j}+\epsilon_i \\
+        \text { reduced model (II): } y_i=\beta_0+\sum_{j=1}^q \beta_j^{(I I)} x_{i j}+\epsilon_i, \quad q<p
+    \end{gathered}
+\end{equation}
+and make the null hypothesis
+\begin{equation}
+    H_0: \beta_{q+1} = \dots = \beta_p = 0
+\end{equation}
+i.e. that the small model is sufficient for linearly explaining the data.
+
+Now consider the model losses
+\begin{equation}
+    \operatorname{SSQ}(\vec{\beta}^{(I)})=\sum_{i=1}^N\left(y_i-\hat{y}_i^{(I)}\right)^2, \quad \operatorname{SSQ}(\vec{\beta}^{(I I)})=\sum_{i=1}^N\left(y_i-\hat{y}_i^{(I I)}\right)^2
+\end{equation}
+
+\note{By choice of the residuals, $y_i - \hat{y}_i^{(I,II)} \sim \mathcal{N}(0,\sigma^2)$, so the sums of squares of the residuals
+$\operatorname{SSQ}(\vec{\beta}^{(I,II)})$ follow $\chi^2$ distributions.}
+
+Therefore the test statistic comparing the sum of squares of the residuals of the two models is given by
+\begin{equation}
+    \begin{gathered}
+        \mathcal{F} = \frac{\operatorname{SSQ}(\vec{\beta}^{(I I)}) - \operatorname{SSQ}(\vec{\beta}^{(I)}) \slash (p-q)}{\operatorname{SSQ}(\vec{\beta}^{(I)}) \slash (N-p-1)} \sim F_{p-q,N-p-1} \\
+        \operatorname{SSQ}(I I) - \operatorname{SSQ}(I) \geq 0 \text { as the smaller model has the higher loss }
+    \end{gathered}
+\end{equation}
+
+\subsubsubsection{Likelihood ratio test principle - comparing models by likelihood}
+\bluebox{\textbf{Aim of the likelihood ratio test:} We want to compare a full to a restricted model,
+to see, if the full more complex model should be used or if the simpler one is just fine.}
+
+So consider a model $M_\vec{\theta}$ with parameters $\vec{\theta} \in \Omega$ (the parameter space).
+The resctricted model $M_{\vec{\theta}_0}$ has parameters from a limited parameter space $\Omega_0 \subset \Omega$,
+constrained by the null hypothesis $H_0$.
+
+\paragraph*{Test statistic} We compare the likelihood of the sample under the full and restricted model.
+\begin{equation}
+    \lambda = \frac{\mathcal{L}_X(\vec{\hat{\theta}}_{\text{MLE}} \in \Omega_0)}{\mathcal{L}_X(\vec{\hat{\theta}}_{\text{MLE}} \in \Omega)} \in [0,1]
+\end{equation}
+If the null hypothesis is true, then the limitation of $\Omega$ has no effect on the likelihood
+\begin{equation}
+    \text{if } H_0: \vec{\hat{\theta}}_{\text{MLE}} \in \Omega_0 \text{ in general } \quad \rightarrow \quad \lambda = 1
+\end{equation}
+As we usually want a test statistic distributed around $0$, we use the log-likelihood ratio
+\begin{equation}
+    \begin{gathered}
+        D := -2 \log{\lambda} \underset{\text{for sample size } \geq 10 \text{ as of CLT}}{\sim} \chi^2_{k-k_0} \\
+        \quad k = \text{number of parameters in the full model}, \quad k_0 = \text{number of parameters in the restricted model} \\
+        df = k - k_0 \text{ \# parameters fixed by the null hypothesis}
+    \end{gathered}
+\end{equation}
+\textbf{Example:} For instance we could have the baseline linear model
+\begin{equation}
+    M_\Omega: y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \epsilon_i, \quad \beta_1, \beta_2 \in \Omega
+\end{equation}
+and the null hypothesis $H_0: \beta_2 = 0$. Then
+\begin{equation}
+    M_{\Omega_0}: y_i = \beta_0 + \beta_1 x_i + \epsilon_i \quad \rightarrow \quad df = 1
+\end{equation}
+
+\note{To really approximately have a $\chi^2$ distribution, it might make sense to bring the baseline 
+observation to a more Gaussian form, e.g. by Box-Cox transformation, generally
+\begin{equation}
+    z_i = \begin{cases}\frac{x_i^\lambda-1}{\lambda} & \text { if } \lambda \neq 0 \\ \ln y_i & \text { if } \lambda=0\end{cases}
+\end{equation}
+with $\lambda$ being a parameter. Where for $\lambda = 0$ we have the log-transformation which can sometimes
+help to unskew distributions (stabilize the variance) (it it was log-normal previously) (might also have the opposite effect).
+}
+
+\subsection{Bootstrap methods}
+\bluebox{Uses of Bootstrap include: 
+\begin{itemize}
+    \item estimating the standard error of a statistic
+    \item estimating the bias of a statistic
+    \item estimating confidence intervals for a statistic
+    \item estimating the distribution of a statistic for hypothesis testing
+\end{itemize}
+}
+
+At the heart of bootstrap lies random sampling with replacement to better assess statistical
+estimates (assign measures of accuracy\footnote{For the mean e.g. a measure of accuracy is the standard error for which we have the explicit formula $\SE = \sqrt{\frac{s^2}{n}}$, $\bar{X}_{\text{sample}} = \frac{1}{n} \sum_{i=1}^{n} x_i$, $s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{X}_{\text{sample}})^2$, $X_{\text{sample}} = (x_1,\dots,x_n)$. For most other statistics (e.g. the median) we do not have such an explicit formula. See \cite[chapter 1]{Efron1994}.}) - we use a sample as an estimate of a population and bootstrap samples from the sample
+as estimates of the sampling distribution. Consider we have observed a sample $X_{\text{sample}} = (x_1,\dots,x_n)$ and are interested in a population parameter
+$\theta$ which we can estimate as $\hat{\theta}$ from a sample. The non-parametric bootstrap method is given by
+\begin{enumerate}
+    \item $\forall b \in \{1, \dots, B\}$ (where $B$ is the number of bootstrap samples): Generate a bootstrap sample $X^{(b)} = (x_1^{(b)},\dots,x_n^{(b)})$ by sampling from $X$ with replacement and calculate $\hat{\theta}^{(b)}$ on the bootstrap sample.
+    \item This yields an empirical distribution of estimates $\hat{\theta}^{(1)},\dots,\hat{\theta}^{(B)}$ from which we can calculate the mean $\hat{\theta}^{*}$ and standard error $\SE\left(\hat{\theta}^*\right)$.
+\end{enumerate}
+with the bootstrap estimate and the estimated standard error given by
+\begin{equation}
+    \begin{aligned}
+        \hat{\theta}^{*} &= \frac{1}{B} \sum_{b=1}^{B} \hat{\theta}^{(b)} \\
+        \hat{\SE}(\hat{\theta}) = \SE\left(\hat{\theta}^*\right) &= \sqrt{\frac{1}{B-1} \sum_{b=1}^{B} \left( \hat{\theta}^{(b)} - \hat{\theta}^{*} \right)^2}
+    \end{aligned}
+\end{equation}
+
+The bootstrap estimate of the $\bias\left(\hat{\theta}\right) = E\left[ \hat{\theta} \right] - \theta$ of the estimator $\hat{\theta}$ is given by
+\begin{equation}
+    \hat{\bias}\left(\hat{\theta}\right) = \hat{\theta}^{*} - \hat{\theta}
+\end{equation}
+
+\note{By the bias correction we introduce a new source of variance (the variance of the bias) which we do not account for in the standard error.
+Using further bootstrapping we can estimate the standard error of $\bar{t}$, but if $\hat{\text{bias}}(\hat{t})$ is small compared to $\hat{\SE}\left(\hat{t}\right)$
+it is safer to use $\hat{t}$ than $\bar{t}$ (see \cite[chapter 10.6, p. 138]{Efron1994}).}
+
+\subsubsection{Caveats of Bootstrap\skipthis}
+Beware, that bootstrap is not magic - it will not retrieve information not present in
+a sample or fix a bad sample. Also, the bootstrap sample is generally centered at
+the observed statistic, not the population parameter (e.g. $\bar{X}$ not $\mu$) - using
+bootstrap we will not improve on $\bar{X}$ \citep[section 2.3 (also see there for exceptions)]{tim15}. And if there is bias
+(as estimated above), the bootstrap estimate is indeed not a bias-corrected estimate - if $\hat{\theta}^{*}$
+is greater than $\hat{\theta}$, the bias corrected estimate $\bar{\theta} = \hat{\theta} - \hat{\bias}$ should be less than $\hat{\theta}$,
+and this kind of bias correction also has pitfalls\footnote{$\bar{\theta}$ might have a much larger standard error than $\hat{\theta}$.} \citep[chapter 10.6, p. 138]{Efron1994}. Simply put, if from resampling a sample we get a positive bias
+then to get to the unbiased one we have to go "two steps back", $\hat{\theta} = \hat{\theta}^{*} - 2 \cdot (\hat{\theta}^{*} - \hat{\theta}) = 2\hat{\theta}-\hat{\theta}^{*}$ (eq. 10.41 in \cite{Efron1994}).
+
+In figure \ref{fig:bootstrap_samples} we illustrate that as the sample carries distributional information so do the bootstrap samples. In figure \ref{fig:boots_corr} we illustrate the difference between the sample
+estimate, bootstrap estimate and corrected estimate for a biased estimator, the standard deviation. Here the bias comes from the fact that in the calculation
+of the standard deviation we also estimate the mean from which the points in the sample naturally deviate less than from the true mean, so the
+standard deviation is (with the biased estimator) underestimated.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=.95\linewidth]{figures/boot_samples.svg}
+    \caption{Bootstrap Samples from a sample.}
+    \label{fig:bootstrap_samples}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=.95\linewidth]{figures/boot_cav.svg}
+    \caption{Illustration of the difference between the sample estimate, bootstrap estimate and corrected estimate for the biased estimate of the standard deviation.}
+    \label{fig:boots_corr}
+\end{figure}
+
+\subsubsection{Bootstrap Confidence Intervals\skipthis}
+Note in general that bootstrap distributions tend to be narrow on average, so the bootstrap confidence intervals often under-cover \citep{tim15}.
+
+\note{This also carries over to testing. When a bootstrap distribution is used as an alternative
+to a $t$-distribution it is usually more narrow, so the bootstrap test rejects $H_0$ more often than the $t$-test.}
+
+\subsubsection{Standard Normal Bootstrap Confidence Interval}
+If $\hat{\theta}$ is a sample mean, then for large sample sizes, we can apply the central limit theorem
+
+\begin{equation}
+    \frac{\hat{\theta} - \theta}{\SE(\hat{\theta})} \isEquivTo{a} N(0,1)
+\end{equation}
+
+so based on the bootstrap estimate of the standard error $\hat{\SE}(\hat{\theta})$ we can calculate a $1-\alpha$-confidence interval for $\theta$ as
+
+\begin{equation}
+    \hat{\theta} \pm z_{1 - \alpha/2} \hat{\SE}(\hat{\theta}), \quad z_{1 - \alpha/2} \text{ is the } 1 - \alpha/2 \text{ quantile of } N(0,1)
+\end{equation}
+
+assuming that $\hat{\theta}$ is approximately normally distributed, $\hat{\theta}$ is unbiased and $\hat{\SE}(\hat{\theta})$ is a good estimate of $\SE(\hat{\theta})$.
+
+\subsubsubsection{Percentile Bootstrap Confidence Interval\skipthis}
+Here, we use quantiles based on the empirical distribution of the bootstrap samples, so a $1-\alpha$-confidence interval for $\theta$ is given by
+\begin{equation}
+    \begin{multlined}
+        \left[ \hat{\theta}^*_{\alpha/2}, \hat{\theta}^*_{1 - \alpha/2} \right], \quad \hat{\theta}^*_{\alpha/2} \text{ is the } \alpha/2 \text{ quantile of } \hat{\theta}^*, \\
+        \text{ with } \hat{\theta}^*_{1 - \alpha/2}, \hat{\theta}^*_{1 - \alpha/2} \text{ being the quantiles of the empirical distribution } \left\{ \hat{\theta}^{(b)} \right\}_{b=1,\dots,B}
+    \end{multlined}
+\end{equation}
+
+% \subsubsubsection{Basic Bootstrap Confidence Interval\skipthis}
+% Akin to the bias-corrected estimate $\bar{\theta}$, we get a basic bootstrap confidence interval for $\theta$ as
+% \begin{equation}
+%     \begin{multlined}
+%         \left[ 2\hat{\theta} - \hat{\theta}^*_{1 - \alpha/2}, 2\hat{\theta} - \hat{\theta}^*_{\alpha/2} \right], \quad \hat{\theta}^*_{\alpha/2} \text{ is the } \alpha/2 \text{ quantile of } \hat{\theta}^*, \\
+%         \text{ with } \hat{\theta}^*_{1 - \alpha/2}, \hat{\theta}^*_{1 - \alpha/2} \text{ being the quantiles of the empirical distribution } \left\{ \hat{\theta}^{(b)} \right\}_{b=1,\dots,B}
+%     \end{multlined}
+% \end{equation}
+
+\subsubsection{Bootstrap Hypothesis Testing}
+\label{subsec:bootstrap_hypothesis_testing}
+
+Consider we want to test a null hypothesis $H_0$ and we have a test statistic $T$ where observed values of $T$ under $H_0$ can be calculated for
+a sample as $t_{\text{obs}}\left( X_{\text{sample}} \right)$. In a setting where we make assumptions on the distributions
+of the test statistic we would test based on where our observed value falls in the distribution of the test statistic under $H_0$.
+
+\problem{What if the sampling distribution of the test statistic is not known? What if assumptions of asymptotic tests are not met?}
+
+\bluebox{\textbf{Intermezzo - general empirical distribution function:} Consider we have observed data $X = (x_1,\dots,x_n)$ from some underlying
+population distribution $F$. The distribution information of $F$ lies in how often similar values of $x_i$ occur in the sample $X$. We therefore
+estimate the cumulative distribution function $F$ by the empirical distribution function $\hat{F}_n$ as
+\begin{equation}
+    \hat{F}_n(x) = EDX(x) = \frac{\#\{ x_i \leq x \}}{N}
+\end{equation}
+which resembles the true distrution in the large $N$ limit.}
+
+\idea{While we only have one sample at hand, by resampling we can generate multiple \textit{samples} and based on those samples
+\textbf{conditioned on $H_0$} find an empirical distribution of the test statistic under $H_0$. See figure \ref{fig:bootstrap}.}
+
+\note{The re-samples / empirical distribution must be constructed / adapted to follow $H_0$. So we want to use the distributional
+information of the sample to generate new samples that are consistent with $H_0$. If we would just directly calculate 
+our test statistic on resampled samples and then our observed test statistic by the same formula - why should we expect
+to ever reject the null hypothesis?}
+
+In table \ref{tab:test_overview}, the different kinds of tests with respect how the test-statistic distribution
+is constructed are compared.
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+        \hline
+        & \textbf{Exact test} & \textbf{Parametric test} & \textbf{Nonparametric bootstrap test} \\
+        \hline
+        \textcolor{blue1}{Knowledge on the distribution function $F$ of the test statistic} & $F_\alpha(T)$ (/ the parameters $\alpha$) is known 
+        exactly based on $H_0$ & In $F_{\hat{\alpha}}(T)$ some parameters have to be estimated, e.g. the STD $\hat{\sigma}$ & The distribution $\hat{F}$ itself is estimated using the data
+        constrained to $H_0$ \\
+        \hline
+    \end{tabular}
+    \caption{Comparison of different kinds of tests.}
+    \label{tab:test_overview}
+\end{table}
+
+Note that there is also
+\begin{itemize}
+    \item \textbf{Parametric bootstrap test:} The sample is assumed to come from a known distribution with unknown parameters. These parameters are estimated from the sample and then the distribution is used to generate bootstrap samples and to construct the \textit{empirical distribution of the test statistic under $H_0$}.
+    \item \textbf{Semiparametric bootstrap test:} E.g. do the usual bootstrap resampling but add noise (e.g. $\sim \mathcal{N}(\sigma^2)$)
+\end{itemize}
+
+\subsubsubsection{1-sample test as an introductory example}
+Consider for instance for a sample $X_{\text{sample}} = (x_1,\dots,x_n)$ we want to test the null hypothesis $H_0: \mu = \mu_0$ vs $H_1: \mu \neq \mu_0$ (one-sample test).
+We then base our bootstrap samples on $z_i = x_i - \bar{X}_{\text{sample}} + \mu_0$ and use the test statistic $t^{(b)} = t^*\left( Z^{(b)} \right) = \frac{\bar{Z}^{(b)} - \mu_0}{s_Z^{(b)} / \sqrt{n}}$
+where $Z^{(b)} = (z_1^{(b)},\dots,z_n^{(b)})$ and $s_Z^{(b)} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} \left( z_i^{(b)} - \bar{Z}^{(b)} \right)^2}$
+and $t_{\text{obs}} = t^*\left( X_{\text{sample}} \right)$.
+
+Here we assume that as the mean varies, the distributions are just translated versions of each other
+(translation family) where if our $x_i$ are lifetimes it might make sense to use
+logged lifetimes as they are more likely to satisfy a translation or normal family
+assumption \citep[chapter 16.4]{Efron1994}.
+
+% make a figure with a and b part, one displaying bootstrap.svg, one paired_t_test.svg
+\begin{figure}
+
+    \centering
+    \begin{subfigure}{0.8\textwidth}
+      \centering
+      \includesvg[width=.95\linewidth]{figures/bootstrap.svg}
+      \caption{(Two-sided) Bootstrap Hypothesis Testing based on empirical distribution from bootstrap samples.}
+      \label{fig:bootstrap}
+    \end{subfigure}%
+
+
+
+    \begin{subfigure}{0.8\textwidth}
+      \centering
+      \includesvg[width=.95\linewidth]{figures/paired_t_test.svg}
+      \caption{(Two-sided) Standard Hypothesis test with distributional assumption.}
+      \label{fig:distributional_assumptions}
+    \end{subfigure}
+
+    \caption{Bootstrap vs Distributional Assumption Hypothesis Testing.}
+    \label{fig:tests}
+
+\end{figure}
+
+\subsubsubsection{Calculation of $p$ values in Bootstrap Hypothesis Testing}
+Practically, we calculate estimates of the $p$ values (where for $p < \alpha$ we reject $H_0$) as
+% cases for tight, left and two-sided test
+\begin{equation}
+    \begin{aligned}
+        \hat{p}^*_{\text{right}} &= \frac{1}{B} \sum_{b=1}^{B} \mathbbm{1}_{\left[t^{(b)} \geq t_{\text{obs}} \right]} \\
+        \hat{p}^*_{\text{left}} &= \frac{1}{B} \sum_{b=1}^{B} \mathbbm{1}_{\left[t^{(b)} \leq t_{\text{obs}} \right]} \\
+        \hat{p}^*_{\text{two-sided}} &= \frac{1}{B} \left[ \min{\left\{ \sum_{b=1}^{B} \mathbbm{1}_{\left[t^{(b)} \geq t_{\text{obs}} \right]}, \sum_{b=1}^{B} \mathbbm{1}_{\left[t^{(b)} \leq t_{\text{obs}} \right]} \right\} } \right]
+    \end{aligned}
+\end{equation}
+
+\subsubsubsection{Bootstrap Hypothesis Test on the Difference of Means}
+Consider we have two samples $X^{(1)} = (x_1^{(1)},\dots,x_n^{(1)})$ and $X^{(2)} = (x_1^{(2)},\dots,x_n^{(2)})$. And we want to test the null-hypothesis
+
+\begin{equation}
+    H_0: \mu^{(2)} - \mu^{(1)} \leq c \quad \text{vs} \quad H_1: \mu^{(2)} - \mu^{(1)} > c
+\end{equation}
+
+where $c \in \mathbb{R}$. Assume the true means are $\mu^{(1)}$ and $\mu^{(2)}$. We can generate a
+bootstrap distribution under $H_0$ by sampling from
+
+\begin{equation}
+    \begin{multlined}
+        z^{(1)}_i = x^{(1)}_i - \bar{X}^{(1)}_{\text{sample}} - \frac{c}{2} \quad \text{and} \quad z^{(2)}_i = x^{(2)}_i - \bar{X}^{(2)}_{\text{sample}} + \frac{c}{2} \\   
+        Z^{(1)} = (z_1^{(1)},\dots,z_n^{(1)}) \quad \text{and} \quad Z^{(2)} = (z_1^{(2)},\dots,z_n^{(2)})
+    \end{multlined}
+\end{equation}
+
+and using the test statistic
+
+\begin{equation}
+    \begin{multlined}
+    t_{\text{obs}} = \frac{\bar{X}^{(2)}_{\text{sample}} - \bar{X}^{(1)}_{\text{sample}} - c}{S_p\sqrt{\frac{1}{n^{(1)}} + \frac{1}{n^{(2)}}}} \\
+    S_p = \sqrt{\frac{\left(n^{(1)} - 1\right)\left(S^{(1)}\right)^2 + \left(n^{(2)} - 1\right)\left(S^{(2)}\right)^2}{n^{(1)} + n^{(2)} - 2}} \\
+    \end{multlined}
+\end{equation}
+
+with analogous calculations of $t^{(b)}$ on the bootstrap samples (the basic reasoning behind the denominator is that the scale on which means can be compared
+is the standard deviation, without which a statement like the means are 1 apart is meaningless (very different statement for standard deviations
+of the order of $10$ or $10^{-2}$)).
+
+\subsubsubsection{Bootstrap Hypothesis Test - Are two samples from different distributions?}
+Consider we have samples
+\begin{equation}
+    \begin{array}{ll}
+    X=\left\{x_1, \ldots, x_{N_X}\right\}, & X \sim F_X \\
+    Y=\left\{y_1, \ldots, y_{N_Y}\right\}, & Y \sim F_Y
+    \end{array}
+\end{equation}
+drawn from unknown distributions $F_X,F_Y$. Our aim is to test
+\begin{equation}
+    H_0: F_X = F_Y \quad \text { vs } \quad H_1: F_X \neq F_Y
+\end{equation}
+For testing if two samples possibly come from different distributions
+(e.g. test results of girls and boys), the testing procedure is
+\begin{enumerate}
+    \item Formulate $H_0$, so $H_0: F_X = F_Y$.
+    \item Specify the $\alpha$-level and test statistic $T$, which if $N_X = N_Y = N$ could be
+    \begin{equation}
+        T(X,Y) = \frac{\bar{\Delta}}{\sigma_\Delta \slash \sqrt{N}}, \quad \delta_i = x_i - y_i
+    \end{equation}
+    \item \textbf{Bootstrapping:} From the union $Z = X \cup Y$ we make draw replacement $N_b$ samples of sizes $N_X$ and $N_Y$ respectively with replacement. For $b = 1,\dots,N_b$
+    \begin{enumerate}
+        \item Fraw samples with repition from $Z$
+        \begin{equation}
+            \begin{gathered}
+                N_X \text{ draws with repetition from } Z \rightarrow \tilde{X}_b=\left\{\tilde{x}_1, \ldots, \tilde{x}_{N_X}\right\} \\
+                N_Y \text{ draws with repetition from } Z \rightarrow \tilde{Y}_b=\left\{\tilde{y}_1, \ldots, \tilde{y}_{N_Y}\right\} \\
+                \text{e.g. } \tilde{X}_b=\left\{x_1, y_2, x_1, y_5, \ldots\right\}, \tilde{Y}_b=\left\{y_1, y_4, x_3, y_8, \ldots\right\}
+            \end{gathered}
+        \end{equation}
+        $H_0$ (\textit{what if they were from the same distribution}) is built-in as we draw from the union of the samples.
+        \item Calculate the test statistic $t_b = T(\tilde{X}_b,\tilde{Y}_b)$.
+    \end{enumerate}
+    \item Step 3 yields a set of test statistics $t_1,\dots,t_{N_b}$ on which \textit{histogram} check if $t_{\text{obs}} = T(X,Y)$ falls 
+    into the rejection region of $H_0$. We reject $H_0$ if
+    \begin{equation}
+        \begin{gathered}
+            p_{E D F}\left(t \geq t_{\text {observed }}\right) \approx \frac{\# \text { of bootstrap } t \geq t_{\text {observed }}}{\text { bootstrap drawings } N_b}<\frac{\alpha}{2} \\
+            \text { or } p_{E D F}\left(t \leq t_{\text {observed }}\right) \approx \frac{\# \text { of bootstrap } t \leq t_{\text {observed }}}{\text { bootstrap drawings } N_b}<\frac{\alpha}{2}
+        \end{gathered}
+    \end{equation}
+    See figure \ref{fig:bootstrap} for an illustration.
+\end{enumerate}
+
+\subsection{Multiple testing problem | significance by chance}
+\problem{Consider we are testing $100$ independent null 
+hypotheses (e.g. benefits of alcohol on 100 health 
+indicators) at $\alpha=0.05$. Then - only by chance - on average 
+5 of them will lead to the wrong rejection of $H_0$ (type I error) (so to wrong 
+significant results, e.g. alcohol is good for red body cell 
+production). So we are likely to run into a type I error.}
+
+\idea{We set a confidence level for the whole family of tests,
+and scale down the $\alpha$-level for each test the more tests we do,
+so we scale down the confidence that a single test is significant (/ will generalize
+to independent data).}
+
+We want to control the \textbf{confidence in the family of tests which is quantified by the 
+family-wise error rate (FWER)}. The FWER is the probability of obtaining at least
+one significant result just by chance (so when all null hypotheses are true).
+
+\begin{equation}
+    \begin{gathered}
+        \hat{\alpha} = p(\# \{\text{accept } H_1 \mid H_0 \text{ is true}\} \geq 1) = 1 - (1-\alpha)^K \\
+        \text{total number } K \text{ of hypotheses tested with significance level } \alpha \text{ per test}
+    \end{gathered}
+\end{equation}
+
+\paragraph*{FWER control: Decrease $\alpha$ with $1 \slash K$} The so-called Bonferroni correction is
+\begin{equation}
+    \alpha_\text{per test} = \frac{\alpha_{\text{family}}}{K}, \quad \text{e.g. } \alpha_{\text{family}} = 0.05
+\end{equation}
+
+\note{This correction comes at the cost of increasing the probability for false negatives (type II error)
+(so accepting the \textit{no-difference} statement when we really have a significant result), so decreasing
+the statistical power of the test. Holm-Bonferroni is more powerful.
+}
+
+Alternatively one can also \textbf{control the false discovery rate} (the proportion of wrongly rejected null hypotheses (\textit{false-discoveries}) to all rejected hypothesis (\textit{discoveries})). See e.g.
+Benjamin-Hochberg procedure.
+
+\pagebreak

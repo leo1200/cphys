@@ -85,7 +85,7 @@ CPUs and GPUs are compared in table \ref{tab:cpu_gpu} and figure \ref{fig:cpu_gp
 
 \begin{figure}
     \centering
-    \includesvg[width=0.4\textwidth]{figures/cpu_gpu.svg}
+    \includegraphics[width=0.6\textwidth]{figures/cpu_gpu.pdf}
     \caption{GPUs are build for parallel operations over many ALUs, CPUs for more complex operations over fewer ALUs.}
     \label{fig:cpu_gpu}
 \end{figure}
@@ -462,6 +462,16 @@ Imagine we have four processes on four cores of one node, then they have to shar
 the memory of the node. It can be advantageous to use less of the available cores
 of a node and more nodes if memory is a bottleneck.
 
+\subsubsection{Notes on reading and writing}
+While having lots of processes simultaneously read data is not a problem, \textcolor{red1}{multiple parallel writing
+accesses} are problematic. Possible strategies are
+\begin{itemize}
+    \item split the writing based on the domain the respective process is concerned with
+    \item let one MPI process collect all data and write
+\end{itemize}
+An organized approach would be a pipeline, starting with data-reading and
+distribution to workers in the next step and collection and writing thereafter.
+
 \subsection{Parallel computing for physical simulations}
 How can we parallelize e.g. a hydrodynamics simulation?
 \subsubsection{Parallelized hydrodynamics}
@@ -546,11 +556,118 @@ table \ref{tab:parallel_ncell}.}
     \label{tab:parallel_ncell}
 \end{table}
 
+\subsubsubsection{Adaptive grid e.g. for the simulation if interstellar gas}
+\problem{Many physical systems are multi-scale with densities orders of magnitude apart and process on vastly
+different scales in space and time\footnote{E.g. in the interstellar medium cold dense gas forming clouds and
+stars and hot gas escaping galaxies.} - we cannot afford to have a fine grid and small time steps everywhere.}
+\idea{Use an adaptive grid with a higher resolution where necessary, e.g. in denser regions, as
+illustrated in figure \ref{fig:refined_grid} and \ref{fig:grid_jet}. As the
+system evolves, the grid is adapted (refined and derefined where necessary).}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/adaptive_mesh.png}\hfill
+  \caption{Grid refinement for interstellar medium.}
+  \label{fig:refined_grid}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/jet_refined.png}\hfill
+    \caption{Adaptive mesh for the simulation of a supersonic jet.}
+    \label{fig:grid_jet}
+\end{figure}
+
+\greybox{\textbf{How to distribute the simulation onto processes?:} A simple approach is to give
+all processes the same number of cells with domains chosen to limit communication (/ minimize
+to overall borderlenght) and cell-size chosen e.g. to have the roughly the same number of particles
+(equal memory distribution over cells). \textcolor{red1}{Problems:}
+\begin{itemize}
+    \item with increasing distribution increases the necessary communication, giving us a limit
+    until which parallelization makes sense (beyond this further parallelization does not yield
+    better performance)
+    \item in the simple \textit{memory balanced} approach, we neglect that different cells can have 
+    different costs (see physical load balancing below)
+\end{itemize}}
+
+\yellowbox{\textbf{Local timesteps | physics load balancing:} Small cells interact on smaller time scales so
+they require smaller timesteps (as before with the CFL criterion), \textcolor{red1}{so more iterations
+to cover the same time as for larger cells are necessary - so the workload for smaller cells is higher}.
+\textcolor{green1}{Decompose the domain according to work for more balanced tasks.}}
+
+\subsubsubsection{Inclusion of long-range forces | long range forces vs. parallelization}
+In hydrodynamics interactions are short-range, information travels
+\textit{one cell at a time}, a cell might be updated only based on
+its neighbors. Therefore, if we divide the domain into subdomains to distribute
+them onto processes, \textcolor{green1}{a padding of only one (communicated) guard cell is sufficient
+for pure hydrodynamics} (for a \textit{three-point-stencil}).
+\redbox{\textbf{But gravity is an instantanous long-range interaction:}
+\begin{itemize}
+    \item all cells are interdependent $\rightarrow$ all processes need to communicate (not only those handling neighboring regions)
+    \item so practically every process while only updating its subdomain would need to have all particles in memory
+\end{itemize}}
+\idea{While each process also needs distant information it must not be highly resolved - we can reduce
+communication by all processes working on a shared tree (possibly managed by one MPI rank / \textit{arced RWLock in Rust}). For a distant group under small opening angle
+a single process must only retrieve the respective center-of-mass force, limiting communication.}
+
+So we can do (magneto)-hydrodynamics based on local information transfer and reduce the communication
+of (self)-gravitation via a shared tree structure.
 
 \subsection{Scaling of the processing time with increasing parallelism and Ahmdal's law}
+Concurrency is the partial-decomposability of a problem. The maximum speed-up gained
+from parallelization (the ratio of execution time with and wihtout parallization $= t_1 \slash t_N$)
+is limited by the fraction of the problem, that is not decomposable.
+
+\paragraph*{Strong scaling} Consider a fixed problem size. When using multiple processes
+the ideal speedup would be $\propto N_{proc}$ as $t_{N_{proc}} = t_{1} \slash N_{proc}$. The not-parallelizable
+part gives an upper limit for the speedup (\textbf{Ahmdal's law})
+\begin{equation}
+    \begin{gathered}
+        \text{speedup } = \frac{1}{s + \frac{p}{N_{proc}}}, \quad \text{proportion of execution time of parallelizable part } p \\
+        \text{proportion of execution time of serial part } s
+    \end{gathered}
+\end{equation}
+The higher the non parallelizable part, the worse the scaling, see
+figure \ref{fig:ahmdal}. Strong scaling is measured by how the
+computational time increases with the number of processes for
+a constant job size.
+
+\paragraph*{Weak scaling} Here we consider the amount of work done
+for a scaled problem size. In Gustafson's law it is assumed that the
+parallel part scales linearly with the processes, while the serial
+part does not increase, $\text{speedup } = s + pN$. Weak scaling
+is tested by increasing job size and number of processes.
+
+\note{In real application the overhead of parallelization increases
+with problem size, reducing the speedup.}
 
 \subsection{Examples of parallel algorithms}
+\begin{itemize}
+    \item sorting numbers in parallel
+    \begin{itemize}
+        \item even-odd-sort: while in (stupid) bubble sort we go through the list and consecutively swap, so $[72964] \rightarrow [27649]$ after one
+        run (and we might need $N$ of them), we can also make this independent by considering only consecutive pairs in each step, so
+        $[72,96,4] \rightarrow [27,69,4]$ (can be done in parallel), then $[2,76,94] \rightarrow [2,67,49]$
+        \item parallel merge sort: sort chunks of the list in parallel, then merge
+    \end{itemize}
+    \item parallel FFT: In a 3D FFT problem, we can split the domain into 2D slices and start by performing FFTs along their axis and after a transposed
+    composition a final FFT along the missing axis, for detials see \cite{jagode06}.
+\end{itemize}
 
-\subsection{Smartly scheduling work}
+
+\subsection{Notes on sheduling}
+\problem{If tasks (a sequence of commands executed by a thread) need totally different computation times,
+the slowest task is the bottleneck for subsequent merging. For instance in a Milky Way SPH simulation
+where we would want to do time-steps on the order of $10^5$ years, the bottleneck are cells
+with supernovae for which we would need to do mutliple time-steps on the order of $10^3$ years.}
+
+\paragraph*{Task based scheduling:} One approach is to estimate the cost of tasks and distribute work wisely accordingly.
+Another is work having a worker pool with work stealing. Work is distributed to workers
+but if one finishes early, it can steal work from another worker and not just wait,
+which might be more or less feasable depending on the problem.
+
+\paragraph*{Async:} Asynchronous runtimes can allow us to write code similar as in a non-parallel setting 
+while managing the distribution of work - we specify
+when we need what results (async / await).
 
 

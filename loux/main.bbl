@@ -204,6 +204,38 @@
       \verb https://doi.org/10.1214/aoms/1177706645
       \endverb
     \endentry
+    \entry{breiman01}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=132b7100417675d55d5d4d8b244f7a34}{%
+           family={Breiman},
+           familyi={B\bibinitperiod},
+           given={Leo},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Institute of Mathematical Statistics}%
+      }
+      \strng{namehash}{132b7100417675d55d5d4d8b244f7a34}
+      \strng{fullhash}{132b7100417675d55d5d4d8b244f7a34}
+      \strng{bibnamehash}{132b7100417675d55d5d4d8b244f7a34}
+      \strng{authorbibnamehash}{132b7100417675d55d5d4d8b244f7a34}
+      \strng{authornamehash}{132b7100417675d55d5d4d8b244f7a34}
+      \strng{authorfullhash}{132b7100417675d55d5d4d8b244f7a34}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Statistical science}
+      \field{number}{3}
+      \field{title}{Statistical modeling: The two cultures (with comments and a rejoinder by the author)}
+      \field{volume}{16}
+      \field{year}{2001}
+      \field{pages}{199\bibrangedash 231}
+      \range{pages}{33}
+    \endentry
     \entry{bryant2011computer}{book}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=733e32bf9035c50457c549c4ca2d1a72}{%
@@ -337,6 +369,51 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1007/BF01448839
+      \endverb
+    \endentry
+    \entry{Efron1994}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=5470455fc7dceb3ccf6db38cb22a113d}{%
+           family={Efron},
+           familyi={E\bibinitperiod},
+           given={Bradley},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=644e738f30691dfc96d4d31511c70447}{%
+           family={Tibshirani},
+           familyi={T\bibinitperiod},
+           given={R.J.},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{2}{%
+        {Chapman}%
+        {Hall/CRC}%
+      }
+      \strng{namehash}{70f76e499a57d9cd953f2644537577dd}
+      \strng{fullhash}{70f76e499a57d9cd953f2644537577dd}
+      \strng{bibnamehash}{70f76e499a57d9cd953f2644537577dd}
+      \strng{authorbibnamehash}{70f76e499a57d9cd953f2644537577dd}
+      \strng{authornamehash}{70f76e499a57d9cd953f2644537577dd}
+      \strng{authorfullhash}{70f76e499a57d9cd953f2644537577dd}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780429246593}
+      \field{month}{5}
+      \field{title}{An Introduction to the Bootstrap}
+      \field{year}{1994}
+      \verb{doi}
+      \verb 10.1201/9780429246593
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1201/9780429246593
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1201/9780429246593
       \endverb
     \endentry
     \entry{gould96}{article}{}
@@ -711,6 +788,51 @@
       \verb https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.070/abschlussarbeiten/masterthesis_pfh.pdf
       \endverb
     \endentry
+    \entry{tim15}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=fed92df2f55f9716f8025e248a1e813f}{%
+           family={Hesterberg},
+           familyi={H\bibinitperiod},
+           given={Tim\bibnamedelima C.},
+           giveni={T\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor & Francis}%
+      }
+      \strng{namehash}{fed92df2f55f9716f8025e248a1e813f}
+      \strng{fullhash}{fed92df2f55f9716f8025e248a1e813f}
+      \strng{bibnamehash}{fed92df2f55f9716f8025e248a1e813f}
+      \strng{authorbibnamehash}{fed92df2f55f9716f8025e248a1e813f}
+      \strng{authornamehash}{fed92df2f55f9716f8025e248a1e813f}
+      \strng{authorfullhash}{fed92df2f55f9716f8025e248a1e813f}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The American Statistician}
+      \field{note}{PMID: 27019512}
+      \field{number}{4}
+      \field{title}{What Teachers Should Know About the Bootstrap: Resampling in the Undergraduate Statistics Curriculum}
+      \field{volume}{69}
+      \field{year}{2015}
+      \field{pages}{371\bibrangedash 386}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1080/00031305.2015.1089789
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1080/00031305.2015.1089789
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1080/00031305.2015.1089789
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1080/00031305.2015.1089789
+      \endverb
+    \endentry
     \entry{higham02}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=5bec9d02065c9b35d45c881a24f7a1cd}{%
@@ -815,6 +937,36 @@
       \field{year}{2023}
       \verb{eprint}
       \verb 2311.08460
+      \endverb
+    \endentry
+    \entry{jagode06}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f0dc8e781cc9397cdd4ce698adf1c76e}{%
+           family={Jagode},
+           familyi={J\bibinitperiod},
+           given={Heike},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \strng{fullhash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \strng{bibnamehash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \strng{authorbibnamehash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \strng{authornamehash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \strng{authorfullhash}{f0dc8e781cc9397cdd4ce698adf1c76e}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Fourier Transforms for the BlueGene / L Communication Network}
+      \field{year}{2006}
+      \verb{urlraw}
+      \verb https://api.semanticscholar.org/CorpusID:18464112
+      \endverb
+      \verb{url}
+      \verb https://api.semanticscholar.org/CorpusID:18464112
       \endverb
     \endentry
     \entry{Kincl23}{article}{}
@@ -3006,6 +3158,55 @@
       \verb http://dx.doi.org/10.1093/mnras/stu2164
       \endverb
     \endentry
+    \entry{schlottke21}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=fa979ee4e7aa746da6bbcd1ecea8e8fc}{%
+           family={Schlottke-Lakemper},
+           familyi={S\bibinithyphendelim L\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ee689a6467b314d95901ed6bda16995b}{%
+           family={Winters},
+           familyi={W\bibinitperiod},
+           given={Andrew\bibnamedelima R},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1e8c6e67fa2863e4f390eeef9dd633e7}{%
+           family={Ranocha},
+           familyi={R\bibinitperiod},
+           given={Hendrik},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7bb2409461ddd3639c5fe1840bb902d1}{%
+           family={Gassner},
+           familyi={G\bibinitperiod},
+           given={Gregor\bibnamedelima J},
+           giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{b44e1d9e18698aed13c139070446de61}
+      \strng{fullhash}{693da963d6d51831c8f7e505bb60c701}
+      \strng{bibnamehash}{b44e1d9e18698aed13c139070446de61}
+      \strng{authorbibnamehash}{b44e1d9e18698aed13c139070446de61}
+      \strng{authornamehash}{b44e1d9e18698aed13c139070446de61}
+      \strng{authorfullhash}{693da963d6d51831c8f7e505bb60c701}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{title}{A purely hyperbolic discontinuous Galerkin approach for self-gravitating gas dynamics}
+      \field{volume}{442}
+      \field{year}{2021}
+      \field{pages}{110467}
+      \range{pages}{1}
+    \endentry
     \entry{springel23}{misc}{}
       \name{author}{8}{}{%
         {{un=0,uniquepart=base,hash=d673f4b06bc18145fb87123390b4948f}{%
@@ -3151,6 +3352,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{over04}
 \endrefsection
 \endinput
 
