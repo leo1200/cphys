@@ -1,19 +1,19 @@
 # Fdb version 4
-["biber C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main"] 1708427063 "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf" "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl" "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main" 1708540016 0
+["biber C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main"] 1708427063 "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf" "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl" "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main" 1708542531 0
   "./bibs/bib.bib" 1708427044 38421 9a056cc627a625e0291fb8c247fd6c08 ""
-  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf" 1708540013 112017 459fea47c1fe33a15091ce012f23b597 ""
+  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bcf" 1708542528 112017 459fea47c1fe33a15091ce012f23b597 ""
   (generated)
   "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl"
   "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.blg"
   (rewritten before read)
-["biber loux/main"] 1708427054 "loux/main.bcf" "loux/main.bbl" "loux/main" 1708540016 0
+["biber loux/main"] 1708427054 "loux/main.bcf" "loux/main.bbl" "loux/main" 1708542531 0
   "./bibs/bib.bib" 1708427044 38421 9a056cc627a625e0291fb8c247fd6c08 ""
-  "loux/main.bcf" 1708540013 112017 459fea47c1fe33a15091ce012f23b597 "pdflatex"
+  "loux/main.bcf" 1708542528 112017 459fea47c1fe33a15091ce012f23b597 "pdflatex"
   (generated)
   "loux/main.bbl"
   "loux/main.blg"
   (rewritten before read)
-["pdflatex"] 1708539961 "c:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/main.tex" "loux/main.pdf" "main" 1708540016 0
+["pdflatex"] 1708542477 "c:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/main.tex" "loux/main.pdf" "main" 1708542531 0
   "C:/Users/leona/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1707761591 278213 95657c73472c04ba4ea8a9fe260c4682 ""
   "C:/Users/leona/AppData/Local/MiKTeX/fonts/pk/ljfour/public/bbm/dpi600/bbm12.pk" 1700144847 8448 075f52338e883810874d21dc06f626ca ""
   "C:/Users/leona/AppData/Local/MiKTeX/fonts/tfm/public/bbm/bbm10.tfm" 1700241039 560 39fd35b5e4a6aca3672660cc548ba860 ""
@@ -412,9 +412,9 @@
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/xstring/xstring.sty" 1693735632 123 a302f2c651a95033260db60e51527ae8 ""
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1695383086 2269 4fe6fb3396214c91f164d45faf9bec45 ""
   "C:/Users/leona/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1695383086 20785 f7d1133a287929598a897c93f8f4c44b ""
-  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.aux" 1708540013 322629 8458c4ed31dbbe086a0b05e869fd77fb ""
+  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.aux" 1708542528 322629 8458c4ed31dbbe086a0b05e869fd77fb ""
   "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.bbl" 1708427067 147764 fda46ef7578fb4a8ee04ece629234f25 "biber C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main"
-  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.toc" 1708540013 129268 37c2e2b0fa9097d433b43549a3f33097 ""
+  "C:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/loux/main.toc" 1708542528 129268 37c2e2b0fa9097d433b43549a3f33097 ""
   "c:/Users/leona/OneDrive/Dokumente/Studium/Master/Mündliche Masterprüfung/Introduction_to_Computational_Physics/main.tex" 1708269509 15333 af5fa18d3b14479fa3e293e38b00c81c ""
   "figures/1dfem2.svg" 1706375549 309063 d1dae05c9666f454817b8ed36fbcb316 ""
   "figures/1dreconst.svg" 1706101133 230005 c021a2fc867059ce01b8a7d165f994b7 ""
@@ -698,10 +698,10 @@
   "loux/_minted-main/D320286E58409D019E67580E2B8DB223FD9FB11F49B41717A1A48C3E11B5404B.pygtex" 1707143463 699 e16648258ae0ae0a8d41503fe488ae77 ""
   "loux/_minted-main/E40D2A45D276608E10700BD7FA86AD5DD84E5C1BC741A86B4714D03F18A74582.pygtex" 1707428995 637 16eed796a7463dc985cfdbd564c3f1ac ""
   "loux/_minted-main/manni.pygstyle" 1704040417 6644 1dfdea6b238a668387a523adf3722d51 ""
-  "loux/main.aux" 1708540013 322629 8458c4ed31dbbe086a0b05e869fd77fb "pdflatex"
+  "loux/main.aux" 1708542528 322629 8458c4ed31dbbe086a0b05e869fd77fb "pdflatex"
   "loux/main.bbl" 1708427067 147764 fda46ef7578fb4a8ee04ece629234f25 "biber loux/main"
-  "loux/main.run.xml" 1708540013 2343 9f9a8238d7e2d8646a5fbe962b8efddb "pdflatex"
-  "loux/main.toc" 1708540013 129268 37c2e2b0fa9097d433b43549a3f33097 "pdflatex"
+  "loux/main.run.xml" 1708542528 2343 9f9a8238d7e2d8646a5fbe962b8efddb "pdflatex"
+  "loux/main.toc" 1708542528 129268 37c2e2b0fa9097d433b43549a3f33097 "pdflatex"
   "sections/1-introduction.tex" 1703873226 1101 7efd004bf0da64cc0a14b4bf4f8bab6c ""
   "sections/2_0-computation.tex" 1704032757 1716 0147153515fb60ba983e438e287330f0 ""
   "sections/2_1-numbers.tex" 1706198695 26171 c247b051328bae0b378f962926689276 ""
@@ -726,7 +726,7 @@
   "sections/4_4_regr.tex" 1708197573 46445 4c9693cfa4c3dcaa5427917a994e88d6 ""
   "sections/4_5_bias_var.tex" 1708115689 38345 10388b8fe4e90da440fbbf6e66ed58c2 ""
   "sections/4_6_class.tex" 1708269002 51047 a9a243a9d77c5f7a14f1c85ca58fdedc ""
-  "sections/4_7_NN.tex" 1708269509 74 ff76a1f9dba9e87c26242e28278eb079 ""
+  "sections/4_7_NN.tex" 1708542476 78 14a704d02d77ddd3758ef9b5030520a0 ""
   "sections/4_8_dim.tex" 1708354213 19498 379edd3c138872c31b8293505b999dcb ""
   "sections/4_9_latent.tex" 1708539849 45477 792a3c59a8a0ac15999a17d78b5cddde ""
   "svg-inkscape/1dfem2_svg-tex.pdf" 1706375589 116812 c53964e38624036b3a8658af668bf20d ""
