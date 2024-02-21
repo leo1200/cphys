@@ -327,8 +327,8 @@ so the likelihood of the observed data given the parameters is
 \end{equation}
 
 \problem{This integral is intractable in general as it is performed over the whole latent space. More profoundly, while
-me might use importance sampling to calculate this integral for given $\vec{\theta}$, if we optimize on $\vec{\theta}$, we
-would have to do this infeasibly often.}
+me might use importance sampling to calculate this integral for given $\vec{\theta}$, how we integrate itself
+(so what samples we take) depends in $\vec{\theta}$.}
 
 But if we could calculate this marginal likelihood of the observed data,
 the parameters would follow by
@@ -396,17 +396,23 @@ Then one can find (proof follows) for any distribution $q_{\vec{\phi}}(\vec{z})$
 \subsubsubsection{Proof of the ELBO}
 We have
 \begin{equation}
-    \log p_\vec{\theta}(\vec{x}) = \log \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \frac{p(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z} \underset{\text{Jenssen's inequality}}{\geq} \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \log \frac{p(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z}
+    \log p_\vec{\theta}(\vec{x}) = \log \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z} \underset{\text{Jenssen's inequality}}{\geq} \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z}
 \end{equation}
 where Jenssens inequality holds because $\log$ is concave.
+
+\pinkbox{We see that if $q_{\vec{\phi}}(\vec{z}) = p_{\vec{\theta}}(\vec{z} | \vec{x})$, then the ELBO is equal to the log-likelihood, as by the \textit{path-rule}
+\begin{equation}
+    \frac{p_\vec{\theta}(\vec{x},\vec{z})}{p_\vec{\theta}(\vec{z}|\vec{x})} = p_\vec{\theta}(\vec{x})
+\end{equation}
+}
 
 \textbf{On Jenssen's inequality}: Generally, Jenssens inequality is given by
 \begin{equation}
     \begin{aligned}
         \text{discrete case: }&\, f(\sum \alpha_i x_i) \geq \sum \alpha_i f(x_i) \\
-        \text{for } f \text{ concave, } \alpha_i \geq 0, \sum \alpha_i = 1 \\
+        &\text{for } f \text{ concave, } \alpha_i \geq 0, \sum \alpha_i = 1 \\
         \text{continuous case: }&\, f(\int \alpha(x) g(x) \, dx) \geq \int \alpha(x) f(g(x)) \, dx \\
-        \text{for } f \text{ concave, } \alpha(x) \geq 0, \int \alpha(x) \, dx = 1
+        &\text{for } f \text{ concave, } \alpha(x) \geq 0, \int \alpha(x) \, dx = 1
     \end{aligned}
 \end{equation}
 
@@ -468,17 +474,25 @@ Based on the introduction of ELBO, the following aims are natural
 \end{itemize}
 }
 
-The EM algorithm consists of
+The EM algorithm consists of (here given as a maximization-maximization procedure)
 \begin{itemize}
-    \item \textbf{E-step:} assume some $\theta^*$ reasonably good, find the parameters of the
-    variational density $q_{\vec{\phi}}(\vec{z})$ that maximize the ELBO
+    \item \textbf{Expectation-step:} Our baseline problem is that we do not know the distribution of the
+    latent variables given our observations. So given a current estimate of the model parameters $\vec{\theta}^*$, find a possible
+    distribution $q_{\vec{\phi}}(\vec{z})$ that is close to the true posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$
+    so optimally maximizing the ELBO
     \begin{equation}
         \vec{\phi}^* = \argmax_{\vec{\phi}} \text{ELBO}(\vec{\theta}^*, q_{\vec{\phi}})
     \end{equation}
-    \item \textbf{M-step:} assume some $\vec{\phi}^*$ reasonably good, find
+    We might not do this maximization explicitly, but ask ourselves what latent distribution would be reasonable given our current parameters.
+    With this we can calculate
+    \begin{equation}
+        \text{ELBO}(\vec{\theta}) = E_{\vec{z} \sim q_{\vec{\phi}^*}} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}^*}(\vec{z})} \right]
+    \end{equation}
+    which is then \textbf{only a function of $\vec{\theta}$}.
+    \item \textbf{Maximization-step:} Assume the above expectation was calculated under some $\vec{\phi}^*$ reasonably good, find
     the model parameters $\vec{\theta}$ that maximize the ELBO
     \begin{equation}
-        \vec{\theta}^* = \argmax_{\vec{\theta}} \text{ELBO}(\vec{\theta}, q_{\vec{\phi}^*})
+        \vec{\theta}^* = \argmax_{\vec{\theta}} \text{ELBO}(\vec{\theta})
     \end{equation}
 \end{itemize}
 
@@ -584,5 +598,240 @@ iteration of the model parameters $\vec{\theta}^{(n+1)}$.
 cross-validation for this.}
 
 \subsubsection{Variational Inference}
+\subsubsubsection{Recapitulation on parameter estimation | parameters vs. latent variables}
+Let us go back a step. Previously, we had a model
+for the likelihood given parameters $p(\vec{x}|\vec{\theta})$ - for instance a Gaussian with
+given parameters $\mu$ and $\sigma$ so over our 
+whole dataset $\mathcal{D} = \{ \vec{x}_i, \dots, \vec{x}_N \}$ under i.i.d.
+assumptions the likelihood
+\begin{equation}
+    p(\mathcal{D}|\vec{\theta}) = \mathcal{L}_\mathcal{D}(\vec{\theta}) = \prod_{i = 1}^{N} p(\vec{x}_i|\vec{\theta})
+\end{equation}
+where
+\begin{itemize}
+    \item in the \textit{frequentist} MLE approach we would find a point-estimate of the parameters
+    maximizing the likelihood
+    \item and in the Bayesian setting, we would assume a prior distribution $p(\vec{\theta})$ (and as before the likelihood) and 
+    by Bayes theorem calculate a full distribution over the parameters
+    \begin{equation}
+        p(\vec{\theta}|\mathcal{D}) = \frac{p(\mathcal{D}|\vec{\theta}) p(\vec{\theta})}{\int p(\vec{\theta}) p(\mathcal{D}|\vec{\theta}) d\vec{\theta}}
+    \end{equation}
+    Where as of the \textit{evidence integral} this posterior would usually be intractable, but we can sample from it using Marcov Chain Monte Carlo (MCMC)
+    (where the evidence drops out), and thus calculate integrals over the posterior, e.g. the first moment, the posterior mean (just the mean over the 
+    MCMC samples). Note that also here, the prior and posterior are distributions which themselves have parameters, not explicit here
+    which would be updated in a Bayesian update step.
+\end{itemize}
+
+\pinkbox{\textbf{Latent variables vs. parameters:} Parameters are often 
+connoted to the idea of having fixed values, not being random variables with
+a distribution. In the above Bayesian setting it therefore makes more sense
+to think of the \textit{parameters} as \textbf{latent variables}.}
+
+\subsubsubsection{The general problem of inference: Sampling vs. Variational approach}
+We have
+\begin{itemize}
+    \item data $\mathcal{D} = \{ \vec{x}_i, \dots, \vec{x}_N \}$
+    \item a prior on unobserved / hidden latent variables $\vec{z}$, e.g. parameters $\vec{\theta}$, e.g. flat if we have no prior knowledge
+    \item a model of the likelihood $p(\vec{x}|\vec{z})$, which in the general latent setting might need more parameters
+    to be specified (finding which one can e.g. use expectation maximization), or if we are in the above inference setting
+    is fully given by our parameters of interest $\vec{z} = \vec{\theta}$, those we are looking for
+\end{itemize}
+
+Our joint model is
+\begin{equation}
+    p(\vec{z},\vec{x}) = p(\vec{z}) p(\vec{x}|\vec{z})
+\end{equation}
+where the latent variables help govern the distribution of the data.
+
+\bluebox{\textbf{Aim}: Given a measurement $\vec{x}$ we are interested in the posterior (discriminative model)
+$p(\vec{z}|\vec{x})$ so in the parameter inference setting $p(\vec{\theta}|\vec{x})$ (or
+rather this posterior given the full dataset).}
+
+The main two approaches are
+\begin{itemize}
+    \item \textbf{Sampling Techniques:} We can sample from $p(\vec{z}|\vec{x})$ by MCMC (which only requires knowing the
+    likelihood and prior, the evidence drops out) and construct an empirical estimate of the posterior.
+    \begin{itemize}
+        \item \textcolor{green1}{this is unbiased in the sense that we make no distributional assumption on the posterior}
+        \item \textcolor{red1}{this might be too costly - trillions of MCMC samples might be necessary}
+    \end{itemize}
+    \item \textbf{Variational Inference}: Use optimization rather than sampling. Use an approximate
+    density from some family $q(\vec{z}) \in \mathcal{Q}$ meant to approximate the posterior (ideally expressive and tractable). Find the family-member
+    best approximating the true posterior by minimizing the Kullback-Leibler divergence
+    \begin{equation}
+        q^*(\vec{z}) = \argmin_{q(\vec{z}) \in \mathcal{Q}} D_{KL}(q(\vec{z})||p(\vec{z}|\vec{x}))
+    \end{equation}
+    which we do by maximizing the evidence lower bound as before.
+\end{itemize}
+
+\greybox{\textbf{When to use MCMC, when variational methods?:} MCMC methods tend to
+be computationally intensive but guarantuee producing asymptotically exact samples
+from the target density. Variational inference (VI) does not have these guarantees but
+is usually faster.
+\begin{itemize}
+    \item use MCMC when: smaller dataset, higher computational cost for more precise samples is fine
+    \item use VI when: large data sets, quickly want to explore many models, so when speed is requested, posterior is sufficiently simple to be modeled by the given family $\mathcal{Q}$
+\end{itemize}
+}
+
+The comparison of the two methods is illustrated in figure \ref{fig:vi_mcmc}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.9\textwidth]{figures/mc_vi.svg}
+    \caption{Comparison of variational inference and MCMC.}
+    \label{fig:vi_mcmc}
+\end{figure}
+
+\subsubsubsection{Variational inference}
+\idea{Approximate the posterior $p(\vec{z}|\vec{x})$ by $q(\vec{z}) \in \mathcal{Q}$}
+\begin{equation}
+    \begin{aligned}
+        q^*(\vec{z}) &= \argmin_{q(\vec{z}) \in \mathcal{Q}} D_{KL}(q(\vec{z})||p(\vec{z}|\vec{x})) \\
+        &= \argmin_{q(\vec{z}) \in \mathcal{Q}} \left( \int q(\vec{z}) \log \frac{q(\vec{z})}{p(\vec{z}|\vec{x})} d\vec{z} \right) \\
+        &= \argmin_{q(\vec{z}) \in \mathcal{Q}} \left( \int q(\vec{z}) \log \frac{q(\vec{z}) p(\vec{x})}{p(\vec{z},\vec{x})} d\vec{z} \right) \\
+        &= \argmin_{q(\vec{z}) \in \mathcal{Q}} \left( \underbrace{\int q(\vec{z}) \log p(\vec{x}) d\vec{z}}_{=\,\text{evidence } \log p(\vec{x})} - \underbrace{\int q(\vec{z}) \log \frac{p(\vec{z},\vec{x})}{q(\vec{z})} d\vec{z}}_{=\text{ELBO}(\vec{q})} \right) \\
+        &= \argmax_{q(\vec{z}) \in \mathcal{Q}} \text{ELBO}(q)
+    \end{aligned}
+\end{equation}
+
+\subsubsubsection{Mean-Field Algorithm}
+Here we assume the variational density (the approximate posterior) to factorize over the latent variables
+\begin{equation}
+    q(\vec{z}) = \prod_{i=1}^{N} q_i(z_i)
+\end{equation}
+(or at least to be partitionable), where for the $q_i$ one can find
+the best approximation to the true posterior by calculus of variations,
+by distributional assumptions, an explicit form for the best $q_i$ can
+often be found.
+
+\subsubsection{Variational Autoencoder (VAE)}
+
+\subsubsubsection{Back to the problem of likelihood optimization under latent variables}
+Let us go back to the problem of maximizing the likelihood
+$p_\vec{\theta}(\vec{x}) = p(\vec{x}|\vec{\theta})$.
+If this likelihood is sufficiently simple, we can find 
+parameters $\vec{\theta}$ by usual MLE.
+
+\problem{What if we have further latent, unobserved variables, e.g.
+unobserved class labels?}
+
+We marginalize them out by
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}) = \int p_\vec{\theta}(\vec{x},\vec{z}) \, d\vec{z} \underset{\text{chain rule}}{=} \int p_\vec{\theta}(\vec{x}|\vec{z}) p_\vec{\theta}(\vec{z}) \, d\vec{z}
+\end{equation}
+
+e.g. $p_\vec{\theta}(\vec{x}|\vec{z})$ is a Gaussian and thus $p_\vec{\theta}(\vec{x})$ is a mixture of Gaussians.
+
+\problem{\begin{itemize}
+    \item This integral is generally problematic, more so if we want to optimize $\theta$ through it.
+    \item The posterior $p_\vec{\theta}(\vec{z}|\vec{x})$ is expensive / intractable to calculate.
+\end{itemize}}
+
+\idea{As previously, we introduce the approximation
+\begin{equation}
+    q_{\vec{\phi}}(\vec{z}|\vec{x}) \underset{\text{goal}}{\approx} p_{\vec{\theta}}(\vec{z}|\vec{x})
+\end{equation}
+Finding a good approximation $q_{\vec{\phi}}(\vec{z}|\vec{x})$ later amortizes, because we can then
+infer a $\vec{z}$ from a $\vec{x}$ without doing any integrals (\textit{amortized inference}).
+}
+
+Also as previously, we find good parameters $\vec{\theta}^*$ and $\vec{\phi}^*$ by maximizing the ELBO
+\begin{equation}
+    \vec{\theta}^*, \vec{\phi}^* = \argmax_{\vec{\theta}, \vec{\phi}} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x})
+\end{equation}
+where a high evidence lower bound is wished for as
+\begin{equation}
+    \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = E_{\vec{z} \sim q_{\vec{\phi}}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right] = \explain{\log p_\vec{\theta}(\vec{x})}{quality of the fit of the model to the data} - \explain{D_{KL}(q_{\vec{\phi}}(\vec{z}) || p_{\vec{\theta}}(\vec{z}|\vec{x}))}{correctness of latent model}
+\end{equation}
+\note{The notation $\text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x})$ makes the dependence on $\vec{x}$ more explicit than
+previously. The distributions $q_\vec{\phi}(\vec{z})$ are normally parameterized for each individual data point in a separate optimization process.
+More explicitly, one would always write $q_{\vec{\phi}}(\vec{z}|\vec{x})$.}
+
+\subsubsubsection{The Variational Autoencoder}
+We now take a probabilistic approach to the autoencoder
+\begin{itemize}
+    \item \textbf{Probabilistic Encoder:} The encoder $h_{\vec{\Omega}_{\text{Dec}}}(\vec{x})$ takes input points from the normal data space $\vec{x}$ and outputs
+    parameters $\vec{\phi}$ for the variational density $q_{\vec{\phi}}(\vec{z})$. One can then
+    for this location $\vec{x}$ sample a $\vec{z}$ from $q_{\vec{\phi}}(\vec{z})$ with the
+    obtained parameters. 
+    \item \textbf{Probabilistic Decoder:} The decoder $f_{\vec{\Omega}_{\text{Dec}}}(\vec{z})$ maps from the latent space $\vec{z}$ to 
+    to parameters $\vec{\theta}$ for the likelihood $p_{\vec{\theta}}(\vec{x}|\vec{z})$, from 
+    which we can sample a $\vec{x}$. (Only mapping to the mean of the likelihood is also possible.)
+\end{itemize}
+
+\greenbox{While the distributions $q_{\vec{\phi}}(\vec{z})$ and $p_{\vec{\theta}}(\vec{x}|\vec{z})$ might generally
+be very simple, as of the possibly complex mappings $h_{\vec{\Omega}_{\text{Dec}}}$ and $f_{\vec{\Omega}_{\text{Dec}}}$, the
+variational autoencoder can model very complex distributions.}
+
+The general variational autoencoder idea is illustrated in figure \ref{fig:vae}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.95\textwidth]{figures/varauto.svg}
+    \caption{Illustration of the variational autoencoder idea.}
+    \label{fig:vae}
+\end{figure}
+
+\subsubsubsection{Gradient of the ELBO}
+The ELBO is given by
+\begin{equation}
+    \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = E_{\vec{z} \sim q_{\vec{\phi}}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right]
+\end{equation}
+For a given $\vec{x}$, we calculate the parameters $\vec{\phi}$ for the variational density $q_{\vec{\phi}}(\vec{z})$ by the encoder
+${\vec{\phi}} = h_{\vec{\Omega}_{\text{Dec}}}(\vec{x})$ and draw
+\begin{equation}
+    \vec{z}^{(l)} \sim q_{\vec{\phi}}(\vec{z}), \quad l = 1,\dots,L
+\end{equation}
+With the decoder we calculate $\vec{\theta} = f_{\vec{\Omega}_{\text{Dec}}}(\vec{z}^{(l)})$. With this 
+an estimate of the ELBO is given by
+
+\begin{equation}
+    \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) \approx \frac{1}{L} \sum_{l=1}^{L} \left(\log p_{\vec{\theta}}(\vec{x}|\vec{z}^{(l)}) - \log q_{\vec{\phi}}(\vec{z}^{(l)})\right)
+\end{equation}
+\bluebox{For being able to backpropagate to $\vec{\Omega}_{\text{Dec}}$ and $\vec{\Omega}_{\text{Dec}}$, we need to calculate the gradient of the ELBO with respect to the parameters
+\begin{equation}
+    \partial_{\vec{\theta}, \vec{\phi}} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x})
+\end{equation}
+}
+
+\note{In other articles, $\theta$ and $\phi$ are often used to denote the parameters of the encoder and decoder, respectively (as the
+parameters of the variational density and the likelihood follow from them).}
+
+We can readily calculate
+\begin{equation}
+    \partial_\vec{\theta} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = \partial_\vec{\theta} E_{\vec{z} \sim q_{\vec{\phi}}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right] = E_{\vec{z} \sim q_{\vec{\phi}}(\vec{z})} \left[ \partial_\vec{\theta} \log p_\vec{\theta}(\vec{x}|\vec{z}) \right]
+\end{equation}
+
+\problem{In the calculation
+\begin{equation}
+    \partial_\vec{\phi} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = \partial_\vec{\phi} E_{\vec{z} \sim q_{\vec{\phi}}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right]
+\end{equation}
+we cannot put the derivative inside the expectation, because this expectation (how we sample the $\vec{z}$) depends on the parameters $\vec{\phi}$ itself.
+}
+
+\greenbox{\textbf{Reparametrization trick}: Write $z^{(l)}$ as a deterministic function depending on $\vec{\phi}$ and a parameter-free random variable $\epsilon^{(l)}$ which is independent of $\vec{\phi}$.
+
+\begin{equation}
+    z^{(l)} = g_{\vec{\phi}}(\epsilon^{(l)}, \vec{x})
+\end{equation}
+
+for instance assume
+
+\begin{equation}
+    z^{(l)} \sim \mathcal{N}(\mu_{\vec{\phi}}(\vec{x}), \sigma_{\vec{\phi}}(\vec{x})) \quad \rightarrow \quad z^{(l)} = \mu_{\vec{\phi}}(\vec{x}) + \sigma_{\vec{\phi}}(\vec{x}) \epsilon^{(l)}, \quad \epsilon^{(l)} \sim \mathcal{N}(0,1)
+\end{equation}
+
+(where $\mu$ and $\sigma$ are the outputs of the encoder) then we can rewrite
+
+\begin{equation}
+    E_z[h(z)] = E_{\epsilon} \left[ h(g_{\vec{\phi}}(\epsilon, \vec{x})) \right]
+\end{equation}
+}
+
+So we do not directly sample from $q_{\vec{\phi}}(\vec{z})$, but from a surrogate model, where the distribution does not
+depend on the parameters $\vec{\phi}$ but we still ensure that the sampled $\vec{z}$ follows our variational density. This
+allows us to put the derivative inside the expectation.
 
 \pagebreak

@@ -9,3 +9,4 @@ Memorylessness
 frequentist
 isocontours
 isocontour
+partitionable

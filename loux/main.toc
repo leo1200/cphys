@@ -795,8 +795,16 @@
 \contentsline {subsubsection}{\numberline {24.4.1}Introduction and problem of the intractable marginal likelihood of the data}{536}{subsubsection.24.4.1}%
 \contentsline {subsubsection}{\numberline {24.4.2}Evidence Lower Bound (ELBO)}{537}{subsubsection.24.4.2}%
 \contentsline {subsubsubsection}{\numberline {24.4.2.1}Proof of the ELBO}{538}{subsubsubsection.24.4.2.1}%
-\contentsline {subsubsubsection}{\numberline {24.4.2.2}Gap between evidence and ELBO}{539}{subsubsubsection.24.4.2.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.2.2}Gap between evidence and ELBO}{540}{subsubsubsection.24.4.2.2}%
 \contentsline {subsubsection}{\numberline {24.4.3}Expectation-Maximization (EM) algorithm}{541}{subsubsection.24.4.3}%
 \contentsline {subsubsection}{\numberline {24.4.4}Application of the EM algorithm: Gaussian Mixture Models (GMM)}{542}{subsubsection.24.4.4}%
 \contentsline {subsubsection}{\numberline {24.4.5}Variational Inference}{545}{subsubsection.24.4.5}%
-\contentsline {section}{References}{549}{subsubsection.24.4.5}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.1}Recapitulation on parameter estimation | parameters vs. latent variables}{545}{subsubsubsection.24.4.5.1}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.2}The general problem of inference: Sampling vs. Variational approach}{546}{subsubsubsection.24.4.5.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.3}Variational inference}{548}{subsubsubsection.24.4.5.3}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.4}Mean-Field Algorithm}{548}{subsubsubsection.24.4.5.4}%
+\contentsline {subsubsection}{\numberline {24.4.6}Variational Autoencoder (VAE)}{548}{subsubsection.24.4.6}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.1}Back to the problem of likelihood optimization under latent variables}{548}{subsubsubsection.24.4.6.1}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.2}The Variational Autoencoder}{549}{subsubsubsection.24.4.6.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.3}Gradient of the ELBO}{550}{subsubsubsection.24.4.6.3}%
+\contentsline {section}{References}{556}{equation.24.1265}%
