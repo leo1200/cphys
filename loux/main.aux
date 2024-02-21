@@ -1344,31 +1344,359 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {162}{\ignorespaces Two views on finding an estimator for ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}^*$\relax }}{429}{figure.caption.288}\protected@file@percent }
 \newlabel{fig:two_views_lin}{{162}{429}{Two views on finding an estimator for $\vec {\beta }^*$\relax }{figure.caption.288}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {19.1.3}Finding the model parameters minimizing the sum of squared errors}{429}{subsubsection.19.1.3}\protected@file@percent }
-\abx@aux@page{61}{430}
-\abx@aux@page{62}{430}
-\abx@aux@page{63}{430}
-\abx@aux@page{64}{430}
-\abx@aux@page{65}{430}
-\abx@aux@page{66}{430}
-\abx@aux@page{67}{430}
-\abx@aux@page{68}{430}
-\abx@aux@page{69}{430}
-\abx@aux@page{70}{430}
-\abx@aux@page{71}{430}
-\abx@aux@page{72}{430}
-\abx@aux@page{73}{430}
-\abx@aux@page{74}{431}
-\abx@aux@page{75}{431}
-\abx@aux@page{76}{431}
-\abx@aux@page{77}{431}
-\abx@aux@page{78}{431}
-\abx@aux@page{79}{431}
-\abx@aux@page{80}{431}
-\abx@aux@page{81}{431}
-\abx@aux@page{82}{431}
-\abx@aux@page{83}{431}
-\abx@aux@page{84}{431}
-\abx@aux@page{85}{431}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.1.4}How is ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ distributed? - normally}{430}{subsubsection.19.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.1.4.1}Intuition for the dependence of the distribution of ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ on the Distribution of the explanatory variables}{431}{subsubsubsection.19.1.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {163}{\ignorespaces In the 1D setting, the less spread the explanatory variable, the more their wiggling translates into wiggling at ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$.\relax }}{431}{figure.caption.289}\protected@file@percent }
+\newlabel{fig:uncertainty_beta_x}{{163}{431}{In the 1D setting, the less spread the explanatory variable, the more their wiggling translates into wiggling at $\vec {\hat {\beta }}$.\relax }{figure.caption.289}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.1.4.2}Exact form of the normal distribution of ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{431}{subsubsubsection.19.1.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {164}{\ignorespaces Depending on the distribution of ${\mskip 0.5mu\relax \@@underline {\mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \@@underline {\mskip -0.5mu\relax X_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \@@underline {\mskip -0.5mu\relax X_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \@@underline {\mskip -0.5mu\relax X_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \@@underline {\mskip -0.5mu\relax X_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptscriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }}\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle X$}\sbox  2{$\mathsurround \z@ \displaystyle X_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle X$}\sbox  2{$\mathsurround \z@ \textstyle X_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle X$}\sbox  2{$\mathsurround \z@ \scriptstyle X_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle X$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle X_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$, here $\in \mathbb  {R}^{N \times 2}$, the spread of ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ differs, illustrated are the isocontours of the sum of squares expression, ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ on a given isocontour are equally likely.\relax }}{432}{figure.caption.290}\protected@file@percent }
+\newlabel{fig:uncertainty_beta_2d}{{164}{432}{Depending on the distribution of $\mat {X}$, here $\in \mathbb {R}^{N \times 2}$, the spread of $\vec {\hat {\beta }}$ differs, illustrated are the isocontours of the sum of squares expression, $\vec {\hat {\beta }}$ on a given isocontour are equally likely.\relax }{figure.caption.290}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.1.4.3}Distribution of ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{433}{subsubsubsection.19.1.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {165}{\ignorespaces On how the scattering matrix measures \textit  {scattering}.\relax }}{434}{figure.caption.293}\protected@file@percent }
+\newlabel{fig:scattering_matrix}{{165}{434}{On how the scattering matrix measures \textit {scattering}.\relax }{figure.caption.293}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.1.4.4}Confidence intervals for ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ - where is the true ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}^*$?}{434}{subsubsubsection.19.1.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.1.4.5}Usage in hypothesis testing}{435}{subsubsubsection.19.1.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.2}General linear model}{435}{subsection.19.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.2.1}Purely categorical predictors}{435}{subsubsection.19.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.2.2}Testing if categories have the same mean}{436}{subsubsection.19.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.3}Multivariate linear model | multiple outcomes}{437}{subsection.19.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.3.1}Multivariate model}{437}{subsubsection.19.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.3.2}Except for possible correlations in the error terms, it's just a concatenated model}{437}{subsubsection.19.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {166}{\ignorespaces The multivariate linear model\relax }}{438}{figure.caption.294}\protected@file@percent }
+\newlabel{fig:multivariate_model}{{166}{438}{The multivariate linear model\relax }{figure.caption.294}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.3.3}The error matrix ${\mskip 0.5mu\relax \@@underline {\mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \@@underline {\mskip -0.5mu\relax E_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \@@underline {\mskip -0.5mu\relax E_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \@@underline {\mskip -0.5mu\relax E_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \@@underline {\mskip -0.5mu\relax E_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptscriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }}\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle E$}\sbox  2{$\mathsurround \z@ \displaystyle E_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle E$}\sbox  2{$\mathsurround \z@ \textstyle E_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle E$}\sbox  2{$\mathsurround \z@ \scriptstyle E_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle E$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle E_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ can contain correlations}{438}{subsubsection.19.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.3.4}Distribution of ${\mskip 0.5mu\relax \@@underline {\mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \@@underline {\mskip -0.5mu\relax \hat  {B}_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \@@underline {\mskip -0.5mu\relax \hat  {B}_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \textfont 3 \relax \box \z@ \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \@@underline {\mskip -0.5mu\relax \hat  {B}_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \@@underline {\mskip -0.5mu\relax \hat  {B}_{}\kern -\scriptspace \mskip -0.5mu\relax }$}\dp \z@ =\dimexpr \dp \z@ -2\fontdimen 8 \scriptscriptfont 3 \relax \box \z@ \kern -\scriptspace \endgroup }}\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {B}$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {B}_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {B}$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {B}_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {B}$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {B}_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {B}$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {B}_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$}{439}{subsubsection.19.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.3.5}Hypothesis testing in the multivariate case - considering parameters jointly}{439}{subsubsection.19.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {167}{\ignorespaces Hypothesis testing on linear regression parameters in the multivariate (multiple outputs) case\relax }}{440}{figure.caption.295}\protected@file@percent }
+\newlabel{fig:multivariate_hypothesis}{{167}{440}{Hypothesis testing on linear regression parameters in the multivariate (multiple outputs) case\relax }{figure.caption.295}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {19.4}Regression Models Suitable for Non-Linear Relationships}{440}{subsection.19.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {168}{\ignorespaces For this sample, a model linear in the predictors is not suitable.\relax }}{441}{figure.caption.296}\protected@file@percent }
+\newlabel{fig:nonlinear_relationship}{{168}{441}{For this sample, a model linear in the predictors is not suitable.\relax }{figure.caption.296}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.4.1}Regression with Feature Engineering}{442}{subsubsection.19.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {169}{\ignorespaces Feature engineering for a non-linear relationship.\relax }}{443}{figure.caption.297}\protected@file@percent }
+\newlabel{fig:nonlinear_feature_engineering}{{169}{443}{Feature engineering for a non-linear relationship.\relax }{figure.caption.297}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.4.2}Spline Regression}{443}{subsubsection.19.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {170}{\ignorespaces Spline regression.\relax }}{445}{figure.caption.298}\protected@file@percent }
+\newlabel{fig:spline_regression}{{170}{445}{Spline regression.\relax }{figure.caption.298}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.4.3}Local Linear Regression}{445}{subsubsection.19.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.3.1}Model and parameter estimates in local linear regression}{445}{subsubsubsection.19.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.3.2}Choosing the bandwidth $\lambda $ - the hyperparameter of local linear regression}{446}{subsubsubsection.19.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {171}{\ignorespaces Local linear regression for different bandwidths $\lambda $.\relax }}{447}{figure.caption.303}\protected@file@percent }
+\newlabel{fig:local_linear_regression}{{171}{447}{Local linear regression for different bandwidths $\lambda $.\relax }{figure.caption.303}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.4.4}Generalized Linear Models (GLM)\textsuperscript  {\textasteriskcentered }}{447}{subsubsection.19.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.4.1}Repetition on Linear Regression}{447}{subsubsubsection.19.4.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.4.2}Generalized Linear Models}{448}{subsubsubsection.19.4.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.4.3}Finding the parameters ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ for a GLM}{449}{subsubsubsection.19.4.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.4.4}Canonical Link Functions for a Bernoulli GLM - Logistic Regression}{449}{subsubsubsection.19.4.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.4.5}Complementary Log-Log Link Function}{449}{subsubsubsection.19.4.4.5}\protected@file@percent }
+\abx@aux@cite{0}{ras95}
+\abx@aux@segm{0}{0}{ras95}
+\@writefile{lof}{\contentsline {figure}{\numberline {172}{\ignorespaces Complementary log-log fit.\relax }}{451}{figure.caption.304}\protected@file@percent }
+\newlabel{fig:cloglog_fit}{{172}{451}{Complementary log-log fit.\relax }{figure.caption.304}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {19.4.5}Gaussian Process Regression\textsuperscript  {\textasteriskcentered }}{451}{subsubsection.19.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {19.4.5.1}Weight-space view - generalization of linear regression}{451}{subsubsubsection.19.4.5.1}\protected@file@percent }
+\abx@aux@page{61}{451}
+\abx@aux@cite{0}{ras95}
+\abx@aux@segm{0}{0}{ras95}
+\abx@aux@page{62}{452}
+\@writefile{tdo}{\contentsline {todo}{\fcolorbox {black}{Dandelion}{\textcolor {Dandelion}{o}}\ At some point continue...}{452}{section*.305}\protected@file@percent }
+\pgfsyspdfmark {pgfid446}{19562754}{21290774}
+\@writefile{toc}{\contentsline {section}{\numberline {20}Bias-Variance Tradeoff and dealing with model complexity}{453}{section.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.1}Bias-Variance-Tradeoff}{453}{subsection.20.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.1.1}Model Bias and Variance}{453}{subsubsection.20.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.1.2}Bias-Variance Tradeoff}{454}{subsubsection.20.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {35}{\ignorespaces Local Linear Regression: Underlying model and two noisy samples. The more complex model with smaller support has higher variance. The simpler model with larger support has higher bias.\relax }}{454}{table.caption.306}\protected@file@percent }
+\newlabel{tab:bias_variance_llr}{{35}{454}{Local Linear Regression: Underlying model and two noisy samples. The more complex model with smaller support has higher variance. The simpler model with larger support has higher bias.\relax }{table.caption.306}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.2}Measuring generalization: Train and Test error and their relation to Bias and Variance}{455}{subsection.20.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.2.1}Bias-Variance-Decomposition of the (Mean-Squared) prediction error}{455}{subsubsection.20.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.2.1.1}Definition of the prediction error}{455}{subsubsubsection.20.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.2.2}Bias-Variance-Decomposition of the prediction error}{455}{subsubsection.20.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.2.3}Derivation of the Bias-Variance-Decomposition}{456}{subsubsection.20.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.2.4}Striking a balance between Bias and Variance}{457}{subsubsection.20.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {173}{\ignorespaces Bias-Variance Tradeoff\relax }}{457}{figure.caption.307}\protected@file@percent }
+\newlabel{fig:bias_variance_tradeoffA}{{173}{457}{Bias-Variance Tradeoff\relax }{figure.caption.307}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.2.4.1}Effect of more training data on the balance}{457}{subsubsubsection.20.2.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {174}{\ignorespaces Bias-Variance Tradeoff with more training data\relax }}{458}{figure.caption.308}\protected@file@percent }
+\newlabel{fig:bias_variance_tradeoffB}{{174}{458}{Bias-Variance Tradeoff with more training data\relax }{figure.caption.308}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.3}Finding good hyperparameters | partitioning, cross-validation and analytical model selectors}{458}{subsection.20.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.3.1}Choosing hyperparameters if we are rich in training data - partitioning (train-test-validation-split)}{458}{subsubsection.20.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.3.2}Choosing hyperparameters if we are poorer in training data - K-folds Cross-Validation}{459}{subsubsection.20.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.3.2.1}K-Fold for estimating the prediction error}{459}{subsubsubsection.20.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.3.2.2}K-Fold for choosing hyperparameters}{460}{subsubsubsection.20.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {175}{\ignorespaces Cross-Validation Error for Local Linear Regression, estimating the prediction error for different $\lambda $. Model complexity is lower for larger $\lambda $.\relax }}{460}{figure.caption.309}\protected@file@percent }
+\newlabel{fig:cv_llr}{{175}{460}{Cross-Validation Error for Local Linear Regression, estimating the prediction error for different $\lambda $. Model complexity is lower for larger $\lambda $.\relax }{figure.caption.309}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.3.3}Analytical Model Selectors}{461}{subsubsection.20.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {176}{\ignorespaces Information Criteria and Cross Validation estimates of the prediction error for KNN Regression. The larger $K$, the lower the number of effective parameters (lower model complexity). BIC is more conservative, choosing a less complex model (less risky regarding generalizability).\relax }}{461}{figure.caption.310}\protected@file@percent }
+\newlabel{fig:inf_knn_reg}{{176}{461}{Information Criteria and Cross Validation estimates of the prediction error for KNN Regression. The larger $K$, the lower the number of effective parameters (lower model complexity). BIC is more conservative, choosing a less complex model (less risky regarding generalizability).\relax }{figure.caption.310}{}}
+\abx@aux@cite{0}{Belkin19}
+\abx@aux@segm{0}{0}{Belkin19}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.4}Breakpoint of Bias-Variance Tradeoff - double descent}{462}{subsection.20.4}\protected@file@percent }
+\abx@aux@page{63}{462}
+\@writefile{lof}{\contentsline {figure}{\numberline {177}{\ignorespaces Double Descent in Test Error over Model Complexity\relax }}{462}{figure.caption.311}\protected@file@percent }
+\newlabel{fig:double_descent}{{177}{462}{Double Descent in Test Error over Model Complexity\relax }{figure.caption.311}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {178}{\ignorespaces In the overparameterized regime, the model can exactly fit the training data (small bias) but the model is also regularized towards a small-norm solution, making variance small.\relax }}{463}{figure.caption.312}\protected@file@percent }
+\newlabel{fig:double_descent_pol}{{178}{463}{In the overparameterized regime, the model can exactly fit the training data (small bias) but the model is also regularized towards a small-norm solution, making variance small.\relax }{figure.caption.312}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.5}Curse of Dimensionality in Modeling\textsuperscript  {\textasteriskcentered }}{463}{subsection.20.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.5.1}Curse of Dimensionality in Modeling / Sampling}{463}{subsubsection.20.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {179}{\ignorespaces Curse of dimensionality in data density\relax }}{464}{figure.caption.313}\protected@file@percent }
+\newlabel{fig:curse_dens}{{179}{464}{Curse of dimensionality in data density\relax }{figure.caption.313}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.5.2}Example for Curse of Dimensionality in number of possible models\textsuperscript  {\textasteriskcentered }}{464}{subsubsection.20.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.6}Overview on dealing with complexity}{465}{subsection.20.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.7}Feature selection - best subset selection}{465}{subsection.20.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.8}Regularization I | General idea and pre-step}{465}{subsection.20.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.8.1}Pre-step to regularization - centering, standardizing}{465}{subsubsection.20.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.8.1.1}Centering and standardizing (z-scoring)}{466}{subsubsubsection.20.8.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.9}Bayesian perspective on Regularization}{466}{subsection.20.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.10}Regularization II | Regularized regression}{467}{subsection.20.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.10.1}Ridge Regression}{467}{subsubsection.20.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.1.1}Influence of $\lambda $ and Bias-Variance Tradeoff}{468}{subsubsubsection.20.10.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {180}{\ignorespaces Ridge Regression - influence of $\lambda $ on the coefficients\relax }}{468}{figure.caption.314}\protected@file@percent }
+\newlabel{fig:ridge_reg_lamda}{{180}{468}{Ridge Regression - influence of $\lambda $ on the coefficients\relax }{figure.caption.314}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.1.2}Bayesian perspective on Ridge regression}{468}{subsubsubsection.20.10.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.1.3}Discussion of the ridge regression}{469}{subsubsubsection.20.10.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.10.2}On choosing the penalty}{469}{subsubsection.20.10.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {181}{\ignorespaces Isocontours of $||{\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}||_q = 1$\relax }}{470}{figure.caption.315}\protected@file@percent }
+\newlabel{fig:penalty_norms}{{181}{470}{Isocontours of $||\vec {\beta }||_q = 1$\relax }{figure.caption.315}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.10.3}Using the $L_0$ \textit  {norm} (under $0^0 = 0$)}{470}{subsubsection.20.10.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {182}{\ignorespaces As $\lambda $ increases, we are first driven to the green, then to the blue estimate ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \hat  {\beta }_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \displaystyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \textstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \hat  {\beta }_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ (drawn are the sum of squared residual contours).\relax }}{471}{figure.caption.316}\protected@file@percent }
+\newlabel{fig:l0_norm_reg}{{182}{471}{As $\lambda $ increases, we are first driven to the green, then to the blue estimate $\vec {\hat {\beta }}$ (drawn are the sum of squared residual contours).\relax }{figure.caption.316}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.10.4}Lasso Regression}{471}{subsubsection.20.10.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.4.1}Penalty in the Lasso - $L_1$ norm}{471}{subsubsubsection.20.10.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.4.2}Why does Lasso drive coefficients to exactly zero? | Soft-thresholding of the coefficients in Lasso regression}{472}{subsubsubsection.20.10.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Derivation of the thresholding for scalar $x_i \in \mathbb  {R}$, so $\beta \in \mathbb  {R}$ ($\beta _0 = 0$ as we centered the data)}{472}{section*.317}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {183}{\ignorespaces Soft thresholding in Lasso regression\relax }}{473}{figure.caption.318}\protected@file@percent }
+\newlabel{fig:lasso_reg}{{183}{473}{Soft thresholding in Lasso regression\relax }{figure.caption.318}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.4.3}Influence of $\lambda $ on the coefficients in Lasso regression}{473}{subsubsubsection.20.10.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {184}{\ignorespaces Loss contours of lasso and ridge regression\relax }}{474}{figure.caption.319}\protected@file@percent }
+\newlabel{fig:ridge_lasso_contours}{{184}{474}{Loss contours of lasso and ridge regression\relax }{figure.caption.319}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {185}{\ignorespaces Influence of $\lambda $ on the coefficients in Lasso regression\relax }}{475}{figure.caption.320}\protected@file@percent }
+\newlabel{fig:lasso_lambda}{{185}{475}{Influence of $\lambda $ on the coefficients in Lasso regression\relax }{figure.caption.320}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {20.10.5}Why does Lasso regression lead to feature selection (\textit  {induces sparsity}) and Ridge regression does not?}{476}{subsubsection.20.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.5.1}Constraint perspective and regularized regression}{476}{subsubsubsection.20.10.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {20.10.5.2}Intuition for the difference in feature selection}{476}{subsubsubsection.20.10.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {186}{\ignorespaces Sum of squares contours and constraining contours for Ridge and Lasso regression. If the OLS estimate falls within one of the green-shaded areas, one parameter is set to zero. This is not the case for Ridge regression.\relax }}{477}{figure.caption.321}\protected@file@percent }
+\newlabel{fig:ridge_lasso_constraint}{{186}{477}{Sum of squares contours and constraining contours for Ridge and Lasso regression. If the OLS estimate falls within one of the green-shaded areas, one parameter is set to zero. This is not the case for Ridge regression.\relax }{figure.caption.321}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {20.11}Preview: Fighting overfitting and improving performance in Neural Networks: Dropout}{477}{subsection.20.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {21}Classification}{478}{section.21}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {187}{\ignorespaces Example classification.\relax }}{478}{figure.caption.322}\protected@file@percent }
+\newlabel{fig:classification}{{187}{478}{Example classification.\relax }{figure.caption.322}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.1}Overview on approaches to classification}{478}{subsection.21.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.2}Discriminant analysis}{479}{subsection.21.2}\protected@file@percent }
+\newlabel{fig:discriminant_analysis_data}{{188a}{480}{Given data. For instance the weights of examplares of African Forest Elephants (red) and Asian Elephants (blue), for which a Gaussian distribution seems reasonable.\relax }{figure.caption.323}{}}
+\newlabel{sub@fig:discriminant_analysis_data}{{a}{480}{Given data. For instance the weights of examplares of African Forest Elephants (red) and Asian Elephants (blue), for which a Gaussian distribution seems reasonable.\relax }{figure.caption.323}{}}
+\newlabel{fig:discriminant_analysis_fits}{{188b}{480}{Fits of the class probability densities. So really just a Gaussian density fit to the African and Asian elephant measurements respectively.\relax }{figure.caption.323}{}}
+\newlabel{sub@fig:discriminant_analysis_fits}{{b}{480}{Fits of the class probability densities. So really just a Gaussian density fit to the African and Asian elephant measurements respectively.\relax }{figure.caption.323}{}}
+\newlabel{fig:discriminant_analysis_posteriors}{{188c}{480}{Posteriors, as the read class has higher spread, outer points are assigned to it. Given the weight, what kind of elephant do we assume? As the forest elephant comes in a wider range of weights, at the extremes we assume forest elephant.\relax }{figure.caption.323}{}}
+\newlabel{sub@fig:discriminant_analysis_posteriors}{{c}{480}{Posteriors, as the read class has higher spread, outer points are assigned to it. Given the weight, what kind of elephant do we assume? As the forest elephant comes in a wider range of weights, at the extremes we assume forest elephant.\relax }{figure.caption.323}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {188}{\ignorespaces Example of discriminant analysis in 1D.\relax }}{480}{figure.caption.323}\protected@file@percent }
+\newlabel{fig:discriminant_analysis}{{188}{480}{Example of discriminant analysis in 1D.\relax }{figure.caption.323}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.2.1}Linear discriminant analysis (LDA) and Mahalanobis distance}{481}{subsubsection.21.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {189}{\ignorespaces Mahalanobis distance.\relax }}{482}{figure.caption.324}\protected@file@percent }
+\newlabel{fig:mahalanobis}{{189}{482}{Mahalanobis distance.\relax }{figure.caption.324}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.2.1.1}The LDA decision surface is linear}{482}{subsubsubsection.21.2.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {190}{\ignorespaces Example of QDA. Class likelihoods in red and grey, decision boundaries drawn below.\relax }}{483}{figure.caption.325}\protected@file@percent }
+\newlabel{fig:qda}{{190}{483}{Example of QDA. Class likelihoods in red and grey, decision boundaries drawn below.\relax }{figure.caption.325}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.2.2}Estimation of the prior, mean and covariance in discriminant analysis}{483}{subsubsection.21.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.2.2.1}Advantages of Discriminant Analysis}{484}{subsubsubsection.21.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.3}Linear Classifiers}{484}{subsection.21.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {191}{\ignorespaces Sign classifier.\relax }}{485}{figure.caption.326}\protected@file@percent }
+\newlabel{fig:sign_classifier}{{191}{485}{Sign classifier.\relax }{figure.caption.326}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.4}Support Vector Machines (SVM)}{485}{subsection.21.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.1}Basic Idea of SVMs - maximum margin classifier}{485}{subsubsection.21.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {192}{\ignorespaces Example of two linearly separable classes.\relax }}{486}{figure.caption.327}\protected@file@percent }
+\newlabel{fig:svm_simple}{{192}{486}{Example of two linearly separable classes.\relax }{figure.caption.327}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.2}The margins - intuition for linearly separable classes}{486}{subsubsection.21.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {193}{\ignorespaces Margins and decision boundary.\relax }}{487}{figure.caption.328}\protected@file@percent }
+\newlabel{fig:svm_margin}{{193}{487}{Margins and decision boundary.\relax }{figure.caption.328}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.3}Finding ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ and $\beta _0$ specifying the maximum-margin hyperplane}{487}{subsubsection.21.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.3.1}Formulating the optimization problem}{487}{subsubsubsection.21.4.3.1}\protected@file@percent }
+\newlabel{eq:svm_optimization_problem}{{1114}{487}{Formulating the optimization problem}{equation.21.1114}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.3.2}Reformulating into constraint minimization}{487}{subsubsubsection.21.4.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {194}{\ignorespaces Distance between a point and a hyperplane.\relax }}{488}{figure.caption.329}\protected@file@percent }
+\newlabel{fig:dist_p_h}{{194}{488}{Distance between a point and a hyperplane.\relax }{figure.caption.329}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.3.3}Intermezzo: Primal and Dual Problems in Quadratic Programming\textsuperscript  {\textasteriskcentered }}{489}{subsubsubsection.21.4.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.3.4}Reformulating into a dual problem}{489}{subsubsubsection.21.4.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.4}Relaxing the constraint of linear separability - soft-margin SVM}{491}{subsubsection.21.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {195}{\ignorespaces Soft margin.\relax }}{491}{figure.caption.330}\protected@file@percent }
+\newlabel{fig:soft_margin}{{195}{491}{Soft margin.\relax }{figure.caption.330}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {36}{\ignorespaces Effect of $\gamma $ ($C$ in the figures) on the soft margin.\relax }}{492}{table.caption.331}\protected@file@percent }
+\newlabel{tab:svm_gamma}{{36}{492}{Effect of $\gamma $ ($C$ in the figures) on the soft margin.\relax }{table.caption.331}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.5}Kernelized SVM}{492}{subsubsection.21.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {196}{\ignorespaces Projection trick.\relax }}{493}{figure.caption.332}\protected@file@percent }
+\newlabel{fig:projection_trick}{{196}{493}{Projection trick.\relax }{figure.caption.332}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.5.1}Kernel trick for high-D computations}{493}{subsubsubsection.21.4.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.4.5.2}Kernel SVM is where the dual formulation shines}{494}{subsubsubsection.21.4.5.2}\protected@file@percent }
+\newlabel{fig:poly_kernel}{{197a}{495}{SVM with polynomial kernel.\relax }{figure.caption.335}{}}
+\newlabel{sub@fig:poly_kernel}{{a}{495}{SVM with polynomial kernel.\relax }{figure.caption.335}{}}
+\newlabel{fig:rbf_kernel}{{197b}{495}{SVM with RBF kernel.\relax }{figure.caption.335}{}}
+\newlabel{sub@fig:rbf_kernel}{{b}{495}{SVM with RBF kernel.\relax }{figure.caption.335}{}}
+\newlabel{fig:sigmoid_kernel}{{197c}{495}{SVM with sigmoid kernel.\relax }{figure.caption.335}{}}
+\newlabel{sub@fig:sigmoid_kernel}{{c}{495}{SVM with sigmoid kernel.\relax }{figure.caption.335}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {197}{\ignorespaces Effect of different kernels in SVMs.\relax }}{495}{figure.caption.335}\protected@file@percent }
+\newlabel{fig:kernel_trick}{{197}{495}{Effect of different kernels in SVMs.\relax }{figure.caption.335}{}}
+\abx@aux@cite{0}{crammer01}
+\abx@aux@segm{0}{0}{crammer01}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.4.6}Multiclass SVM}{496}{subsubsection.21.4.6}\protected@file@percent }
+\abx@aux@page{64}{496}
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.5}K-Nearest Neighbor classifier}{496}{subsection.21.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.5.1}Dependence of the classification on $k$ - balance between over- and underfitting}{496}{subsubsection.21.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {37}{\ignorespaces Effect of $k$ on kNN.\relax }}{497}{table.caption.336}\protected@file@percent }
+\newlabel{tab:knn_k}{{37}{497}{Effect of $k$ on kNN.\relax }{table.caption.336}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.5.2}Advantages and Disadvantages of kNN}{497}{subsubsection.21.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.6}Logistic classification}{497}{subsection.21.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.6.1}GLM perspective on logistic regression}{498}{subsubsection.21.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {198}{\ignorespaces Logistic regression.\relax }}{498}{figure.caption.337}\protected@file@percent }
+\newlabel{fig:logistic_regression}{{198}{498}{Logistic regression.\relax }{figure.caption.337}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.6.2}Linear classifier perspective on logistic regression}{499}{subsubsection.21.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {199}{\ignorespaces Heaviside classifier.\relax }}{499}{figure.caption.338}\protected@file@percent }
+\newlabel{fig:heaviside_classifier}{{199}{499}{Heaviside classifier.\relax }{figure.caption.338}{}}
+\newlabel{fig:sigmoid_classifier_small}{{200a}{500}{Sigmoid classifier with small $||\vec {w}||$.\relax }{figure.caption.339}{}}
+\newlabel{sub@fig:sigmoid_classifier_small}{{a}{500}{Sigmoid classifier with small $||\vec {w}||$.\relax }{figure.caption.339}{}}
+\newlabel{fig:sigmoid_classifier_large}{{200b}{500}{Sigmoid classifier with large $||\vec {w}||$.\relax }{figure.caption.339}{}}
+\newlabel{sub@fig:sigmoid_classifier_large}{{b}{500}{Sigmoid classifier with large $||\vec {w}||$.\relax }{figure.caption.339}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {200}{\ignorespaces Sigmoid classifier.\relax }}{500}{figure.caption.339}\protected@file@percent }
+\newlabel{fig:sigmoid_classifier}{{200}{500}{Sigmoid classifier.\relax }{figure.caption.339}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.6.3}Finding the parameters of $\mu ({\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax x_{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle x$}\sbox  2{$\mathsurround \z@ \displaystyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle x$}\sbox  2{$\mathsurround \z@ \textstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle x$}\sbox  2{$\mathsurround \z@ \scriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle x$}\sbox  2{$\mathsurround \z@ \scriptscriptstyle x_{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }})$, ${\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}$ by MLE}{501}{subsubsection.21.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.3.1}Understanding the terms in the negative log-loss as penalties}{501}{subsubsubsection.21.6.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {201}{\ignorespaces Negative log-loss for a single data point.\relax }}{501}{figure.caption.340}\protected@file@percent }
+\newlabel{fig:log_loss}{{201}{501}{Negative log-loss for a single data point.\relax }{figure.caption.340}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.3.2}For linearly separable data, $||{\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}|| \rightarrow \infty $ minimizes the loss}{502}{subsubsubsection.21.6.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.3.3}The decision boundary in logistic regression is linear}{502}{subsubsubsection.21.6.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {202}{\ignorespaces Large $||{\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}||$ limit for linearly separable data.\relax }}{503}{figure.caption.341}\protected@file@percent }
+\newlabel{fig:separable_w_inf}{{202}{503}{Large $||\vec {\beta }||$ limit for linearly separable data.\relax }{figure.caption.341}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {203}{\ignorespaces Large $||{\mskip 0.5mu\relax \underline  {\mskip -0.5mu\relax \beta _{}\kern -\scriptspace \mskip -0.5mu\relax }\mskip 0.5mu\relax \mathchoice {\begingroup \sbox  \z@ {$\mathsurround \z@ \displaystyle \beta $}\sbox  2{$\mathsurround \z@ \displaystyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \textstyle \beta $}\sbox  2{$\mathsurround \z@ \textstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }{\begingroup \sbox  \z@ {$\mathsurround \z@ \scriptscriptstyle \beta $}\sbox  2{$\mathsurround \z@ \scriptscriptstyle \beta _{}\kern -\scriptspace $}\kern \dimexpr \wd \z@ -\wd \tw@ \relax \endgroup }}||$ limit for non-linearly separable data.\relax }}{504}{figure.caption.342}\protected@file@percent }
+\newlabel{fig:non_separable_w_inf}{{203}{504}{Large $||\vec {\beta }||$ limit for non-linearly separable data.\relax }{figure.caption.342}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.6.4}Multinomial Logistic Regression}{505}{subsubsection.21.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.4.1}Perspective of a multicategorical probability model}{505}{subsubsubsection.21.6.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.4.2}Derivation of the class probabilities | soft(arg)max}{506}{subsubsubsection.21.6.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.4.3}An engineering style approach to multinomial logistic classification}{506}{subsubsubsection.21.6.4.3}\protected@file@percent }
+\newlabel{eq:softargmax}{{1160}{507}{An engineering style approach to multinomial logistic classification}{equation.21.1160}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.6.4.4}Perceptron for binary classification}{507}{subsubsubsection.21.6.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {204}{\ignorespaces Soft(arg)max function in an engineering style diagram.\relax }}{508}{figure.caption.343}\protected@file@percent }
+\newlabel{fig:softargmax_engineering}{{204}{508}{Soft(arg)max function in an engineering style diagram.\relax }{figure.caption.343}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {205}{\ignorespaces Perceptron.\relax }}{508}{figure.caption.344}\protected@file@percent }
+\newlabel{fig:perceptron}{{205}{508}{Perceptron.\relax }{figure.caption.344}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {21.7}A primer on neural networks in the context of classification}{508}{subsection.21.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {206}{\ignorespaces Complex separation of two classes in 1D.\relax }}{509}{figure.caption.345}\protected@file@percent }
+\newlabel{fig:nn_1d}{{206}{509}{Complex separation of two classes in 1D.\relax }{figure.caption.345}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {207}{\ignorespaces Complex separation of two classes in 2D.\relax }}{510}{figure.caption.346}\protected@file@percent }
+\newlabel{fig:nn_2d}{{207}{510}{Complex separation of two classes in 2D.\relax }{figure.caption.346}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {38}{\ignorespaces XOR and Perceptron.\relax }}{510}{table.caption.347}\protected@file@percent }
+\newlabel{tab:xor_perceptron}{{38}{510}{XOR and Perceptron.\relax }{table.caption.347}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {21.7.1}Neural Network Loss for Classification}{510}{subsubsection.21.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.7.1.1}Intermezzo: Information measures for probability distributions}{511}{subsubsubsection.21.7.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.7.1.2}Introduction of Cross-Entropy}{511}{subsubsubsection.21.7.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {21.7.1.3}Relation between cross-entropy and the negative log-likelihood - they're the same}{512}{subsubsubsection.21.7.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {22}A Primer on Neural Networks}{513}{section.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {23}Dimensionality Reduction}{514}{section.23}\protected@file@percent }
+\newlabel{fig:dimred1}{{208a}{515}{2D data with 1 relevant dimension.\relax }{figure.caption.348}{}}
+\newlabel{sub@fig:dimred1}{{a}{515}{2D data with 1 relevant dimension.\relax }{figure.caption.348}{}}
+\newlabel{fig:dimred2}{{208b}{515}{3D data with 2 relevant dimensions.\relax }{figure.caption.348}{}}
+\newlabel{sub@fig:dimred2}{{b}{515}{3D data with 2 relevant dimensions.\relax }{figure.caption.348}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {208}{\ignorespaces Simple examples of data with lower intrinsic dimensionality.\relax }}{515}{figure.caption.348}\protected@file@percent }
+\newlabel{fig:dimred}{{208}{515}{Simple examples of data with lower intrinsic dimensionality.\relax }{figure.caption.348}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.1}Principal Component Analysis (PCA)}{516}{subsection.23.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {209}{\ignorespaces PCA applied to a 2D dataset.\relax }}{516}{figure.caption.349}\protected@file@percent }
+\newlabel{fig:pca}{{209}{516}{PCA applied to a 2D dataset.\relax }{figure.caption.349}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {23.1.1}Deriving the principal components from finding the direction with maximum variance}{516}{subsubsection.23.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.1.1.1}The principal components and dimensionality reduction}{517}{subsubsubsection.23.1.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {210}{\ignorespaces Explained variance of the principal components (scree plot).\relax }}{518}{figure.caption.350}\protected@file@percent }
+\newlabel{fig:explained_variance}{{210}{518}{Explained variance of the principal components (scree plot).\relax }{figure.caption.350}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.2}Nonlinear Dimensionality Reduction I: Nonlinear PCA}{518}{subsection.23.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {211}{\ignorespaces PCA applied to data with non-linear structure.\relax }}{519}{figure.caption.351}\protected@file@percent }
+\newlabel{fig:pca_examples}{{211}{519}{PCA applied to data with non-linear structure.\relax }{figure.caption.351}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {212}{\ignorespaces Nonlinear PCA (Kernel PCA) applied to data with non-linear structure.\relax }}{520}{figure.caption.352}\protected@file@percent }
+\newlabel{fig:nonlinear_pca}{{212}{520}{Nonlinear PCA (Kernel PCA) applied to data with non-linear structure.\relax }{figure.caption.352}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {23.2.1}Kernel PCA}{521}{subsubsection.23.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.2.1.1}Finding a formulation where the projection to the principal components is only expressed in terms of a kernel function}{521}{subsubsubsection.23.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.2.1.2}Kernel expression for mean centered projected features}{522}{subsubsubsection.23.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {23.3}Nonlinear Dimensionality Reduction II: Further techniques}{523}{subsection.23.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {23.3.1}Linear discriminant analysis for dimensionality reduction of classified data}{523}{subsubsection.23.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {23.3.2}Retaining (local) distance information or neighbor structure}{523}{subsubsection.23.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.3.2.1}Global preservation of distance information}{524}{subsubsubsection.23.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.3.2.2}Local preservation of distance information}{524}{subsubsubsection.23.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {213}{\ignorespaces Different approaches to retain distance information.\relax }}{525}{figure.caption.353}\protected@file@percent }
+\newlabel{fig:distance_retaining_approaches}{{213}{525}{Different approaches to retain distance information.\relax }{figure.caption.353}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.3.2.3}Isomap - distance preservation along geodesics}{525}{subsubsubsection.23.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.3.2.4}Locally Linear Embedding (LLE)}{525}{subsubsubsection.23.3.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {214}{\ignorespaces Isomap applied to data with non-linear structure.\relax }}{526}{figure.caption.354}\protected@file@percent }
+\newlabel{fig:isomap}{{214}{526}{Isomap applied to data with non-linear structure.\relax }{figure.caption.354}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {23.3.2.5}t-SNE (t-distributed stochastic neighbor embedding)}{526}{subsubsubsection.23.3.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {23.3.3}Autoencoders}{526}{subsubsection.23.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {215}{\ignorespaces Autoencoder.\relax }}{527}{figure.caption.355}\protected@file@percent }
+\newlabel{fig:autoencoder}{{215}{527}{Autoencoder.\relax }{figure.caption.355}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {24}Latent Variable Models}{527}{section.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.1}The Cocktail Party Problem - Blind Source Separation}{527}{subsection.24.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {216}{\ignorespaces Mixture and separation of signal. Note the space where we operate is really $p$-dimensional space (here $p=3$), so the number of original signals and number of separations. \textbf  {The order / time data is not used.} We might try to separate the signals by doing PCA in this $p$-dimensional space (leading to $p$ separated signals).\relax }}{529}{figure.caption.356}\protected@file@percent }
+\newlabel{fig:cocktail_party}{{216}{529}{Mixture and separation of signal. Note the space where we operate is really $p$-dimensional space (here $p=3$), so the number of original signals and number of separations. \textbf {The order / time data is not used.} We might try to separate the signals by doing PCA in this $p$-dimensional space (leading to $p$ separated signals).\relax }{figure.caption.356}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.2}Independent Component Analysis (ICA)}{529}{subsection.24.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.2.1}Intuition}{529}{subsubsection.24.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {217}{\ignorespaces Illustration of ICA.\relax }}{530}{figure.caption.357}\protected@file@percent }
+\newlabel{fig:ica_illu}{{217}{530}{Illustration of ICA.\relax }{figure.caption.357}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.2.2}Formalization and aim}{531}{subsubsection.24.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.2.3}Pre-step: Whitening of the observed data}{531}{subsubsection.24.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.2.4}Minimizing dependence of the sources}{532}{subsubsection.24.2.4}\protected@file@percent }
+\abx@aux@cite{0}{miller03}
+\abx@aux@segm{0}{0}{miller03}
+\abx@aux@page{65}{533}
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.3}Factor Analysis}{534}{subsection.24.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.3.1}Going deeper than relating observed data - in search of the unobserved}{534}{subsubsection.24.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.3.2}Setting of Factor Analysis}{534}{subsubsection.24.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.3.3}Deriving the parameters in Factor Analysis by Maximum Likelihood}{535}{subsubsection.24.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {24.4}Generative Latent Models}{536}{subsection.24.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.4.1}Introduction and problem of the intractable marginal likelihood of the data}{536}{subsubsection.24.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.4.2}Evidence Lower Bound (ELBO)}{537}{subsubsection.24.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {24.4.2.1}Proof of the ELBO}{538}{subsubsubsection.24.4.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {218}{\ignorespaces Illustration of Jenssen's inequality.\relax }}{539}{figure.caption.358}\protected@file@percent }
+\newlabel{fig:jenssen}{{218}{539}{Illustration of Jenssen's inequality.\relax }{figure.caption.358}{}}
+\@writefile{toc}{\contentsline {subsubsubsection}{\numberline {24.4.2.2}Gap between evidence and ELBO}{539}{subsubsubsection.24.4.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {219}{\ignorespaces Illustration of the gap between the evidence and the ELBO.\relax }}{541}{figure.caption.359}\protected@file@percent }
+\newlabel{fig:elbo_gap}{{219}{541}{Illustration of the gap between the evidence and the ELBO.\relax }{figure.caption.359}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.4.3}Expectation-Maximization (EM) algorithm}{541}{subsubsection.24.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.4.4}Application of the EM algorithm: Gaussian Mixture Models (GMM)}{542}{subsubsection.24.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {220}{\ignorespaces Illustration of a Gaussian Mixture Model.\relax }}{543}{figure.caption.360}\protected@file@percent }
+\newlabel{fig:gmm}{{220}{543}{Illustration of a Gaussian Mixture Model.\relax }{figure.caption.360}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {24.4.5}Variational Inference}{545}{subsubsection.24.4.5}\protected@file@percent }
+\abx@aux@page{66}{546}
+\abx@aux@page{67}{546}
+\abx@aux@page{68}{546}
+\abx@aux@page{69}{546}
+\abx@aux@page{70}{546}
+\abx@aux@page{71}{546}
+\abx@aux@page{72}{546}
+\abx@aux@page{73}{546}
+\abx@aux@page{74}{546}
+\abx@aux@page{75}{546}
+\abx@aux@page{76}{546}
+\abx@aux@page{77}{546}
+\abx@aux@page{78}{546}
+\abx@aux@page{79}{547}
+\abx@aux@page{80}{547}
+\abx@aux@page{81}{547}
+\abx@aux@page{82}{547}
+\abx@aux@page{83}{547}
+\abx@aux@page{84}{547}
+\abx@aux@page{85}{547}
+\abx@aux@page{86}{547}
+\abx@aux@page{87}{547}
+\abx@aux@page{88}{547}
+\abx@aux@page{89}{547}
+\abx@aux@page{90}{547}
+\abx@aux@page{91}{547}
+\abx@aux@page{92}{548}
+\abx@aux@page{93}{548}
+\abx@aux@page{94}{548}
+\abx@aux@page{95}{548}
+\abx@aux@page{96}{548}
+\abx@aux@page{97}{548}
+\abx@aux@page{98}{548}
+\abx@aux@page{99}{548}
+\abx@aux@page{100}{548}
+\abx@aux@page{101}{548}
+\abx@aux@page{102}{548}
+\abx@aux@page{103}{548}
+\abx@aux@page{104}{548}
+\abx@aux@page{105}{548}
 \gdef\minted@oldcachelist{,
   manni.pygstyle,
   364863D0D1B87D8B5C63324CAC13B827A9EC73F7B7C4D1C86D6DD227E92F8DA5.pygtex,
@@ -1401,66 +1729,63 @@
   7FBE5E1C9CA933B10758CF9E6E5CB301C3A0E1D64FDFBF6EBD78400A34B83C98.pygtex,
   1E18AD92EC2F94DB5BD51517E44A7BE8D84E5C1BC741A86B4714D03F18A74582.pygtex,
   E40D2A45D276608E10700BD7FA86AD5DD84E5C1BC741A86B4714D03F18A74582.pygtex}
-\abx@aux@page{86}{432}
-\abx@aux@page{87}{432}
-\abx@aux@page{88}{432}
-\abx@aux@page{89}{432}
-\abx@aux@page{90}{432}
-\abx@aux@page{91}{432}
-\abx@aux@page{92}{432}
-\abx@aux@page{93}{432}
-\abx@aux@page{94}{432}
-\abx@aux@page{95}{432}
-\abx@aux@page{96}{432}
-\abx@aux@page{97}{432}
-\abx@aux@page{98}{432}
-\@writefile{toc}{\contentsline {section}{References}{432}{equation.19.984}\protected@file@percent }
+\abx@aux@page{106}{549}
+\abx@aux@page{107}{549}
+\@writefile{toc}{\contentsline {section}{References}{549}{subsubsection.24.4.5}\protected@file@percent }
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{1}}
-\abx@aux@number{60}{ardourel17}{0}{nyt/global//global/global}{1}
-\abx@aux@number{61}{Bagla02}{0}{nyt/global//global/global}{2}
-\abx@aux@number{62}{biamonte2017quantum}{0}{nyt/global//global/global}{3}
-\abx@aux@number{63}{box58}{0}{nyt/global//global/global}{4}
-\abx@aux@number{64}{breiman01}{0}{nyt/global//global/global}{5}
-\abx@aux@number{65}{bryant2011computer}{0}{nyt/global//global/global}{6}
-\abx@aux@number{66}{chou07}{0}{nyt/global//global/global}{7}
-\abx@aux@number{67}{Courant1928}{0}{nyt/global//global/global}{8}
-\abx@aux@number{69}{gould96}{0}{nyt/global//global/global}{9}
-\abx@aux@number{70}{bonitz22}{0}{nyt/global//global/global}{10}
-\abx@aux@number{71}{Hairer06b}{0}{nyt/global//global/global}{11}
-\abx@aux@number{72}{hairer03}{0}{nyt/global//global/global}{12}
-\abx@aux@number{73}{Hairer1996}{0}{nyt/global//global/global}{13}
-\abx@aux@number{74}{Hairer06}{0}{nyt/global//global/global}{14}
-\abx@aux@number{75}{hairer93}{0}{nyt/global//global/global}{15}
-\abx@aux@number{76}{heiter12}{0}{nyt/global//global/global}{16}
-\abx@aux@number{78}{higham02}{0}{nyt/global//global/global}{17}
-\abx@aux@number{79}{hirashima2023}{0}{nyt/global//global/global}{18}
-\abx@aux@number{80}{jagode06}{0}{nyt/global//global/global}{19}
-\abx@aux@number{81}{Kincl23}{0}{nyt/global//global/global}{20}
-\abx@aux@number{82}{lambert91}{0}{nyt/global//global/global}{21}
-\abx@aux@number{83}{lefever71}{0}{nyt/global//global/global}{22}
-\abx@aux@number{84}{lewis2004}{0}{nyt/global//global/global}{23}
-\abx@aux@number{85}{Margolin2023}{0}{nyt/global//global/global}{24}
-\abx@aux@number{86}{matsumoto98}{0}{nyt/global//global/global}{25}
-\abx@aux@number{87}{nigel12}{0}{nyt/global//global/global}{26}
-\abx@aux@number{88}{Moser1978}{0}{nyt/global//global/global}{27}
-\abx@aux@number{89}{particle2020}{0}{nyt/global//global/global}{28}
-\abx@aux@number{90}{press07}{0}{nyt/global//global/global}{29}
-\abx@aux@number{91}{rackauckas17}{0}{nyt/global//global/global}{30}
-\abx@aux@number{92}{rackauckas22}{0}{nyt/global//global/global}{31}
-\abx@aux@number{93}{Rein14}{0}{nyt/global//global/global}{32}
-\abx@aux@number{94}{schlottke21}{0}{nyt/global//global/global}{33}
-\abx@aux@number{95}{springel23}{0}{nyt/global//global/global}{34}
-\abx@aux@number{96}{Ulmann2020}{0}{nyt/global//global/global}{35}
-\abx@aux@number{97}{leer79}{0}{nyt/global//global/global}{36}
-\abx@aux@read@bbl@mdfivesum{22F80ADD69211BF81231D5DAEB40A5EC}
+\abx@aux@number{65}{ardourel17}{0}{nyt/global//global/global}{1}
+\abx@aux@number{66}{Bagla02}{0}{nyt/global//global/global}{2}
+\abx@aux@number{67}{Belkin19}{0}{nyt/global//global/global}{3}
+\abx@aux@number{68}{biamonte2017quantum}{0}{nyt/global//global/global}{4}
+\abx@aux@number{69}{box58}{0}{nyt/global//global/global}{5}
+\abx@aux@number{70}{breiman01}{0}{nyt/global//global/global}{6}
+\abx@aux@number{71}{bryant2011computer}{0}{nyt/global//global/global}{7}
+\abx@aux@number{72}{chou07}{0}{nyt/global//global/global}{8}
+\abx@aux@number{73}{Courant1928}{0}{nyt/global//global/global}{9}
+\abx@aux@number{74}{crammer01}{0}{nyt/global//global/global}{10}
+\abx@aux@number{75}{Efron1994}{0}{nyt/global//global/global}{11}
+\abx@aux@number{76}{gould96}{0}{nyt/global//global/global}{12}
+\abx@aux@number{77}{bonitz22}{0}{nyt/global//global/global}{13}
+\abx@aux@number{78}{Hairer06b}{0}{nyt/global//global/global}{14}
+\abx@aux@number{79}{hairer03}{0}{nyt/global//global/global}{15}
+\abx@aux@number{80}{Hairer1996}{0}{nyt/global//global/global}{16}
+\abx@aux@number{81}{Hairer06}{0}{nyt/global//global/global}{17}
+\abx@aux@number{82}{hairer93}{0}{nyt/global//global/global}{18}
+\abx@aux@number{83}{heiter12}{0}{nyt/global//global/global}{19}
+\abx@aux@number{84}{tim15}{0}{nyt/global//global/global}{20}
+\abx@aux@number{85}{higham02}{0}{nyt/global//global/global}{21}
+\abx@aux@number{86}{hirashima2023}{0}{nyt/global//global/global}{22}
+\abx@aux@number{87}{jagode06}{0}{nyt/global//global/global}{23}
+\abx@aux@number{88}{Kincl23}{0}{nyt/global//global/global}{24}
+\abx@aux@number{89}{lambert91}{0}{nyt/global//global/global}{25}
+\abx@aux@number{90}{miller03}{0}{nyt/global//global/global}{26}
+\abx@aux@number{91}{lefever71}{0}{nyt/global//global/global}{27}
+\abx@aux@number{92}{lewis2004}{0}{nyt/global//global/global}{28}
+\abx@aux@number{93}{Margolin2023}{0}{nyt/global//global/global}{29}
+\abx@aux@number{94}{matsumoto98}{0}{nyt/global//global/global}{30}
+\abx@aux@number{95}{nigel12}{0}{nyt/global//global/global}{31}
+\abx@aux@number{96}{Moser1978}{0}{nyt/global//global/global}{32}
+\abx@aux@number{97}{particle2020}{0}{nyt/global//global/global}{33}
+\abx@aux@number{98}{press07}{0}{nyt/global//global/global}{34}
+\abx@aux@number{99}{rackauckas17}{0}{nyt/global//global/global}{35}
+\abx@aux@number{100}{rackauckas22}{0}{nyt/global//global/global}{36}
+\abx@aux@number{101}{Rein14}{0}{nyt/global//global/global}{37}
+\abx@aux@number{102}{schlottke21}{0}{nyt/global//global/global}{38}
+\abx@aux@number{103}{springel23}{0}{nyt/global//global/global}{39}
+\abx@aux@number{104}{Ulmann2020}{0}{nyt/global//global/global}{40}
+\abx@aux@number{105}{leer79}{0}{nyt/global//global/global}{41}
+\abx@aux@number{106}{ras95}{0}{nyt/global//global/global}{42}
+\abx@aux@read@bbl@mdfivesum{FDA46EF7578FB4A8EE04ECE629234F25}
 \abx@aux@defaultrefcontext{0}{ardourel17}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Bagla02}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{Belkin19}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{biamonte2017quantum}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{box58}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{breiman01}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{bryant2011computer}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{chou07}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Courant1928}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{crammer01}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Efron1994}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{gould96}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{bonitz22}{nyt/global//global/global}
@@ -1476,6 +1801,7 @@
 \abx@aux@defaultrefcontext{0}{jagode06}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Kincl23}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{lambert91}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{miller03}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{lefever71}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{lewis2004}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Margolin2023}{nyt/global//global/global}
@@ -1491,4 +1817,5 @@
 \abx@aux@defaultrefcontext{0}{springel23}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{Ulmann2020}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{leer79}{nyt/global//global/global}
-\gdef \@abspage@last{455}
+\abx@aux@defaultrefcontext{0}{ras95}{nyt/global//global/global}
+\gdef \@abspage@last{576}

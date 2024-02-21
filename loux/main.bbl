@@ -95,6 +95,67 @@
       \verb http://dx.doi.org/10.1007/BF02702282
       \endverb
     \endentry
+    \entry{Belkin19}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=b2aeb0539e71c989e52b170b56b1fabd}{%
+           family={Belkin},
+           familyi={B\bibinitperiod},
+           given={Mikhail},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=97d68bdafb2fefd550bc00375aab158e}{%
+           family={Hsu},
+           familyi={H\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2eebe9bcff663d57eb49edc43dfee6a4}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Siyuan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b59a201ea7db1f04f3e759f7f4f9fdb1}{%
+           family={Mandal},
+           familyi={M\bibinitperiod},
+           given={Soumik},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Proceedings of the National Academy of Sciences}%
+      }
+      \strng{namehash}{d345a47731758681f1be1a00df52823b}
+      \strng{fullhash}{53ff9bd1260405afa11c8ea0926eccf4}
+      \strng{bibnamehash}{d345a47731758681f1be1a00df52823b}
+      \strng{authorbibnamehash}{d345a47731758681f1be1a00df52823b}
+      \strng{authornamehash}{d345a47731758681f1be1a00df52823b}
+      \strng{authorfullhash}{53ff9bd1260405afa11c8ea0926eccf4}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{month}{7}
+      \field{number}{32}
+      \field{title}{Reconciling modern machine-learning practice and the classical bias–variance trade-off}
+      \field{volume}{116}
+      \field{year}{2019}
+      \field{pages}{15849\bibrangedash 15854}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1903070116
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1073/pnas.1903070116
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1073/pnas.1903070116
+      \endverb
+    \endentry
     \entry{biamonte2017quantum}{article}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=392818d7b034b0b53362804f322ab7a5}{%
@@ -370,6 +431,41 @@
       \verb{url}
       \verb https://doi.org/10.1007/BF01448839
       \endverb
+    \endentry
+    \entry{crammer01}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=16e0c91cca40e2931e13a4c18e98530b}{%
+           family={Crammer},
+           familyi={C\bibinitperiod},
+           given={Koby},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=300d4990e626d975e0c28630444f63c3}{%
+           family={Singer},
+           familyi={S\bibinitperiod},
+           given={Yoram},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \strng{fullhash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \strng{bibnamehash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \strng{authorbibnamehash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \strng{authornamehash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \strng{authorfullhash}{145ef4a4a8eb19e849d62f98e6719c1b}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of machine learning research}
+      \field{number}{Dec}
+      \field{title}{On the algorithmic implementation of multiclass kernel-based vector machines}
+      \field{volume}{2}
+      \field{year}{2001}
+      \field{pages}{265\bibrangedash 292}
+      \range{pages}{28}
     \endentry
     \entry{Efron1994}{book}{}
       \name{author}{2}{}{%
@@ -1050,6 +1146,43 @@
       \verb{url}
       \verb https://books.google.de/books?id=P0vPnQEACAAJ
       \endverb
+    \endentry
+    \entry{miller03}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=15a1a371fb3afb240eb3ee60a39c1c85}{%
+           family={Learned-Miller},
+           familyi={L\bibinithyphendelim M\bibinitperiod},
+           given={Erik\bibnamedelima G},
+           giveni={E\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c57592435e774a8c75fad45f770c804e}{%
+           family={III},
+           familyi={I\bibinitperiod},
+           given={John\bibnamedelimb W\bibnamedelima Fisher},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {JMLR. org}%
+      }
+      \strng{namehash}{692c95975f25432d91b4038588256a66}
+      \strng{fullhash}{692c95975f25432d91b4038588256a66}
+      \strng{bibnamehash}{692c95975f25432d91b4038588256a66}
+      \strng{authorbibnamehash}{692c95975f25432d91b4038588256a66}
+      \strng{authornamehash}{692c95975f25432d91b4038588256a66}
+      \strng{authorfullhash}{692c95975f25432d91b4038588256a66}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Journal of Machine Learning Research}
+      \field{title}{ICA using spacings estimates of entropy}
+      \field{volume}{4}
+      \field{year}{2003}
+      \field{pages}{1271\bibrangedash 1295}
+      \range{pages}{25}
     \endentry
     \entry{lefever71}{article}{}
       \name{author}{2}{}{%
@@ -3350,6 +3483,38 @@
       \verb{url}
       \verb https://www.sciencedirect.com/science/article/pii/0021999179901451
       \endverb
+    \endentry
+    \entry{ras95}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6dedcea44b2da1415e95ac8a84fef83e}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c3e4580ad47bbaa5c297dcf7133fe05e}{%
+           family={Rasmussen},
+           familyi={R\bibinitperiod},
+           given={Carl},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \strng{fullhash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \strng{bibnamehash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \strng{authorbibnamehash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \strng{authornamehash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \strng{authorfullhash}{3b73570b653dd9d51fad36cfc42ca9e2}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advances in neural information processing systems}
+      \field{title}{Gaussian processes for regression}
+      \field{volume}{8}
+      \field{year}{1995}
     \endentry
   \enddatalist
   \missing{over04}

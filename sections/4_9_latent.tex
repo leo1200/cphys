@@ -1,0 +1,588 @@
+\section{Latent Variable Models}
+\thispagestyle{plain}
+
+From measurements, we want to find the underlying, latent signals, so rather
+than finding a model relating multiple observed variables, we want to find
+underlying unobserved variables linked to our observation.
+
+For instance
+\begin{itemize}
+    \item we have measured neural activity by $100$ electrodes on the scalp and want to find the underlying neural signals
+    \item we have multiple stock prices and many points in time ($N$ measurements) and want to find the underlying factors that drive the stock prices
+\end{itemize}
+
+\subsection{The Cocktail Party Problem - Blind Source Separation}
+Consider three instruments playing at the center of the room, one plays a sine signal
+\begin{equation}
+    \{S_{i1}\}_{i=1}^N = \{ \sin 2t_i \}_{i=1}^N, \quad t = 0.000:0.004:8.000
+\end{equation}
+another a square signal
+\begin{equation}
+    \{S_{i2}\}_{i=1}^N = \{ \text{square}(2t_1) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
+\end{equation}
+and the third a sawtooth signal
+\begin{equation}
+    \{S_{i2}\}_{i=1}^N = \{ \text{sawtooth}(2t_1) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
+\end{equation}
+We measure this signal by three microphones at different positions in the room. They measure different
+linearly mixed signals
+\begin{equation}
+    \begin{aligned}
+        X_{i1} &= S_{i1} + S_{i1} + S_{i1} + \epsilon_{i1} \\
+        X_{i2} &= 0.5 S_{i2} + 2 S_{i2} + S_{i2} + \epsilon_{i2} \\
+        X_{i3} &= 1.5 S_{i3} + S_{i3} + 2 c_3 S_{i3} + \epsilon_{i3}
+    \end{aligned}
+\end{equation}
+where the $\epsilon_{i1}$ are the noise terms and we have inserted an arbitrary mixture.
+
+\note{We assume the same mixture at all times, time information is not used. We just consider $N$ samples of the signals. So our transformation
+is really a matrix transformation in $p \times p$ space (here $p = 3$).}
+
+In matrix form, we have
+
+\begin{equation}
+    \vec{X} = \begin{pmatrix} X_1 \\ X_2 \\ X_3 \end{pmatrix} = \mat{\Gamma} \vec{S} + \vec{\epsilon}
+\end{equation}
+
+holding for all $N$ samples. For all samples we can write
+
+\begin{equation}
+    \mat{X} = \mat{S} \mat{\Gamma} + \mat{E}, \quad \mat{X}, \mat{S} \in \mathbb{R}^{N \times p}, \quad \mat{\Gamma} \in \mathbb{R}^{p \times p}
+\end{equation}
+
+here with $p = 3$. The original signals of the instruments and the microphone recordings
+are shown in figure \ref{fig:cocktail_party}.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/cocktail_party.svg}
+    \caption{Mixture and separation of signal. Note the space where we operate is really $p$-dimensional space (here $p=3$),
+    so the number of original signals and number of separations. \textbf{The order / time data is not used.} We might try to
+    separate the signals by doing PCA in this $p$-dimensional space (leading to $p$ separated signals).}
+    \label{fig:cocktail_party}
+\end{figure}
+
+\bluebox{\textbf{Aim:} Given $p$ perspectives ($p$ microphones) on a mixed signal, we want to find $p$ (generally $q \leq p$) original \textbf{latent} (not directly observed)
+source signals.}
+
+\subsection{Independent Component Analysis (ICA)}
+
+\subsubsection{Intuition}
+\bluebox{From mixes we want to find original not directly observable (latent) signals.}
+Consider two uniformly distributed source signals $S_1, S_2$ and the mixes
+\begin{equation}
+    \begin{aligned}
+        X_1 &= S_1 + \frac{1}{2} S_2 \\
+        X_2 &= S_1 - \frac{1}{2} 3S_2
+    \end{aligned}
+\end{equation}
+This is illustrated in figure \ref{fig:ica_illu}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/ica_illu2.svg}
+    \caption{Illustration of ICA.}
+    \label{fig:ica_illu}
+\end{figure}
+
+\textbf{Rough idea:} Loosely speaking when we add two signals, the mixture becomes more Gaussian,
+so we might try to find sources by finding a transformation that makes the result as non-Gaussian as possible,
+or relatedly maximize their independence.
+
+\note{We first whiten the data, i.e. remove any correlations, the different channels in $\vec{X}$ are forced to
+be uncorrelated. Here the intuition is that after whitening, ICA only needs to rotate the data-matrix for
+a high independence of the sources.}
+
+\subsubsection{Formalization and aim}
+\redbox{Different from before let $\mat{X} \in \mathbb{R}^{p \times N}$ be the matrix with $p$ features and $N$ samples,
+as it makes the notation here a bit nicer. We assume $\mat{X}$ to have centered and normalized features.}
+
+We assume the model
+\begin{equation}
+    \begin{gathered}
+        \underset{p\times N}{\mat{X}} = \underset{p\times q}{\mat{\Gamma}} \, \underset{q\times N}{\mat{S}}, \quad q \leq p \\
+        \quad \text{latent sources } \mat{S}, \text{linear mixing matrix } \mat{\Gamma}, \quad \text{observed signals } \mat{X}
+    \end{gathered}
+\end{equation}
+so without a noise term\footnote{There is also noisy ICA.}.
+
+\textbf{In independent component analysis (ICA), the $S_i$ are assumed to be statistically independent (not just
+uncorrelated) and non-gaussian.}\footnote{Independent Gaussian components can only be determined up to a rotation.}
+
+\bluebox{\textbf{Aim:} Find the mixing matrix $\mat{\Gamma}$ and the latent sources $\mat{S}$ from the observed signals $\mat{X}$,
+such that the sources are as independent as possible, \enquote{$p(\vec{S}) = p(S_1) \cdot p(S_2) \cdot \dots \cdot p(S_q)$}.}
+
+\subsubsection{Pre-step: Whitening of the observed data}
+
+Consider the singular-value decomposition $\mat{X} = \mat{U} \mat{D} \mat{V}^T$ ($\mat{U} \in \mathbb{R}^{p \times p}$).
+Since the rows of $\mat{U}$ and $\mat{V}$ are orthonormal vectors, $\mat{U}\mat{V}^T$ will be white ($(\mat{U}\mat{V}^T)(\mat{U}\mat{V}^T)^T 
+\mat{U}(\mat{V}^T\mat{V})\mat{U}^T = \mat{1}$). Which
+we use as our $\mat{X}$ henceforth.
+
+\greenbox{Since $\mat{X}$ is whitened to $\Cov(\vec{X}) = \mat{1}$ (so for centered features $\Cov(\vec{X}) = \frac{1}{N} \mat{X} \mat{X}^T = \mat{1}$, so $\mat{X}$
+orthogonal) and we also request covariance of the sources to be $\Cov(\vec{S}) = \mat{1}$ (a weaker condition than independence), $\mat{\Gamma}$ must
+be orthogonal, so $\mat{\Gamma}^{-1} = \mat{\Gamma}^T$.}
+
+\bluebox{\textbf{Reformulated aim:} Find an orthogonal $\mat{\Gamma}$ such that the components of the vector random
+variable $\vec{S} = \mat{\Gamma}^T \vec{X}$ are independent (and non-Gaussian).}
+
+\yellowbox{\textbf{Why does requesting no correlation does not give unique sources?:} Assume we would only 
+request that the sources are uncorrelated, so $\Cov(\vec{S}) = \mat{1}$. As discussed, no correlation
+can be obtained by whitening. However, consider 
+\begin{equation}
+    \vec{X} = \mat{\Gamma} \vec{S} = \mat{\Gamma} \mat{R} \mat{R}^T \vec{S} = (\mat{\Gamma} \mat{R}) (\mat{R}^T \vec{S}) = \mat{\Gamma^*} \vec{S^*}
+\end{equation}
+then $\Cov(\vec{S^*}) = \mat{R} \Cov(\vec{S}) \mat{R}^T = \mat{R} \mat{1} \mat{R}^T = \mat{1}$, so there
+are many such compositions and it is impossible to recover unique underlying sources.}
+
+\yellowbox{\textbf{Why do we exclude Gaussian sources?} Any Gaussian independent components can only be determined
+up to a rotation, so we would have the same non-uniqueness problem as with uncorrelated sources.}
+
+\subsubsection{Minimizing dependence of the sources}
+Dependence of random variables can be measured by the mutual information (with $p(S_i)$ the marginal
+densities of the source-components)
+\begin{equation}
+    \begin{aligned}
+        \operatorname{MI}(\vec{S}) &= \explain{D_{KL}\left( p(\vec{S}) \, || \, \prod_{i=1}^q p(S_i) \right)}{Kullback-Leibler divergence aka Relative Entropy} \\
+        &= \int p(\vec{S}) \log \frac{p(\vec{S})}{\prod_{i=1}^q p(S_i)} \, d\vec{S} \\
+        &= \sum_{i=1}^{q} H(S_i) - H(\vec{S})
+    \end{aligned}
+\end{equation}
+where we used the expression for the entropy
+\begin{equation}
+    H(\vec{S}) = - \int p(\vec{S}) \log p(\vec{S}) \, d\vec{S}
+\end{equation}
+
+Assuming $\Cov(\vec{S}) = \mat{1}$ without loss of generality (can be enforced by choice of $\mat{\Gamma}$), and
+with $\Cov(\vec{X}) = \mat{1}$, we have $\vec{S} = \mat{\Gamma}^T \vec{X} \in \mathbb{R}^{q}$, from which
+one can show $H(\vec{S}) = H(\vec{X}) + \log |\det \mat{\Gamma}| = H(\vec{X})$, so
+
+\begin{equation}
+    \operatorname{MI}(\vec{S}) = \sum_{i=1}^{q} H(S_i) - H(\vec{X})
+\end{equation}
+
+so
+
+\begin{equation}
+    \mat{\hat{\Gamma}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\hat{\Gamma}^T \vec{X})_i) - \underbrace{H(\vec{X})}_{=\text{const.}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\hat{\Gamma}^T \vec{X})_i)
+\end{equation}
+
+\note{This is equivalent to minimizing the sum of the entropies of the separate components of $\vec{S}$, which is
+equivalent to maximizing their non-Gaussianity (e.g. Wasserschein distance to a Gaussian).}
+
+\problem{We want to calculate 
+\begin{equation}
+    H(S_i) = H((\hat{\Gamma}^T \vec{X})_i)
+\end{equation}
+but given the $\mat{\Gamma}$ we only have $N$ samples $S_{1}^{(1)}, S_{i}^{(2)}, \dots, S_{i}^{(N)}$ of the $i$-th source, not a probability
+distribution $p(S_i)$.
+}
+\idea{By estimating the probability distribution of the sources, we can estimate the entropy, e.g. by
+\begin{equation}
+    \hat{H}_\text{RADICAL}(S_i) = \frac{1}{N-m} \sum_{k=1}^{N-m} \log \left( \frac{N+1}{m} \left( S_{i}^{(k+m)} - S_{i}^{(k)} \right) \right)
+\end{equation}
+with a small integer $m$ (a parameter) (e.g. $m=1$). This is called ICA with spacings estimates of entropy, see \cite{miller03}.
+}
+
+\note{ICA cannot recover
+\begin{itemize}
+    \item the actual number of source signals
+    \item a uniquely correct ordering of the source signals
+    \item the proper scaling (including sign) of the source signals
+    \item ICA can only extract sources that were mixed linearly
+\end{itemize}
+}
+
+\note{While it might look like it, ICA is not an inverse problem in the classical sense
+because there is no forward model to invert.}
+
+\subsection{Factor Analysis}
+\subsubsection{Going deeper than relating observed data - in search of the unobserved}
+Consider we have observed temperatures $y_i$ and climate factors $x_{ij}$, which we relate
+by a linear model
+\begin{equation}
+    y_i = \sum_{j=1}^{p} \beta_j x_{ij} + \epsilon_i
+\end{equation}
+in which the $\beta_j$ can be determined by linear regression as usual.
+A step deeper we can ask ourselves what well separated unknown sources
+$\vec{S}$ can have given rise to $\vec{x}$ and $y$, e.g. industrial policies, etc.
+
+\subsubsection{Setting of Factor Analysis}
+Consider we have observed $p$ features $\vec{x} \in \mathbb{R}^{p}$.
+\idea{What if there are common latent sources $S_1,\dots, S_q$ ($\vec{S} \in \mathbb{R}^{q}$) of the
+variation amongst the features?}
+For instance a set stock prices (e.g. all from the DAX) might be driven by a few common factors
+like central bank policies etc. which we want to find. Or from a set of tests in school, we might want
+to find common factors like drive, diligence, etc.
+
+\begin{equation}
+    \begin{gathered}
+        \underset{p\times 1}{\vec{x}_i} = \underset{p \times 1}{\vec{\mu}_i} + \underset{p \times q}{\mat{\Gamma}} \, \underset{q \times 1}{\vec{S}_i^T} + \underset{p \times 1}{\vec{\epsilon}_i}, \quad i = 1,\dots,N \\
+        \text{observations } \vec{x}_i, \text{latent sources } \vec{S}_i, \text{loading matrix } \mat{\Gamma}, \text{mean } \vec{\mu}_i, \text{noise } \vec{\epsilon}_i
+    \end{gathered}
+\end{equation}
+
+\greenbox{The latent variables $S_1,\dots,S_q$ account for the common sources of variance and their correlation
+in the $x_1,\dots,x_p$, while the $\epsilon_j$ account for the remaining variance.}
+
+\bluebox{Typically $S_j$ and $\epsilon_j$ are assumed to be Gaussian and uncorrelated.}
+
+We assume
+\begin{equation}
+    \vec{S}_i \sim \mathcal{N}(0, \mat{1}), \quad \vec{\epsilon}_i \sim \mathcal{N}(0, \mat{\Psi})
+\end{equation}
+
+Note that for the $S_j$ to be jointly normal and uncorrelated ($\Cov(X,Y) = E[XY] - E[X] E[Y] = 0 \rightleftarrows E[XY] = E[X]E[Y]$), 
+means they are independent ($p(x,y) = p(x) p(y)$).
+
+\pinkbox{\textbf{Link to generative latent models:} Given the assumption $\vec{S}_i \sim \mathcal{N}(0, \mat{1})$, in this space
+we can easily generate new samples of $\vec{S}_i$ by drawing from a normal distribution and given we have found the loading matrix
+$\mat{\Gamma}$, we can generate new samples of $\vec{x}_i$ as $\vec{x} = \vec{\mu} + \mat{\Gamma} \vec{S} + \vec{\epsilon}_i$.}
+
+\problem{Remember the discussed identifiability issue for the case of independent Gaussian sources - the user can search for 
+rotated versions of the factors that are more easily interpretable.}
+
+\greybox{\textbf{Difference to PCA:} Different from PCA, we also have the noise term $\vec{\epsilon}_i$ in the model.}
+
+\subsubsection{Deriving the parameters in Factor Analysis by Maximum Likelihood}
+We want to find the parameters $\vec{\mu}_i, \mat{\Gamma}, \mat{\Psi}$ by maximum likelihood.
+Let us collect the parameters in a vector $\vec{\theta} = (\vec{\mu}_i, \mat{\Gamma}, \mat{\Psi})$ for 
+shorthand notation.
+
+We want to maximize the likelihood of the observed data given the parameters. Assuming the measurements to be i.i.d, we get
+
+\begin{equation}
+    \hat{\vec{\theta}}_{\text{MLE}} = \argmax_{\vec{\theta}} \prod_{i=1}^{N} p_{\vec{\theta}}(\vec{x}_i)
+\end{equation}
+
+As we do not know the latent variables $\vec{S}_i$, we have to integrate them out, so
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}) = \int_\vec{S} p_\vec{\theta} (\vec{x}, \vec{S}) \, d\vec{S} \underset{\text{Bayes}}{=} \int_\vec{S} p_\vec{\theta} (\vec{x} | \vec{S}) p(\vec{S}) \, d\vec{S}
+\end{equation}
+
+where in case of our factor analysis
+
+\begin{equation}
+    \vec{S}_i \sim \mathcal{N}(0, \mat{1}) \quad \rightarrow \quad p(\vec{S}_i) = (2\pi)^{-\frac{q}{2}} \exp \left( -\frac{1}{2} \vec{S}_i^T \vec{S}_i \right)
+\end{equation}
+
+and by our model
+
+\begin{equation}
+    \vec{x}_i | \vec{S}_i \sim \mathcal{N}(\vec{\mu}_i + \mat{\Gamma} \vec{S}_i, \mat{\Psi})
+\end{equation}
+
+so
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}_i | \vec{S}_i) = (2\pi)^{-\frac{p}{2}} \exp \left( -\frac{1}{2} (\vec{x}_i - \vec{\mu}_i - \mat{\Gamma} \vec{S}_i)^T \mat{\Psi}^{-1} (\vec{x}_i - \vec{\mu}_i - \mat{\Gamma} \vec{S}_i) \right)
+\end{equation}
+
+with \textit{factor loadings} $\mat{\Gamma}$, and factor scores $\vec{S}_i$.
+
+\note{In a more general setting than factor analysis, $p_\vec{\theta}(\vec{x}_i | \vec{S}_i)$ might be a different model, e.g.
+for $p$ neurons we want to find underlying latent variables $s_i$ modelling if they 
+are firing $x_{ij} \in \{0,1\}, i =1,\dots,p, j = 1,\dots,N$ modelled by the Bernoulli distribution. 
+\begin{equation}
+    p(x_{ij} | s_i) = \Pi_i(s_i)^{x_{ij}} (1 - \Pi_i(s_i))^{1 - x_{ij}}
+\end{equation}
+with e.g. $\Pi_i(s_i) = (\operatorname{soft(arg)max} (s_1, \dots, s_p))_i$.
+}
+
+\problem{How to we go about the (intractable) integral over $\vec{S}_i$?}
+
+\subsection{Generative Latent Models}
+\subsubsection{Introduction and problem of the intractable marginal likelihood of the data}
+Assume we have observations $\vec{x} \in \mathbb{R}^p$ in the data space $\mathcal{X}$. 
+Also assume there is unobserved latent (or missing) 
+data $\vec{z} \in \mathbb{R}^q$ in the latent space $\mathcal{Z}$.
+
+\begin{itemize}
+    \item Assume the distribution over the latent variables $\vec{z}$ is given
+    by the prior distribution $p_{\vec{\theta}_{\text{lat}}}(\vec{z})$ with unknown parameters
+    $\vec{\theta}_{\text{lat}}$.
+    \item Assume a mapping from latent space to data space $\vec{f}: \mathcal{Z} \rightarrow \mathcal{X}$,
+    and a noise model in the data space $p_{\vec{\theta}_{\text{obs}}}(\vec{x} | \vec{z})$ with unknown parameters
+    $\vec{\theta}_{\text{obs}}$.
+\end{itemize}
+
+Let us write the parameters in one vector $\vec{\theta} = (\vec{\theta}_{\text{lat}}, \vec{\theta}_{\text{obs}})$.
+
+\idea{If we could find the parameters $\vec{\theta}$ and so the distribution $p_\theta(\vec{z})$ we could sample data from the simpler
+latent space and map it to the data space - generative modeling.}
+
+\problem{At hand, we only have $N$ samples $\vec{x}_i$ in the data space, and we want to find the parameters $\vec{\theta}$}
+
+By Bayes theorem, we can write
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x},\vec{z}) = p_{\vec{\theta}_{\text{lat}}}(\vec{z}) p_{\vec{\theta}_{\text{obs}}}(\vec{x} | \vec{z})
+\end{equation}
+
+so the likelihood of the observed data given the parameters is
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}) = \int p_\vec{\theta}(\vec{x}, \vec{z}) \, d\vec{z} = \int p_{\vec{\theta}}(\vec{z}) p_{\vec{\theta}}(\vec{x} | \vec{z}) \, d\vec{z}
+\end{equation}
+
+\problem{This integral is intractable in general as it is performed over the whole latent space. More profoundly, while
+me might use importance sampling to calculate this integral for given $\vec{\theta}$, if we optimize on $\vec{\theta}$, we
+would have to do this infeasibly often.}
+
+But if we could calculate this marginal likelihood of the observed data,
+the parameters would follow by
+
+\begin{equation}
+    \hat{\vec{\theta}}_{\text{MLE}} = \argmax_{\vec{\theta}} \prod_{i=1}^{N} p_{\vec{\theta}}(\vec{x}_i)
+\end{equation}
+
+\greybox{\textbf{Latent posterior:} Approximating the posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$ (the discriminative model)
+would also be nice to do statistical inference in the latent space. Or assuming the latent variables are e.g. unobserved
+class labels (so clustering), by the discriminative model (the latent posterior), we can assign clusters of new data.}
+
+\subsubsection{Evidence Lower Bound (ELBO)}
+We need the marginal likelihood of the observed data,
+$p_\vec{\theta}(\vec{x})$ for calculating the likelihood
+(and from this the parameters $\vec{\theta}$) but it is intractable.
+
+\idea{Do not maximize the log-likelihood directly but a lower bound on it, which is generally more tractable.}
+
+Consider the logarithm of the marginal likelihood of the observed data
+
+\begin{equation}
+    \log p_\vec{\theta}(\vec{x}) = \log \int p_\vec{\theta}( \vec{x}, \vec{z}) \, d\vec{z}
+\end{equation}
+
+For some fixed $\vec{\theta}$ this is called the \textbf{evidence} of the model
+(if this is high, we would assume that we have chosen a good model and good parameters).
+
+\idea{Introduce a simple, easy to use variational density,
+one we can easily sample from
+
+\begin{equation}
+    q_{\vec{\phi}}(\vec{z})
+\end{equation}
+
+with parameters $\vec{\phi}$ which aims to approximate the more complicated true posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$.}
+
+Then one can find (proof follows) for any distribution $q_{\vec{\phi}}(\vec{z})$ that
+
+\begin{equation}
+    \log p_\vec{\theta}(\vec{x}) \geq \text{ELBO}(\vec{\theta}) := E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right]
+\end{equation}
+
+\greenbox{This can be estimated using Monte Carlo importance sampling. For samples $\vec{z}_1,\dots,\vec{z}_M \sim q_{\vec{\phi}}(\vec{z})$ we can estimate
+\begin{equation}
+    \text{ELBO}(\vec{\theta}) \approx \frac{1}{M} \sum_{m=1}^{M} \log \frac{p_\vec{\theta}(\vec{x},\vec{z}_m)}{q_{\vec{\phi}}(\vec{z}_m)}
+\end{equation}
+(which by Jenssen's inequality is biased downwards).}
+
+\greenbox{So what have we won in comparison to the original problem?
+\begin{itemize}
+    \item the samples from $q_{\vec{\phi}}(\vec{z})$ do not depend on $\vec{\theta}$, so we can optimize the ELBO, different from
+     the original $\int p_{\vec{\theta}}(\vec{z}) p_{\vec{\theta}}(\vec{x} | \vec{z}) \, d\vec{z}$ where an update to $\theta$ would
+     have made new samples necessary.
+     \item if we also optimize the variational density $q_{\vec{\phi}}(\vec{z})$, we can make it more similar to the true posterior,
+     so we get a posterior in the latent space from which we can easily sample and generate new data by the mapping $\vec{f}$. Then
+     we can also approximate
+     \begin{equation}
+        p_\vec{\theta}( \vec{x}) = \frac{p_\vec{\theta}(\vec{x}|\vec{z}) p(\vec{z})}{q_\vec{\phi}(\vec{z})}
+     \end{equation}
+     so not by the integral as before.
+\end{itemize}
+}
+
+\subsubsubsection{Proof of the ELBO}
+We have
+\begin{equation}
+    \log p_\vec{\theta}(\vec{x}) = \log \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \frac{p(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z} \underset{\text{Jenssen's inequality}}{\geq} \int_{\vec{z}} q_\vec{\phi}(\vec{z}) \log \frac{p(\vec{x},\vec{z})}{q_\vec{\phi}(\vec{z})} \, d\vec{z}
+\end{equation}
+where Jenssens inequality holds because $\log$ is concave.
+
+\textbf{On Jenssen's inequality}: Generally, Jenssens inequality is given by
+\begin{equation}
+    \begin{aligned}
+        \text{discrete case: }&\, f(\sum \alpha_i x_i) \geq \sum \alpha_i f(x_i) \\
+        \text{for } f \text{ concave, } \alpha_i \geq 0, \sum \alpha_i = 1 \\
+        \text{continuous case: }&\, f(\int \alpha(x) g(x) \, dx) \geq \int \alpha(x) f(g(x)) \, dx \\
+        \text{for } f \text{ concave, } \alpha(x) \geq 0, \int \alpha(x) \, dx = 1
+    \end{aligned}
+\end{equation}
+
+Which in 1D states, that the secant line between two points on a concave function is always below the function, so
+\begin{equation}
+    f(\alpha x_1 + (1-\alpha) x_2) \geq \alpha f(x_1) + (1-\alpha) f(x_2), \quad \alpha \in [0,1]
+\end{equation}
+
+This is illustrated in figure \ref{fig:jenssen}.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=0.9\textwidth]{figures/jenssen.svg}
+    \caption{Illustration of Jenssen's inequality.}
+    \label{fig:jenssen}
+\end{figure}
+
+\subsubsubsection{Gap between evidence and ELBO}
+The gap between the evidence
+\begin{equation}
+    \text{evidence} := \log p_\vec{\theta}(\vec{x})
+\end{equation}
+and the evidence lower bound (ELBO)
+\begin{equation}
+    \text{ELBO}(\vec{\theta}, q_{\vec{\phi}}) = E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}}(\vec{z})} \right]
+\end{equation}
+turns out to be the Kullback-Leibler divergence between the true posterior and the variational density
+\begin{equation}
+    \begin{aligned}
+        \operatorname{KL}(q_{\vec{\phi}}(\vec{z}) || p_{\vec{\theta}}(\vec{z} | \vec{x})) &= E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log \frac{q_{\vec{\phi}}(\vec{z})}{p_{\vec{\theta}}(\vec{z} | \vec{x})} \right] \\
+        &= E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log q_{\vec{\phi}}(\vec{z})\right] - E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log \underbrace{p_{\vec{\theta}}(\vec{z} | \vec{x})}_{=\, \frac{p_\vec{\theta}(\vec{x},\vec{z})}{p_\vec{\theta}(\vec{x})}} \right] \\
+        &= E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log q_{\vec{\phi}}(\vec{z})\right] - E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log p_{\vec{\theta}}(\vec{x},\vec{z}) \right] + \log p_\vec{\theta}(\vec{x}) \\
+        &= \log p_\vec{\theta}(\vec{x}) - \text{ELBO}(\vec{\theta}, q_{\vec{\phi}}) \\
+        &= \text{evidence} - \text{ELBO}
+    \end{aligned}
+\end{equation}
+
+So while the direct calculation of the posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$ is intractable, we can
+approximate it by the variational density $q_{\vec{\phi}}(\vec{z})$ when we maximize the ELBO, under
+variation of $\vec{\phi}$.
+
+This is illustrated in figure \ref{fig:elbo_gap}.
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.9\textwidth]{figures/elbo_gap.svg}
+    \caption{Illustration of the gap between the evidence and the ELBO.}
+    \label{fig:elbo_gap}
+\end{figure}
+
+\greenbox{So maximizing ELBO, gives us both the generative model $p_\vec{\theta}(\vec{x}, \vec{z})$ and the discriminative model $p_{\vec{\theta}}(\vec{z} | \vec{x}) \approx q_{\vec{\phi}}(\vec{z})$.}
+
+\subsubsection{Expectation-Maximization (EM) algorithm}
+Based on the introduction of ELBO, the following aims are natural
+\bluebox{\textbf{Aims}:
+\begin{itemize}
+    \item find $q_{\vec{\phi}}(\vec{z})$ so that it is close to the true posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$
+    \item find parameters $\vec{\theta}$ (our model parameters) that maximize the ELBO
+\end{itemize}
+}
+
+The EM algorithm consists of
+\begin{itemize}
+    \item \textbf{E-step:} assume some $\theta^*$ reasonably good, find the parameters of the
+    variational density $q_{\vec{\phi}}(\vec{z})$ that maximize the ELBO
+    \begin{equation}
+        \vec{\phi}^* = \argmax_{\vec{\phi}} \text{ELBO}(\vec{\theta}^*, q_{\vec{\phi}})
+    \end{equation}
+    \item \textbf{M-step:} assume some $\vec{\phi}^*$ reasonably good, find
+    the model parameters $\vec{\theta}$ that maximize the ELBO
+    \begin{equation}
+        \vec{\theta}^* = \argmax_{\vec{\theta}} \text{ELBO}(\vec{\theta}, q_{\vec{\phi}^*})
+    \end{equation}
+\end{itemize}
+
+Starting with initial estimates $\vec{\theta}^{(0)}, \vec{\phi}^{(0)}$, the EM algorithm iterates
+until $\Delta \text{ELBO} < \epsilon$ for some small $\epsilon$.
+
+\note{This is not guaranteed to converge but converges for some problems.}
+
+As of our estimated parameters, $p_\vec{\theta}(\vec{z})$ and $p_\vec{\theta}(\vec{x} | \vec{z})$ are known
+(tractable distributions in the first place) (mind that $\vec{\theta}$ is the collection
+of parameters of both) and the intractable latent posterior
+
+\begin{equation}
+    p_\vec{\theta}(\vec{z} | \vec{x}) \approx q_{\vec{\phi}}(\vec{z})
+\end{equation}
+
+and the intractable marginal likelihood of the data
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}) = \int p_\vec{\theta}(\vec{x}, \vec{z}) \, d\vec{z} \approx \frac{p_\vec{\theta}(\vec{x}|\vec{z} p_\vec{\theta}(\vec{z}))}{q_\vec{\phi}(\vec{z})}
+\end{equation}
+
+can be approximated.
+
+\subsubsection{Application of the EM algorithm: Gaussian Mixture Models (GMM)}
+Consider we want to estimate the probability distribution of data $\mat{X}$ by 
+a mixture of Gaussians. This is illustrated in figure \ref{fig:gmm}.
+
+\bluebox{In this case our latent variables are assignments of data points to specific Gaussians,
+so to specific clusters.}
+
+\begin{figure}[!htb]
+    \centering
+    \includesvg[width=0.9\textwidth]{figures/gauss_mix.svg}
+    \caption{Illustration of a Gaussian Mixture Model.}
+    \label{fig:gmm}
+\end{figure}
+
+We approximate the density of the data $\mathcal{D} = \{ \vec{x}_1, \dots, \vec{x}_N \}$ (i.i.d.) by
+
+\begin{equation}
+    f(\vec{x}) = \sum_{k=1}^{K} \Pi_k \mathcal{N}(\vec{x} | \vec{\mu}_k, \mat{\Sigma}_k), \quad \sum_{k=1}^{K} \Pi_k = 1
+\end{equation}
+(other basic models, e.g. Bernoulli would also be possible).
+
+The model parameters are
+
+\begin{equation}
+    \vec{\theta} = \{ \Pi_1, \vec{\mu}_1, \mat{\Sigma}_1, \dots, \Pi_K, \vec{\mu}_K, \mat{\Sigma}_K \}
+\end{equation}
+
+so the likelihood is
+
+\begin{equation}
+    \log \mathcal{L}_{\vec{\theta}}(\mathcal{D}) = \log p_{\vec{\theta}}(\mathcal{D}) = \log \prod_{i=1}^{N} \sum_{k=1}^{K} \Pi_k p(\vec{x}_i | \vec{\theta}_k), \quad p(\vec{x}_i | \vec{\theta}_k) = \mathcal{N}(\vec{x}_i | \vec{\mu}_k, \mat{\Sigma}_k)
+\end{equation}
+
+Now introduce the latent variables $\vec{z}_i \in \{0,1\}^K$ with $z_{ik} = 1$ if $\vec{x}_i$ is assigned to the $k$-th Gaussian
+(1-hot encoded).
+
+\paragraph*{E-step - updating the distribution over $\vec{z}_i$, $q_\vec{\phi}(\vec{z}_i)$} Naturally, the probability that $\vec{x}_i$ is assigned to the $k$-th Gaussian is given by
+the probability of that Gaussian at $\vec{x}_i$ (with its weighting as in the density approximation) divided by the sum of the probabilities of all Gaussians at $\vec{x}_i$ (with their respective
+general weightings),
+\begin{equation}
+    \begin{aligned}
+        \forall i,k: \quad p(z_{ik} = 1 | \vec{x}_i, \vec{\theta}^{(N)}) &= \frac{p(\vec{x}_i|\vec{z};\vec{\theta}^{(n)}) p(z_{ik} = 1 | \vec{\theta}^{(n)})}{p(\vec{x}_i | \vec{\theta}^{(n)})} \\
+        &= \frac{\Pi_k \mathcal{N}(\vec{x}_i | \vec{\mu}_k, \mat{\Sigma}_k)}{\sum_{l=1}^{K} \Pi_l \mathcal{N}(\vec{x}_i | \vec{\mu}_l, \mat{\Sigma}_l)}
+    \end{aligned}
+\end{equation}
+where here at each point we have the posterior categorical distribution
+\begin{equation}
+    q_{\vec{\phi}}(\vec{z}_i) = \prod_{k=1}^{K} \left( \phi_{ik} \right)^{z_{ik}}, \quad \phi_{ik} = p\left(z_{ik} = 1 | \vec{x}_i, \vec{\theta}^{(N)}\right)
+\end{equation}
+
+\paragraph*{M-step - updating the model parameters} We want to find the model parameters that maximize the ELBO. As an approximation
+to the true posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$, we use the variational density $q_{\vec{\phi}}(\vec{z})$.
+
+\begin{equation}
+    \begin{aligned}
+        \vec{\theta}^{(n+1)} &= \argmax_{\vec{\theta}} E_{\vec{z} \sim q_{\vec{\phi}}} \left[ \log p_\vec{\theta}(\{\vec{x},\vec{z}\}) \right] \\
+        &= \argmax_{\vec{\theta}} \sum_\vec{z} q_{\vec{\phi}}(\vec{z}) \log \underbrace{p_\vec{\theta}(\{\vec{x},\vec{z}\})}_{=\prod_{i=1}^{N} p_\vec{\theta}(\vec{x}_i,\vec{z}_i)} \\
+        &= \argmax_{\vec{\theta}} \sum_{i=1}^{N} \sum_{k=1}^{K} \explain{\phi_{ik}}{from E-step} \log p_\vec{\theta}(\vec{x}_i,\vec{z}_i) \\
+        &= \argmax_{\vec{\theta}} \sum_{i=1}^{N} \sum_{k=1}^{K} \phi_{ik} \left[ \log p_\vec{\theta}(\vec{x}_i | \vec{z}_i) + \log p_\vec{\theta}(\vec{z}_i) \right] \\
+        &= \argmax_{\vec{\theta}} \sum_{i=1}^{N} \sum_{k=1}^{K} \phi_{ik} \left[ \log \mathcal{N}(\vec{x}_i | \vec{\mu}_k, \mat{\Sigma}_k) + \log \prod_{r=1}^{K} \Pi_l^{z_{ir}} \right]
+    \end{aligned}
+\end{equation}
+
+We maximize this in $\vec{\theta} = \{ \Pi_1, \vec{\mu}_1, \mat{\Sigma}_1, \dots, \Pi_K, \vec{\mu}_K, \mat{\Sigma}_K \}$ to find the next
+iteration of the model parameters $\vec{\theta}^{(n+1)}$.
+
+\pinkbox{\textbf{Gaussian mixture as a generative model:}
+\begin{enumerate}
+    \item From the categorical distribution of the $\Pi_l, l = 1,\dots,K$, we can sample the class of a new data point
+    \item Given the class, we can sample a new data point from the Gaussian distribution with the parameters $\vec{\mu}_l, \mat{\Sigma}_l$
+\end{enumerate}}
+
+\bluebox{In general the generative process is
+\begin{equation}
+    \vec{z} \sim p_\vec{\theta}(\vec{z}) \quad \rightarrow \quad \vec{x} \sim p_\vec{\theta}(\vec{x} | \vec{z})
+\end{equation}}
+
+\note{The Gaussian mixture model with the EM algorithm can not itself find the number of clusters $K$ in the data, use e.g.
+cross-validation for this.}
+
+\subsubsection{Variational Inference}
+
+\pagebreak

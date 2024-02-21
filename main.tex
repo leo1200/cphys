@@ -109,6 +109,9 @@
 % nice enumeration
 \usepackage{enumitem}
 
+% allow norms
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
 \usepackage{bbm}
 
 % set page margins
@@ -288,6 +291,7 @@
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\km}{km}
+\DeclareMathOperator{\kg}{kg}
 \DeclareMathOperator{\s}{s}
 \DeclareMathOperator{\m}{m}
 \DeclareMathOperator{\cm}{cm}
@@ -500,6 +504,11 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{4_2_inf.tex}
 \import{sections/}{4_3_num.tex}
 \import{sections/}{4_4_regr.tex}
+\import{sections/}{4_5_bias_var.tex}
+\import{sections/}{4_6_class.tex}
+\import{sections/}{4_7_NN.tex}
+\import{sections/}{4_8_dim.tex}
+\import{sections/}{4_9_latent.tex}
 
 \pagebreak
 \thispagestyle{plain}

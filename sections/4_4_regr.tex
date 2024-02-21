@@ -133,7 +133,7 @@ so we can write the model as
 \subsubsection{Two views on finding an estimator for $\vec{\beta}^*$}
 Consider the true model to be
 \begin{equation}
-    \vec{y}=\mat{X} \vec{\beta}^*+\vec{\epsilon}, \quad \vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right), \quad \text { some true parameters } \vec{\beta}^{\star}, \quad \epsilon_i \text { i.i.d. }
+    \vec{y}=\mat{X} \vec{\beta}^*+\vec{\epsilon}, \quad \vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right), \quad \text { some true parameters } \vec{\beta}^{*}, \quad \epsilon_i \text { i.i.d. }
 \end{equation}
 $\mat{X}$ is deterministic and $y_i$ are distributed normally around a modeled mean.
 The basic intuitions for finding an estimator $\hat{\vec{\beta}}$ for $\vec{\beta}^*$ are
@@ -167,3 +167,774 @@ which is nicely convex, so we can find a unique minimum by
     \end{gathered}
 \end{equation}
 
+On the side, note
+\begin{itemize}
+    \item the expression for $\vec{\hat{\beta}}$ can be read as the cross-covariance of $\vec{Y}$ and $\mat{X}$, normalized by the auto-covariance of $\mat{X}$
+    \item $(\mat{X}^T \mat{X})^{-1} \mat{X}^T$ is the \textbf{Moore-Penrose pseudoinverse} of $\mat{X}$
+\end{itemize}
+
+\note{This only holds for $\mat{X}^T \mat{X}$ invertible, so not if features are linearly dependent or if $N<p$.}
+
+\bluebox{\textbf{Estimator for the overparametrized regime\skipthis:} If $N<p$ (more features than data points in the sample), we can exactly 
+fit our data at hand, so it makes sense to use the optimization with Lagrange multipliers
+\begin{equation}
+    \vec{\hat{\beta}}_\text{over} = \argmin_{\vec{\beta}, \vec{\lambda}} L(\vec{\beta}, \vec{\lambda}) = \argmin_{\vec{\beta}, \vec{\lambda}} ||\vec{\beta}||_2^2 + \vec{\lambda}^T (\vec{Y} - \mat{X} \vec{\beta})
+\end{equation}
+leading to the estimator
+\begin{equation}
+    \vec{\hat{\beta}}_\text{over}=\mat{X}^T \left(\mat{X} \mat{X}^T\right)^{-1} \vec{Y}, \quad \text{Gram-Matrix } \mat{X} \mat{X}^T \in \mathbb{R}^{N \times N}
+\end{equation}
+as of
+\begin{equation}
+    \begin{aligned}
+    \vec{\nabla}_{\vec{\beta}} \mathcal{L}(\vec{\beta}, \vec{\lambda})=\overrightarrow{0}=2 \hat{\vec{\beta}}-\mat{X}^T \vec{\lambda} & \Rightarrow \hat{\vec{\beta}}_{\text {over }}=\frac{1}{2} \mat{X}^T \vec{\lambda} \\
+    \vec{\nabla}_{\vec{\lambda}} \mathcal{L}(\beta, \lambda)=\overrightarrow{0}=\vec{Y}-\mat{X} \hat{\vec{\beta}}_{\text {over }} & \Rightarrow \vec{Y}=\frac{1}{2} \mat{X} \mat{X}^T \vec{\lambda} \\
+    & \Rightarrow \vec{\lambda}=2\left(\mat{X} \mat{X}^T\right)^{-1} \vec{Y} \\
+    & \Rightarrow \hat{\vec{\beta}}_{\text {over }}=\mat{X}^T\left(\mat{X} \mat{X}^T\right)^{-1} \vec{Y}
+    \end{aligned}
+\end{equation}
+While in the underparametrized regime, the moment (aka scattering) matrix $\mat{X}^T \mat{X}$ is invertible (if no collinearities), in the overparametrized regime, the Gram matrix $\mat{X} \mat{X}^T$ is invertible.
+}
+
+\subsubsection{How is $\vec{\hat{\beta}}$ distributed? - normally}
+We consider the underlying situation to be
+Consider the true model to be
+\begin{equation}
+    \vec{y}=\mat{X} \vec{\beta}^*+\vec{\epsilon}, \quad \vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right), \quad \text { some true parameters } \vec{\beta}^{*}, \quad \epsilon_i \text { i.i.d. }
+\end{equation}
+and our estimate is
+\begin{equation}
+    \vec{\hat{\beta}}=\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \vec{Y}
+\end{equation}
+
+$\mat{X}$ is deterministic (fixed). Consider for the same $\mat{X}$ we would 
+have different realizations (samples) of $\vec{Y}$, brought forth
+from the true model as of different random parts $\vec{\epsilon}$.
+
+Naturally, we expect to get different estimates $\vec{\hat{\beta}}$ for such
+different samples.
+
+\bluebox{\textbf{Question:} For given fixed $\mat{X}$, how is the distribution of $\vec{\hat{\beta}}$
+based on different realizations of $\vec{Y}$?}
+
+\greenbox{\textbf{Form of the distribution - normal:} Assuming $\vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right)$, $\vec{y} \sim \mathcal{N}\left(\mat{X} \vec{\beta}^*, \sigma^2 \mat{1}_{N \times N}\right)$, so as $\vec{\hat{\beta}}$ is a linear transformation of $\vec{Y}$
+(remember $\mat{X}$ deterministic), it is also normally distributed.}
+
+\subsubsubsection{Intuition for the dependence of the distribution of $\vec{\hat{\beta}}$ on the Distribution
+of the explanatory variables}
+
+How much normally wiggling at $\vec{Y}$ translates into wiggling at $\vec{\hat{\beta}}$ (so a spread
+in the distribution of $\vec{\hat{\beta}}$) depends in the distribution of the explanatory variables,
+as illustrated in figure \ref{fig:uncertainty_beta_x}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/uncertainty_beta_x.svg}\hfill
+ \caption{In the 1D setting, the less spread the explanatory variable, the more their wiggling translates into wiggling at $\vec{\hat{\beta}}$.}
+ \label{fig:uncertainty_beta_x}
+\end{figure}
+
+An example in 2D (only the independent variables plotted) is given in figure \ref{fig:uncertainty_beta_2d}.
+The more the data is spread along a direction the less is $\vec{\hat{\beta}}$ sensitive to wiggling in this direction,
+the narrower the distribution of $\vec{\hat{\beta}}$ in this direction.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/uncertainty_beta_2d.svg}\hfill
+ \caption{Depending on the distribution of $\mat{X}$, here $\in \mathbb{R}^{N \times 2}$, the spread of $\vec{\hat{\beta}}$ differs,
+ illustrated are the isocontours of the sum of squares expression, $\vec{\hat{\beta}}$ on a given isocontour are equally likely.}
+ \label{fig:uncertainty_beta_2d}
+\end{figure}
+
+\subsubsubsection{Exact form of the normal distribution of $\vec{\hat{\beta}}$}
+\paragraph*{Expectation value of $\vec{\hat{\beta}}$ | it is an unbiased estimator}
+We can see that $\vec{\hat{\beta}}$ is an unbiased estimator from
+
+\begin{equation}
+    \begin{aligned}
+        E[\vec{\hat{\beta}}]&=E\left[\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \mathcolor{green1}{\vec{Y}}\right]\\
+        &=E\left[\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T\mathcolor{green1}{\left(\mat{X} \vec{\beta}^*+\vec{\epsilon}\right)}\right] \\
+        &=E\left[\left(\mat{X}^T \mat{X}\right)^{-1}\left(\mat{X}^T \mat{X}\right) \vec{\beta}^{*}\right]+\mathcolor{red1}{E\left[\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \vec{\epsilon}\right]} \\
+        \underset{\begin{array}{c} \scriptstyle \mat{X} \text{ exact} \\ \scriptstyle \vec{\epsilon} \, \sim \, \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right) \end{array}} &= E[\vec{\beta}^{*}] \\
+        \underset{\vec{\beta}^* \text{ exact}}&=\vec{\beta}^*
+    \end{aligned}
+\end{equation}
+
+where $\vec{\beta}^*$ is the true parameter vector.
+
+\paragraph*{Calculation of the covariance of $\vec{\hat{\beta}}$} We calculate
+\begin{equation}
+    \begin{aligned}
+        \Cov_\epsilon(\vec{\hat{\beta}}) &= E\left( \left( \vec{\hat{\beta}} - E(\vec{\hat{\beta}}) \right) \left(  \vec{\hat{\beta}} - E(\vec{\hat{\beta}})  \right)^T \right) \in \mathbb{R}^{p \times p} \\
+                                         &= \Cov_\epsilon\left(\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \mathcolor{green1}{\vec{Y}}\right) \\
+                                         &= \Cov_\epsilon\left(\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \mathcolor{green1}{\left(\mat{X} \vec{\beta}^*+\vec{\epsilon}\right)}\right) \\
+                                         \underset{\vec{\beta}^* \text{deterministic } \rightarrow \text{ no cov.}}&= \Cov_\epsilon\left(\underbrace{\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T}_{:=\,\mat{A}} \vec{\epsilon}\right) \\
+    \end{aligned}
+\end{equation}
+As $\mat{A}$ is just a constant matrix
+\begin{equation}
+    \Cov_\epsilon\left(\mat{A} \vec{\epsilon}\right) = \mat{A} \Cov_\epsilon(\vec{\epsilon}) \mat{A}^T
+\end{equation}
+and as $\vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right)$ i.i.d., we have
+\begin{equation}
+    \Cov_\epsilon(\vec{\epsilon}) = \sigma^2 \mat{1}_{N \times N}
+\end{equation}
+so
+\begin{equation}
+    \boxed{\Cov_\epsilon(\vec{\hat{\beta}}) = \sigma^2 \left(\mat{X}^T \mat{X}\right)^{-1}}
+\end{equation}
+so $\text{wiggle} \times \text{inverse scattering}$. This is illustrated ín 
+\ref{fig:scattering_matrix}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.95\textwidth]{figures/scattering_matrix.svg}\hfill
+ \caption{On how the scattering matrix measures \textit{scattering}.}
+ \label{fig:scattering_matrix}
+\end{figure}
+
+\note{The expression for the covariance is true for any distribution of 
+$\vec{\epsilon}$ with $E[\vec{\epsilon}] = 0$ and 
+$\Cov[\vec{\epsilon}] = \sigma^2 \mat{1}_{N \times N}$.}
+
+\subsubsubsection{Distribution of $\vec{\hat{\beta}}$}
+So we have
+\begin{equation}
+    \vec{\hat{\beta}} \sim \mathcal{N}\left(\vec{\beta}^*, \sigma^2 \left(\mat{X}^T \mat{X}\right)^{-1}\right)
+\end{equation}
+
+\subsubsubsection{Confidence intervals for $\vec{\beta}$ - where is the true $\vec{\beta}^*$?}
+The estimates $\beta_i$ have sampling uncertainty. Consider
+the limit where we draw lots of samples. Then in $1-\alpha$
+of those samples, the true $\beta_i^*$ will be in the interval
+\begin{equation}
+    \begin{gathered}
+        \operatorname{CI}_{1-\alpha}^{\beta_i} = \left( \hat{\beta}_i - z_{\alpha/2} \cdot \operatorname{SE}( \hat{\beta}_i ), \hat{\beta}_i + z_{\alpha/2} \cdot \operatorname{SE}( \hat{\beta}_i ) \right) \\
+        \text{with } z_{\alpha/2} \text{ the } \alpha/2 \text{ quantile of the standard normal distribution} \\
+        \text{and } \operatorname{SE}( \hat{\beta}_i ) = \sqrt{\sigma^2 \left( (\mat{X}^T \mat{X})^{-1} \right)_{ii}}
+    \end{gathered}
+\end{equation}
+
+\subsubsubsection{Usage in hypothesis testing}
+Consider we want to test $H_0: \beta_i = 0$ vs $H_1: \beta_i \neq 0$. As $\vec{\hat{\beta}}$ is normally distributed, we can use the $t$-test
+\begin{equation}
+    \begin{gathered}
+        t = \frac{\hat{\beta}_i}{\operatorname{SE}(\hat{\beta}_i)} \sim t_{N-p-1} \\
+       \operatorname{SE}(\hat{\beta}_i) = \sqrt{\hat{\sigma}^2 \left( (\mat{X}^T \mat{X})^{-1} \right)_{ii}} \\
+       \text{here with estimate } \hat{\sigma}^2 = \frac{1}{N-p} ||\vec{Y} - \mat{X} \vec{\hat{\beta}}||_2^2 \\
+       \text{as of this estimation } t \sim t_{N-p-1} \text{ not normal}
+    \end{gathered}
+\end{equation}
+
+\subsection{General linear model}
+A general linear model is a conventional linear regression model
+(with a continuous response variable) given \textbf{continuous and / or
+categorical predictors}. As before $y_i \sim \mathcal{N}(\vec{x}_i^T \vec{\beta}, \sigma^2)$.
+
+An example could be that in for purely categorical $\vec{x}$, we have classes
+\begin{equation}
+    \text{cow } = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \quad \text{manatee } = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \quad \text{elephant } = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}
+\end{equation}
+and we have measured weights, so a very small sample could be
+\begin{equation}
+    \left\{ \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, 525.5\kg \right\}, \left\{ \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, 918.3\kg \right\}, \left\{ \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}, 5485.6\kg \right\}, \left\{ \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, 480.1\kg \right\}
+\end{equation}
+so
+\begin{equation}
+    \begin{gathered}
+        \vec{y} = \begin{pmatrix} 525.5 \\ 918.3 \\ 5485.6 \\ 480.1 \end{pmatrix}, \quad \mat{X} = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}
+    \end{gathered}
+\end{equation}
+where we might want to add further predictors (e.g. age (continuous), gender (categorical), ...) to 
+better predict the weight.
+
+\subsubsection{Purely categorical predictors}
+\bluebox{For $\mat{X} \in \{0,1\}^{N \times p}$, purely categorical ($p$ categories) in $1$-hot
+encoding, $\vec{\hat{\beta}} \in \mathbb{R}^p$ will consist of the means over the $y_i$
+of the respective category.}
+Consider as in the example above the 1-hot predictor encoding
+\begin{equation}
+    \vec{x}_i = \begin{pmatrix}
+        x_{i1} \\
+        \vdots \\
+        x_{ip}
+    \end{pmatrix}, \quad x_{ij} \in \{0,1\}, \quad \sum_{j=1}^p x_{ij} = 1
+\end{equation}
+So how does a category being active influence the outcome?
+
+The number of occurrences of each category are
+\begin{equation}
+    N_j = \sum_{i=1}^N x_{ij}
+\end{equation}
+(in our example $1$ cow, $2$ manatees, $1$ elephant).
+
+We can calculate $\vec{\hat{\beta}}$ as
+
+\begin{equation}
+    \vec{\hat{\beta}}=\left(\mat{X}^T \mat{X}\right)^{-1} \mat{X}^T \vec{Y}=\left(\begin{array}{ccc}
+    N_1 & 0 & 0 \\
+    0 & \ddots & 0 \\
+    0 & 0 & N_p
+    \end{array}\right)^{-1}\left(\begin{array}{c}
+    \sum_i y_i x_{i 1} \\
+    \vdots \\
+    \sum_i y_i x_{i p}
+    \end{array}\right)=\left(\begin{array}{c}
+    \frac{1}{N_1} \sum_i y_i x_{i 1} \\
+    \vdots \\
+    \frac{1}{N_p} \sum_i y_i x_{i p}
+    \end{array}\right)=\left(\begin{array}{c}
+    \overline{y_{\text {cat. }}} \\
+    \vdots \\
+    \overline{y_{\text {cat.p }}}
+    \end{array}\right)
+\end{equation}
+
+so the components of $\hat{\beta}_j$ is the mean of the outcome for the $j$-th category.
+
+\subsubsection{Testing if categories have the same mean}
+Let us make the null hypothesis of equal means
+\begin{equation}
+    H_0: \mu_1 = \mu_2 = \mu_3, \quad \bar{\beta} := \hat{\beta}_1 = \hat{\beta}_2 = \hat{\beta}_3
+\end{equation}
+If the means are equal and as we have found that for each category we predict the mean,
+we can to the full model
+\begin{equation}
+    \text{full model (I): } y_i = \sum_{j=1}^p \beta_j x_{ij} + \epsilon_i
+\end{equation}
+compare the reduced model under $H_0$
+\begin{equation}
+    \text{reduced model (II): } y_i = \bar{\beta} + \epsilon_i, \quad \bar{\beta} = \frac{1}{N} \sum_{i=1}^N y_i
+\end{equation}
+
+We can do an F-test based on the sums of squares of the residuals of the two models
+
+\begin{equation}
+    \begin{gathered}
+        \mathcal{F} = \frac{\left(\operatorname{SSQ}(\vec{\beta}^{(I I)}) - \operatorname{SSQ}(\vec{\beta}^{(I)}) \right) \slash (p-q)}{\operatorname{SSQ}(\vec{\beta}^{(I)}) \slash (N-p-1)} \sim F_{p-q,N-p-1} \\
+        p \text{ \# parameters in the full model, } q \text{ \# parameters in the reduced model}
+    \end{gathered}
+\end{equation}
+
+\subsection{Multivariate linear model | multiple outcomes}
+\subsubsection{Multivariate model}
+\textit{Multiple linear model} refers to multiple predictors $y(\vec{x})$,
+in a multivariate linear model, we also have multiple outcomes $\vec{y}(\vec{x})$.
+
+For instance based on many environmental variables, we want to predict temperature
+and humidity at the same time.
+
+Let us write the multivariate data of $N$ measurements of $q$ outcomes given
+$p$ predictors as
+
+\begin{equation}
+    \mat{Y} \in \mathbb{R}^{N \times q} \text{ with } \vec{y}_i \in \mathbb{R}^q, \quad \mat{X} \in \mathbb{R}^{N \times p} \text{ with } \vec{x}_i \in \mathbb{R}^p
+\end{equation}
+
+and the \textbf{multivariate linear model} as
+
+\begin{equation}
+    \begin{gathered}  
+        \mat{Y} = \mat{X} \mat{B} + \mat{E}, \quad \text{parameter-matrix } \mat{B} \in \mathbb{R}^{p \times q} \\
+        \text{error-matrix } \mat{E} \in \mathbb{R}^{N \times q}
+    \end{gathered}
+\end{equation}
+
+\subsubsection{Except for possible correlations in the error terms, it's just a concatenated model}
+Each column of $\mat{B}$ represents the relationship between $\mat{X}$ and
+one output variable (e.g. the first the temperature, the second the humidity), see
+figure \ref{fig:multivariate_model}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.7\textwidth]{figures/multivariate_model.svg}\hfill
+ \caption{The multivariate linear model}
+ \label{fig:multivariate_model}
+\end{figure}
+
+$\mat{\hat{B}}$ is given by
+
+\begin{equation}
+    \mat{\hat{B}} = \left( \mat{X}^T \mat{X} \right)^{-1} \mat{X}^T \mat{Y}
+\end{equation}
+
+\subsubsection{The error matrix $\mat{E}$ can contain correlations}
+Possible correlations between the outputs (e.g. correlation between temperature
+and humidity, of if $\vec{y}$ would be multiple temperature measurements
+at different locations their correlation.) can be encoded in $\mat{E}$ as
+correlated error terms.
+
+Each column of $\mat{E}$ are the errors in one output variable over the $N$
+measurements in the sample
+
+\begin{equation}
+    \mat{E}=\left(\begin{array}{ccc}
+    \mid & \ldots & \mid \\
+    \vec{\epsilon}_1 & \cdots & \vec{\epsilon}_q \\
+    \mid & \ldots & \mid
+    \end{array}\right)
+\end{equation}
+
+\begin{itemize}
+    \item measurements of a single output variable over the whole sample have uncorrelated errors
+    \begin{equation}
+        k \text{-th column of } \mat{E}, \vec{e}_k \sim \mathcal{N}\left(\vec{0}_N, \sigma_{kk}^2 \mat{1}_{N \times N}\right)
+    \end{equation}
+    \item error terms in over different outputs in one measurement can be correlated
+    \begin{equation}
+        i\text{-th row of } \mat{E}, \vec{e}_i \sim \mathcal{N}\left(\vec{0}_q, \mat{\Sigma}\right), \quad \mat{\Sigma} \text{ covariance matrix} \in \mathbb{R}^{q \times q}
+    \end{equation}
+\end{itemize}
+
+\subsubsection{Distribution of $\mat{\hat{B}}$}
+Let $\operatorname{vec}$ be the vectorization (column under column) of
+a matrix. Then
+
+\begin{equation}
+    \operatorname{vec} \mat{\hat{B}} \sim \mathcal{N}\left(\operatorname{vec} \mat{B}^*, \left( \mat{X}^T \mat{X} \right)^{-1} \otimes \mat{\Sigma} \right)
+\end{equation}
+
+with $\otimes$ the Kronecker product\footnote{Example Kronecker product:
+\begin{equation}
+    \left(\begin{array}{ll}
+    1 & 2 \\
+    3 & 4 \\
+    5 & 6
+    \end{array}\right) \otimes\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right)=\left(\begin{array}{cc}
+    1 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right) & 2 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right) \\
+    3 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right) & 4 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right) \\
+    5 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right) & 6 \cdot\left(\begin{array}{ll}
+    7 & 8 \\
+    9 & 0
+    \end{array}\right)
+    \end{array}\right)=\left(\begin{array}{cccc}
+    7 & 8 & 14 & 16 \\
+    9 & 0 & 18 & 0 \\
+    21 & 24 & 28 & 32 \\
+    27 & 0 & 36 & 0 \\
+    35 & 40 & 42 & 48 \\
+    45 & 0 & 54 & 0
+    \end{array}\right)
+    \end{equation}
+}.
+
+\greenbox{So the difference between doing separate linear models for each output variable is 
+that we have an error matrix with possible correlations and thus a more intricute sampling
+distribution of $\mat{\hat{B}}$. Possible correlation of outputs shows in the
+sampling distribution of $\mat{\hat{B}}$.}
+
+\subsubsection{Hypothesis testing in the multivariate case - considering parameters jointly}
+Consider we have a two-dimensional output $\vec{y}_i \in \mathbb{R}^2$ and a categorical
+predictor $\vec{x}_i \in \mathbb{R}^3$ with three categories $A,B,C$. If we consider the parameters
+jointly, we can formulate more complicated combined hypotheses, e.g. $H_0: \vec{\hat{\beta}}_{y_1}^2 + \vec{\hat{\beta}}_{y_2}^2 < c$.
+This is illustrated in figure \ref{fig:multivariate_hypothesis}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.95\textwidth]{figures/multivariate_hypothesis.svg}\hfill
+ \caption{Hypothesis testing on linear regression parameters in the multivariate (multiple outputs) case}
+ \label{fig:multivariate_hypothesis}
+\end{figure}
+
+\subsection{Regression Models Suitable for Non-Linear Relationships}
+Let us go back to the univariate case. We have a sample $\{\vec{x}_i,y_i\}_{i=1}^N$ and we want to model
+the relationship between $\vec{x}$ and $y$, so given a new $\vec{x}$ (e.g. new climate 
+parameters) we can predict $y$ (e.g. a new temperature).
+
+Now consider the relationship between $\vec{x}$ and $y$ is not linear, as illustrated
+in figure \ref{fig:nonlinear_relationship}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.95\textwidth]{figures/non_lin.svg}\hfill
+ \caption{For this sample, a model linear in the predictors is not suitable.}
+ \label{fig:nonlinear_relationship}
+\end{figure}
+
+Our principal options of going about this are \textbf{adaptations of simple linear regression}, still
+linear in the parameters
+
+\begin{itemize}
+    \item \textbf{feature engineering}: linear regression is linear in the parameters, not necessarily in the original predictors - we can just add e.g. polynomial features as columns to $\mat{X}$, or evaluations of ony other base function. This is \textcolor{green1}{very robust} \textcolor{red1}{if we know appropriate base functions.}
+    \item \textbf{spline regression:} in the polynomial feature engineering approach, we get flexible smooth curves, but one problem is that they are trained globally, therefore we can use piecewise polynomial regression (splines), fitted over different regions
+    \item \textbf{local linear regression}: make the regression parameters $\vec{\beta}$ dependent on $\vec{x}$, so we can model non-linear relationships.
+\end{itemize}
+
+or using the \textbf{framework} of
+\begin{itemize}
+    \item \textbf{generalized linear models (GLM)}: A mean of a distribution is modeled via a link function applied to $\vec{\beta}^T \vec{x}$, so as of the link function
+    the modeled mean can be non-linear in the predictors and parameters.
+\end{itemize}
+
+A more sophisticated model, which can also be obtained from generalizing linear regression
+to a possibly infinitely large number of basis function is
+
+\begin{itemize}
+    \item \textbf{Gaussian process regression}: set in Bayesian persepecive; based on introducing a kernel, an infinite basis function expansion can be done
+\end{itemize}
+
+Or alternatively approaches from the \textit{algorithmic modeling culture} (more complex or
+non parametric models)
+
+\begin{itemize}
+    \item \textbf{$k$-nearest neighbors regression}: approximate $y(\vec{x})$ by the average of $y_i$ of the $k$ nearest neighbors of $\vec{x}$ in the sample
+    \item \textbf{kernel regression}: based on $k$-nearest neighbor regression, weighting the neighbors by a kernel function
+    \item \textbf{decision tree regression}: recursive partitioning of the feature space, fitting a constant in each region
+    \item \textbf{regression by neural networks}: possibly very flexible model
+    \item \dots
+\end{itemize}
+
+which can have the advantages of \textcolor{green1}{good predictive performance}, but the disadvantage of
+being \textcolor{red1}{more difficult to interpret}.
+
+\subsubsection{Regression with Feature Engineering}
+In the example of figure \ref{fig:nonlinear_relationship}, the true relationship is
+\begin{equation}
+    y_i = x_i + 0.1 x_i^2 + 5 \sin{(0.5 x_i)} + \epsilon_i
+\end{equation}
+Using a feature matrix
+\begin{equation}
+    \mat{X} = \begin{pmatrix}
+        1 & x_1 & x_1^2 & \sin{(0.5 x_1)} \\
+        \vdots & \vdots & \vdots & \vdots \\
+        1 & x_N & x_N^2 & \sin{(0.5 x_N)}
+    \end{pmatrix}
+\end{equation}
+we can again just use our linear regression model,
+see figure \ref{fig:nonlinear_feature_engineering}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.95\textwidth]{figures/non_lin_feat.svg}\hfill
+ \caption{Feature engineering for a non-linear relationship.}
+ \label{fig:nonlinear_feature_engineering}
+\end{figure}
+
+Generally, by feature engineering
+\begin{equation}
+    \vec{x} \in \mathbb{R}^p \mapsto \vec{\phi}(\vec{x}) \in \mathbb{R}^{p'}, \quad p' \geq p
+\end{equation}
+and the data matrix is transformed to
+\begin{equation}
+    \mat{X} \in \mathbb{R}^{N \times p} \mapsto \mat{\Phi} \in \mathbb{R}^{N \times p'}
+\end{equation}
+so the linear regression model is
+\begin{equation}
+    \vec{y} = \mat{\Phi} \vec{\beta} + \vec{\epsilon}
+\end{equation}
+with the least squares estimate
+\begin{equation}
+    \vec{\hat{\beta}} = \left( \mat{\Phi}^T \mat{\Phi} \right)^{-1} \mat{\Phi}^T \vec{y}
+\end{equation}
+
+\note{This is still linear in the parameters. Using $\sin{(\beta_s x)}$ with
+a parameter in the function is not possible. So we have to choose
+the basis functions wisely.}
+
+\subsubsection{Spline Regression}
+In spline regression, we do a piecewise polynomial regression.
+
+The \textbf{local model} is just linear regression with feature engineering
+\begin{equation}
+    \phi(\vec{x}) = \begin{pmatrix}
+        1 \\ x_1 \\ x_2 \\ \vdots \\ x_p \\ x_1^2 \\ x_1 x_2 \\ \vdots \\ x_p^2 \\ \vdots
+    \end{pmatrix}
+\end{equation}
+
+For the \textbf{global model}, we stitch polynomials pieces together at so called-knots,
+so in a model with one knot, we have (for originally 1D $x$)
+
+\begin{equation}
+    \begin{aligned}
+        y_i &= y_A = \vec{\beta}_A^T \vec{\phi}(x), \quad x_i < c \\
+        y_i &= y_B = \vec{\beta}_B^T \vec{\phi}(x), \quad x_i \geq c
+    \end{aligned}
+\end{equation}
+
+where the parameters $\vec{\beta}_A, \vec{\beta}_B$ are further restricted by
+\begin{equation}
+    y_A(c) = y_B(c), \quad \partial_x y_A(c) = \partial_x y_B(c), \quad \partial_x^2 y_A(c) = \partial_x^2 y_B(c)
+\end{equation}
+so demanding the function to be continuously differentiable. Each equations constrains
+one parameter in $\vec{\beta}_A, \vec{\beta}_B$. 
+\bluebox{A cubic piecewise polynomial with these three constraints is called a cubic spline.}
+A global model is illustrated in figure \ref{fig:spline_regression}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.95\textwidth]{figures/spline_regression.svg}\hfill
+ \caption{Spline regression.}
+ \label{fig:spline_regression}
+\end{figure}
+
+\subsubsection{Local Linear Regression}
+\subsubsubsection{Model and parameter estimates in local linear regression}
+\idea{In local linear regression, we at each point of interest fit a linear model
+locally, which is done by introducing a weighting
+kernel into the sum of squared residuals centered at the point of interest. 
+The coefficients $\vec{\beta}$ are then dependent on $\vec{x}$.}
+
+\paragraph*{Model}
+At a given (test) point $\vec{x}_t$, our local linear model evaluates to
+\begin{equation}
+    \hat{y}_t = \vec{\beta}(\vec{x}_t)^T \vec{x}_t
+\end{equation}
+($\vec{x}$ might also be a transformed version of $\vec{x}$, e.g. $\vec{\phi}(\vec{x})$).
+
+\paragraph*{Loss and Kernel}
+$\vec{\hat{\beta}}$ follows from the loss (on $D = \{(\vec{x}_i,y_i)\}_{i=1}^N$) being
+\begin{equation}
+    L(\vec{\beta}(\vec{x}_t)) = \sum_{i=1}^N K_\lambda(\vec{x}_t,\vec{x}_i) (y_i - \vec{\beta}(\vec{x}_t)^T \vec{x}_i)^2
+\end{equation}
+with $K_\lambda(\vec{x}_t,\vec{x}_i)$ being a kernel fulfilling
+\begin{equation}
+    \sum_{i=1}^N K_\lambda(\vec{x}_t,\vec{x}_i) = 1, \quad K_\lambda(\vec{x}_t,\vec{x}_i) \geq 0
+\end{equation}
+\yellowbox{$\lambda$ in $K_\lambda$ is a bandwidth parameter, controlling the width of the kernel and effectively
+the smoothness of our model (more later).}
+
+Using the weighting matrix
+\begin{equation}
+    \mat{W}_\lambda(\vec{x}_t) = \operatorname{diag}\left(K_\lambda(\vec{x}_t,\vec{x}_1), \dots, K_\lambda(\vec{x}_t,\vec{x}_N)\right)
+\end{equation}
+we can write the loss (sum of squares) as
+\begin{equation}
+    L(\vec{\beta}_{\vec{x}_t}) = ||\mat{W}_{\lambda, \vec{x}_t}^{1/2} (\vec{Y} - \mat{X} \vec{\beta}(\vec{x}_t))||_2^2
+\end{equation}
+
+\paragraph*{Estimate for $\vec{\beta}(\vec{x}_t)$}
+From the loss we can obtain the estimate (same situation as in the usual linear regression)
+\begin{equation}
+    \vec{\hat{\beta}}_{\vec{x}_t} = \left( \mat{X}^T \mat{W}_{\lambda, \vec{x}_t} \mat{X} \right)^{-1} \mat{X}^T \mat{W}_{\lambda, \vec{x}_t} \vec{Y}
+\end{equation}
+
+\paragraph*{Example Kernel}
+\begin{equation}
+    K_\lambda\left(\vec{x}_t, \vec{x}_j\right)=\frac{\exp \left(-\frac{\left\|\vec{x}_t-\vec{x}_j\right\|^2}{\lambda^2}\right)}{\sum_{i=1}^N \exp \left(-\frac{\left\|\vec{x}_t-\vec{x}_j\right\|^2}{\lambda^2}\right)}
+\end{equation}
+
+\subsubsubsection{Choosing the bandwidth $\lambda$ - the hyperparameter of local linear regression}
+\yellowbox{The larger $\lambda$ the more points are considered in the 
+regression and for $\lambda \rightarrow \infty$ we just have linear regression (most 
+likely underfitting), while for $\lambda$ too small overfitting to 
+the data will occur and no meaningful information is extracted.}
+This is illustrated in figure \ref{fig:local_linear_regression}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/local_linear_regression.svg}\hfill
+ \caption{Local linear regression for different bandwidths $\lambda$.}
+ \label{fig:local_linear_regression}
+\end{figure}
+
+
+\subsubsection{Generalized Linear Models (GLM)\skipthis}
+\idea{Our prediction is the mean of a distribution from the exponential family modeled via a link function where one finds the parameters by
+maximizing the likelihood of the data.}
+\greenbox{So for any given $\vec{x}$ we have the same distribution over $y$ but with a different mean depending on $\vec{x}$.}
+
+\subsubsubsection{Repetition on Linear Regression}
+Remember that in a simple linear regression Model, we assume the underlying model to be
+\begin{equation}
+    y(\vec{x}) = \vec{\beta}^T \vec{x} + \epsilon(\vec{x}), \quad \epsilon(\vec{x}) \sim \mathcal{N}(0, \sigma^2)
+\end{equation}
+so linear in the parameters $\vec{\beta}$ and we assume a normal distribution of the noise $\epsilon(\vec{x})$.
+We can also write this as
+\begin{equation}
+    p(y | \vec{x}, \vec{\beta}, \sigma^2) = \mathcal{N}(y | \vec{\beta}^T \vec{x}, \sigma^2), \quad E{\left[ y | \vec{x}, \vec{\beta}, \sigma^2 \right]} = \vec{\beta}^T \vec{x}
+\end{equation}
+Naturally, such a model is not well suited for binary data or only positive data, ..., so we need to generalize this.
+
+\subsubsubsection{Generalized Linear Models}
+
+In the Generalized Linear Model, we assume a distribution which mean is modeled using
+
+\begin{equation}
+    E{\left[ y | \vec{x}, \vec{\beta} \right]} = \mu = g^{-1}(\eta), \quad \eta = \vec{\beta}^T \vec{x}
+\end{equation}
+
+where $g$ is called the link function and $g^{-1}$ the mean function. The distribution of which we model the mean
+is from the exponential family
+
+\begin{equation}
+    \begin{multlined}
+        p(y | \theta) = \exp{\left( \frac{y\theta - b(\theta)}{a(\phi)} + c(y,\phi) \right)},  \\
+        \text{with real functions } a,b,c, \quad \text{ and parameters } \theta, \phi
+    \end{multlined}
+\end{equation}
+
+for which holds
+
+\begin{equation}
+    E{\left[ y \right]} = \mu = \partial_{\theta} b(\theta)
+\end{equation}
+
+connecting the parameter $\theta$ to the mean we model as
+
+\begin{equation}
+    \mu = g^{-1}(\eta) = \partial_{\theta} b(\theta)
+\end{equation}
+
+where for the canonical link function $\eta = \theta$.
+
+\greenbox{Given we choose a distribution from the exponential family with parameters $\theta$ to model
+$y$ and some function modeling the mean of this distribution $\mu = g^{-1}(\eta), \eta = \vec{\beta}^T \vec{x}$, we can
+\begin{enumerate}
+    \item relate the model parameters $\theta$ to the predictors $\eta = \vec{\beta}^T \vec{x}$ via $\mu = g^{-1}(\eta) = \partial_{\theta} b(\theta)$
+    \item from given $\vec{x}$ and $\vec{\beta}$ we can therefore calculate $\theta$ and with this the likelihood of some $y$
+    \item by maximizing the likelihood over a sample, we can find the parameters $\vec{\hat{\beta}}$
+    \item using the mean function $g^{-1}(\eta)$ (with the estimated $\vec{\hat{\beta}}$) we can predict the mean of the distribution of $y$ given an unknown $\vec{x}$
+\end{enumerate}}
+
+Also, one can calculate the variance as
+
+\begin{equation}
+    \Var[Y] = a(\phi) \partial_\theta^2 b(\theta)
+\end{equation}
+
+\subsubsubsection{Finding the parameters $\vec{\beta}$ for a GLM}
+The parameters $\vec{\beta}$ are found by maximizing the likelihood of the data,
+or minimizing the negative log-likelihood, so
+
+\begin{equation}
+    \vec{\hat{\beta}} = \argmin_{\vec{\beta}} \left( - \sum_{i=1}^N \log{p(y_i | \vec{x}_i, \vec{\beta})} \right)
+\end{equation}
+
+\subsubsubsection{Canonical Link Functions for a Bernoulli GLM - Logistic Regression}
+\bluebox{Here our response variable is $y \in \{0,1\}$.}
+Consider the binomial distribution given by
+\begin{equation}
+    \begin{aligned}
+        f(y|p) &= p^y(1-p)^{1-y} \\
+               &= \exp{\left( y \explain{\log{\frac{p}{1-p}}}{define $\theta$} - \left[ - \log{(1-p)} \right] \right)} \\
+               &= \exp{\left( y \theta - \log{\left(1 + \frac{1}{1-p}\right)} \right)} \\
+               &= \exp{\left( y \theta - \log{\left(1 + \exp{\theta}\right)} \right)} \\
+               &= \exp{\left( y \theta - b(\theta) \right)}
+    \end{aligned}
+\end{equation}
+with $a(\phi) = 1, c(y,\phi) = 0, b(\theta) = \log{\left(1 + \exp{\theta}\right)}$ and $\theta = \log{\frac{p}{1-p}}$. From this we can find the well-known mean as
+\begin{equation}
+    \mu = \partial_{\theta} b(\theta) = \frac{\exp{\theta}}{1 + \exp{\theta}} = p
+\end{equation}
+so for the canonical link ($\eta = \theta$) we have the mean function (a sigmoid)
+\begin{equation}
+    g^{-1}(\eta) = \mu = \frac{\exp{\eta}}{1 + \exp{\eta}}
+\end{equation}
+and thus the link function (log-odds)
+\begin{equation}
+    g(\mu) = \eta = \log{\frac{\mu}{1-\mu}}
+\end{equation}
+
+\subsubsubsection{Complementary Log-Log Link Function}
+Let us discuss the general route. Our model is $f(y|p) = p^y (1-p)^{1-y}$ and we choose the link function
+
+\begin{equation}
+    g(\mu) = \eta = \log{\left( - \log{(1-\mu)} \right)}
+\end{equation}
+and the mean function is
+\begin{equation}
+    g^{-1}(\eta) = \mu = 1 - \exp{\left( - \exp{\eta} \right)}
+\end{equation}
+
+\begin{enumerate}
+    \item In the Bernoulli model, the model-parameter $p$ is the mean, $p = \mu = g^{-1}(\eta)$
+    \item Given $\vec{x}$ and $\vec{\beta}$, the likelihood therefore is
+    \begin{equation}
+        p(y | \vec{x}, \vec{\beta}) = (g^{-1}(\vec{\beta}^T \vec{x}))^y (1-g^{-1}(\vec{\beta}^T \vec{x}))^{1-y}
+    \end{equation}
+    \item We therefore find the parameters $\vec{\hat{\beta}}$ by maximizing the likelihood on $D = \{(\vec{x}_i,y_i)\}_{i=1}^N$ with $\eta_i = \vec{\beta}^T \vec{x}_i$ by
+    \begin{equation}
+        \begin{aligned}
+            \vec{\hat{\beta}} &= \argmin_{\vec{\beta}} \left( - \sum_{i=1}^N \log{p(y_i | \vec{x}_i, \vec{\beta})} \right) \\
+                              &= \argmin_{\vec{\beta}} \left( - \sum_{i=1}^{N} y_i \log{\left( g^{-1}(\eta_i) \right) } + (1-y_i) \log{\left( 1 - g^{-1}(\eta_i) \right)} \right) \\
+                              &= \dots \\
+                              &= \argmin_{\vec{\beta}} \left( - \sum_{i=1}^{N} y_i \log{\left( \exp{\left(\exp{ \vec{\beta}^T \vec{x}_i}\right)} - 1 \right)} - \exp{ \vec{\beta}^T \vec{x}_i}\right)
+        \end{aligned}
+    \end{equation}
+    \item Based on those parameters, we can predict the mean of the distribution of $y$ given an unknown $\vec{x}$
+\end{enumerate}
+
+A clolog-link is useful, when we observe and count events and observe either 0 (denoted by $y = 0$) or more events (denoted by $y = 1$).
+
+An example cloglog-fit is shown in figure \ref{fig:cloglog_fit}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/newton_julia2.svg}\hfill
+ \caption{Complementary log-log fit.}
+ \label{fig:cloglog_fit}
+\end{figure}
+
+\subsubsection{Gaussian Process Regression\skipthis}
+\subsubsubsection{Weight-space view - generalization of linear regression}
+Given parameters $\vec{\beta} \in \mathbb{R}^p$ and data $\mat{X} \in \mathbb{R}^{N \times p}$, 
+$\vec{Y} \in \mathbb{R}^N$ ($N$ measurements in the sample) is distributed as
+\begin{equation}
+    \vec{Y} \sim \mathcal{N}(\mat{X} \vec{\beta}, \sigma^2 \mat{I})
+\end{equation}
+Now assume that the parameters $\vec{\beta}$ have a prior distribution
+\begin{equation}
+    \vec{\beta} \sim \mathcal{N}(\vec{0}, \sigma^2 \mat{\Lambda}_0^{-1})
+\end{equation}
+\note{In a non-Bayesian setting this is equivalent to a regularization term in the loss function, e.g. the $L_2$-norm of $\vec{\beta}$, see \cite{ras95} for more details.}
+Based on the data $\mat{X}, \vec{Y}$ the posterior of the parameters is
+\begin{equation}
+    \vec{\beta} | \mat{X}, \vec{Y} \sim \mathcal{N}\left( \vec{\beta}_{\text{post}}, \sigma^2 \mat{\Lambda}_{\text{post}}^{-1} \right)
+\end{equation}
+with
+\begin{equation}
+    \mat{\Lambda}_{\text{post}} = \mat{X}^T \mat{X} + \mat{\Lambda}_0, \quad \vec{\beta}_{\text{post}} = \mat{\Lambda}_{\text{post}}^{-1} \mat{X}^T \vec{Y}
+\end{equation}
+
+With this we can calculate the distribution of an averaged output $y_\star$ over all possible parameters $\vec{\beta}$ evaluated
+at a new $\vec{x}_\star$ as
+
+\begin{equation}
+    \begin{aligned}
+        p(y_\star | \vec{x}_\star, \mat{X}, \vec{Y}) &= \int p(y_\star | \vec{x}_\star, \vec{\beta}) p(\vec{\beta} | \mat{X}, \vec{Y}) d\vec{\beta} \\
+        &= \mathcal{N}\left( \vec{x}_\star^T \vec{\beta}_{\text{post}}, \vec{x}_\star^T \sigma^2 \mat{\Lambda}_{\text{post}}^{-1} \vec{x}_\star\right)
+    \end{aligned}
+\end{equation}
+
+We then do feature expansion
+\begin{equation}
+    \vec{x} \in \mathbb{R}^p \mapsto \vec{\phi}(\vec{x}) \in \mathbb{R}^{p'}, \quad p' \geq p
+\end{equation}
+
+and rewrite the above epression only in terms of the kernel function
+
+\begin{equation}
+    k(\vec{x}, \vec{x}') = \vec{\phi}(\vec{x})^T \sigma^2 \mat{\Lambda}_0^{-1} \vec{\phi}(\vec{x}') = \vec{\psi}(\vec{x})^T \vec{\psi}(\vec{x}')
+\end{equation}
+
+which we replace by a function directly operating on the low-dimensional
+input space $\vec{x}$, which allows us to model an expression equivalent
+to one would obtain from an infinite basis function expansion, e.g. by
+
+\begin{equation}
+    k(\vec{x}, \vec{x}') = \exp{\left( - \frac{1}{2}\left\|\vec{x} - \vec{x}'\right\|^2 \right)}
+\end{equation}
+
+See \cite{ras95} for the continuation.
+
+\todo[inline]{At some point continue...}
+
+\pagebreak
