@@ -80,12 +80,12 @@
 \contentsline {subsubsubsection}{\numberline {3.7.5.3}Advantages of the Leapfrog scheme}{61}{subsubsubsection.3.7.5.3}%
 \contentsline {subsubsubsection}{\numberline {3.7.5.4}Leapfrog is symmetric (time reversible)}{61}{subsubsubsection.3.7.5.4}%
 \contentsline {subsubsubsection}{\numberline {3.7.5.5}Symplecticity of the leapfrog scheme I: Intuition and Meaning}{62}{subsubsubsection.3.7.5.5}%
-\contentsline {subsubsubsection}{\numberline {3.7.5.6}Symplecticity of the leapfrog scheme II: Proof}{64}{subsubsubsection.3.7.5.6}%
+\contentsline {subsubsubsection}{\numberline {3.7.5.6}Symplecticity of the leapfrog scheme II: Proof}{63}{subsubsubsection.3.7.5.6}%
 \contentsline {paragraph}{Operator splitting}{64}{section*.41}%
 \contentsline {paragraph}{Constructing leapfrog}{64}{section*.42}%
 \contentsline {paragraph}{Error Hamiltonian}{65}{section*.43}%
 \contentsline {paragraph}{Notes on the derivation of the Error Hamiltonian}{65}{section*.44}%
-\contentsline {subsection}{\numberline {3.8}Extrapolation method: Bulirsch-Stoer algorithm}{65}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.8}Extrapolation method: Bulirsch-Stoer algorithm}{66}{subsection.3.8}%
 \contentsline {subsubsection}{\numberline {3.8.1}Basic integration method | second order method with $\mathcal {O}(h^2)$; midpoint rule $\rightarrow $ modified midpoint rule}{67}{subsubsection.3.8.1}%
 \contentsline {subsubsubsection}{\numberline {3.8.1.1}Modified midpoint rule}{68}{subsubsubsection.3.8.1.1}%
 \contentsline {subsubsubsection}{\numberline {3.8.1.2}Combining modified midpoint calculations with different $h$; advantage of modified midpoint}{68}{subsubsubsection.3.8.1.2}%
@@ -762,49 +762,67 @@
 \contentsline {subsubsubsection}{\numberline {21.7.1.1}Intermezzo: Information measures for probability distributions}{511}{subsubsubsection.21.7.1.1}%
 \contentsline {subsubsubsection}{\numberline {21.7.1.2}Introduction of Cross-Entropy}{511}{subsubsubsection.21.7.1.2}%
 \contentsline {subsubsubsection}{\numberline {21.7.1.3}Relation between cross-entropy and the negative log-likelihood - they're the same}{512}{subsubsubsection.21.7.1.3}%
-\contentsline {section}{\numberline {22}A Primer on Neural Networks}{513}{section.22}%
-\contentsline {section}{\numberline {23}Dimensionality Reduction}{514}{section.23}%
-\contentsline {subsection}{\numberline {23.1}Principal Component Analysis (PCA)}{516}{subsection.23.1}%
-\contentsline {subsubsection}{\numberline {23.1.1}Deriving the principal components from finding the direction with maximum variance}{516}{subsubsection.23.1.1}%
-\contentsline {subsubsubsection}{\numberline {23.1.1.1}The principal components and dimensionality reduction}{517}{subsubsubsection.23.1.1.1}%
-\contentsline {subsection}{\numberline {23.2}Nonlinear Dimensionality Reduction I: Nonlinear PCA}{518}{subsection.23.2}%
-\contentsline {subsubsection}{\numberline {23.2.1}Kernel PCA}{521}{subsubsection.23.2.1}%
-\contentsline {subsubsubsection}{\numberline {23.2.1.1}Finding a formulation where the projection to the principal components is only expressed in terms of a kernel function}{521}{subsubsubsection.23.2.1.1}%
-\contentsline {subsubsubsection}{\numberline {23.2.1.2}Kernel expression for mean centered projected features}{522}{subsubsubsection.23.2.1.2}%
-\contentsline {subsection}{\numberline {23.3}Nonlinear Dimensionality Reduction II: Further techniques}{523}{subsection.23.3}%
-\contentsline {subsubsection}{\numberline {23.3.1}Linear discriminant analysis for dimensionality reduction of classified data}{523}{subsubsection.23.3.1}%
-\contentsline {subsubsection}{\numberline {23.3.2}Retaining (local) distance information or neighbor structure}{523}{subsubsection.23.3.2}%
-\contentsline {subsubsubsection}{\numberline {23.3.2.1}Global preservation of distance information}{524}{subsubsubsection.23.3.2.1}%
-\contentsline {subsubsubsection}{\numberline {23.3.2.2}Local preservation of distance information}{524}{subsubsubsection.23.3.2.2}%
-\contentsline {subsubsubsection}{\numberline {23.3.2.3}Isomap - distance preservation along geodesics}{525}{subsubsubsection.23.3.2.3}%
-\contentsline {subsubsubsection}{\numberline {23.3.2.4}Locally Linear Embedding (LLE)}{525}{subsubsubsection.23.3.2.4}%
-\contentsline {subsubsubsection}{\numberline {23.3.2.5}t-SNE (t-distributed stochastic neighbor embedding)}{526}{subsubsubsection.23.3.2.5}%
-\contentsline {subsubsection}{\numberline {23.3.3}Autoencoders}{526}{subsubsection.23.3.3}%
-\contentsline {section}{\numberline {24}Latent Variable Models}{527}{section.24}%
-\contentsline {subsection}{\numberline {24.1}The Cocktail Party Problem - Blind Source Separation}{527}{subsection.24.1}%
-\contentsline {subsection}{\numberline {24.2}Independent Component Analysis (ICA)}{529}{subsection.24.2}%
-\contentsline {subsubsection}{\numberline {24.2.1}Intuition}{529}{subsubsection.24.2.1}%
-\contentsline {subsubsection}{\numberline {24.2.2}Formalization and aim}{531}{subsubsection.24.2.2}%
-\contentsline {subsubsection}{\numberline {24.2.3}Pre-step: Whitening of the observed data}{531}{subsubsection.24.2.3}%
-\contentsline {subsubsection}{\numberline {24.2.4}Minimizing dependence of the sources}{532}{subsubsection.24.2.4}%
-\contentsline {subsection}{\numberline {24.3}Factor Analysis}{534}{subsection.24.3}%
-\contentsline {subsubsection}{\numberline {24.3.1}Going deeper than relating observed data - in search of the unobserved}{534}{subsubsection.24.3.1}%
-\contentsline {subsubsection}{\numberline {24.3.2}Setting of Factor Analysis}{534}{subsubsection.24.3.2}%
-\contentsline {subsubsection}{\numberline {24.3.3}Deriving the parameters in Factor Analysis by Maximum Likelihood}{535}{subsubsection.24.3.3}%
-\contentsline {subsection}{\numberline {24.4}Generative Latent Models}{536}{subsection.24.4}%
-\contentsline {subsubsection}{\numberline {24.4.1}Introduction and problem of the intractable marginal likelihood of the data}{536}{subsubsection.24.4.1}%
-\contentsline {subsubsection}{\numberline {24.4.2}Evidence Lower Bound (ELBO)}{537}{subsubsection.24.4.2}%
-\contentsline {subsubsubsection}{\numberline {24.4.2.1}Proof of the ELBO}{538}{subsubsubsection.24.4.2.1}%
-\contentsline {subsubsubsection}{\numberline {24.4.2.2}Gap between evidence and ELBO}{540}{subsubsubsection.24.4.2.2}%
-\contentsline {subsubsection}{\numberline {24.4.3}Expectation-Maximization (EM) algorithm}{541}{subsubsection.24.4.3}%
-\contentsline {subsubsection}{\numberline {24.4.4}Application of the EM algorithm: Gaussian Mixture Models (GMM)}{542}{subsubsection.24.4.4}%
-\contentsline {subsubsection}{\numberline {24.4.5}Variational Inference}{545}{subsubsection.24.4.5}%
-\contentsline {subsubsubsection}{\numberline {24.4.5.1}Recapitulation on parameter estimation | parameters vs. latent variables}{545}{subsubsubsection.24.4.5.1}%
-\contentsline {subsubsubsection}{\numberline {24.4.5.2}The general problem of inference: Sampling vs. Variational approach}{546}{subsubsubsection.24.4.5.2}%
-\contentsline {subsubsubsection}{\numberline {24.4.5.3}Variational inference}{548}{subsubsubsection.24.4.5.3}%
-\contentsline {subsubsubsection}{\numberline {24.4.5.4}Mean-Field Algorithm}{548}{subsubsubsection.24.4.5.4}%
-\contentsline {subsubsection}{\numberline {24.4.6}Variational Autoencoder (VAE)}{548}{subsubsection.24.4.6}%
-\contentsline {subsubsubsection}{\numberline {24.4.6.1}Back to the problem of likelihood optimization under latent variables}{548}{subsubsubsection.24.4.6.1}%
-\contentsline {subsubsubsection}{\numberline {24.4.6.2}The Variational Autoencoder}{549}{subsubsubsection.24.4.6.2}%
-\contentsline {subsubsubsection}{\numberline {24.4.6.3}Gradient of the ELBO}{550}{subsubsubsection.24.4.6.3}%
-\contentsline {section}{References}{556}{equation.24.1265}%
+\contentsline {section}{\numberline {22}A Primer on Neural Networks\textsuperscript {\textasteriskcentered }}{513}{section.22}%
+\contentsline {subsection}{\numberline {22.1}The final layer of a neural network for classification and regression}{513}{subsection.22.1}%
+\contentsline {subsection}{\numberline {22.2}Adding hidden layers - path to a neural network}{514}{subsection.22.2}%
+\contentsline {subsubsection}{\numberline {22.2.1}On the choice of activation function}{515}{subsubsection.22.2.1}%
+\contentsline {subsubsection}{\numberline {22.2.2}Neural Network are universal function approximators}{516}{subsubsection.22.2.2}%
+\contentsline {subsubsection}{\numberline {22.2.3}Neural Networks and Algorithmic modeling}{516}{subsubsection.22.2.3}%
+\contentsline {subsection}{\numberline {22.3}Training of a neural network}{517}{subsection.22.3}%
+\contentsline {subsubsection}{\numberline {22.3.1}Problem statement of training NNs}{517}{subsubsection.22.3.1}%
+\contentsline {subsubsection}{\numberline {22.3.2}Stochastic Gradient Descent for minimizing the loss}{517}{subsubsection.22.3.2}%
+\contentsline {subsubsubsection}{\numberline {22.3.2.1}Normal gradient descent}{518}{subsubsubsection.22.3.2.1}%
+\contentsline {subsubsubsection}{\numberline {22.3.2.2}Stochastic gradient descent}{518}{subsubsubsection.22.3.2.2}%
+\contentsline {subsubsection}{\numberline {22.3.3}How to compute the gradients? | backpropagation}{518}{subsubsection.22.3.3}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.1}Gradient we want to compute}{518}{subsubsubsection.22.3.3.1}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.2}Why can't we use finite differencing?}{519}{subsubsubsection.22.3.3.2}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.3}Backpropagation to the help}{519}{subsubsubsection.22.3.3.3}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.4}Intermezzo: Automatic differentiation}{520}{subsubsubsection.22.3.3.4}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.5}Error backpropagation in a neural network}{522}{subsubsubsection.22.3.3.5}%
+\contentsline {subsubsubsection}{\numberline {22.3.3.6}Problem in training deep networks: Exploding and vanishing gradients}{525}{subsubsubsection.22.3.3.6}%
+\contentsline {subsection}{\numberline {22.4}Outlook}{526}{subsection.22.4}%
+\contentsline {section}{\numberline {23}Dimensionality Reduction}{527}{section.23}%
+\contentsline {subsection}{\numberline {23.1}Principal Component Analysis (PCA)}{529}{subsection.23.1}%
+\contentsline {subsubsection}{\numberline {23.1.1}Deriving the principal components from finding the direction with maximum variance}{529}{subsubsection.23.1.1}%
+\contentsline {subsubsubsection}{\numberline {23.1.1.1}The principal components and dimensionality reduction}{530}{subsubsubsection.23.1.1.1}%
+\contentsline {subsection}{\numberline {23.2}Nonlinear Dimensionality Reduction I: Nonlinear PCA}{531}{subsection.23.2}%
+\contentsline {subsubsection}{\numberline {23.2.1}Kernel PCA}{534}{subsubsection.23.2.1}%
+\contentsline {subsubsubsection}{\numberline {23.2.1.1}Finding a formulation where the projection to the principal components is only expressed in terms of a kernel function}{534}{subsubsubsection.23.2.1.1}%
+\contentsline {subsubsubsection}{\numberline {23.2.1.2}Kernel expression for mean centered projected features}{535}{subsubsubsection.23.2.1.2}%
+\contentsline {subsection}{\numberline {23.3}Nonlinear Dimensionality Reduction II: Further techniques}{536}{subsection.23.3}%
+\contentsline {subsubsection}{\numberline {23.3.1}Linear discriminant analysis for dimensionality reduction of classified data}{536}{subsubsection.23.3.1}%
+\contentsline {subsubsection}{\numberline {23.3.2}Retaining (local) distance information or neighbor structure}{536}{subsubsection.23.3.2}%
+\contentsline {subsubsubsection}{\numberline {23.3.2.1}Global preservation of distance information}{537}{subsubsubsection.23.3.2.1}%
+\contentsline {subsubsubsection}{\numberline {23.3.2.2}Local preservation of distance information}{537}{subsubsubsection.23.3.2.2}%
+\contentsline {subsubsubsection}{\numberline {23.3.2.3}Isomap - distance preservation along geodesics}{538}{subsubsubsection.23.3.2.3}%
+\contentsline {subsubsubsection}{\numberline {23.3.2.4}Locally Linear Embedding (LLE)}{538}{subsubsubsection.23.3.2.4}%
+\contentsline {subsubsubsection}{\numberline {23.3.2.5}t-SNE (t-distributed stochastic neighbor embedding)}{539}{subsubsubsection.23.3.2.5}%
+\contentsline {subsubsection}{\numberline {23.3.3}Autoencoders}{539}{subsubsection.23.3.3}%
+\contentsline {section}{\numberline {24}Latent Variable Models}{540}{section.24}%
+\contentsline {subsection}{\numberline {24.1}The Cocktail Party Problem - Blind Source Separation}{540}{subsection.24.1}%
+\contentsline {subsection}{\numberline {24.2}Independent Component Analysis (ICA)}{542}{subsection.24.2}%
+\contentsline {subsubsection}{\numberline {24.2.1}Intuition}{542}{subsubsection.24.2.1}%
+\contentsline {subsubsection}{\numberline {24.2.2}Formalization and aim}{544}{subsubsection.24.2.2}%
+\contentsline {subsubsection}{\numberline {24.2.3}Pre-step: Whitening of the observed data}{544}{subsubsection.24.2.3}%
+\contentsline {subsubsection}{\numberline {24.2.4}Minimizing dependence of the sources}{545}{subsubsection.24.2.4}%
+\contentsline {subsection}{\numberline {24.3}Factor Analysis}{547}{subsection.24.3}%
+\contentsline {subsubsection}{\numberline {24.3.1}Going deeper than relating observed data - in search of the unobserved}{547}{subsubsection.24.3.1}%
+\contentsline {subsubsection}{\numberline {24.3.2}Setting of Factor Analysis}{547}{subsubsection.24.3.2}%
+\contentsline {subsubsection}{\numberline {24.3.3}Deriving the parameters in Factor Analysis by Maximum Likelihood}{548}{subsubsection.24.3.3}%
+\contentsline {subsection}{\numberline {24.4}Generative Latent Models}{549}{subsection.24.4}%
+\contentsline {subsubsection}{\numberline {24.4.1}Introduction and problem of the intractable marginal likelihood of the data}{549}{subsubsection.24.4.1}%
+\contentsline {subsubsection}{\numberline {24.4.2}Evidence Lower Bound (ELBO)}{550}{subsubsection.24.4.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.2.1}Proof of the ELBO}{551}{subsubsubsection.24.4.2.1}%
+\contentsline {subsubsubsection}{\numberline {24.4.2.2}Gap between evidence and ELBO}{553}{subsubsubsection.24.4.2.2}%
+\contentsline {subsubsection}{\numberline {24.4.3}Expectation-Maximization (EM) algorithm}{554}{subsubsection.24.4.3}%
+\contentsline {subsubsection}{\numberline {24.4.4}Application of the EM algorithm: Gaussian Mixture Models (GMM)}{555}{subsubsection.24.4.4}%
+\contentsline {subsubsection}{\numberline {24.4.5}Variational Inference}{558}{subsubsection.24.4.5}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.1}Recapitulation on parameter estimation | parameters vs. latent variables}{558}{subsubsubsection.24.4.5.1}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.2}The general problem of inference: Sampling vs. Variational approach}{559}{subsubsubsection.24.4.5.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.3}Variational inference}{561}{subsubsubsection.24.4.5.3}%
+\contentsline {subsubsubsection}{\numberline {24.4.5.4}Mean-Field Algorithm}{561}{subsubsubsection.24.4.5.4}%
+\contentsline {subsubsection}{\numberline {24.4.6}Variational Autoencoder (VAE)}{561}{subsubsection.24.4.6}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.1}Back to the problem of likelihood optimization under latent variables}{561}{subsubsubsection.24.4.6.1}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.2}The Variational Autoencoder}{562}{subsubsubsection.24.4.6.2}%
+\contentsline {subsubsubsection}{\numberline {24.4.6.3}Gradient of the ELBO}{563}{subsubsubsection.24.4.6.3}%
+\contentsline {section}{References}{569}{equation.24.1293}%

@@ -1275,7 +1275,21 @@ applied to \textit{integrable and near-integrable} \textbf{reversible systems} s
 similar properties to symplectic methods applied to \textit{(near)-integrable} Hamiltonian
 systems: linear error growth and long-time near-conservation of first integrals.
 \textcolor{red1}{For a non-reversible system, a symmetric but non-symplectic method (e.g. Lobatto IIIB) will have 
-no good conservation properties though.}}
+no good conservation properties though.}\footnote{A system of differential equations
+\begin{equation*}
+  \begin{aligned}
+    \partial_t \vec{u} &= \vec{f}(\vec{u},\vec{v}) \\
+    \partial_t \vec{v} &= \vec{g}(\vec{v},\vec{v})
+  \end{aligned}
+\end{equation*}
+is reversible if
+\begin{equation*}
+  \begin{aligned}
+    \vec{f}(\vec{u},-\vec{v}) &= -\vec{f}(\vec{u},\vec{v}) \\
+    \vec{g}(\vec{v},-\vec{v}) &= \vec{g}(\vec{v},\vec{v})
+  \end{aligned}
+\end{equation*}
+}}
 
 \note{Not every symplectic method is symmetric. For instance symplectic Euler is symplectic but not symmetric.}
 
