@@ -476,8 +476,7 @@ equations (table \ref{tab:euler_eq}).
 The equations form a set of hyperbolic conservation laws (all continuity equations, one for mass, one for momentum, one for energy).
 \paragraph{Hierarchy and closure} The equations are in a hierarchy that in one 
 equations occur quantities following from the next higher one (velocity in the 
-continuity equation, …) - we need a further closure relation making the energy 
-balance unnecessary, for an ideal gas this is
+continuity equation, …) - we need a further closure relation, for an ideal gas this is
 \begin{equation}
     P = (\gamma - 1) \rho e_{th}, \quad \gamma = \text{ specific heat ratio } = \frac{c_p}{c_v}, \quad \text{ for monoatomic gas } \gamma = \frac{f+2}{f} = \frac{5}{3}
 \end{equation}
@@ -704,7 +703,7 @@ These characeteristic equations are the same no matter the aplitude of the pertu
 Consider a fluid with base density $\rho_0$. For small perturbation in density, we can to first order
 use
 \begin{equation}
-    c_s = \left( \frac{\partial P}{\partial \rho} \right)^{\frac{1}{2}} \simeq \frac{\gamma p_0}{\rho_0}
+    c_s = \left( \frac{\partial P}{\partial \rho} \right)^{\frac{1}{2}} \simeq \left(\frac{\gamma p_0}{\rho_0}\right)^{\frac{1}{2}}
 \end{equation}
 But now consider a larger perturbation. Adiabatically the temperature scales with $T \propto \rho^{\gamma - 1}$, and as $c_s^2$ scales
 linearly with the temperature, we have

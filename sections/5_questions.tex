@@ -1,0 +1,541 @@
+\part{Questions for an Oral Exam}
+\thispagestyle{plain}
+
+\section{Fundamentals of Simulation Methods}
+
+\subsection*{Digital Representation of Numbers}
+
+\begin{itemize}
+    \item (L) How are integers stored?
+    \item (L) How are signed integers stored?
+    \item (L) What are common pitfalls in integer arithmetic?
+    \item (L) How are floating point numbers stored?
+    \item (L) What are common pitfalls in floating point arithmetic?
+    \item (L) I want to use $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$ to approximate
+    the RHS. With finitely many terms of the sum, how can I best do this? What is the pitfall?
+    \item (L) One-pass vs. two-pass formula for the variance - which is numerically better?
+    \item (L) Can $0.1$ be exactly represented as a floating-point number? Why not?
+\end{itemize}
+
+\subsection*{Integration of Ordinary Differential Equations}
+
+\begin{itemize}
+    \item (K) What is an ordinary differential equation?
+    \item (G) How can one numerically calculate a 2nd derivative?
+    \item (K) How do you convert from an ODE of degree $n$ to $n$ coupled ODEs?
+    \item (K) Name solution schemes to ODEs.
+    \item (K) What are the shortcomings of explicit Euler? What are better methods?
+    \item (L) Compare the linear stability of explicit and implicit Euler. What are the consequences for stiff problems? What are the advantages of implicit solvers?
+    \item (K) What is the principle of Runge-Kutta methods?
+    \item (K) How can one derive the coefficients for Runge-Kutta schemes?
+    \item (K) How is the Butcher tableau for an explicit Runge-Kutta method different from that for an implicit one?
+    \item (K) Explain the step size halving / doubling scheme.
+    \item (L) How to introduce a global error bound?
+    \item (L) When to double the step size?
+    \item (L) Explain the Störmer-Verlet / Velocity Verlet method.
+    \item (L) Explain the Leapfrog method. What is its order? Show that its reversible.
+    Write down the kick-drift-kick and drift-kick drift update steps.
+    \item (L) What are symplectic integrators? What are their advantages? Disadvantages?
+    \item (K) Explain the Bulirsch-Stoer method.
+    \item (K) When to accept the Bulirsch-Stoer result for an interval
+    \begin{itemize}
+        \item \bottomupL{hint: when the difference between the result with the smallest step-size and the extrapolation is sufficiently small}
+    \end{itemize}
+    \item (K) What is special about Richardson interpolation?
+    \item (K) What are multistep methods?
+    \item (K) Explain the predictor-corrector scheme.
+\end{itemize}
+
+\subsection*{Basic Fluid Dynamics}
+
+\begin{itemize}
+    \item (L) When is a fluid description valid?
+    \item (L) Write down the Boltzmann equation.
+    \item (L) Write down the Navier-Stokes / Euler equations. How are they connected to the Boltzmann equation?
+    \item (L) What can viscosity be expressed by in the incompressible, isotropic case?
+    \item (L) What characterizes a shock?
+    \item (L) What differentiates shocks and fluid discontinuities?
+    \item (L) Write down the Rankine-Hugoniot jump conditions.
+    \item (L) What are common fluid instabilities?
+    \item (L) What kind of turbulence do we have in subsonic flow?
+    \item (L) How does the kinematic viscosity change with the mean free path (at same density)?
+    \item (L) Draw the Kolmogorov spectrum, name the ranges and their properties.
+\end{itemize}
+
+\subsection*{Eulerian Hydrodynamics | Solving PDEs}
+
+\begin{itemize}
+    \item (L) How can we classify PDEs? What types of solvers are there?
+    \item (L) What is a Riemann problem? What are the characteristics? Sketch the 1D evolution of the fluid quantities for a Sod shock tube.
+    \item (L) What is the basic idea of the Godunov scheme?
+    \item (L) Does CFL need to be obeyed in the Godunov scheme? If so, why?
+    \item (L) Are the fluxes exact fluxes of the exact problem? Does conservation mean that the scheme is accurate to machine precision?
+    \item (L) Derive the update of a cell average in the Godunov scheme?
+    \item (L) How do you solve the small problems in the Godunov scheme? Explain the HLL method.
+    \item (L) How can we generalize the Godunov scheme to multiple spatial dimensions?
+    \item (L) What is the spatial order of a hydro-solver, e.g. what does it mean that Godunov is 1st order?
+    \item (LA) What does Godunovs theorem state? How is it related to the total variation / monotonicity of the scheme?
+    \item (L) How to estimate the values at the boundaries in a linear reconstruction? Why does the evolution in time have to be considered?
+    \begin{itemize}
+        \item \bottomupL{hint: we use $ \rho_{i+\frac{1}{2}}^L=\rho_i+\left(\partial_x \rho\right)_i \frac{\Delta x}{2}+\left(\partial_t \rho\right)_i \frac{\Delta t}{2}, \quad \rho_{i+\frac{1}{2}}^R=\rho_{i+1}-\left(\partial_x \rho\right)_{i+1} \frac{\Delta x}{2}+\left(\partial_t \rho\right)_{i+1} \frac{\Delta t}{2}$
+        to get to second order accuracy in time and for stability reasons.}
+    \end{itemize}
+    \item (L) What is the Muscl-Hancock scheme?
+    \item (L) What are advantages and disadvantages of higher order schemes?
+    \item (L) Why do we need flux limiters? What properties do they have? Give an example.
+    \begin{itemize}
+        \item \bottomup{hint: to preserve monotonicity, to avoid adding ocscillations}
+    \end{itemize}
+    \item (L) Based on what do we assess, if we should take the higher or lower order method?
+    \item (L) How many values are stored per cell in higher order finite volume methods? How is this
+    different from finite element methods?
+\end{itemize}
+
+\subsection*{Smoothed Particle Hydrodynamics}
+
+\begin{itemize}
+    \item (L) What are the key advantages of SPH?
+    \item (L) What is are the material fluid derivatives used?
+    \item (L) How are the fluid quantities represented?
+    \item (L) How can we introduce the kernels into our fluid variables?
+    \item (L) What is the key advantage of the smoothed fluid variables?
+    \item (L) Give the formula for the discretized smoothed fluid variables.
+    \item (L) Why should one have a kernel with compact support? What is the computational cost?
+    \item (L) Why should one want to have an adaptive kernel smoothing $h$?
+    \item (L) What are the principal approaches to $h$'s dependency on the location?
+    \item (L) Why should $h$ by symmetric regarding the density calculations at two particles?
+    \item (L) How should $h$ be chosen?
+    \item (L) Why does SPH without artificial viscosity not resolve shocks?
+    \item (L) How many loops does one need when implementing the SPH method?
+    \item (L) (What is the SPH continuity equation?)
+    \item (L) How are gradients calculated in SPH?
+    \item (L) Give the equation of movement of the SPH particles.
+    \item (L) Give the simplest working SPH formulation.
+    \item (L) When should we add artificial viscosity?
+    \item \begin{itemize}
+        \item \bottomup{hint: when to SPH particles rapidly approach each other}
+        \item \bottomup{hint: or if high compression, so $\vec{\nabla} \cdot \vec{v} \ll 0$}
+    \end{itemize}
+    \item (L) What problem does the Shear-Flow-Balsara correction solve? What is the idea?
+    \begin{itemize}
+        \item \bottomupL{hint: shear flow $\rightarrow$ rotation $\rightarrow$ reduce rapid-approach factor; to suppress the viscosity in non-shocking, shearing environments}
+    \end{itemize}
+    \item (L) How is the energy equation influenced by artificial viscosity? How the entropy equation?
+    \item (LA) Why is the symmetric form of the gradient not used in the energy equation?
+    \item (L) What is the meaning of the CFL criterion in the SPH context?
+    \begin{itemize}
+        \item \bottomup{hint: depends on $h_i$ and $(\vec{\nabla} \cdot \vec{v})_i$}
+    \end{itemize}
+    \item (LA) What are possible approaches for boundary modeling?
+    \item (L) Give the key advantages of SPH.
+    \begin{itemize}
+        \item \bottomup{hint: mesh-free, so no advection errors (/ numerical diffusion), Galilean invariance}
+        \item \bottomup{excellent conservation properties (energy, momentum, mass), robust and simple}
+        \item \bottomup{automatic adaptive resolution}
+    \end{itemize}
+    \item (L) Give the key disadvantages of SPH.
+    \begin{itemize}
+        \item \bottomup{hint: poorly handles shocks, artificial viscosity limits Reynolds number}
+        \item \bottomup{free surface density underestimation, poorly resolved low density regions}
+        \item \bottomup{neighbors considered $>$ neighbors in finite volume methods}
+        \item \bottomup{problems with boundaries and magnetic fields}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Finite Element Methods}
+
+\begin{itemize}
+    \item (L) What are the basic FEM ideas?
+    \item (L) What are the options for the weak formulation?
+    \item (L) Derive the equation for the coefficients in the Galerkin method for a linear PDE.
+    \item (L) Apply to the Poisson problem.
+    \item (L) What is the idea behind the Discontinous Galerkin method?
+    \item (L) What is the problem of using a continous solution over elements?
+    \begin{itemize}
+        \item \bottomup{hint: shocks smeared out}
+    \end{itemize}
+    \item (LA) What is the difference between the nodal and the modal approach?
+    \item (L) How can initial weights be found from a fluid state in the modal perspective?
+    \item (L) How are the occuring integrals evaluated? What are the evaluation points? Until what polynomial
+    degree is Gauss quadrature exact?
+    \begin{itemize}
+        \item \bottomupL{hint: Gauss quadrature, roots of $n$ Legendre polynomial as evaluation points $\rightarrow$ integrate polynomials of degree $2n-1$ exactly}
+    \end{itemize}
+    \item (L) What are ideas for refinement in the Discontinous Galerkin method?
+\end{itemize}
+
+\begin{itemize}
+    \item How do finite difference, finite volume, SPH, and finite element methods compare in general?
+    \begin{itemize}
+        \item \bottomup{hint: finite volume good for shocks, regular domain, similar orders of density (?)}
+        \item \bottomup{finite volume is made for hyperbolic conservation laws}
+        \item \bottomup{there are finite element methods for elliptic, parabolic and hyperbolic systems}
+        \item \bottomupL{SPH good for gravitating systems, resolution follows mass, Lagrangian character, but boundary conditions are difficult to implement}
+        \item \bottomupL{discontinuous Galerkin for hyperbolic systems: complex geometries from FEMs + flux conservation}
+    \end{itemize}
+    \item How about integrating self-gravity into these methods? Can gravity be included into a hyperbolic solver?
+\end{itemize}
+
+\subsection*{Diffusion}
+
+\begin{itemize}
+    \item (L) Explain the rough microscopic concept of diffusion?
+    \item (L) Based on a step length $\lambda_{mfp}$ and the central limit theorem, how does a concentration spread?
+    \item (L) How can $\lambda_{mfp}$ be expressed in terms of the density and the cross-section?
+    \item (LA) Derive the diffusion equation. What kind of PDE is it?
+    \begin{itemize}
+        \item \bottomup{hint: use $n(x,t+\Delta t) = \langle n(x-\Delta x,t) \rangle_{\Delta x \sim p(\cdot,\Delta t)}$}
+    \end{itemize}
+    \item (L) For a $\delta$-peak in density, what is the solution of the diffusion equation? In what way is this unphysical?
+    \item (L) How can one solve the diffusion equation?
+    \item (L) In the naive finite difference solution, how large can the time step be? What
+    is the problem with this kind of CFL criterion?
+    \item (L) What is the problem of the implicit approach?
+    \begin{itemize}
+        \item \bottomup{hint: only 1st order in time, $\mathcal{O}(\Delta x^2, \Delta t)$}
+    \end{itemize}
+    \item (L) How can one do better? Explain the Crank-Nicolson method, $\mathcal{O}(\Delta x^2, \Delta t^2)$
+    \item (L) What is the idea of tempered diffusion?
+    \begin{itemize}
+        \item \bottomupL{hint: use Fick's law, get velocity from assuming the momentum was relativistic (larger at lower velocities),
+        solve for $\tilde{v} = \frac{v}{1 + \frac{v^2}{c^2}}$}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Solving Linear Equations with Iterative Solver and the Multigrid Technique}
+
+\begin{itemize}
+    \item (K) How can one solve a linear system?
+    \item (L) Why should one not explicitly invert the matrix?
+    \item (L) What is the computational cost of the LU decomposition? Is the residual calculated from the result of LU decomposition exactly zero?
+    \item (G) What types of iterative solvers for linear systems are there?
+    \item (G) Derive the Jacobi update.
+    \item (L) Derive the error in the Jacobi scheme. When does Jacobi converge?
+    \begin{itemize}
+        \item \bottomup{hint: calculate $\vec{e} = \vec{x}^* - \vec{x}^{(n+1)}$ using $\vec{x}^* = \mat{M} \vec{x}^* + \mat{D}^{-1} \vec{b}$}
+    \end{itemize}
+    \item (G) Derive the Gauss-Seidel update. What makes Gauss Seidel better than Jacobi? What is the downside?
+    \item (LA) When does Gauss-Seidel converge?
+    \begin{itemize}
+        \item \bottomup{hint: if $\mat{A}$ diagonally dominant or symmetric and positive definite}
+    \end{itemize}
+    \item (L) Explain the concept of red-black ordering. 
+    \item (LA) Formulate the Poisson problem in 2D as
+    a relaxation scheme. How far does information travel in one step? What does the CFL criterion imply?
+    \item (G) What problems do these iterative methods have, how to solve them?
+    \begin{itemize}
+        \item \bottomupL{hint: slow convergence as of slow information travel on a fine grid
+        but we want the high resolution of the fine grid, use multigrid-cycle}
+    \end{itemize}
+    \item (L) Derive the V-cycle method. What are its advantages?
+    \item (L) How to restrict $\mat{A}$?
+    \begin{itemize}
+        \item \bottomup{hint: Galerkin coarse grid (possibly enlarges stencil) or same stencil}
+    \end{itemize}
+    \item (L) Also explain the full multigrid method. What problem
+    of the V-cycle does it solve?
+    \item (L) What are the costs of the V-cycle and the full multigrid method?
+    \begin{itemize}
+        \item \bottomupL{hint: until convergence both $\mathcal{O}(N_{\text{grid}} \log N_{\text{grid}})$
+        with $N_{\text{grid}}$ the number of grid points on the finest grid}
+    \end{itemize}
+    \item (LA) Outline the idea of the Krylov subspace conjugate gradient method? Which vectors span the Krylov subspace?
+    What are the directions taken? How many steps until convergence? Advantage when $\mat{A}$ is a Jacobian (e.g. from 
+    Newton's method for root finding (write this down))?
+\end{itemize}
+
+\subsection*{Fourier Methods}
+
+\begin{itemize}
+    \item (L) Write the gravitational Poisson equation as a convolution.
+    \item (L) How can the convolution theorem help us?
+    \item (L) What is the Poisson Greens function in Fourier space?
+    \item (L) Give the formula for the Fourier transform. 
+    \item (L) Derive / give the periodic Fourier transform.
+    \item (L) Derive / give the discrete (periodic) Fourier transform, which we can quickly calculate via FFT.
+    Why does the discrete sum in $k$ space (following from periodic distribution in real space) become finite when $\vec{x}$ is discrete?
+    \item (LA) What does Plancherel's theorem state?
+    \item (L) What is the storage convention for the values in Fourier-space?
+    \item (L) The fourier transformed variable of a real variable is generally complex.
+    So does are there more independent variables in the Fourier space than in the real space for DFT?
+    \item (L) What kind of convolution is calculated by using the convolution theorem with FFTs
+    (e.g. to find the potential from the convolution of the density with the Poisson green function)?
+    \item (L) For two arrays of sizes $N_1$ and $N_2$, how do you have to zero-pad them, so that
+    a cyclic convolution resembles the linear convolution?
+    \item (G) How can one solve the Poisson problem using Fourier methods?
+    \item (SA) How would that work in higher dimensions?
+    \item (L) What if one does not want to have periodic boundary conditions? How much does the cost increase?
+    \item (L) What are power spectrum and auto-correlation? How are they related?
+    \item (LA) How can this be used to quickly calculate the variance of a smoothed field?
+    \begin{itemize}
+        \item \bottomupL{hint: smoothing is a convolution, correlation (related to power spectrum by Fourier transform) at $y = 0$ is the variance}
+    \end{itemize}
+    \item (L) Proof the Helmholtz decomposition in Fourier space. How can this be used to clense a
+    magnetic field from divergence? How can this be used to analyze stability in an astrophysical context?
+    (alternative: density distribution broader if more compressive motion)
+\end{itemize}
+
+\subsection*{Collisionless particle systems}
+
+\begin{itemize}
+    \item (LA) Based on the moments of the Boltzmann equation one can derive
+    a continuity, momentum and energy equation. What are the collisionless analogues
+    to the Euler equations, derived from the collisionless Boltzmann equation (Vlasov equation)?
+    \item (L) What differentiates collisionless from standard collisional fluids? Can an isotropic
+    pressure be assumed? Is there an equation of states? Can a fluid element be defined?
+    \item (L) Give examples for systems that can be described as normal fluids and ones that are collisionless.
+    \item (L) Are systems purely collisional or collisionless?
+    \begin{itemize}
+        \item \bottomupL{hint: no, e.g. the gaseous component in galaxies can be described 
+        by classic hydrodynamics, for stellar and dark matter (lacking collisions), 
+        a locally anisotropic pressure might be used but $N$-body simulations have shown
+        to be more stable. To account for effects of gas physics SPH and $N$-body
+        techniques can be combined (e.g. Gadget 4 code, or TreeSPH Gasoline), for instance in a small simulation with 
+        $250$ (heavier) dark-matter $30,000$ (lighter) gas particles (or both with numbers of same order of magnitude).}
+    \end{itemize}
+    \item (L) Given the $N$ body phase space probability $p\left(\vec{x}_1, \ldots, \vec{x}_N, \vec{v}_1, \ldots, \vec{v}_N\right)$ how
+    can one obtain $f_1(\vec{x}, \vec{v}, t)$, the distribution function of a single particle?
+    \item (L) What does collisionless (uncorrelated) mean in the context of the mean product $f_2$ of particle numbers
+    at two phase space points $\vec{x}, \vec{v}$ and $\vec{x}', \vec{v}'$? Mind this does not exclude global effects.
+    \item (LA) Give the formula for the Coulomb logarithm. What does it express?
+    \item (L) Are the bodies we model the real physical ones?
+    \begin{itemize}
+        \item \bottomup{hint: no, what we model can be seen as samples of the distribution function}
+    \end{itemize}
+    \item (L) When can a gravitational system be assumed collisionless?
+    \begin{itemize}
+        \item \bottomupL{hint: when $t_{\text{sim}} \ll t_{\text{relax}} \approxeq \frac{N}{8 \log N} t_\text{cross}$ ($N$ particles, crossing time $t_\text{cross}$), where the relaxation time is the timescale on which collisions become important}
+    \end{itemize}
+    \item (L) Consider two gravitational systems with the same mass and size, but one with more, smaller particles (so more frequent encounters).
+    Which system is more collisionless?
+    \item (L) Are a few big deflections or many small ones more important?
+    \item (L) Do the fiducial particles follow real trajectories?
+    \item (L) Our simulation contains $N$ bodies. What do we have to mind with respect to the simulation time?
+    \begin{itemize}
+        \item \bottomup{hint: our smaller $N$ systems must still be collisionless}
+    \end{itemize}
+    \item (L) Why do we need a softening length in the force calculation? (physically: smallest resolved scale; smallest possible impact parameter)
+    \item (L) What is the condition under which bounded pairs are avoided?
+    \begin{itemize}
+        \item \bottomup{hint: $\langle v^2 \rangle \gg \frac{G m}{\epsilon}$}
+    \end{itemize}
+    \item (L) One $N$ body simulation of ours is only one realization of $f_1$. How can we get
+    a better result for $f_1$?
+    \begin{itemize}
+        \item \bottomup{hint: use a larger $N$ and average over many simulations}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Force calculation | tree algorithms and particle mesh technique}
+
+\begin{itemize}
+    \item (G) Given a group of particles and interaction forces, how can one simulate the behavior?
+    \begin{itemize}
+        \item \bottomup{hint: use direct-summation, particle-mesh, or tree based method}
+    \end{itemize}
+    \item (L) How to simulate $N$ bodies? Are those typically the real physical bodies?
+    \begin{itemize}
+        \item \bottomupL{hint: direct summation, tree, particle-mesh based on solving Poisson equation on mesh either with FFT or multigrid relaxation; no typically heavier fiducial particles}
+    \end{itemize}
+    \item (G) What ways are there to calculate the potential from a density field?
+    \item (G) What part of the potential is better calculated with what method?
+    \begin{itemize}
+        \item \bottomup{hint: long range with particle-mesh, short-range direct summation}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Tree methods}
+\begin{itemize}
+    \item (L) Describe the idea of the tree method.
+    \item (L) Describe the Barnes-Hut algorithm. What are advantages and disadvantages? How is it done algorithmically?
+    \begin{itemize}
+        \item \bottomupL{hint: disadvantage: can go very deep if particles do not naturally fall onto a boarder, advantage: more refinement in dense areas. Algorithm: For each particle, do splits until it can be placed into an empty subnode. Then recursively calculate the multipole moments and centers of mass (just sum of subnode masses in monopole version).}
+    \end{itemize}
+    \item (L) Name an alternative to the Barnes-Hut algorithm.
+    \begin{itemize}
+        \item \bottomupL{hint: KD-trees as in tree classifiers, binary splits along axis, e.g. to balance mass $\rightarrow$ better control depth (but more complex data structure)}
+    \end{itemize}
+    \item (L) How many nodes do we have to open? What is the computational cost of the tree method? Why is this infeasible for the Millennium simulation $N > 10^{10}$
+    \item (L) How does the expected force error scale with the critical opening angle $\theta_c$?
+\end{itemize}
+
+\subsubsection*{Particle mesh method}
+\begin{itemize}
+    \item (L) What is the idea of the particle mesh method? What are its advantages?
+    \item (L) How are particles represented, how is mass mapped onto the auxiliary grid?
+    \item (L) How is the potential calculated from the density field?
+    \item (G) What are the different types of grid mappings in the particle mesh method? What are their
+    differences? Draw the shape functions. Give the formulas.
+    \item (L) How is the acceleration calculated from the potential? What finite difference scheme should one use?
+    \item (L) How is the acceleration on the grid points distributed to the particles?
+    \item (L) Why does the same assignment kernel have to be used for mass and acceleration assignment?
+    \item (LA) Sketch the proofs that using the same assignment kernel leads to vanishing self-force and
+    antisymmetric pairwise force.
+    \begin{itemize}
+        \item \bottomupL{hint: write potential as convolution, discretize and calculate acceleration, then use symmetry arguments}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Random Number Generation and Monte Carlo Techniques}
+
+\subsubsection*{Sampling from the uniform}
+
+\begin{itemize}
+    \item (L) What are advantages of pseudo-random- over true random number generators?
+    \item (LA) What are desired properties of random number generators?
+    \item (L) How can one sample from the uniform distribution? Introduce Linear Congruential Generators.
+    \item (L) What are the shortcomings of LCGs?
+    \begin{itemize}
+        \item \bottomupL{hint: regularities, e.g. take numbers from an LCG sequence in bunches of $k$ and plot
+        them in a $k$-dimensional space, they will lie on at most $(k! \cdot m)^{1\slash k}$ parallel $k-1$-dimensional hyperplanes}
+    \end{itemize}
+    \item (LA) Why shouldn't the modulo be chosen as a power of $2$ as in RANDU?
+    \begin{itemize}
+        \item \bottomupL{hint: least significant bit has period of at most $2$}
+    \end{itemize}
+    \item (L) What are improvements / better schemes?
+    \item (LA) For spatially more evenly spread points, what kind of method can be used?
+\end{itemize}
+
+\subsubsection*{Sampling from a distribution I: Inverse transform and acceptance-rejection method}
+\begin{itemize}
+    \item (L) Explain and derive the inverse transform method. What's the biggest problem?
+    \item (L) How can one sample from a Gaussian by the inverse transform method? Give the idea and derive the sampling formulas for the Box-Muller trick.
+    \item (L) Explain the acceptance rejection method. When is it most efficient?
+    \item (L) How can one sample from a sphere's surface?
+\end{itemize}
+
+\subsubsection*{Monte Carlo Integration}
+\begin{itemize}
+    \item (G) How can one integrate a function on a computer?
+    \item (L) Explain Monte Carlo Integration / Estimation. How is the estimate distributed? What is the standard error? How does the estimate converge for $N \rightarrow \infty$?
+    \item (LA) State and proof the Central Limit Theorem.
+    \item (G) Give an example of a classical (\textit{deterministic}) method for quadrature (integration).
+    \item (L) When is Monte Carlo integration better than e.g. Simpsons rule? So what's its main advantage?
+    \item (L) How can you reduce the variance in Monte Carlo integration? Explain the importance sampling method.
+\end{itemize}
+
+\subsubsection*{Sampling from a distribution I: MCMC}
+
+\begin{itemize}
+    \item (L) When a distribution is very complicated how can you sample from it? Explain Marcov Chain Monte Carlo.
+    \item (L) What are the key assumptions of Marcov Chain Monte Carlo? Will to frogs hopping on the Markov chain eventually meet, will they ever part ways again?
+    \item (L) What is detailed balance?
+    \item (LA) Proof the convergence towards the desired equilibrium distribution.
+    \item (L) Give the Metropolis Hastings algorithm. Show that it satisfies detailed balance.
+    \item (L) What happens for a symmetric proposal distribution?
+    \item (L) Explain the Metropolis-Hastings algorithm at the hand of sampling from a Gaussian.
+    \item (L) Why does one need thinning and burn in time?
+\end{itemize}
+
+\subsubsection*{MCMC for thermodynamic systems}
+
+\begin{itemize}
+    \item (L) What gives the probabilities of states in thermodynamic systems at given temperature?
+    \item (L) What is an application of Monte Carlo methods in thermodynamic systems?
+    \item (L) What is the advantage of Marcov Chain Monte Carlo in the context of calculating thermodynamic averages? Give an example average of interest.
+    \begin{itemize}
+        \item \bottomup{hint: partition function drops out in Hastings ratio.}
+    \end{itemize}
+    \item (L) In the Metropolis-Hastings algorithm for sampling from the $\frac{1}{Z} \exp \left( - \frac{E(\vec{\phi})}{k_B T} \right)$, when
+    is a new state always accepted for a symmetric proposal distribution.
+    \item (LA) Give the alternative Gibbs sampler, where $W_f$ is directly formulated and does not depend on the current state.
+    \item (L) How can the Metropolis Hastings algorithm be used to simulate a system of spins (Ising model)?
+    \item (L) What quantity could be of interest?
+    \begin{itemize}
+        \item \bottomupL{hint: for instance the mean magnetization $M \frac{1}{V} \sum s_i$. For different temperatures
+        one can run the Metropolis-Hastings algorithm until one reaches plausible (equilibrium) spin configurations and consider the mean magnetization.
+        This way we can find the critical temperature under which spontaneous magnetization occurs.}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{MCMC for parameter estimation}
+
+\begin{itemize}
+    \item Why might one want to sample from a posterior?
+    \item What term in Bayes law makes the posterior intractable?
+    \item What is the advantage of applying Metropolis-Hastings to sampling from a posterior?
+    \item Give the Metropolis-Hastings algorithm for sampling from a posterior
+\end{itemize}
+
+\subsection*{Parallelization techniques}
+
+\section{Computational Statistics and Data Analysis}
+
+\subsection*{Basic probability theory}
+
+\begin{itemize}
+    \item (D) Give the formula for the exponential family.
+    \item (D) Derive the sufficient statistic for the Poisson distribution.
+    \item (D) What is the conjugate prior of a Gaussian?
+    \item (D) Give the formula for a multivariate Gaussian.
+    \item (S) Name a distribution where not all moments exist.
+    \item (S) Give the Central Limit Theorem and its rational.
+\end{itemize}
+
+\subsection*{Statistical Inference}
+
+\begin{itemize}
+    \item (D) What tests are there on the coefficients of linear models?
+\end{itemize}
+
+\subsection*{Numerical Methods for Parameter Estimation}
+
+\begin{itemize}
+    \item (D) What kinds of parameter estimators are there?
+    \begin{itemize}
+        \item \bottomupL{hint: mainly maximum likelihood in frequentist, in Bayesian setting
+        we have the full posterior, use e.g. MAP or posterior mean.}
+    \end{itemize}
+    \item (D) What is the role of the prior? Compare to regularization in a maximum likelihood setting.
+    \item (D) Which approach is better for less data - the Bayesian or Maximum-Likelihood approach?
+\end{itemize}
+
+
+\subsection*{Regression}
+
+\begin{itemize}
+    \item (D) What are the components of a linear model?
+    \begin{itemize}
+        \item \bottomup{features, response, regression coefficients, noise}
+    \end{itemize}
+    \item (D) How are the coefficients distributed?
+    \item (S) What assumptions do we make in linear regression?
+    \item (D) What to do if the true relationship is non-linear?
+    \item (L) In local linear regression, what is the meaning of the coefficient $\lambda$? $\rightarrow$ Bias-Variance-Tradeoff
+\end{itemize}
+
+\subsection*{Bias-Variance Tradeoff and dealing with model complexity}
+
+\begin{itemize}
+    \item (L) How to deal with model complexity in a linear model?
+    \item (D) What are common regularizations to a linear model, how do the differentiate?
+    \begin{itemize}
+        \item \bottomup{hint: Lasso and Ridge, Lasso can fully suppress a parameter.}
+    \end{itemize}
+    \item (D) Sketch Ridge and Lasso regularization in the constrained formulation. How can you
+    see that one will rather set coefficients to zero than the other?
+    \item (D) How is the regularization connected to the Bias-Variance-Tradeoff?
+    \item (D) How is the kernel support $h$ connected to the Bias-Variance-Tradeoff? How can one choose the best Kernel width?
+    \begin{itemize}
+        \item \bottomup{hint: Cross-Validation}
+    \end{itemize}
+    \item (D) Give and proof the Bias-Variance-Tradeoff for the squared prediction error.
+\end{itemize}
+
+\subsection*{Classification}
+
+\begin{itemize}
+    \item (D) What kinds of different classifiers are there? When should which be preferred?
+    \item (D) Explain maximum margin classifiers aka SVMs?
+    \item (L) Why should one want to project to higher dimensions?
+    \item (L) What is the advantage of using a Kernel?
+    \item (L) Why should one rather solve the dual than the primal problem?
+    \begin{itemize}
+        \item \bottomup{hint: Kernelization.}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Dimensionality Reduction}
+
+\subsection*{Latent variable models}

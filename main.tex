@@ -273,6 +273,14 @@
 \usepackage{booktabs,multirow,array}
 \newcolumntype{N}{@{}m{0pt}@{}}%a fix for array package
 
+% bottom-up text
+% Define lighter grey color
+\definecolor{lightgrey}{RGB}{89, 98, 117}
+% Define \bottomup command
+\newcommand{\bottomup}[1]{{\rotatebox[origin=c]{180}{\textcolor{lightgrey}{#1}}}}
+\newcommand{\bottomupL}[1]{{\rotatebox[origin=c]{180}{\parbox{14cm}{\textcolor{lightgrey}{#1}}}}}
+
+
 % Line break in table
 \newcommand\ExtraSep
 {\dimexpr\cmidrulewidth+\aboverulesep+\belowrulesep\relax}
@@ -509,6 +517,7 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{4_7_NN.tex}
 \import{sections/}{4_8_dim.tex}
 \import{sections/}{4_9_latent.tex}
+\import{sections/}{5_questions.tex}
 
 \pagebreak
 \thispagestyle{plain}

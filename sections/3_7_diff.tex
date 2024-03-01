@@ -88,7 +88,7 @@ $\Delta x$ be the according change of a particle position, distributed according
 We can therefore write
 \begin{equation}
     \begin{gathered}
-        n(x,t+\Delta t) = \langle n(x-\Delta x,t) \rangle \underset{\text{Taylor}}{=} n(x,t) - \partial_x n \cdot \langle \Delta x \rangle + \frac{1}{2} \partial_x^2 n \cdot \langle \Delta x^2 \rangle + \dots \\
+        n(x,t+\Delta t) = \langle n(x-\Delta x,t) \rangle_{\Delta x \sim p(\cdot,\Delta t)} \underset{\text{Taylor}}{=} n(x,t) - \partial_x n \cdot \langle \Delta x \rangle + \frac{1}{2} \partial_x^2 n \cdot \langle \Delta x^2 \rangle + \dots \\
         \underset{\text{vanishing uneven moments}}{=} n(x,t) + \frac{1}{2} \partial_x^2 n \cdot \langle \Delta x^2 \rangle + \mathcal{O}(\Delta x^4)
     \end{gathered}
 \end{equation}

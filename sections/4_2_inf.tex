@@ -960,7 +960,11 @@ Then sum the ranks of the observations from each sample respectively. One can fi
 \subsubsection{Asymptotic test}
 \subsubsubsection{Central limit theorem}
 Let $X_i, i=1,\ldots,N$ be independent random variables with 
-variance $\sigma^2$ and finite mean $\mu := E[X_i] < \infty$. Then
+variance $\sigma^2$ and finite mean $\mu := E[X_i] < \infty$\footnote{Consider
+I am in front of a line and kick a ball into a random angle $\in (-90°, 90°)$.
+Neither the mean nor the standard deviation of the position of the shots along the line
+will ever converge. If I am $1$ away from the line, this is described by the standard
+Cauchy distribution $f(x) = \frac{1}{\pi \cdot (1+x^2)}$.}. Then
 \begin{equation}
     \lim _{N \rightarrow \infty} \frac{\frac{1}{N} \sum_i\left(X_i-\mu\right)}{\sigma / \sqrt{N}} \sim \mathcal{N}(0,1)
 \end{equation}

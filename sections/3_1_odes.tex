@@ -713,7 +713,7 @@ Examples for butcher tableaus of explicit RK methods are given in table \ref{tab
       \end{tabular}
     & 
       \begin{tabular}{l|l}
-      0 & 1\\
+      1 & 1\\
       \hline & 1
       \end{tabular}
     &
@@ -1133,7 +1133,7 @@ but this is problematic as
 accelerations at $t$ and $t + \Delta t$}
 \begin{equation}
   \begin{aligned}
-    \vec{s}(t+\Delta t) &= \vec{s}(t) + \vec{v}(t) \Delta t + \mathcal{O}(\Delta t)^3 \\
+    \vec{s}(t+\Delta t) &= \vec{s}(t) + \vec{v}(t) \Delta t + \frac{1}{2} \vec{a} \Delta t^2 +  \mathcal{O}(\Delta t)^3 \\
     \vec{v}(t+\Delta t) &= \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2} + \mathcal{O}(\Delta t)^2
   \end{aligned}
 \end{equation}

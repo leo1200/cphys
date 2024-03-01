@@ -552,6 +552,9 @@ An example with marked rarefaction fan, contact discontinuity and shock is shown
     \label{fig:riemann_problem_example}
 \end{figure}
 
+\note{For an isentropic process $dS = 0$, the entropic function $A(s) = \frac{P}{\rho^\gamma} = \text{const.}$ so we can
+use it as a proxy for entropy.}
+
 \subsubsubsection{Properties of shock, contact discontinuity and rarefaction wave}
 \begin{itemize}
     \item \textcolor{blue1}{Shock:} Normal velocity, pressure, denseity, entropy change discontinuously. In the rest frame of the shock fast upstream fluid is converted to slow downstream one. The fluid is compressed and kinetic energy tuned into heat (addition of entropy).
@@ -657,7 +660,7 @@ in some time, are shown in figure \ref{fig:char_hll}.
 
 \begin{figure}[htb!]
     \centering
-    \includesvg[width=0.8\textwidth]{figures/hll.svg}
+    \includesvg[width=0.8\textwidth]{figures/hll2.svg}
     \caption{Characteristics of the Riemann problem and HLL approach.}
     \label{fig:char_hll}
 \end{figure}
@@ -705,7 +708,11 @@ We therefore find an expression for \textcolor{red1}{our integral} and thus for 
 \begin{equation}
     u^{H L L}=\frac{S_R u_R-S_L u_L+f_L-f_R}{S_R-S_L}
 \end{equation}
-Which is a pretty simple balance we could have seen directly.
+Which is a pretty simple balance we could have seen directly, by
+\begin{equation}
+    \text{start state} \cdot \text{volume} + \text{net flux into volume} \cdot \Delta t = \text{end state} \cdot \text{volume}
+\end{equation}
+over $[\Delta t S_L,\Delta t S_R]$.
 
 \subsubsubsection{Deriving the intercell flux $f^{HLL} = f^*$}
 We consider the integral over $u$ in the left region where the
@@ -803,7 +810,8 @@ where we can combine this expression and the cases above to
 
 \subsubsection{Ansätze for the maximum wave velocities $S_L$ and $S_R$}
 Consider the gas velocity $v$ as given by part of the state vector and
-sound speed $c_s$ (given by the problem, here denoted $a_L$ and $a_R$), then
+sound speed $c_s$ (depending on the state on each side, e.g. $c_s^2 = \gamma P \slash \rho$ for
+and adiabatic process, here called $a_L$ and $a_R$), then
 possible estimates are
 \begin{itemize}
     \item $S_L = v_L - a_L, S_R = v_R + a_R$
@@ -1145,6 +1153,15 @@ with and exemplary flux limiter being
     \includesvg[width=0.8\textwidth]{figures/minmod.svg}
     \caption{Minmod flux limiter.}
     \label{fig:minmod}
+\end{figure}
+
+The flux limiter concept is illustrated in figure \ref{fig:flux_limiter}.
+
+\begin{figure}[htb!]
+    \centering
+    \includesvg[width=0.8\textwidth]{figures/flux_limiter.svg}
+    \caption{Flux limiter concept.}
+    \label{fig:flux_limiter}
 \end{figure}
 
 \yellowbox{\textbf{Why is $\phi$ called a flux limiter?} Higher order schemes can have larger slopes and predict larger fluxes, taking the lower order will has less of this problem.}

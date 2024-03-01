@@ -315,7 +315,7 @@ We adjust $h_i$ so that we always consider $50 \lesssim 50 \lesssim 500$ neighbo
 One choice is to choose $h$ to keep $N_{ngb}$ constant. Another
 is to scale $h$ according to the density (higher for lower densities), e.g.
 \begin{equation}
-    h_i = h_0 \left( \frac{\rho_0}{\rho_i} \right)^3, \quad \frac{dh}{dt} = - \frac{1}{3} \frac{h}{\rho} \frac{d\rho}{dt} \underbrace{=}_{\text{continuity eq.}} \frac{1}{3} h \vec{\nabla} \cdot \vec{v}, \quad \text{dimension } d
+    h_i = h_0 \left( \frac{\rho_0}{\rho_i} \right)^{\frac{1}{3}}, \quad \frac{dh}{dt} = - \frac{1}{3} \frac{h}{\rho} \frac{d\rho}{dt} \underbrace{=}_{\text{continuity eq.}} \frac{1}{3} h \vec{\nabla} \cdot \vec{v}, \quad \text{dimension } d
 \end{equation}
 so that the mass $\rho h^3$ is constant.
 
@@ -357,22 +357,28 @@ As with the density, it is better not to directly apply eq. \ref{eq:gradient_of_
 \begin{equation}
     \label{eq:gradient_identities}
     \begin{aligned}
-    & \vec{\nabla} \cdot F(\vec{r})=\frac{1}{\rho}[\vec{\nabla} \cdot(\rho F(\vec{r}))-F(\vec{r}) \vec{\nabla} \cdot \rho] \\
-    & \vec{\nabla} \cdot F(\vec{r})=\rho\left[\vec{\nabla} \cdot\left(\frac{F(\vec{r})}{\rho}\right)+\frac{F(\vec{r})}{\rho^2} \vec{\nabla} \cdot \rho\right]
+    & \vec{\nabla} F(\vec{r})=\frac{1}{\rho}[\vec{\nabla} (\rho F(\vec{r}))-F(\vec{r}) \vec{\nabla} \rho] \\
+    & \vec{\nabla} F(\vec{r})=\rho\left[\frac{F(\vec{r})}{\rho^2} \vec{\nabla} \rho + \vec{\nabla} \left(\frac{F(\vec{r})}{\rho}\right)\right]
     \end{aligned}
 \end{equation}
 
-to obtain
+which motivates
+
+\begin{equation}
+    \vec{\nabla} F_i \approx \rho_i \left[\frac{F_i}{\rho_i^2} \langle \vec{\nabla} \rho \rangle + \langle \vec{\nabla} \left(\frac{F_i}{\rho_i}\right) \rangle \right]
+\end{equation}
+
+to obtain the symmetric form
+
+\begin{equation}
+    \vec{\nabla} F_i =\rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F_i}{\rho_i^2}+\frac{F_j}{\rho_j^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
+\end{equation}
+
+and analogously
 
 \begin{equation}
     \label{eq:gradient_1}
-    \langle\vec{\nabla} \cdot F(\vec{r})\rangle_i=\frac{1}{\rho_i} \sum_{j=1}^{N_i} m_j\left[F\left(\vec{r}_j\right)-F\left(\vec{r}_i\right)\right] \cdot \vec{\nabla}_i W_{i j}, \quad W_{i j}=W\left(r_{i j}, h_{i j}\right)
-\end{equation}
-
-and the symmetric form
-
-\begin{equation}
-    \langle\vec{\nabla} \cdot F(\vec{r})\rangle_i=\rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F\left(\vec{r}_j\right)}{\rho_j^2}+\frac{F\left(\vec{r}_i\right)}{\rho_i^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
+    \langle\vec{\nabla} F(\vec{r})\rangle_i=\frac{1}{\rho_i} \sum_{j=1}^{N_i} m_j\left[F\left(\vec{r}_j\right)-F\left(\vec{r}_i\right)\right] \cdot \vec{\nabla}_i W_{i j}, \quad W_{i j}=W\left(r_{i j}, h_{i j}\right)
 \end{equation}
 
 \subsubsection{SPH Euler equation | The central ingredient to making our simple fluid simulator work}
@@ -644,7 +650,7 @@ Advantages and disadvantages of SPH are summarized in table \ref{tab:advantages_
             \item jitter develops
             \item fluid instabilities arcoss contact discontinuities are problematic such as Kelvin helmholtz instabilities
             \item artificial viscosity limits the Reynolds number which can be reached
-            \item low convergence rate \footnote{Convergence in the SPH case means that with increasing number of SPH particles we approach the correct fluid behavior.}
+            \item low convergence rate \tablefootnote{Convergence in the SPH case means that with increasing number of SPH particles we approach the correct fluid behavior.}
             \item approximation of boundary conditions can be difficult
             \item formation of voids
             \item free surfaces can be problematic (density underestimated there)
