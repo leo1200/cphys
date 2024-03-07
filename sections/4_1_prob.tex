@@ -232,7 +232,7 @@ function.
 \begin{equation}
     \begin{gathered}
     E[X] \underset{X \text { discrete }}{=} \sum_{i=1}^N P\left(X=x_i\right) x_i \\
-    \underset{X \text { continuous }}{=} \int_D^ f(x) x d x
+    \underset{X \text { continuous }}{=} \int_D f(x) x d x
     \end{gathered}
 \end{equation}
 
@@ -370,7 +370,7 @@ of the sample around the sample mean not around the population mean.}
 Consider random variables $\{x_1,\dots,x_N\}$. The pairwise covariances
 can be collected into a covariance matrix
 \begin{equation}
-    \sigma_ij^2 := \Cov(x_i,x_j), \quad \text{often denoted as } \mat{\Sigma} \in \mathbb{R}^{N \times N}
+    \sigma_{ij}^2 := \Cov(x_i,x_j), \quad \text{often denoted as } \mat{\Sigma} \in \mathbb{R}^{N \times N}
 \end{equation}
 which is
 \begin{itemize}
@@ -435,11 +435,13 @@ and the variance
 Consider $N$ identical and independent (i.i.d.) repititions of a Bernoulli experiment.
 The occurence of $x=1$ in $m$ of $N$ draws has the probability
 \begin{equation}
-    P(X=k)=\operatorname{Bin}(X=m ; N, \mu)=\left(\begin{array}{l}
-        N \\
-        m
-        \end{array}\right) \mu^m(1-\mu)^{N-m} \\
-        \text{parameters } N, \mu, \quad X: \Omega \rightarrow \{0,\dots,N\} \text{ is the number of heads}
+    \begin{gathered}
+        P(X=k)=\operatorname{Bin}(X=m ; N, \mu)=\left(\begin{array}{l}
+            N \\
+            m
+            \end{array}\right) \mu^m(1-\mu)^{N-m} \\
+            \text{parameters } N, \mu, \quad X: \Omega \rightarrow \{0,\dots,N\} \text{ is the number of heads}
+    \end{gathered}
 \end{equation}
 (plotted in \ref{fig:binomial}) which is the product of the probability of a specific ordering with $m$ heads ($\mu^m(1-\mu)^{N-m}$,
 as i.i.d. Bernoulli experiments) and the possible orderings of $m$ heads in $N$ experiments given
@@ -603,7 +605,7 @@ So given the mean number of occurrences in a time interval $\lambda$ what is the
 of any given number of occurrences?
 
 \greybox{\textbf{Recapitulation - Binomial coefficient:} Consider an urn with 
-$N$ different balls from which we draw $k$ \textit{without replacement and without order 
+$N$ uniquely different balls from which we draw $k$ \textit{without replacement and without order 
 in our sample playing a role}. How many different such samples are there?
 Naturally in the first draw there are $N$ possibilities, in the second
 $N-1$ and so forth, but as we do not consider order we have to divide by
@@ -613,6 +615,10 @@ $k!$, so naturally
 \end{equation}
 Another possibility to directly see the RHS result, is to think of the possibilities to order
 $N$ balls of which $k$ are blue and $N-k$ are red, where order within the color-groups do not matter.
+
+We can unify both intuitions, by thinking of the unique balls each having a number from $1$ to $N$ printed on
+them. Drawing $k$ of those can be seen as drawing the positions of the blue balls in the sequence of all balls,
+so $\left( \begin{array}{c} N \\ k \end{array} \right)$ is the number of arrangements of $k$ blue balls in $N$ positions.
 }
 
 \paragraph*{Obtaining the Poisson distribution as the limit of the Binomial one}

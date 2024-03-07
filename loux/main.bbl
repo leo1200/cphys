@@ -1269,6 +1269,69 @@
       \field{title}{Fundamentals of the finite element method for heat and fluid flow}
       \field{year}{2004}
     \endentry
+    \entry{shell}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=8b96172e0b406dc4e0f1ffc7d03064a1}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Wen-Yan},
+           giveni={W\bibinithyphendelim Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=00f25b0ce188c44d8ec5c09eaeb5c237}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Siying},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bea845bd83fcad2b68a028da8b8f5b24}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Changhao},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=54cff214a2905977051c8cbe018c5499}{%
+           family={Cheung},
+           familyi={C\bibinitperiod},
+           given={Ngai-Man},
+           giveni={N\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bfb71cf26620b3b038faaa059c3341f7}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Hongdong},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=678bdc85f6769e200ac624fd3330f489}{%
+           family={Matsushita},
+           familyi={M\bibinitperiod},
+           given={Yasuyuki},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e0acc848087fb1f04c39fb0e7ac4a90b}
+      \strng{fullhash}{5c252dbb998d6f3500b94cc05732e57e}
+      \strng{bibnamehash}{e0acc848087fb1f04c39fb0e7ac4a90b}
+      \strng{authorbibnamehash}{e0acc848087fb1f04c39fb0e7ac4a90b}
+      \strng{authornamehash}{e0acc848087fb1f04c39fb0e7ac4a90b}
+      \strng{authorfullhash}{5c252dbb998d6f3500b94cc05732e57e}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{10}
+      \field{title}{Shell Theory: A Statistical Model of Reality}
+      \field{volume}{44}
+      \field{year}{2022}
+      \field{pages}{6438\bibrangedash 6453}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1109/TPAMI.2021.3084598
+      \endverb
+      \keyw{Semantics;Mathematical model;Machine learning;Random variables;Manifolds;Machine learning algorithms;Prediction algorithms;High dimension;statistics;semantic manifold;anomaly detection;one-class learning;life-long learning;incremental learning;hierarchical models;generative models}
+    \endentry
     \entry{Margolin2023}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=da1e96f9c4a62458dfa54c4973d85a60}{%

@@ -10,3 +10,10 @@ frequentist
 isocontours
 isocontour
 partitionable
+Ahmdal
+uncorrelatedness
+memoryless
+homoscedasticity
+kernelization
+multiclass
+backpropagation

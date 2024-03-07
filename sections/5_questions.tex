@@ -267,6 +267,11 @@
     \item (L) What if one does not want to have periodic boundary conditions? How much does the cost increase?
     \item (L) What are power spectrum and auto-correlation? How are they related?
     \item (LA) How can this be used to quickly calculate the variance of a smoothed field?
+    \item (L) How can one calculate the power spectrum of an FFT?
+    \begin{itemize}
+        \item \bottomup{hint: essentially histogram of squared amplitudes over $|\vec{k}|$}
+    \end{itemize}
+    \item (L) Consider one smoothes an image with a kernel. Why does a cubic kernel better smooth out details than a top hat one, how can one see this from the power spectrum?
     \begin{itemize}
         \item \bottomupL{hint: smoothing is a convolution, correlation (related to power spectrum by Fourier transform) at $y = 0$ is the variance}
     \end{itemize}
@@ -400,6 +405,7 @@
 \subsubsection*{Sampling from a distribution I: Inverse transform and acceptance-rejection method}
 \begin{itemize}
     \item (L) Explain and derive the inverse transform method. What's the biggest problem?
+    \item (L) Give the inverse transform method for sampling from an exponential distribution.
     \item (L) How can one sample from a Gaussian by the inverse transform method? Give the idea and derive the sampling formulas for the Box-Muller trick.
     \item (L) Explain the acceptance rejection method. When is it most efficient?
     \item (L) How can one sample from a sphere's surface?
@@ -426,6 +432,7 @@
     \item (L) What happens for a symmetric proposal distribution?
     \item (L) Explain the Metropolis-Hastings algorithm at the hand of sampling from a Gaussian.
     \item (L) Why does one need thinning and burn in time?
+    \item (L) What is a caveat in the application of MCMC?
 \end{itemize}
 
 \subsubsection*{MCMC for thermodynamic systems}
@@ -460,23 +467,235 @@
 
 \subsection*{Parallelization techniques}
 
+\subsubsection*{General concepts}
+\begin{itemize}
+    \item (L) What are concurrency and parallelism?
+    \item (L) Why do we want to parallelize?
+    \item (S) Can parallelization improve the scaling $\mathcal{O}$ of a method?
+    \item (L) What are the basic types of concurrency? How do they differ? Give examples.
+    \item (L) What are the general challenges of concurrency?
+\end{itemize}
+
+\subsubsection*{Shared memory concurrency}
+\begin{itemize}
+    \item (L) What are the limitations of shared memory concurrency?
+    \item (L) What are race conditions? Give an example. How can races be avoided?
+    \item (L) Many threads count up the same variable (same reference), what goes wrong if the operations are not atomic? What can one do?
+    \item (L) How does one typically parallelize in OpenMP?
+\end{itemize}
+
+\subsubsection*{Message passing concurrency | distributed memory parallelism}
+
+\begin{itemize}
+    \item (L) What is the idea of message passing concurrency?
+    \item (L) Why might one want to have distributed memory parallelism for a big simulation?
+    \item (L) Explain the structure of an MPI program. Give other examples of message passing approaches.
+    \item (L) How do we design our program to avoid doing lots of writes in parallel?
+    \item (L) Give a simple example of a parallel algorithm.
+\end{itemize}
+
+\subsubsection*{Hardware perspective}
+\begin{itemize}
+    \item (L) Why can't we make a single core infinitely many fast?
+    \item (L) Describe the terms cores, cache and cache line.
+    \item (L) How can we write linear algebra code to reduce memory access?
+    \item (L) Compare CPUs and GPUs, which have more cores, which lower clock speeds, faster data transfer, which are more suited for what?
+    \item (L) Give an example case of where one might want to use the GPU.
+    \item (LA) What are vector cores and hyperthreading?
+\end{itemize}
+
+\subsubsection*{Parallel computing for physical simulations}
+\begin{itemize}
+    \item How can we parallelize a physical simulation in space? How can the domain be split?
+    \item How can the necessary communication between threads be minimized?
+    \begin{itemize}
+        \item \bottomupL{hint: each domain has guard cells with the necessary shared information, exchanged at the beginning of each time step, otherwise too much communication overhead}
+    \end{itemize}
+    \item In a finite difference scheme, how many guard cells do we need to communicate?
+    \item How can one best split the domain, why should one use an adaptive grid? Mind that we often have multiscale physics problems, where in
+    one area a totally different time step might be necessary.
+    \item Do smaller or larger cells typically interact on shorter timescales? What is the consequence for physics load balancing?
+    \item What is the problem with long range forces like gravity? How can we mitigate this?
+    \begin{itemize}
+        \item \bottomupL{hint: let the threads operate on a shared tree structure, limiting data access to the necessary moments}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Scaling of processing time and Ahmdal's law}
+\begin{itemize}
+    \item (LA) Speak about strong scaling, Ahmdal's law and weak scaling and Gustafson's law.
+\end{itemize}
+
+\subsection*{Birds eye questions}
+\begin{itemize}
+    \item Comment on the importance of considering the flow and change of information in numerical schemes with examples.
+\end{itemize}
+
 \section{Computational Statistics and Data Analysis}
 
 \subsection*{Basic probability theory}
 
 \begin{itemize}
-    \item (D) Give the formula for the exponential family.
-    \item (D) Derive the sufficient statistic for the Poisson distribution.
+    \item (L) Explain the basic components of a probability model, sample space, set of events, probability measure. Give examples.
+    \item (L) What is the probability of the intersection of two and more events?
+    \item Give: Bayes rule; rules for probabilities of unions of events; the law of total probability (marginalization).
+\end{itemize}
+
+\begin{itemize}
+    \item (L) What is a random variable? Give an example. Is an estimator e.g. a sample mean a random variable?
+    \item (L) How do continuous and discrete RVs differ?
+    \item (L) Introduce the expectation value and its properties. Introduce conditional expectation and the law of total expectation.
+    \item (L) Introduce the variance and its properties. Also introduce covariance and correlation.
+    \item (L) How is the correlation bound?
+    \item (L) How are independence and uncorrelatedness related?
+    \item (L) What is the variance of added random variables? (do the short proof)
+\end{itemize}
+
+\begin{itemize}
+    \item Give the discrete uniform, Bernoulli, binomial, geometric, hypergeometric and Poisson distribution and their rationales. Give expected values, variances and cumulative distribution functions.
+    \item Derive the Poisson distribution from the binomial distribution.
+\end{itemize}
+
+\begin{itemize}
+    \item Explain how with a quantile-quantile plot you can check if a sample might come from a certain distribution.
+\end{itemize}
+
+\begin{itemize}
+    \item (L) Give the uniform distribution.
+    \item (L) Give the Gaussian distribution and show that $\mu$ is the mean and $\sigma^2$ the variance.
+    \item (L) Give the Beta distribution. For what likelihoods is it a conjugate prior? Over which range is it defined?
+    \item (L) For which $\alpha, \beta$ do we have a flat prior?
+    \item (L) Give the conjugate prior for the Binomial distribution.
+    \item (L) Give the Gamma distribution. How are its parameters called? What could it model? Give its expectation value and variance. Where is it defined?
+    \item (L) Give the exponential distribution. What could it describe? For which parameter is it a special case of the Gamma distribution?
+    \item (L) How is the relation between Binomial and geometric analogue to the relation between Poisson and exponential distribution?
+    \item (L) Show that the exponential distribution is memoryless.
+    \item (L) What is a convenient way to check if two distributions are the same?
+    \begin{itemize}
+        \item \bottomupL{hint: if moment generating functions are the same, the distributions are the same}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item (D) Give the formula for the exponential family. What are its advantages?
+    \item (L) Relate the expected value and variance of the sufficient statistic to the link function.
+    \item (L) Do all distributions from the exponential family have conjugate priors?
     \item (D) What is the conjugate prior of a Gaussian?
-    \item (D) Give the formula for a multivariate Gaussian.
+    \item (L) What is the conjugate prior for $\mu$ in a Bernoulli or Binomial distribution?
+    \item (L) What is the conjugate prior for $\mu$ in a Gaussian distribution (with known $\sigma^2$)? What
+    is both $\mu$ and $\sigma^2$ are unknown?
+    \item (L) What is the conjugate prior for $\lambda$ in an exponential distribution?
+    \item (L) How is the exponential family connected to generalized linear models?
+    \item (L) When is a statistic $T(x)$ sufficient with respect to a parameter $\eta$? What means minimally sufficient?
+    \item (D) Derive the sufficient statistic for the Poisson distribution.
+    \item (D) Derive the sufficient statistic for the Bernoulli distribution.
+    \item (L) What is Tschebysheff's inequality about? Give and proof Tschebysheff's inequality.
+    \begin{itemize}
+        \item \bottomupL{hint: upper bound on prob. of \textit{wings} of a distribution wit finite $\mu, \sigma^2$.}
+    \end{itemize}
+    \item (L) Give the moment generating function.
+    \item (L) How can we obtain the moments of a distribution via the moment generating function?
+    \item (L) Give the moments of the Poisson distribution via the moment generating function.
     \item (S) Name a distribution where not all moments exist.
     \item (S) Give the Central Limit Theorem and its rational.
+    \item (L) Consider $s_1 \sim \mathcal{N}(\mu_1,\sigma^2)$ and $s_2 \sim \mathcal{N}(\mu_2,\sigma^2)$, what is the distribution of $s_1 + s_2$?
+\end{itemize}
+
+\begin{itemize}
+    \item What are multivariate distributions? Give the general multivariate Cumulative Distribution function and its properties.
+    \item Give the multicategorical distribution. Why should one use a 1-hot encoding for categories?
+    \item Give the multinomial distribution. (Give its expectation, variance and covariance).
+    \item Give the multivariate Gaussian distribution. Draw multivariate Gaussians for different covariance matrices
+    \begin{equation}
+        \mat{\Sigma}_1 = \begin{pmatrix} 0.5 & 0 \\ 0 & 1 \end{pmatrix}, \quad \mat{\Sigma}_2 = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}, \quad \mat{\Sigma}_3 = \begin{pmatrix} 1 & -0.5 \\ -0.5 & 1 \end{pmatrix}
+    \end{equation}
 \end{itemize}
 
 \subsection*{Statistical Inference}
 
 \begin{itemize}
+    \item (L) What is the goal of statistical inference?
+    \item (L) Give examples of statistical models.
+    \item (L) What is a statistic?
+    \item (L) What is an estimator?
+    \item (L) What kind of information do we seek with respect to model parameters based on a sample?
+    \item (L) Give the definitions of bias and consistency and illustrate with an example.
+    \item (L) Give the (unbiased) estimates of sample mean and variance.
+    \item (L) Show that even if $\hat{\sigma}^2$ is unbiased, $\sqrt{\hat{\sigma}^2}$ is not by Jensen's inequality.
+    \item (L) What is a sampling distribution?
+    \item (L) Define the standard error, mean squared error and precision of an estimator.
+    \item (L) In which case are mean squared error and standard error equal?
+    \item (L) When is an estimator sufficient?
+    \begin{itemize}
+        \item \bottomupL{hint: given the sufficient estimator for a population parameter, the likelihood of that sample,
+        given the estimator, is independent of the parameter.}
+    \end{itemize}
+    \item (L) Define the efficiency of an estimator.
+    \item (L) A lower bound of the variance of an unbiased estimator is given by the Cramér-Rao bound. What is the Cramér-Rao bound?
+    \item (L) What are desired properties of an estimator.
     \item (D) What tests are there on the coefficients of linear models?
+\end{itemize}
+
+\subsubsection*{Parameter Estimation}
+
+\begin{itemize}
+    \item (L) What are common approaches to parameter estimation?
+    \item (L) Explain the least squares estimator. Take the example of linear regression.
+    \item (L) When will this estimate fail for linear regression? What are our assumptions?
+    \item (L) Give the maximum likelihood estimator. Apply it to the mean and variance of a Gaussian distribution.
+    \item (L) Show that least squares and maximum likelihood are equivalent for linear regression.
+    \item (L) What is the Bayesian approach to parameter estimation?
+    \item (L) If one wanted to have a point estimate in a Bayesian setting, what would one choose?
+    \item (L) Give the naive MAP.
+    \item (L) Give the Bayesian update to the distributions over $\vec{\beta}$ and $\sigma^2$ in linear regression.
+    What priors are used?
+\end{itemize}
+
+\subsubsection*{Hypothesis testing}
+
+\begin{itemize}
+    \item (L) What is a hypothesis?
+    \item (L) Explain the terms null hypothesis and alternative hypothesis.
+    \item (L) Explain the procedure of null hypothesis significance testing.
+    \item (L) What is the rejection region? What the significance level? What the $p$-value?
+    \item (L) What is the size of a test? What is the power of a test?
+    \item (L) What is the difference between exact and asymptotic tests?
+    \item (L) Name different kinds of tests based on how the test statistic's distribution is derived.
+    \begin{itemize}
+        \item \bottomup{hint: exact, asymptotic, bootstrap}
+    \end{itemize}
+    \item (L) Give examples of exact and asymptotic tests.
+    \item (L) Say you have measured Covid19 infection rates before and after measures over multiple countries? With what kind of test could you test if the measures were effective? Give the test statistic.
+    \item (L) Describe an exact test to test if two samples come from the same distribution.
+    \item (L) Explain the problem of confounding factors.
+    \item (L) Give the central limit theorem in terms of a mean and standard normal distribution (do not forget the large $N$ limit)
+    \item (L) Introduce the $\chi^2$, $t$, and $F$-distribution.
+    \item (L) Consider you throw balls at boxes and have assigned probabilities of hitting the boxes. Based on observed counts, give a test that checks if the assumed probabilities are reasonable.
+    \item (L) Give an asymptotic test to check if a sample might reasonably come from a distribution with a given mean.
+    \item (L) For the one sample $t$-test, show that the test statistic is distributed as $t_{N-1}$.
+    \item (L) Give an asymptotic test to compare if two samples come from a distribution with the same mean.
+    \item (L) How can one test if two variances are the different, $H_0: \sigma_1^2 = \sigma_2^2$?
+    \item (L) How can one test if a general model is better than a reduced model? Explain the $F$-test and 
+    the likelihood ratio test for doing so.
+\end{itemize}
+
+\subsubsection*{Bootstrap}
+\begin{itemize}
+    \item (L) Explain the general idea and applications of bootstrapping for estimating standard errors, biases, confidence intervals and testing.
+    \item (L) Explain how bootstrapping can be used in testing.
+    \item (LA) What is semiparametric bootstrapping?
+    \item (L) Give a bootstrap test to check if a sample might come from a distribution with given mean.
+    \item (L) Give a bootstrap test to check if two samples might come from a distributions with the same mean.
+    \item (L) Give a bootstrap test to check if two samples might come from the same distribution.
+\end{itemize}
+
+\subsubsection*{Multiple Testing Problem}
+\begin{itemize}
+    \item (L) What is the false discovery rate?
+    \item (L) What is the multiple testing problem?
+    \item (L) What is the familywise error rate?
+    \item (L) What can we do about it? What is the Bonferroni correction? What is the problem of this simple correction?
+    \item (LA) Name a more powerful method to correct for multiple testing.
 \end{itemize}
 
 \subsection*{Numerical Methods for Parameter Estimation}
@@ -487,6 +706,10 @@
         \item \bottomupL{hint: mainly maximum likelihood in frequentist, in Bayesian setting
         we have the full posterior, use e.g. MAP or posterior mean.}
     \end{itemize}
+    \item (L) Describe Gradient descent for 1- and multidimensional optimization. What are possible problems? What are possible improvements?
+    \item (L) How is the gradient of the log-likelihood called?
+    \item (L) Give Newton's method for root finding and how it can be applied to optimization. To what kind of loss should this be applied? What are the advantages, what the disadvantages?
+    \item (L) When do we stop the iterative schemes?
     \item (D) What is the role of the prior? Compare to regularization in a maximum likelihood setting.
     \item (D) Which approach is better for less data - the Bayesian or Maximum-Likelihood approach?
 \end{itemize}
@@ -499,43 +722,274 @@
     \begin{itemize}
         \item \bottomup{features, response, regression coefficients, noise}
     \end{itemize}
-    \item (D) How are the coefficients distributed?
-    \item (S) What assumptions do we make in linear regression?
-    \item (D) What to do if the true relationship is non-linear?
+    \item (L) Describe multiple linear regression. What is our model?
+    \item (L) Give the assumptions of linear regression (under which the least squares estimator is the best (lowest sampling variance) linear unbiased estimator (BLUE)) (Gauss-Markov assumptions).
+    \begin{itemize}
+        \item \bottomupL{hint: linearity ($E[e(\vec{x})] = 0$), homoscedasticity ($\Var(e(\vec{x})) = \sigma^2 = \text{const.} < \infty$), uncorrelated errors $\Cov(e(\vec{x}_i), e(\vec{x}_j)) = 0, i \neq j$.}
+    \end{itemize}
+    \item (L) Which is a common assumption for the distribution of the errors?
+    \item (L) Derive the least squares estimator for the coefficients in a linear model.
+    \item (D) How are the coefficients distributed assuming Gaussian errors?
+    \item (L) What does the distribution of $\hat{\vec{\beta}}_{LSE}$ depend on? For a given distribution of data points, how does the distribution of $\hat{\vec{\beta}}_{LSE}$ (or equally the SSQ isolines) look like?
+    \item (L) Is the estimator $\hat{\vec{\beta}}_{LSE}$ unbiased?
+    \item (L) How would one estimate the error variance $\hat{\sigma}^2$, how the variance of single coefficients $\hat{\beta}_j$?
+    \item (L) Give confidence intervals for the coefficients.
+    \item (L) How can we test if a coefficient is different from zero (if the feature is relevant)?
+    \item (L) Describe the General Linear Model (where there are also categorical features).
+    \item (L) How can one test if multiple categories have the same mean?
+    \begin{itemize}
+        \item \bottomup{hint: $F$-test with full and reduced model}
+    \end{itemize}
+    \item (L) What is a multivariate linear model? What does the parameter-matrix $\mat{B}$ look like?
+    \item (L) How is a multivariate linear model different from concatenated multiple linear models?
+    \item (L) What correlations in the error matrix are possible?
+    \item (LA) How is the least squares estimator for $\mat{B}$ distributed?
+    \item (L) Give an example for a multivariate hypothesis.
+\end{itemize}
+
+\subsubsection*{Modeling non-linear relationships}
+\begin{itemize}
+    \item (D) How can we notice that the true relationship is non-linear? What to do if the true relationship is non-linear?
+    \item (L) Explain how you can model non-linear relationships in the underlying data by feature engineering. What are the limitations?
+    \item (L) Explain the concept of spline regression.
+    \item (L) What is the idea of local linear regression? How are the parameters estimated (locally)?
     \item (L) In local linear regression, what is the meaning of the coefficient $\lambda$? $\rightarrow$ Bias-Variance-Tradeoff
 \end{itemize}
 
 \subsection*{Bias-Variance Tradeoff and dealing with model complexity}
 
+\subsubsection*{Bias-Variance tradeoff}
 \begin{itemize}
-    \item (L) How to deal with model complexity in a linear model?
-    \item (D) What are common regularizations to a linear model, how do the differentiate?
+    \item (L) What are the bias and variance errors of models in the context of generalizability?
+    \item (L) Define the prediction error. Does it depend on the data set we train on?
+    \item (L) Derive the bias-variance decomposition of the expected quadratic prediction error.
     \begin{itemize}
-        \item \bottomup{hint: Lasso and Ridge, Lasso can fully suppress a parameter.}
+        \item \bottomup{hint: use $\Var(X) = E[X^2]-(E[X])^2$, $\epsilon,\hat{f}$ independent, $E[\epsilon] = 0$.}
     \end{itemize}
-    \item (D) Sketch Ridge and Lasso regularization in the constrained formulation. How can you
-    see that one will rather set coefficients to zero than the other?
-    \item (D) How is the regularization connected to the Bias-Variance-Tradeoff?
-    \item (D) How is the kernel support $h$ connected to the Bias-Variance-Tradeoff? How can one choose the best Kernel width?
+    \item (L) What does the Bias-Variance tradeoff tell us? What limits our model from being \textit{perfect}?
+    \item (L) Draw the bias, the variance and the total error over the model complexity for different sizes of the training dataset.
+    \item (L) How are bias and variance related to training and test error?
+    \item (D) How is the kernel support $h$ in Local Linear Regression connected to the Bias-Variance-Tradeoff? How can one choose the best Kernel width?
     \begin{itemize}
         \item \bottomup{hint: Cross-Validation}
     \end{itemize}
-    \item (D) Give and proof the Bias-Variance-Tradeoff for the squared prediction error.
+\end{itemize}
+
+\subsubsection*{Estimating the prediction error and model selection}
+\begin{itemize}
+    \item (L) How can we estimate the prediction error?
+    \item (L) What kind of tradeoff is there in the choice of the size of the training and test set?
+    \item (L) How can we choose hyperparameters when we are rich in training data? Why do we need a
+    partition into three: training, validation and test set?
+    \item (L) On what data-set and with which hyperparameters do we train our production model?
+    \item (L) What are common problems in this approach?
+    \item (L) How should one partition data with class labels into training, validation and test set? Why can accuracy be a problematic measurement?
+    \item (L) How can K-fold cross-validation be used to estimate the prediction error / to choose hyperparameters? What are the advantages?
+    \item (L) How should one choose the number of folds $K$? What is the problem in leave-one-out ($K=N$) cross-validation?
+    \item (L) What is the problem if we set $K$ too low?
+    \item (L) How could one without explicitly estimating the prediction error by a form of hold-out
+    choose a good model? Explain the idea of analytical model selectors. What proxy is used for 
+    the variance / complexity?
+    \item (L) Give the Akaike Information Criterion (AIC) and the Bayesian Information Criterion (BIC).
+    \item (L) What will rather choose the more complex model, AIC or BIC?
+\end{itemize}
+
+\subsubsection*{Double descent}
+\begin{itemize}
+    \item (L) What is the double descent phenomenon?
+    \item (L) Do information criteria (like AIC, BIC) in their classical form predict double descent?
+    \item (L) Are multiple descents possible?
+\end{itemize}
+
+\subsubsection*{Dealing with model complexity | regularization}
+\begin{itemize}
+    \item (L) What is the problem of very high dimensional data to model (lots of features)?
+    \item (L) What can we do to avoid having an overfitting model?
+    \item (L) Explain situations where ordinary least squares breaks down or is not robust enough.
+    \begin{itemize}
+        \item \bottomupL{hint: breakdown for $p>N$ and collinear features, bad if not sufficiently many data points / too much noise and outliers}
+    \end{itemize}
+    \item (L) How to regularize model complexity in a linear model?
+    \item (L) What do we have to do before we apply our regularization and find the optimal parameters under the regularization? 
+    What will happen if the response variable is not centered? What will happen 
+    if the features are not normalized (z-scored)?
+    \item (D) What are common regularizations to a linear model, how do they differentiate?
+    \begin{itemize}
+        \item \bottomup{hint: Lasso and Ridge, Lasso can fully suppress a parameter.}
+    \end{itemize}
+    \item (L) Derive the best estimator under Ridge regularization.
+    \item (L) For which prior is the MAP estimator (assuming Gaussian errors) equivalent to the Ridge estimator?
+    \item (L) Give the Lasso objective and derive the solution in the one-dimensional case. When will
+    the parameter be set to zero?
+    \item (D) Sketch Ridge and Lasso regularization in the constrained formulation. How can you
+    see that one will rather set coefficients to zero than the other?
+    \item (D) How is the regularization connected to the Bias-Variance-Tradeoff?
 \end{itemize}
 
 \subsection*{Classification}
 
+\subsubsection*{General concepts}
+
 \begin{itemize}
-    \item (D) What kinds of different classifiers are there? When should which be preferred?
-    \item (D) Explain maximum margin classifiers aka SVMs?
-    \item (L) Why should one want to project to higher dimensions?
-    \item (L) What is the advantage of using a Kernel?
-    \item (L) Why should one rather solve the dual than the primal problem?
+    \item (L) What are principal approaches to classification?
+    \item (D) What kinds of different classifiers are there? When should we prefer which classifier?
+\end{itemize}
+
+\subsubsection*{Discriminant analysis}
+
+\begin{itemize}
+    \item (L) What is the idea of discriminant analysis? What do we model? How to we obtain the class probabilities given a feature vector?
+    \item (L) For Linear Discriminant Analysis write down the discriminant function and identify 
+    the Mahalanobis distance.
+    \item (L) How does the LDA decision boundary between two classes look like?
+    \item (L) What is the difference between LDA and QDA?
+    \item (L) How do we train a discriminant analysis model, i.e. how do we estimate
+    the class means, covariance matrices (pooled covariance for LDA) and class priors?
+\end{itemize}
+
+\subsubsection*{Linear Classifiers in general}
+\begin{itemize}
+    \item (L) How can a linear decision boundary be modeled by a linear function?
+    \item (L) Draw the decision boundary given by $g(\vec{x}) = \vec{w}^T \vec{x} - b = 0$. 
+    What is the offset of the decision boundary from the origin (along $\vec{w}$)?
+\end{itemize}
+
+\subsubsection*{Support Vector Machines}
+\begin{itemize}
+    \item (D) Explain the idea of maximum margin classifiers aka SVMs? What are the margins, what the support vectors? Make a drawing.
+    \item (L) Does the number of support vectors necessarily grow with the dimensionality of the problem or the number of data points?
+    \item (L) Formulate the objective of the SVM classifier for linear separable data (hard margin). Write this as a constraint minimization (the primal problem).
+    \item (L) Why should one want to project to higher dimensions? What is the formal reasoning?
+    \item (L) What is the advantage of using a kernel? Give the kernel for expanding to polynomial features and the Gaussian RBF kernel. To which dimensionality does the Gaussian RBF kernel project?
+    \item (L) What is the problem of the primal problem in the context of projection to higher dimensions and kernelization?
     \begin{itemize}
-        \item \bottomup{hint: Kernelization.}
+        \item \bottomupL{hint: scales with dim. of feature matrix (very large in kernelization), $\vec{w}$ possibly high- or even infinite-dimensional.}
     \end{itemize}
+    \item (L) Formulate the dual problem. What is the advantage of the dual problem?
+    \item (L) Give the decision only in terms of the dual variables.
+    \item (L) What value do the dual variables $\alpha_i$ take for the support vectors? What for all other points?
+    \item (L) How can one allow for soft margines? What do we penalize? What are the relaxed constraints? What are the support vectors now?
+    \item (L) For the soft margin, for stronger $\gamma$ (pentalty against crossing the margin), what happens to the margin, what to the number of support vectors?
+    \item (L) How can one generalize SVMs to multiple classes?
+\end{itemize}
+
+\subsubsection*{K-Nearest Neighbors}
+\begin{itemize}
+    \item (L) What is the idea of KNN classification (and regression)?
+    \item (L) How is a new data point classified?
+    \item (L) How should one choose $K$? What is the problem of choosing $K$ too small? What is the problem of choosing $K$ too large? Connect to the Bias-Variance-Tradeoff.
+    \item (L) KNN is said to be non-parametric. What does this mean? Can one still assign an effective number of parameters to the model?
+    \item (L) What are advantages and disadvantages of KNN?
+    \item (L) How can one avoid storing the whole training set?
+\end{itemize}
+
+\subsubsection*{Logistic Regression}
+\begin{itemize}
+    \item (L) Give the idea of logistic regression from the GLM and linear classifier perspective? What do we model?
+    \begin{itemize}
+        \item \bottomup{hint: we directly model the class probabilities given the feature vector}
+    \end{itemize}
+    \item (L) In 1D draw the probability model and decision boundary of logistic regression for two classes.
+    \item (L) Do we make distributional assumptions on the features?
+    \begin{itemize}
+        \item \bottomupL{hint: no, the central difference to discriminant analysis is that as in linear regression, we assume the $\vec{x}$ to be fixed and have a noise model for the class labels.}
+    \end{itemize}
+    \item (L) What is the decision rule?
+    \item (L) How is the probability model different for small and large $\vec{w}$ (while $\frac{b}{||\vec{w}||}$ is kept constant)?
+    \item (L) In higher dimensions, does logistic regression or discriminant analysis typically have more parameters?
+    \item (L) How do we derive the loss function for logistic regression?
+    \item (L) In what case is this \textit{always} maximized for $||\vec{w}|| \rightarrow \infty$? What is the corresponding likelihood of the observed class labels under this probability model?
+    \item (L) How can we generalize to multiple classes?
+    \item (L) Derive a multiclass probability model starting from the linearity in the log-odds (to a reference class).
+\end{itemize}
+
+\subsubsection*{Neural Networks for Classification}
+
+\begin{itemize}
+    \item (L) Draw multiclass logistic regression in an electrical engineering style diagram.
+    \item (L) How is the engineering style diagram of two-class logistic regression called?
+    \begin{itemize}
+        \item \bottomupL{hint: perceptron}
+    \end{itemize}
+    \item (L) What kind of decision boundary can a single perceptron model? What is the advantage
+    of a multilayer perceptron (aka neural network)?
+    \item (L) What is the typical loss for multiclass classification?
+    \item (L) What does the entropy of a distribution measure? What Bernoulli distribution has the lowest, what one the highest entropy?
+    \item (L) What loss is used in a classification problem? Write down the loss for a single data point.
+    \item (L) Relate the cross-entropy to the negative log-likelihood for multicategorical data. Can cross entropy be negative? When is the 
+    cross-entropy loss minimized (Gibbs inequality)?
+    \item (L) How is the cross-entropy connected to the relative entropy aka Kullback-Leibler divergence?
+    \item (L) Give the information theoretic interpretations of entropy, cross-entropy and relative entropy.
+\end{itemize}
+
+\subsection*{Primer on Neural Networks\skipthis}
+\begin{itemize}
+    \item (L) What is the idea of a neural network over a more simple model like linear regression or logistic classification?
+    \item (L) What is the structure of a neural network, what are the activation functions in the hidden layers and the output layer?
+    How do classification and regression differ in the output layer?
+    \item (L) How can one adapt the parameters to minimize the loss function?
+    \item (L) Why can't one use finite differencing to compute the gradient in (stochastic) gradient descent?
+    \item (L) What is automatic differentiation? When should one use forward, when reverse mode?
+    \item (L) What does one mean with (error) backpropagation?
+    \item (L) What is the problem of exploding and vanishing gradients? How can exploding gradients be mitigated?
 \end{itemize}
 
 \subsection*{Dimensionality Reduction}
 
+\begin{itemize}
+    \item (L) What are the fields of unsupervised learning?
+    \item (L) In which situations does dimensionality reduction make sense?
+    \item (L) Give an overview on approaches to dimensionality reduction.
+\end{itemize}
+
+\subsubsection*{Principal Component Analysis (PCA)}
+
+\begin{itemize}
+    \item (L) What is the idea of PCA? What kind of linear transformation on the data is PCA? How is dimensionality reduced?
+    \item (L) What preliminary change the data matrix is necessary before applying PCA?
+    \item (L) How is the first principal component of a data set $\{ \vec{x}_i \}_{i=1}^N$ defined?
+    \item (L) On how many of the principal components should we project our data to obtain a good dimensionality 
+    reduced representation?
+\end{itemize}
+
+\subsubsection*{Nonlinear PCA}
+\begin{itemize}
+    \item (L) We want to reduce dimensionality. Why should we intermediately project to a higher dimension?
+    \item (L) Consider $\mat{X}$ to be centered in the features. Is the up-projected $\mat{\Phi}$ also automatically centered?
+    \item (L) Given $\mat{\tilde{\Phi}}$ is centered, how can we obtain the principal components? What is the problem with
+    taking the eigenvectors of $\mat{\tilde{\Phi}}^T \mat{\tilde{\Phi}}$?
+    \item (L) How can we only implicitly go to higher dimensions by using a kernel? Do we explicitly calculate
+    the principal components in the high-dimensional space? How do we project the data to lower dimensions?
+    \item (L) Give the modified kernel function so the projected data is mean-centered.
+\end{itemize}
+
+\subsubsection*{Further non-linear dimensionality reduction methods}
+\begin{itemize}
+    \item (L) Give further non-linear dimensionality reduction methods.
+    \item (L) How can find better separating directions in classified data?
+    \item (L) What are dimensionality reduction techniques preserving (local) distance information
+    \begin{itemize}
+        \item \bottomupL{hint: global approach: MDS, neighbor approach: SNE}
+    \end{itemize}
+    \item (L) What is the idea of isomap?
+    \item (L) What is the idea of locally linear embedding?
+    \item (L) What is the idea of t-SNE?
+    \item (L) What is the idea of autoencoders?
+\end{itemize}
+
 \subsection*{Latent variable models}
+
+\begin{itemize}
+    \item (L) What are latent variables?
+\end{itemize}
+
+\subsubsection*{Independent Component Analysis (ICA)}
+
+\begin{itemize}
+    \item (L) What is the party cocktail problem? How can Independent Component Analysis (ICA) help to find the source signals?
+    \item (L) What is the rationale behind wanting independent / as non-Gaussian as possible latent sources? Why are uncorrelated sources not enough (identifiability issue)
+    \item (L) What metric can be used to measure the independence of the latent sources? How do we find the 
+    mixing matrix $\mat{\Gamma}$ yielding the most independent sources? How do we estimate the source entropy terms?
+    \item (L) Before applying ICA one has to whiten the data matrix $\mat{X}$. What does this mean? Why is this necessary?
+    \item (L) What are the limitations of ICA?
+\end{itemize}

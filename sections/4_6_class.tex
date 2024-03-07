@@ -13,7 +13,7 @@ figure \ref{fig:classification}.
 
 \begin{figure}[H]
   \centering
-  \includesvg[width=0.5\textwidth]{figures/classification.svg}
+  \includesvg[width=0.8\textwidth]{figures/classification.svg}
   \caption{Example classification.}
   \label{fig:classification}
 \end{figure}
@@ -392,6 +392,17 @@ By using
     \frac{\partial \mathcal{L}}{\partial \beta_0}=0 \rightarrow \sum_{i=1}^N \alpha_i c_i=0
     \end{gathered}
 \end{equation}
+
+\pinkbox{\textbf{Support vectors and determining $\vec{\beta}_0$}: The $\vec{x}_s$ for which $\alpha_s > 0$ (so those determining $\vec{\beta}$) are the support vectors. 
+Given any support vector $\vec{x}_s$, we can determine $\vec{\beta}_0$ by
+\begin{equation}
+    c_s \left( \vec{x}_s^T \vec{\beta} + \beta_0 \right) = 1
+\end{equation}
+so
+\begin{equation}
+    \beta_0 = c_s - \vec{x}_s^T \vec{\beta}
+\end{equation}}
+
 with this we can simplify the Lagrangian
 
 \begin{equation}
@@ -411,7 +422,7 @@ and finally eliminate $\vec{\beta}$, yielding the \textit{dual problem}.
 We can rewrite this to
 
 \begin{equation}
-    \vec{\alpha}^* = \argmin_{\vec{\alpha}} \frac{1}{2} \vec{\alpha} \operatorname{diag}(\vec{c}) \underbrace{\mat{X} \mat{X}^T}_{=:G \in \mathbb{R}^{N\times N}} \operatorname{diag}(\vec{c}) \vec{\alpha} - \vec{1}^T \vec{\alpha} \text{ s.t. } \vec{\alpha} \geq 0, \vec{c}^T \vec{\alpha} = 0
+    \vec{\alpha}^* = \argmin_{\vec{\alpha}} \left( \frac{1}{2} \vec{\alpha} \operatorname{diag}(\vec{c}) \underbrace{\mat{X} \mat{X}^T}_{=:\, G \, \in \, \mathbb{R}^{N\times N}} \operatorname{diag}(\vec{c}) \vec{\alpha} - \vec{1}^T \vec{\alpha} \right) \quad \text{ s.t. } \vec{\alpha} \geq 0, \vec{c}^T \vec{\alpha} = 0
 \end{equation}
 
 \greenbox{So we have turned a problem of finding $\vec{\beta} \in \mathbb{R}^p$ into a problem of finding $\vec{\alpha} \in \mathbb{R}^N$.}
@@ -458,16 +469,45 @@ A soft margin is illustrated in figure \ref{fig:soft_margin}.
     \label{fig:soft_margin}
 \end{figure}
 
-The new optimization problem is
+The new primal optimization problem is
 
 \begin{equation}
     \begin{gathered}
-        \vec{\beta}, \beta_0=\underset{\vec{\beta}, \beta_0}{\operatorname{argmin}}\left\{\frac{1}{2}\|\vec{\beta}\|^2-\sum_{i=1}^N \alpha_i\left[c_i \cdot\left(\vec{x}_i^T \vec{\beta}+\beta_0\right)-1\right]+\gamma \sum_{i=1}^N \xi_i-\sum_{i=1}^N \lambda_i \xi_i\right\} \\
-        \text{s.t. } c_i \cdot\left(\vec{x}_i^T \vec{\beta}+\beta_0\right) \geq 1-\xi_i, \quad \xi_i \geq 0, \quad \lambda_i \geq 0
+        \vec{\beta}, \beta_0=\underset{\vec{\beta}, \beta_0}{\operatorname{argmin}}\left\{\frac{1}{2}\|\vec{\beta}\|^2 + \gamma \sum_{i=1}^N \xi_i \right\} \\
+        \text{s.t. } c_i \cdot\left(\vec{x}_i^T \vec{\beta}+\beta_0\right) \geq 1-\xi_i, \quad \xi_i \geq 0
     \end{gathered}
 \end{equation}
 
 where $\gamma$ regulates the strength of the penalty.
+
+From this we get the Lagrangian
+
+\begin{equation}
+    \mathcal{L}\left(\vec{\beta}, \beta_0, \left\{ \vec{\xi}_i \right\}, \vec{\alpha}, \vec{\lambda}\right) = \frac{1}{2} \vec{\beta}^T \vec{\beta} + \gamma \sum_{i=1}^N \xi_i - \sum_{i=1}^N \alpha_i \left[ c_i \left( \vec{x}_i^T \vec{\beta} + \beta_0 \right) - 1 + \xi_i \right] - \sum_{i=1}^N \lambda_i \xi_i
+\end{equation}
+
+with the optimization
+
+\begin{equation}
+    \max_{\vec{\alpha}, \vec{\lambda}} \min_{\vec{\beta}, \beta_0,  \left\{ \vec{\xi}_i \right\}} \mathcal{L}\left(\vec{\beta}, \beta_0,  \left\{ \vec{\xi}_i \right\}, \vec{\alpha}, \vec{\lambda}\right)
+\end{equation}
+
+leading to
+
+\begin{equation}
+    \vec{\alpha}^* = \argmax_{\vec{\alpha}} \left\{ -\frac{1}{2} \norm{\sum_{i=1}^N \alpha_i c_i \vec{x}_i}^2 + \sum_{i=1}^N \alpha_i \right\} \quad \text{ s.t. } \mathcolor{green1}{\gamma} \geq \alpha_i \geq 0, \sum_{i=1}^N \alpha_i c_i = 0
+\end{equation}
+
+where $\gamma \geq \alpha_i$ is the new constraint following from $\partial_{\xi_i} \mathcal{L} = 0$. For $\gamma \rightarrow \infty$ we get the hard-margin SVM.
+
+As previously, the results for the parameters are
+
+\begin{equation}
+    \begin{gathered}
+        \vec{\beta}^* = \sum_{i=1}^N \alpha_i^* c_i \vec{x}_i \\
+        \beta_0^* = c_s - \vec{x}_s^T \vec{\beta}^*, \quad \text{for any } s \text{ with } \gamma > \alpha_s^* > 0
+    \end{gathered}
+\end{equation}
 
 \yellowbox{\textbf{Note on $\gamma$}: Dividing by $\gamma$, we can interpret this as a regularization on $||\vec{\beta}||^2$.
 \begin{itemize}
@@ -666,6 +706,21 @@ parameter - the class - is learned.}
     \end{itemize}
 \end{itemize}
 
+\redbox{\textbf{Curse of dimensionality:} In high dimensional spaces distances between nearest and farthest points
+from a query point become almost equal, making kNN possibly ineffective so that one might first want to 
+do dimensionality reduction.}
+\yellowbox{The general problem of \textit{contrast loss} however, is to a degree artificial. \enquote{\textit{Contrast-loss} refers to proof by Argarwal et al. which
+suggests machine learning in high dimensions is intrinsically impossible because the distance between almost-all
+instances converge to a constant. This proof is widely
+accepted by the machine learning community. However, it is inconsistent with empirical evidence which
+shows deep-learned features are both effective and high
+dimensional. The hierarchy of dependencies proposed by shell theory
+resolves this paradox. In shell theory, the constraints used
+to prove “contrast-loss” are used to show that distances
+between high dimensional instances reflect shared dependencies (Theorem 1). This makes “contrast-loss” a special
+case of shell theory, which occurs in the unlikely event of all
+instances being statistically independent outcomes of a single generator.} from \citep{shell}.}
+
 \subsection{Logistic classification}
 
 We have a data set $\mathcal{D} = \{ \vec{x}_i, c_i \}$, $c_i \in \{0, 1\}$, and we want to model the probability of class $1$ at a new point $\vec{x}$.
@@ -682,7 +737,7 @@ where the model of $\mu(\vec{x})$ is given by the sigmoid
 \begin{equation}
     g^{-1}(\eta) = \mu = \sigma(\eta) = \frac{1}{1 + \exp(-\eta)}, \quad \eta = \vec{\beta}^T \vec{x}
 \end{equation}
-which in the GLM framework can be followed from the finding the canonical link function. For 1D data,
+which in the GLM framework can be followed from finding the canonical link function. For 1D data,
 this is illustrated in figure \ref{fig:logistic_regression}.
 
 \begin{figure}[!htb]
@@ -962,7 +1017,7 @@ by a sigmoid function ($p(c = 0 | \vec{x}) = 1 - \mu(\vec{x})$). This model is i
 \end{figure}
 
 \greenbox{The perceptron is visualizes the logistic regression model for binary classification. It can linearly separate
-classes with decision boundary perpendicular to $\vec{\beta}$ and offset $-\frac{b}{||\vec{\beta}||}$ (minted
+classes with decision boundary perpendicular to $\vec{\beta}$ and offset $-\frac{b}{||\vec{\beta}||}$ (mind
 here $+b$ not $-b$ as previously in the formula).}
 
 \subsection{A primer on neural networks in the context of classification}
@@ -1019,6 +1074,13 @@ We use the cross-entropy loss
     \epsilon = H(\{\vec{c}_i\}, \{\vec{f}_\vec{W}(\vec{x}_i)\}) = -\sum_{i=1}^N \vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
 \end{equation}
 
+\note{This is really the sum over many cross entropies, one for the predicted probability distribution over the classes
+at each feature vector $\vec{x}_i$ in the training set compared to the ground truth $\vec{c}_i$, given by
+\begin{equation}
+    \epsilon_i = H(\vec{c}_i, \vec{f}_\vec{W}(\vec{x}_i)) = -\sum_{k=1}^K c_{ik} \log(f_{\vec{W},k}(\vec{x}_i)) = \vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
+\end{equation}
+}
+
 \bluebox{\textbf{Neural Network loss in a regression setting:} In the
 regression setting}
 
@@ -1046,6 +1108,9 @@ are assigned. Cross-entropy is a measure of dissimilarity between the two distri
 \begin{equation}
     H(\vec{p}, \vec{q}) = -E_p[\log{q}] =-\sum_{k=1}^K p_k \log(q_k)
 \end{equation}
+- the average message length if we use $q$ as the distribution under which
+we derive our encoding when the true distribution is $p$.
+
 For $p = q$, we get back to the entropy
 \begin{equation}
     H(\vec{p}, \vec{p}) = H(\vec{p}) = -E_p[\log{p}] =-\sum_{k=1}^K p_k \log(p_k) = H(\vec{p}) \geq 0 \text{ as } 0 \leq p_k \leq 1
@@ -1071,5 +1136,22 @@ With this for the class distribution at a single $\vec{x}_i$, the cross-entropy 
 \end{equation}
 which is just the negative log likelihood at this point. Summing over all data points
 we obtain the total loss.
+
+\subsubsubsection{Kullback-Leibler divergence}
+Consider two probability distributions $p$ (usually representing the data) and $q$ (usually representing the model)
+(the other way around in expectation maximization) defined on a finite set $\mathcal{X}$.
+The Kullback-Leibler divergence is a measure of dissimilarity from the distribution $p$ to the
+reference distribution $q$
+\begin{equation}
+    D_{KL}(p||q) = \sum_{x \in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)} = E_p[\log \frac{p}{q}] = H(p,q) - H(p)
+\end{equation}
+It is the relative entropy of $p$ with respect to $q$ and not a true distance measure, as it is not symmetric.
+
+\paragraph*{Intepretation} From $D_{KL}(p||q) = H(p,q) - H(p)$ we see that the Kullback-Leibler divergence
+is the average extra information needed to encode events from $p$ using a code optimized for $q$ compared
+to the average information needed to encode events from $p$ using a code optimized for $p$.
+
+\note{Consider we train a neural network and do gradient descent on this loss. Our networks estimate is 
+$q$, $H(p)$ does not depend on our network. Gradient descent will therefore will be the same for the cross-entropy loss and the KL-divergence.}
 
 \pagebreak

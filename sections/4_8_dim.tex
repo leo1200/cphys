@@ -104,9 +104,9 @@ so the covariance matrix
 \end{equation}
 }
 
-The first principal component is given by
+The first principal component is given by the direction with maximum (sample) variance
 \begin{equation}
-    \vec{v}^* = \argmax_{\vec{v}, ||\vec{v}|| = 1} \Var(\mat{X}\vec{v})
+    \vec{v}^* = \argmax_{\vec{v}, ||\vec{v}|| = 1} \Var(\mat{X}\vec{v}) = \argmax_{\vec{v}, ||\vec{v}|| = 1} \frac{1}{N} \sum_{i=1}^{N} (\vec{x}_i^T \vec{v})^2 = \argmax_{\vec{v}, ||\vec{v}|| = 1} \vec{v}^T \mat{S} \vec{v}
 \end{equation}
 
 We can formulate this as the optimization problem
@@ -131,10 +131,10 @@ where multiplying by $\vec{v}^T$ from the left and using $\vec{v}^T \vec{v} = 1$
 squared distance (different from Linear Regression as here an orthogonal distance is minimized).}
 
 \subsubsubsection{The principal components and dimensionality reduction}
-The principal components are the eigenvectors of the covariance Matrix
+The principal components are the eigenvectors of the covariance matrix
 (here assuming mean-centered data)
 \begin{equation}
-    \mat{S} = \frac{1}{N} \mat{X}^T \mat{X} \text{ symmetric, real, positive semi-definite} (\vec{u}^T \mat{S} \vec{u} \geq 0 \forall \vec{u})
+    \mat{S} = \frac{1}{N} \mat{X}^T \mat{X} \text{ symmetric, real, positive semi-definite } (\vec{u}^T \mat{S} \vec{u} \geq 0 \forall \vec{u})
 \end{equation}
 so $S$ has only real non-negative eigenvalues and the eigenvectors form an orthonormal basis
 (symmetric matrices are diagonalizable, EVs of real symmetric matrices are orthogonal) - our principal

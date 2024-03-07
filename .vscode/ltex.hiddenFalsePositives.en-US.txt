@@ -1,0 +1,1 @@
+{"rule":"AGREEMENT_SENT_START","sentence":"^\\QFor what likelihoods is it a conjugate prior?\\E$"}

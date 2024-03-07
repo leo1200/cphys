@@ -30,7 +30,7 @@ linearly mixed signals
     \begin{aligned}
         X_{i1} &= S_{i1} + S_{i1} + S_{i1} + \epsilon_{i1} \\
         X_{i2} &= 0.5 S_{i2} + 2 S_{i2} + S_{i2} + \epsilon_{i2} \\
-        X_{i3} &= 1.5 S_{i3} + S_{i3} + 2 c_3 S_{i3} + \epsilon_{i3}
+        X_{i3} &= 1.5 S_{i3} + S_{i3} + 2 S_{i3} + \epsilon_{i3}
     \end{aligned}
 \end{equation}
 where the $\epsilon_{i1}$ are the noise terms and we have inserted an arbitrary mixture.
@@ -62,7 +62,7 @@ are shown in figure \ref{fig:cocktail_party}.
     \label{fig:cocktail_party}
 \end{figure}
 
-\bluebox{\textbf{Aim:} Given $p$ perspectives ($p$ microphones) on a mixed signal, we want to find $p$ (generally $q \leq p$) original \textbf{latent} (not directly observed)
+\bluebox{\textbf{Aim:} Given $p$ perspectives ($p$ microphones) on a mixed signal, we want to find $q$ (generally $q \leq p$) original \textbf{latent} (not directly observed)
 source signals.}
 
 \subsection{Independent Component Analysis (ICA)}
@@ -116,7 +116,7 @@ such that the sources are as independent as possible, \enquote{$p(\vec{S}) = p(S
 
 Consider the singular-value decomposition $\mat{X} = \mat{U} \mat{D} \mat{V}^T$ ($\mat{U} \in \mathbb{R}^{p \times p}$).
 Since the rows of $\mat{U}$ and $\mat{V}$ are orthonormal vectors, $\mat{U}\mat{V}^T$ will be white ($(\mat{U}\mat{V}^T)(\mat{U}\mat{V}^T)^T 
-\mat{U}(\mat{V}^T\mat{V})\mat{U}^T = \mat{1}$). Which
+= \mat{U}(\mat{V}^T\mat{V})\mat{U}^T = \mat{1}$). Which
 we use as our $\mat{X}$ henceforth.
 
 \greenbox{Since $\mat{X}$ is whitened to $\Cov(\vec{X}) = \mat{1}$ (so for centered features $\Cov(\vec{X}) = \frac{1}{N} \mat{X} \mat{X}^T = \mat{1}$, so $\mat{X}$
@@ -164,7 +164,7 @@ one can show $H(\vec{S}) = H(\vec{X}) + \log |\det \mat{\Gamma}| = H(\vec{X})$, 
 so
 
 \begin{equation}
-    \mat{\hat{\Gamma}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\hat{\Gamma}^T \vec{X})_i) - \underbrace{H(\vec{X})}_{=\text{const.}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\hat{\Gamma}^T \vec{X})_i)
+    \mat{\hat{\Gamma}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\mat{\Gamma}^T \vec{X})_i) - \underbrace{H(\vec{X})}_{=\text{const.}} = \argmin_{\mat{\Gamma}} \sum_{i=1}^{q} H((\mat{\Gamma}^T \vec{X})_i)
 \end{equation}
 
 \note{This is equivalent to minimizing the sum of the entropies of the separate components of $\vec{S}$, which is
@@ -172,7 +172,7 @@ equivalent to maximizing their non-Gaussianity (e.g. Wasserschein distance to a 
 
 \problem{We want to calculate 
 \begin{equation}
-    H(S_i) = H((\hat{\Gamma}^T \vec{X})_i)
+    H(S_i) = H((\mat{\Gamma}^T \vec{X})_i)
 \end{equation}
 but given the $\mat{\Gamma}$ we only have $N$ samples $S_{1}^{(1)}, S_{i}^{(2)}, \dots, S_{i}^{(N)}$ of the $i$-th source, not a probability
 distribution $p(S_i)$.
@@ -258,7 +258,10 @@ We want to maximize the likelihood of the observed data given the parameters. As
 As we do not know the latent variables $\vec{S}_i$, we have to integrate them out, so
 
 \begin{equation}
-    p_\vec{\theta}(\vec{x}) = \int_\vec{S} p_\vec{\theta} (\vec{x}, \vec{S}) \, d\vec{S} \underset{\text{Bayes}}{=} \int_\vec{S} p_\vec{\theta} (\vec{x} | \vec{S}) p(\vec{S}) \, d\vec{S}
+    \begin{gathered}
+        p_\vec{\theta}(\vec{x}) = \int_\vec{S} p_\vec{\theta} (\vec{x}, \vec{S}) \, d\vec{S} \underset{\text{Bayes}}{=} \int_\vec{S} p_\vec{\theta} (\vec{x} | \vec{S}) p(\vec{S}) \, d\vec{S} \\
+        \text{usually difficult / intractable to calculate}
+    \end{gathered}
 \end{equation}
 
 where in case of our factor analysis

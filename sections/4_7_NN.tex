@@ -16,7 +16,7 @@ style, we used for logistic regression, as illustrated in figure
 
 \begin{figure}[!htb]
     \centering
-    \includesvg[width=0.95\textwidth]{figures/lin_class.svg}
+    \includesvg[width=0.95\textwidth]{figures/classreg2.svg}
     \caption{Electrical engineering style diagrams.}
     \label{fig:lin_class_electrical}
 \end{figure}
@@ -55,8 +55,8 @@ A comparison between classification and regression is given in table \ref{tab:cl
         Loss & Squared residuals loss \begin{equation*}
             \mathcal{L}(\vec{y}, \vec{\hat{y}}) = \frac{1}{N} \sum_{i=1}^{N} \left( \vec{y}_i - \vec{\hat{y}}(\vec{x}_i) \right)^2
         \end{equation*} &
-        Cross-entropy loss \begin{equation*}
-            \mathcal{L}(\vec{c}, \vec{\hat{c}}) = - \frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} \vec{c}_i^T \log(\vec{\hat{c}}(\vec{x}_i))
+        Cross-entropy loss (averaged or added over the samples) \begin{equation*}
+            \mathcal{L}(\vec{c}, \vec{\hat{c}}) = - \frac{1}{N} \sum_{i=1}^{N} \vec{c}_i^T \log(\vec{\hat{c}}(\vec{x}_i))
         \end{equation*} \\
         \hline
     \end{tabular}
@@ -99,7 +99,7 @@ also effect the training, so finding appropriate weights and biases (the offset 
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/activation_functions.png}
+    \includesvg[width=0.95\textwidth]{figures/activation_functions.svg}
     \caption{Different activation functions.}
     \label{fig:activation_functions}
 \end{figure}
@@ -145,20 +145,20 @@ The cultures of modelling are illustrated in figure \ref{fig:modelling_cultures}
 
 \subsubsection{Problem statement of training NNs}
 Let us consider a network with parameters collected into a vector $\vec{W}$.
-For an observation $\vec{x}_i$ the network output is $f(\vec{x}_i, \vec{W})$.
+For an observation $\vec{x}_i$ the network output is $\vec{f}(\vec{x}_i, \vec{W})$.
 The supervision in the training set is $\vec{y}_i$, $\mathcal{D} = \{ (\vec{x}_i, \vec{y}_i) \}_{i=1}^{N}$.
 
 We can formulate the training problem as
 
 \begin{equation}
-    \vec{\hat{W}} = \argmin_{\vec{W}} \mathcal{Q}(\vec{W}) = \argmin_{\vec{W}} \sum_{i\in \mathcal{D}} \text{loss}(f(\vec{x}_i, \vec{W}), \vec{y}_i) + \Omega_\text{architecture}(\vec{W}) + \Omega_\text{output}(f(\vec{x}_i, \vec{W}))
+    \vec{\hat{W}} = \argmin_{\vec{W}} \mathcal{Q}(\vec{W}) = \argmin_{\vec{W}} \sum_{i\in \mathcal{D}} \text{loss}(\vec{f}(\vec{x}_i, \vec{W}), \vec{y}_i) + \Omega_\text{architecture}(\vec{W}) + \Omega_\text{output}(\vec{f}(\vec{x}_i, \vec{W}))
 \end{equation}
 
 with regularizations $\Omega_\text{architecture}$ and $\Omega_\text{output}$.
 
 In the regression setting the loss would be
 \begin{equation}
-    \text{loss}(f(\vec{x}_i, \vec{W}), \vec{y}_i) = \left( f(\vec{x}_i, \vec{W}) - \vec{y}_i \right)^2
+    \text{loss}(\vec{f}(\vec{x}_i, \vec{W}), \vec{y}_i) = \left(\vec{f}(\vec{x}_i, \vec{W}) - \vec{y}_i \right)^2
 \end{equation}
 
 \subsubsection{Stochastic Gradient Descent for minimizing the loss}
@@ -170,7 +170,7 @@ Starting from an initial guess $\vec{W}^{(0)}$, we update the parameters by
 \end{equation}
 where the loss is calculated over the whole training dataset
 \begin{equation}
-    Q(\vec{W})=\sum_{i \in \mathcal{D}} \text { loss }\left(f\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)
+    Q(\vec{W})=\sum_{i \in \mathcal{D}} \text { loss }\left(\vec{f}\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)
 \end{equation}
 
 \subsubsubsection{Stochastic gradient descent}
@@ -179,16 +179,16 @@ by drawing an index subset $k^\star \subset 1, \ldots, N$ so a corresponding min
 dataset $\mathcal{D}^\star \subset \mathcal{D}$
 
 \begin{equation}
-    Q(\vec{W})=\sum_{i \in \mathcal{D}^\star} \text { loss }\left(f\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)
+    Q(\vec{W})=\sum_{i \in \mathcal{D}^\star} \text { loss }\left(\vec{f}\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)
 \end{equation}
 
 \subsubsection{How to compute the gradients? | backpropagation}
 \subsubsubsection{Gradient we want to compute}
 At each update step in gradient descent, we want to compute
 \begin{equation}
-    \frac{\partial Q(\vec{W})}{\partial \vec{W}} = \sum_{i \in \mathcal{D}^\star} \frac{\partial \text{loss}\left(f\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)}{\partial \vec{W}}
+    \frac{\partial Q(\vec{W})}{\partial \vec{W}} = \sum_{i \in \mathcal{D}^\star} \frac{\partial \text{loss}\left(\vec{f}\left(\vec{x}_{i}, \vec{W}\right), \vec{y}_{i}\right)}{\partial \vec{W}}
 \end{equation}
-So to update our weights fromt $W^{(t-1)}$ to $W^{(t)}$ we need to compute
+So to update our weights from $W^{(t-1)}$ to $W^{(t)}$ we need to compute
 
 \begin{equation}
     \left.\frac{\partial \operatorname{loss}\left(\vec{y}_i, \vec{f}\left(\vec{x}_i, \vec{W}\right)\right)}{\partial \vec{W}}\right|_{\vec{W}^{(t-1)}}=\left(\begin{array}{c}
@@ -200,7 +200,7 @@ So to update our weights fromt $W^{(t-1)}$ to $W^{(t)}$ we need to compute
     \end{array}\right)
 \end{equation}
 
-on each training sample $\{ \vec{x}_i,\vec{y}_i \}$ in the minibatch, to later sum over the minibatch
+on each training sample $\{ \vec{x}_i,\vec{y}_i \}$ in the minibatch, to later sum over the minibatch.
 
 \subsubsubsection{Why can't we use finite differencing?}
 The derivative with respect to one weight can be approximated by

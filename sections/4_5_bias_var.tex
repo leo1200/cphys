@@ -32,13 +32,14 @@ There are two principal aspects to generalizability
 \end{itemize}
 
 Model complexity is how freely we allow our model to fit the data, how large the space of possible models is.
-Naturally for a complex model, we assume a high variance and low bias, and for a simple model, we assume a low variance and high bias.
-This is the \textcolor{blue1}{bias-variance tradeoff}.
+Naturally for a complex model, we assume a high variance and low bias, and for a simple model, we assume a low variance and high bias.\footnote{Consider for instance a model that simply gives a constant output, no matter the training data. It will have no variance but high bias, no complexity and no explanation power. The other extreme is a 1-nearest-neighbor predictor (no bias, high variance).}
+This is the \textcolor{blue1}{bias-variance tradeoff}. While the complex model might be able to 
+perfectly resemble the true model, it picks up on the noise in the sample and therefore generalizes poorly.
 
 \subsubsection{Bias-Variance Tradeoff}
 \redbox{Classically, the fundamental limitation to a perfect model is, that increasing the bias
 decreases the variance and vice versa. By making stronger assumptions on our model parameters
-we can reduce their sensitivity to the noise in our sample, but also loose explanation-power
+we can reduce their sensitivity to the noise in our sample, but also loose explanation-power.
 While we might find a sweet spot, we can never eliminate both.}
 
 Let us illustrate the Bias-Variance tradeoff at the hand of Local Linear Regression,
@@ -82,8 +83,8 @@ based on them, like the support $\lambda$ in Local Linear Regression, we can con
 data and then testing it on the rest (e.g. calculating the sum of squared residuals).}
 
 \begin{itemize}
-    \item \textcolor{blue1}{Train error}: error on the training set - error as of bias (no variance on a single sample)
-    \item \textcolor{blue1}{Test error}: error on the test set - total error as of bias and variance
+    \item \textcolor{blue1}{Train error}: error on the training set - error as of bias (no variance on a single sample; no bias $\rightarrow$ perfect fit on the training set possible)
+    \item \textcolor{blue1}{Test error}: error on the test set - total error as of bias, variance and irreducible noise error (the error the perfect model would have on the test set)
 \end{itemize}
 More accurate ways of obtaining a good model error (that will itself generalize well) is obtained
 via Cross-Validation, as discussed later.
@@ -100,16 +101,19 @@ We want to evaluate our model on $\vec{x}_0 \notin \mathcal{D}$, i.e. on unseen 
 our estimate being $\hat{y}_0 = \hat{f}_{\vec{\theta}}(\vec{x}_0)$ and the true
 value being $y_0$. We define the prediction error as
 \begin{equation}
-    \operatorname{PE} := E\left[ (y_0 - \hat{y}_0)^2 \right]
+    \operatorname{PE} := E_{D,\epsilon}\left[ (y_0 - \hat{y}_0)^2 \right]
 \end{equation}
-\note{As $\hat{f}_{\vec{\theta}}$ was trained on $\mathcal{D}$, $\operatorname{PE}$ depends
-on $\mathcal{D}$.}
+\note{If we on one data set $\mathcal{D}$ train a 
+model $\hat{f}_{\vec{\theta}}$ the prediction error this model has
+over many unseen points, depends on $\mathcal{D}$. Here however, we form the expectation over many
+training sets $\mathcal{D}$ and noisy realizations of the true model at $\vec{x}_0$. Otherwise,
+it would make no sense for the model to have a variance.}
 
 \subsubsection{Bias-Variance-Decomposition of the prediction error}
 We can decompose (proof follows)
 \begin{equation}
     \begin{aligned}
-        \operatorname{PE} &= E\left[ (y_0 - \hat{y}_0)^2 \right] \\
+        \operatorname{PE} &= E_{D,\epsilon}\left[ (y_0 - \hat{y}_0)^2 \right] \\
         &=  E\left[ (y_0 - \hat{f}_{\vec{\theta}}(\vec{x}_0))^2 \right] \\
         &= \text{\textcolor{blue1}{bias}}^2 + \text{\textcolor{green1}{variance}} + \mathcolor{pink1}{\sigma^2} \\
         &= \left(\mathcolor{blue1}{E\left[\hat{f}_{\vec{\theta}}\left(\vec{x}_0\right)\right]-f_{\vec{\theta}}\left(\vec{x}_0\right)}\right)^2+\mathcolor{green1}{E\left[\left(\hat{f}_{\vec{\theta}}\left(\vec{x}_0\right)-E\left[\hat{f}_{\vec{\theta}}\left(\vec{x}_0\right)\right]\right)^2\right]}+\mathcolor{pink1}{E\left[\left(y_0-f\left(\vec{x}_0\right)\right)^2\right]}
@@ -124,6 +128,14 @@ The terms in the decomposition are
     sensitive the model is to the difference between samples due to noise
     \item \textcolor{pink1}{$\sigma^2$}: the noise in the true model, irreducible error
 \end{itemize}
+
+\note{This is just a decomposition of the squared prediction error, it does not say anything about scaling
+with complexity. As our empirical intuition is that a more complex model will have a lower bias but a higher variance 
+(different training sets will yield different models as they pick up on the noise in the data), or rather worse
+generalization, we have a \textbf{bias-variance tradeoff}. The lower the bias (the more flexible the model),
+the higher the variance, so we can never eliminate both (but we can still find the best balance). But this is just empirical
+and no hard proof. Imagine a complex model with regularization, which with more complexity can find smoother
+solutions - here the variance might decrease with complexity over a threshold (at perfect / very good training error).}
 
 \subsubsection{Derivation of the Bias-Variance-Decomposition}
 Let us abbreviate
@@ -181,6 +193,9 @@ The bias variance tradeoff is illustrated in figure \ref{fig:bias_variance_trade
 \end{itemize}
 \greenbox{Therefore, more training data flattens the variance curve and moving the optimal complexity to higher complexity.
 With more training data we can afford using a more complex model.}
+
+With more and more training data, the structure of the data will become dominant over 
+the noise in the sample and will allow fitting more complex models.
 
 This is illustrated in figure \ref{fig:bias_variance_tradeoffB}.
 
@@ -250,8 +265,14 @@ where $S_{-k}$ is the set of all samples except the $k$-th fold.
 We can calculate $\operatorname{CV}(\lambda)$ for different $\lambda$ and pick the one
 yielding the smallest cross-validation error. With this $\lambda$, we can then train
 the model on the whole data set and deploy.
+
 \greenbox{With cross-validation we can also estimate how
 good our estimate of the prediction error is via the spread of the cross-validation errors.}
+
+\note{We should use the same folds for all models (choices of hyperparameters), so effectively, for 
+each left out partition, we train all models on the rest (so the comparison is on the same footing).}
+
+\note{We still hold out a test set as for the final evaluation in cross-validation, but we do not need a validation set anymore.}
 
 For local linear regression the cross-validation error is plotted in figure \ref{fig:cv_llr}.
 
@@ -263,7 +284,7 @@ For local linear regression the cross-validation error is plotted in figure \ref
     \label{fig:cv_llr}
 \end{figure}
 
-\yellowbox{\textbf{Cross-validation is itself subject to bias-variance tradeoff}:
+\yellowbox{\textbf{Cross-validation is itself subject to a tradeoff}:
 \begin{itemize}
     \item for $K=N$ (leave-one-out) the error (only calculated on one data point) will vary highly between different partitions and the
     trained models will - as the training sets only differ by two data-points each - be very similar
@@ -292,7 +313,7 @@ so in case of a linear model
 \begin{equation}
     \begin{gathered}
         \operatorname{AIC}(\lambda) = N \log \left( \sum_{i=1}^N (y_i - \hat{y}_i^2)^2 \right) + 2p(\lambda) + \text{const.}, \quad p = \text{trace}(\mat{S}), \quad \vec{\hat{Y}} = \mat{X} \vec{\hat{\beta}} = \mat{S} \vec{Y} \\
-        \text{in Ridge Regression} \mat{S} = \mat{X}^T (\mat{X} \mat{X}^T + \lambda \mat{I})^{-1} \mat{X}
+        \text{in Ridge Regression } \mat{S} = \mat{X}^T (\mat{X} \mat{X}^T + \lambda \mat{I})^{-1} \mat{X}
     \end{gathered}
 \end{equation}
 
@@ -400,14 +421,34 @@ with more dimensions}.
 \bluebox{For a model with more parameters than data points, we need regularization
 to find the \textit{best no-bias model}.}
 
-\subsection{Overview on dealing with complexity}
-Three approaches for dealing with model complexity are
-\begin{enumerate}
-    \item \textcolor{blue1}{Feature selection}: Only use features (components of the measurements) relevant to the outcome, e.g. simply remove features with least variance
+\subsection{Overview on dealing with complexity / model variance}
+
+\problem{If not done right, more complex models with more parameters will tend to overfit, vary a lot
+depending on the training set and generalize poorly.}
+
+The higher the number of input features, the more complex the model will generally be, with 
+the number of data points to retain the same sampling density growing exponentially with the number of features
+(easy to see for e.g. a linear model). Now consider the model also has features in (higher dimensional)
+\textit{latent spaces} - training will be even more difficult.
+
+\greenbox{To make a model more robust (vary less) our principal approaches are
+\begin{itemize}
+    \item to train a simpler model
+    on simpler data in the first place
+    \item to penalize on model parameters / model output in some way, to reduce the sensitivity to noise / find the meaningful patterns / find a model with smoother simpler output
+\end{itemize}}
+
+\begin{itemize}
+    \item \textcolor{blue1}{Feature selection}: Only use features (components of the measurements) relevant to the outcome, e.g. simply remove features with the least variance
+    \item \textcolor{blue1}{Dimensionality reduction}: Project the data into lower dimensions which still capture (e.g. in semi-supervised learning train a dimensionality reduction on all data
+    and in the lower dimensional space train a classifier on the labeled data)
     \item \textcolor{blue1}{Regularization}: Penalize model complexity / drive unnecessary parameters to zero
-    \item \textcolor{blue1}{Dimensionality reduction}: Project the data into lower dimensions which still capture
+    \begin{itemize}
+        \item Explicit regularization: add a term to the optimization problem, e.g. regularize on the norm of the model parameters or in physics informed regularization penalize how the model violates a differential equation
+        \item Implicit regularization: other forms, e.g. early stopping in training a neural network (stop before model memorizes training data); dropout \footnote{Randomly ignore neurons during training (for a more robust distributed representation (?)).}; using stochastic gradient descent, 
+    \end{itemize}
     the relevant information
-\end{enumerate}
+\end{itemize}
 
 \subsection{Feature selection - best subset selection}
 Consider a data set $\mathcal{D} = \{(\vec{x}_i, y_i)\}_{i=1}^N$ with $\vec{x}_i \in \mathbb{R}^p$.
@@ -524,11 +565,11 @@ This is illustrated in figure \ref{fig:ridge_reg_lambda}.
     \centering
     \includesvg[width=0.95\textwidth]{figures/ridgel.svg}
     \caption{Ridge Regression - influence of $\lambda$ on the coefficients}
-    \label{fig:ridge_reg_lamda}
+    \label{fig:ridge_reg_lambda}
 \end{figure}
 
-\subsubsubsection{Bayesian perspective on Ridge regression}
-Ridge regression is equivalent to using the prior
+\subsubsubsection{Bayesian MAP perspective on Ridge regression}
+Ridge regression is equivalent to the MAP estimate under the Gaussian error assumption using the prior
 \begin{equation}
     \vec{\beta}_\text{prior} \sim \mathcal{N}(\vec{0}, \frac{\sigma^2}{\lambda} \mat{I})
 \end{equation}
@@ -639,7 +680,7 @@ This is illustrated in figure \ref{fig:lasso_reg}.
 
 \begin{figure}[!htb]
     \centering
-    \includesvg[width=0.95\textwidth]{figures/lasso_soft.svg}
+    \includesvg[width=0.95\textwidth]{figures/lasso_soft2.svg}
     \caption{Soft thresholding in Lasso regression}
     \label{fig:lasso_reg}
 \end{figure}
@@ -700,7 +741,7 @@ where
 and lies withing the contour $|| \vec{\beta} ||_q^q = \gamma$, so $|| \vec{\beta} ||_2^2 \leq \gamma$ for Ridge and $|| \vec{\beta} ||_1 \geq \gamma$ for Lasso.}
 
 \subsubsubsection{Intuition for the difference in feature selection}
-The constraint solution found is the point of intersection of the first isocontour of the sum of squared residuals And
+The constraint solution found is the point of intersection of the first isocontour of the sum of squared residuals and
 the constraining contour. For the Lasso regression, the constraining contour is a diamond, so the intersection
 is more likely to be on the axis, so at least one coefficient is set to zero. This is illustrated in figure \ref{fig:ridge_lasso_constraint}.
 
@@ -708,7 +749,7 @@ is more likely to be on the axis, so at least one coefficient is set to zero. Th
     \centering
     \includesvg[width=0.95\textwidth]{figures/ridge_lasso_constraint.svg}
     \caption{Sum of squares contours and constraining contours for Ridge and Lasso regression. If the OLS estimate falls within one of
-    the green-shaded areas, one parameter is set to zero. This is not the case for Ridge regression.}
+    the green-shaded areas, one parameter is set to zero in Lasso Regression. This is not the case for Ridge regression.}
     \label{fig:ridge_lasso_constraint}
 \end{figure}
 

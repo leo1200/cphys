@@ -114,7 +114,7 @@ with a linear model being
 \end{equation}
 so if there is only one feature $x_i$, we have
 \begin{equation}
-    y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \dots + \epsilon_i
+    y_i = \beta_0 + \beta_1 x_i + \dots + \epsilon_i
 \end{equation}
 
 \note{A linear model is linear in the parameters, not necessarily the independent variables. For instance
@@ -834,11 +834,11 @@ Consider table \ref{tab:typical_tests}.
         \hline 
         Test For & Null Hypothesis $(H_0)$ & Test Statistic & Distribution & Use When \\
         \hline 
-        Population mean $(\mu)$ if variance $\sigma^2$ is known & $$\mu=\mu_0$$ & $$\frac{\left(\bar{x}-\mu_o\right)}{\sigma / \sqrt{n}}$$ & $Z$ & Normal distribution or $n>30 ; \sigma$ known \\
+        Population mean $(\mu)$ if variance $\sigma^2$ is known & $$\mu=\mu_0$$ & $$\frac{\left(\bar{x}-\mu_o\right)}{\sigma / \sqrt{n}}$$ & $\mathcal{N}$ & Normal distribution or $n>30 ; \sigma$ known \\
         \hline 
         Population mean $(\mu)$ if variance $\sigma^2$ must be estimated & $$\mu=\mu_0$$ & $$\frac{\left(\bar{x}-\mu_o\right)}{s / \sqrt{n}}$$ & $t_{n-1}$ & $n<30$, and/or $\sigma$ unknown \\
         \hline
-        Difference of two means $(\mu_1-\mu_2)$ with $\sigma_1^2,\sigma_2^2$ known & $$\mu_1-\mu_2=0$$ (Test for $=c$ by replacing the $0$ accordingly.) & $$\frac{\left(\bar{x}_1-\bar{x}_2\right)-0}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}$$ & $Z$ & Both normal distributions, or $n_1, n_2 \geq 30 ; \sigma_1, \sigma_2$ known \\
+        Difference of two means $(\mu_1-\mu_2)$ with $\sigma_1^2,\sigma_2^2$ known & $$\mu_1-\mu_2=0$$ (Test for $=c$ by replacing the $0$ accordingly.) & $$\frac{\left(\bar{x}_1-\bar{x}_2\right)-0}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}$$ & $\mathcal{N}$ & Both normal distributions, or $n_1, n_2 \geq 30 ; \sigma_1, \sigma_2$ known \\
         \hline 
         Difference of two means $(\mu_1-\mu_2)$ with $\sigma_1^2,\sigma_2^2$ estimated& $$\mu_1-\mu_2=0$$ & $$\frac{\left(\bar{x}_1-\bar{x}_2\right)-0}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$ & $t$ distribution with $df=$ the smaller of $n_1-1$ and $n_2-1$ & $n_1, n_2<30 ;$ and/or $\sigma_1, \sigma_2$ unknown \\
         \hline 
@@ -913,7 +913,7 @@ Consider \textbf{paired} observations $\{ x_i \in X, y_i \in Y \}_{i=1}^N$, e.g.
     \end{equation}
     or equivalently $H_0: p(T = +1) = 0.5, \quad H_1: p(T = +1) > 0.5$. Consider the test statistic
     \begin{equation}
-        k_0 = \sum_{i=1}^N T_i + 1
+        k_0 = \frac{1}{2} \sum_{i=1}^N \left( T_i + 1 \right)
     \end{equation}
     counting the number of positive signs.
     \item Under $H_0$ we follow $k_0 \sim \text{Binomial}(N,0.5)$
@@ -1165,6 +1165,13 @@ Therefore the test statistic comparing the sum of squares of the residuals of th
         \operatorname{SSQ}(I I) - \operatorname{SSQ}(I) \geq 0 \text { as the smaller model has the higher loss }
     \end{gathered}
 \end{equation}
+
+\bluebox{\textbf{Why do we divide the difference in the SSQs by $p-q$?} Note that we always divide by the degrees of freedom of the term
+of consideration. Consider $p=q$ - we then have the same models, so the SSQ difference has no degree of freedom but must be zero. The
+more different the models, the more degrees of freedom the difference has.}
+
+\bluebox{\textbf{Why do we divide the SSQ of the full model by $N-p-1$?} The sum of the residuals has less degrees of freedom as of the parameters
+estimated and $-1$ as the residuals must sum up to zero.}
 
 \subsubsubsection{Likelihood ratio test principle - comparing models by likelihood}
 \bluebox{\textbf{Aim of the likelihood ratio test:} We want to compare a full to a restricted model,

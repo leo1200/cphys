@@ -198,7 +198,6 @@ While in the underparametrized regime, the moment (aka scattering) matrix $\mat{
 
 \subsubsection{How is $\vec{\hat{\beta}}$ distributed? - normally}
 We consider the underlying situation to be
-Consider the true model to be
 \begin{equation}
     \vec{y}=\mat{X} \vec{\beta}^*+\vec{\epsilon}, \quad \vec{\epsilon} \sim \mathcal{N}\left(0, \sigma^2 \mat{1}_{N \times N}\right), \quad \text { some true parameters } \vec{\beta}^{*}, \quad \epsilon_i \text { i.i.d. }
 \end{equation}
@@ -321,7 +320,7 @@ Consider we want to test $H_0: \beta_i = 0$ vs $H_1: \beta_i \neq 0$. As $\vec{\
     \begin{gathered}
         t = \frac{\hat{\beta}_i}{\operatorname{SE}(\hat{\beta}_i)} \sim t_{N-p-1} \\
        \operatorname{SE}(\hat{\beta}_i) = \sqrt{\hat{\sigma}^2 \left( (\mat{X}^T \mat{X})^{-1} \right)_{ii}} \\
-       \text{here with estimate } \hat{\sigma}^2 = \frac{1}{N-p} ||\vec{Y} - \mat{X} \vec{\hat{\beta}}||_2^2 \\
+       \text{here with estimate } \hat{\sigma}^2 = \frac{1}{N-p-1} ||\vec{Y} - \mat{X} \vec{\hat{\beta}}||_2^2 \\
        \text{as of this estimation } t \sim t_{N-p-1} \text{ not normal}
     \end{gathered}
 \end{equation}
@@ -759,7 +758,7 @@ Remember that in a simple linear regression Model, we assume the underlying mode
 so linear in the parameters $\vec{\beta}$ and we assume a normal distribution of the noise $\epsilon(\vec{x})$.
 We can also write this as
 \begin{equation}
-    p(y | \vec{x}, \vec{\beta}, \sigma^2) = \mathcal{N}(y | \vec{\beta}^T \vec{x}, \sigma^2), \quad E{\left[ y | \vec{x}, \vec{\beta}, \sigma^2 \right]} = \vec{\beta}^T \vec{x}
+    p(y | \vec{x}, \vec{\beta}, \sigma^2) = \mathcal{N}(\vec{\beta}^T \vec{x}, \sigma^2), \quad E{\left[ y | \vec{x}, \vec{\beta}, \sigma^2 \right]} = \vec{\beta}^T \vec{x}
 \end{equation}
 Naturally, such a model is not well suited for binary data or only positive data, ..., so we need to generalize this.
 
@@ -776,21 +775,21 @@ is from the exponential family
 
 \begin{equation}
     \begin{multlined}
-        p(y | \theta) = \exp{\left( \frac{y\theta - b(\theta)}{a(\phi)} + c(y,\phi) \right)},  \\
-        \text{with real functions } a,b,c, \quad \text{ and parameters } \theta, \phi
+        p(y | \theta) = \exp{\left( \eta(\theta)T(y) - h(\theta) + g(y) \right)},  \\
+        \text{with real functions } \eta,h,g \quad \text{ and parameter } \theta
     \end{multlined}
 \end{equation}
 
 for which holds
 
 \begin{equation}
-    E{\left[ y \right]} = \mu = \partial_{\theta} b(\theta)
+    E{\left[ T(y) \right]} = \mu = \partial_{\theta} h(\theta)
 \end{equation}
 
 connecting the parameter $\theta$ to the mean we model as
 
 \begin{equation}
-    \mu = g^{-1}(\eta) = \partial_{\theta} b(\theta)
+    \mu = g^{-1}(\eta) = \partial_{\theta} h(\theta)
 \end{equation}
 
 where for the canonical link function $\eta = \theta$.
@@ -807,7 +806,7 @@ $y$ and some function modeling the mean of this distribution $\mu = g^{-1}(\eta)
 Also, one can calculate the variance as
 
 \begin{equation}
-    \Var[Y] = a(\phi) \partial_\theta^2 b(\theta)
+    \Var[T(Y)] = \partial_\theta^2 h(\theta)
 \end{equation}
 
 \subsubsubsection{Finding the parameters $\vec{\beta}$ for a GLM}
@@ -827,12 +826,12 @@ Consider the binomial distribution given by
                &= \exp{\left( y \explain{\log{\frac{p}{1-p}}}{define $\theta$} - \left[ - \log{(1-p)} \right] \right)} \\
                &= \exp{\left( y \theta - \log{\left(1 + \frac{1}{1-p}\right)} \right)} \\
                &= \exp{\left( y \theta - \log{\left(1 + \exp{\theta}\right)} \right)} \\
-               &= \exp{\left( y \theta - b(\theta) \right)}
+               &= \exp{\left( y \theta - h(\theta) \right)}
     \end{aligned}
 \end{equation}
-with $a(\phi) = 1, c(y,\phi) = 0, b(\theta) = \log{\left(1 + \exp{\theta}\right)}$ and $\theta = \log{\frac{p}{1-p}}$. From this we can find the well-known mean as
+with $g = 0, T(y) = y, h(\theta) = \log{\left(1 + \exp{\theta}\right)}$ and $\theta = \log{\frac{p}{1-p}}$. From this we can find the well-known mean as
 \begin{equation}
-    \mu = \partial_{\theta} b(\theta) = \frac{\exp{\theta}}{1 + \exp{\theta}} = p
+    \mu = \partial_{\theta} h(\theta) = \frac{\exp{\theta}}{1 + \exp{\theta}} = p
 \end{equation}
 so for the canonical link ($\eta = \theta$) we have the mean function (a sigmoid)
 \begin{equation}
