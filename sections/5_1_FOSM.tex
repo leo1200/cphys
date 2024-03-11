@@ -1,0 +1,104 @@
+\section{Summary of Simulation Methods}
+
+\subsection*{Digital Representation of Numbers}
+\bluebox{\textbf{Aim}: Understand the caveats and limitations of digital representation of numbers.}
+The digital representation of numbers and its caveats
+inform the design of algorithms with rounding errors
+next to truncation errors from the scheme being
+our main error sources.
+
+\subsubsection*{Integer arithmetic}
+Whole numbers are represented exactly in binary form.
+Negative numbers are usually represented as two's complement
+(conversion by inverting all bits and adding 1, so that bitwise 
+addition with carry-on works as usual). For $\omega$ bits,
+the range is $-2^{\omega-1}$ to $2^{\omega-1}-1$.
+
+\textcolor{red1}{Caveats of integer arithmetic} are
+\begin{itemize}
+    \item Overflow: In arithmetic operations, the result is stored truncated 
+    to the $\omega$ least significant bits. Results out of range map to 
+    wrong numbers, e.g. \mintinline{C}{char c = 100 * 4; // -112 stored}
+    \item Integer division: All decimal places are truncated.
+    \item Implicit type conversion: Only up to unsigned int.
+    \item Automatic casts: e.g. \mintinline{C}{-1 < 0U; // false} (all cast to unsigned if one is unsigned)
+\end{itemize}
+
+\subsubsection*{Floating point arithmetic}
+Floating point numbers are stored akin to \textit{scientific notation}
+\begin{equation}
+    \begin{aligned}
+        \text{norm. for } 1 \leq E < \max{E}&: (-1)^s \cdot 1.\underbrace{b_{-1}b_{-2}b_{-3} \ldots b_{-p}}_{M = \sum_{i=-1}^{-p} b_i 2^{p+i}} \times 2^{E-b} \rightarrow V = (-1)^s \cdot \left( 1 + \frac{M}{2^p} \right) \times 2^{E-b} \\
+        \text{denorm. for } E = 0 &: (-1)^s \cdot 0.b_{-1}b_{-2}b_{-3} \ldots b_{-p} \times 2^{1-b} \rightarrow V = (-1)^s \cdot \left( \frac{M}{2^p} \right) \times 2^{1-b} \\
+        \text{special values for } E = \max{E}&: M = 0 \rightarrow \pm \infty, \quad M \neq 0 \rightarrow \text{NaN}
+    \end{aligned}
+\end{equation}
+with sign bit $s$, exponent $E$, mantissa $M$, bias $b$, and precision $p$.
+In single precision, $E$ stored in $8$ bits ($E_\text{max} = 255$), $b = 127$, $M$ in $23$ bits ($p = 23$), so $\epsilon = 2^{-23} \sim 10^{-7}$ (but the 
+precision is really $24$) covering numbers from $\sim 10^{-45}$ to $\sim 10^{38}$.
+
+Typical \textcolor{red1}{caveats of floating point arithmetic} are
+\begin{itemize}
+    \item Precision is finite: Only a finite set of numbers is represented exactly, e.g. $0.1$ is not exactly representable and in general $x \slash 10 \neq x \times 0.1$ while $x \slash 2 = x \times 0.5$.
+    The relative error is the machine precision $\epsilon = 2^{-p}$.
+    \item Rounding errors: In arithmetic operations, the result is rounded to the nearest representable number.
+    $a + b = a$ typically for $|b| < \epsilon |a|$
+    \item Associativity is not guaranteed
+    \item Cancellation: Relative errors come into prominence when subtracting nearly equal numbers.
+    \item Overflow and bad operations: Overflow yields infinity, e.g. $0 \slash 0 = \text{NaN}$, $1 \slash 0 = \infty$, $\infty \times 0 = \text{NaN}$.
+\end{itemize}
+so \textcolor{green1}{good practices} are rewrite expressions to avoid cancellation and do comparisons
+with a tolerance.
+
+\subsection*{Simulation Methods}
+\bluebox{\textbf{Aim}: Solve an ODE $\partial_t \vec{y} = \vec{f}(\vec{y}, t)$ with initial condition $\vec{y}(t_0) = \vec{y}_0$ numerically.}
+
+\subsubsection*{ODE basics}
+We can \textbf{convert each ODE to a first order system}
+\begin{equation}
+    \begin{gathered}
+        \partial_t^n y(t) = f\left(y(t), \partial_t y(t), \dots, \partial_t^{n-1} y(t), t\right), \quad f: U \subset \mathbb{R} \times \mathbb{K}^n \to \mathbb{K} \\
+        \rightarrow  \partial_t \begin{pmatrix} u_0 \\ u_1 \\ \vdots \\ u_{n-2} \\ u_n \end{pmatrix} = \begin{pmatrix} u_1 \\ u_2 \\ \vdots \\ u_{n-1} \\ f\left(t, u_0, u_1, \dots, u_{n-1}\right) \end{pmatrix} \rightarrow \partial_t \vec{u} = \vec{f}\left(t, \vec{u}\right) \\
+        \text{with } u_m = \partial_t^m y(t), \quad m \in \{0, \dots, n-1\}
+    \end{gathered}
+\end{equation}
+where the \textbf{ODE is solvable in regions where $f$ is Lipschitz continuous}.
+
+\subsubsection*{Explicit Euler Method}
+Explicit Euler finds solutions at $t^{(n)} = t^{(0)} + n \cdot \Delta t$ by
+\begin{equation}
+    \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n)}, t^{(n)} \right) \Delta t + \mathcal{O}(\Delta t^2)
+\end{equation}
+which is explicit as it only depends on known states.
+
+\textcolor{red1}{Explicit Euler has problems}
+\begin{itemize}
+    \item \textbf{order}: over a timespan $T, N = T \slash \Delta t$ steps are taken, so the \textbf{order} is $\mathcal{O}(\Delta t)$.
+    So doubling the number of steps taken in an interval only halves the error.
+    \item \textbf{stability}: make a linear stability analysis for $\partial_t y = -\alpha y$
+    \begin{itemize}
+        \item for $\Delta t < 1 \slash \alpha$, the solution decreases monotonically
+        \item for $1 \slash \alpha < \Delta t < 2 \slash \alpha$, the solution oscillates but decreases
+        \item for $\Delta t > 2 \slash \alpha$, the solution oscillates and grows in amplitude $\rightarrow$ \textbf{very bad for stiff problems, as it forces us to resolve the fastest often irrelevant dynamics}
+    \end{itemize}
+    \item \textbf{conserved quantities}: e.g. in the two-body problem, we overshoot, leading to increasing energy (less bound states),
+    also angular momentum and the Runge-Lenz vector are not conserved.
+\end{itemize}
+
+\subsubsection*{Better stability: Implicit Methods, e.g. Implicit Euler}
+Implicit Euler is given by
+\begin{equation}
+    \vec{y}^{(n+1)} = \vec{y}^{(n)} + \vec{f} \left( \vec{y}^{(n+1)}, t^{(n + 1)} \right) \Delta t + \mathcal{O}(\Delta t^2)
+\end{equation}
+which is an implicit equation, for a linear problem solved by solving
+a linear system of equation, in general by root finding methods, e.g. Newton-Raphson
+(where the baseline linear systems to solve come from the inverse Jacobian in Newton-Raphson).
+\begin{itemize}
+    \item \textcolor{red1}{also only first order}
+    \item \textcolor{green1}{unconditionally linearly stable} but \textcolor{red1}{computation intense root-finding}
+\end{itemize}
+
+\subsubsection*{Higher order methods: Runge-Kutta}
+
+
+\pagebreak

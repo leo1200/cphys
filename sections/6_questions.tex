@@ -1,0 +1,1110 @@
+\part{Questions for an Oral Exam}
+\thispagestyle{plain}
+
+\section{Fundamentals of Simulation Methods}
+
+\subsection*{Digital Representation of Numbers}
+
+\begin{itemize}
+    \item (L) How are integers stored?
+    \item (L) How are signed integers stored?
+    \item (L) Explain \mintinline{C}{char c = 100 * 4; // -112 stored}.
+    \item (L) What are common pitfalls in integer arithmetic?
+    \item (L) Consider you multiply two integers which multiplication
+    $6\cdot 10^9$ overflows the integer range and store it in a long long.
+    What is the result stored? What is the underlying problem?
+    \item (L) How do little and big endian differ?
+    \item (L) How are floating point numbers stored? What are the denormalized numbers?
+    \item (L) For $x\neq y$, is $x-y = 0$ always false?
+    \item (L) Why is the exponent stored in a biased way, not in two's complement?
+    \item (L) What are common pitfalls in floating point arithmetic?
+    \item (L) What are the two kinds of errors in numerical algorithms?
+    \item (L) When is $a + b$ typically equal to $a$?
+    \item (L) Explain what cancellation is and how it can be avoided.
+    \item (L) I want to use $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$ to approximate
+    the RHS. With finitely many terms of the sum, how can I best do this? What is the pitfall?
+    \item (L) One-pass vs. two-pass formula for the variance - which is numerically better?
+    \item (L) Can $0.1$ be exactly represented as a floating-point number? Why not?
+\end{itemize}
+
+\subsection*{Integration of Ordinary Differential Equations}
+
+\subsubsection*{Introduction to ODEs and their numerical solution}
+\begin{itemize}
+    \item (K) What is an ordinary differential equation? When do solutions exist around $(y_0, t_0)$?
+    \item (G) How can one numerically calculate a 2nd derivative?
+    \item (K) How do you convert from an ODE of degree $n$ to $n$ coupled ODEs?
+    \item (K) Name solution schemes to ODEs.
+\end{itemize}
+
+\subsubsection*{Explicit and Implicit Euler Method}
+\begin{itemize}
+    \item (L) Give the explicit and implicit Euler method. What is the local truncation error?
+    \item (L) What is the order of a numerical ODE solver?
+    \item (K) What are the shortcomings of explicit Euler? What are better methods?
+    \item (L) Compare the linear stability of explicit and implicit Euler. What are the consequences for stiff problems? What are the advantages of implicit solvers?
+    \item (L) How can the implicit Euler method be solved for linear and non-linear problems?
+\end{itemize}
+
+\subsubsection*{Higher order methods}
+\begin{itemize}
+    \item (L) What is the key advantage of a higher order vs. a lower order method?
+    \item (L) Why is it not a good idea to construct a higher order method by simply adding more terms to the Taylor expansion?
+    \item (K) What is the principle of Runge-Kutta methods?
+    \item (K) How can one derive the coefficients for Runge-Kutta schemes?
+    \item (L) Give the RK2 and midpoint method.
+    \item (K) How is the Butcher tableau for an explicit Runge-Kutta method different from that for an implicit one?
+    \item (K) Explain the step size halving / doubling scheme.
+    \item (L) How to introduce a global error bound?
+    \item (L) When to double the step size?
+    \item (L) How can you continuously adapt the step size?
+\end{itemize}
+
+\subsubsection*{Problem of conserved quantities}
+\begin{itemize}
+    \item (L) When using RK2 for the 2-body problem, which conserved quantities are not conserved?
+    \item (L) Explain the Störmer-Verlet / Velocity Verlet method.
+    \item (L) Explain the Leapfrog method. What is its order? Show that its reversible.
+    Write down the kick-drift-kick and drift-kick drift update steps.
+    \item (L) How are Velocity Verlet and Leapfrog related?
+    \item (L) Show that the leapfrog method is reversible.
+    \item (L) What is the order of the leapfrog scheme?
+    \item (L) What quantities in the 2-body problem are conserved with the Leapfrog method, which are not?
+    \item (L) What are symplectic integrators? What are their advantages? Disadvantages?
+    \item (L) Show that the leapfrog method is symplectic.
+    \item (L) Is every symplectic method reversible?
+    \item (L) Leapfrog solves a disturbed Hamiltonian system exactly. What order in the time step is the error Hamiltonian?
+\end{itemize}
+
+\subsubsection*{Extrapolation methods}
+\begin{itemize}
+    \item (K) Explain the Bulirsch-Stoer method.
+    \item (K) When to accept the Bulirsch-Stoer result for an interval
+    \begin{itemize}
+        \item \bottomupL{hint: when the difference between the result with the smallest step-size and the extrapolation is sufficiently small}
+    \end{itemize}
+    \item (K) What is special about Richardson interpolation?
+\end{itemize}
+
+\subsubsection*{Predictor corrector and Multistep methods}
+\begin{itemize}
+    \item (K) Explain the predictor-corrector scheme. What is the idea?
+    \item (K) What are multistep methods? Give an example
+\end{itemize}
+
+\subsubsection*{Shooting}
+\begin{itemize}
+    \item How can one solve a boundary value problem with an initial value solver?
+\end{itemize}
+
+\subsection*{Basic Fluid Dynamics}
+
+\subsubsection*{Basic Fluid Description}
+\begin{itemize}
+    \item (L) When is a fluid description valid?
+    \item (L) Compare the Eulerian and Lagrangian description of a fluid and the derivatives used.
+    \item (LA) Relate the mean free path to the collisional cross-section and the density. What is the order of
+    magnitude of the mean free path in air, what in solar wind?
+    \item (L) Write down the Boltzmann equation.
+    \item (L) Write down the Navier-Stokes / Euler equations. How are they connected to the Boltzmann equation?
+    \item (L) What characterizes an incompressible fluid?
+    \item (L) What are the assumptions of the Navier-Stokes equations, what of the Euler equations?
+    \item (L) What can viscosity be expressed by in the incompressible, isotropic case?
+    \item (L) What does the Reynolds number express? Give an expression for it. When is a flow turbulent?
+\end{itemize}
+
+\subsubsection*{Shocks}
+\begin{itemize}
+    \item (L) What does the speed of sound depend on?
+    \item (L) How does a shock form? What characterizes a shock?
+    \item (L) What are causes for the formation of a shock?
+    \item (L) What is the scale of the shock front where entropy is generated? How do collisional
+    and collisionsless shocks differ in this regard?
+    \item (L) What differentiates shocks and tangential / contact discontinuities?
+    \item (L) Write down the Rankine-Hugoniot jump conditions.
+    \item (L) What is the Mach number? Under which Mach number does a shock occur?
+    \item (L) How much of the pre-shock kinetic energy is converted into heat in a strong shock?
+    \item (L) In an oblique shock, in which direction is the flow deflected with regards to the shock normal?
+\end{itemize}
+
+\subsubsection*{Fluid Instabilities and Turbulence}
+\begin{itemize}
+    \item (L) What are common fluid instabilities?
+    \item (L) How do turbulent and laminar flows differ?
+    \item (L) How is turbulence quantified?
+    \item (L) What kind of turbulence do we have in subsonic flow?
+    \item (L) How does the kinematic viscosity change with the mean free path (at same density)?
+    \item (L) Draw the Kolmogorov spectrum, name the ranges and their properties.
+\end{itemize}
+
+\subsection*{Eulerian Hydrodynamics | Solving PDEs}
+
+\begin{itemize}
+    \item (L) How can we classify PDEs? Give typical examples for the classes. What types of solvers are there?
+    \item (L) Construct an advection solver. What do you have to mind with respect to the 
+    direction of information flow and the maximum timestep?
+    \item (L) In the advection upwind scheme, why does the solution smooth out? Does a smaller
+    time step reduce the numerical smoothing? How can this effect be reduced (give the numerical 
+    diffusion constant).
+    \item (L) What is a Riemann problem? What are the characteristics? How do they occur? Sketch the 1D evolution of the fluid quantities for a Sod shock tube.
+    \item (L) What is the basic idea of the Godunov scheme?
+    \item (L) Does CFL need to be obeyed in the Godunov scheme? If so, why?
+    \item (L) Are the fluxes exact fluxes of the exact problem? Does conservation mean that the scheme is accurate to machine precision?
+    \item (L) Derive the update of a cell average in the Godunov scheme?
+    \item (L) How do you solve the small problems in the Godunov scheme? Explain the HLL method.
+    \item (L) How can we generalize the Godunov scheme to multiple spatial dimensions?
+    \item (L) What is the spatial order of a hydro-solver, e.g. what does it mean that Godunov is 1st order?
+    \item (L) How can one approximately solve a Riemann problem, e.g. for the Godunov scheme? Derive the intercell fluxes of the HLL method.
+    \item (L) How can the Godunov scheme be extended to multiple dimensions?
+    \item (LA) What does Godunovs theorem state? How is it related to the total variation / monotonicity of the scheme?
+    \item (L) How to estimate the values at the boundaries in a linear reconstruction? Why does the evolution in time have to be considered?
+    \begin{itemize}
+        \item \bottomupL{hint: we use $ \rho_{i+\frac{1}{2}}^L=\rho_i+\left(\partial_x \rho\right)_i \frac{\Delta x}{2}+\left(\partial_t \rho\right)_i \frac{\Delta t}{2}, \quad \rho_{i+\frac{1}{2}}^R=\rho_{i+1}-\left(\partial_x \rho\right)_{i+1} \frac{\Delta x}{2}+\left(\partial_t \rho\right)_{i+1} \frac{\Delta t}{2}$
+        to get to second order accuracy in time and for stability reasons.}
+    \end{itemize}
+    \item (L) What is the Muscl-Hancock scheme?
+    \item (L) What are advantages and disadvantages of higher order schemes?
+    \item (L) Why do we need flux limiters? What properties do they have? Give an example.
+    \begin{itemize}
+        \item \bottomup{hint: to preserve monotonicity, to avoid adding ocscillations}
+    \end{itemize}
+    \item (L) Based on what do we assess, if we should take the higher or lower order method?
+    \item (L) How many values are stored per cell in higher order finite volume methods? How is this
+    different from finite element methods?
+\end{itemize}
+
+\subsection*{Smoothed Particle Hydrodynamics}
+
+\begin{itemize}
+    \item (L) What are the key advantages of SPH?
+    \item (L) What is are the material fluid derivatives used?
+    \item (L) How are the fluid quantities represented?
+    \item (L) How can we introduce the kernels into our fluid variables?
+    \item (L) What is the key advantage of the smoothed fluid variables?
+    \item (L) Give the formula for the discretized smoothed fluid variables.
+    \item (L) Why should one have a kernel with compact support? What is the computational cost?
+    \item (L) Why should one want to have an adaptive kernel smoothing $h$?
+    \item (L) What are the principal approaches to $h$'s dependency on the location?
+    \item (L) Why should $h$ by symmetric regarding the density calculations at two particles?
+    \item (L) How should $h$ be chosen?
+    \item (L) Why does SPH without artificial viscosity not resolve shocks?
+    \item (L) How many loops does one need when implementing the SPH method?
+    \item (L) (What is the SPH continuity equation?)
+    \item (L) How are gradients calculated in SPH?
+    \item (L) Give the equation of movement of the SPH particles.
+    \item (L) Give the simplest working SPH formulation.
+    \item (L) When should we add artificial viscosity?
+    \item \begin{itemize}
+        \item \bottomup{hint: when to SPH particles rapidly approach each other}
+        \item \bottomup{hint: or if high compression, so $\vec{\nabla} \cdot \vec{v} \ll 0$}
+    \end{itemize}
+    \item (L) What problem does the Shear-Flow-Balsara correction solve? What is the idea?
+    \begin{itemize}
+        \item \bottomupL{hint: shear flow $\rightarrow$ rotation $\rightarrow$ reduce rapid-approach factor; to suppress the viscosity in non-shocking, shearing environments}
+    \end{itemize}
+    \item (L) How is the energy equation influenced by artificial viscosity? How the entropy equation?
+    \item (LA) Why is the symmetric form of the gradient not used in the energy equation?
+    \item (L) What is the meaning of the CFL criterion in the SPH context?
+    \begin{itemize}
+        \item \bottomup{hint: depends on $h_i$ and $(\vec{\nabla} \cdot \vec{v})_i$}
+    \end{itemize}
+    \item (LA) What are possible approaches for boundary modeling?
+    \item (L) Give the key advantages of SPH.
+    \begin{itemize}
+        \item \bottomup{hint: mesh-free, so no advection errors (/ numerical diffusion), Galilean invariance}
+        \item \bottomup{excellent conservation properties (energy, momentum, mass), robust and simple}
+        \item \bottomup{automatic adaptive resolution}
+    \end{itemize}
+    \item (L) Give the key disadvantages of SPH.
+    \begin{itemize}
+        \item \bottomup{hint: poorly handles shocks, artificial viscosity limits Reynolds number}
+        \item \bottomup{free surface density underestimation, poorly resolved low density regions}
+        \item \bottomup{neighbors considered $>$ neighbors in finite volume methods}
+        \item \bottomup{problems with boundaries and magnetic fields}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Finite Element Methods}
+
+\begin{itemize}
+    \item (L) What are the basic FEM ideas?
+    \item (L) What are the options for the weak formulation?
+    \item (L) Derive the equation for the coefficients in the Galerkin method for a linear PDE.
+    \item (L) Apply to the Poisson problem.
+    \item (L) What is the idea behind the Discontinous Galerkin method?
+    \item (L) What is the problem of using a continous solution over elements?
+    \begin{itemize}
+        \item \bottomup{hint: shocks smeared out}
+    \end{itemize}
+    \item (LA) What is the difference between the nodal and the modal approach?
+    \item (L) How can initial weights be found from a fluid state in the modal perspective?
+    \item (L) How are the occuring integrals evaluated? What are the evaluation points? Until what polynomial
+    degree is Gauss quadrature exact?
+    \begin{itemize}
+        \item \bottomupL{hint: Gauss quadrature, roots of $n$ Legendre polynomial as evaluation points $\rightarrow$ integrate polynomials of degree $2n-1$ exactly}
+    \end{itemize}
+    \item (L) What are ideas for refinement in the Discontinous Galerkin method?
+\end{itemize}
+
+\begin{itemize}
+    \item How do finite difference, finite volume, SPH, and finite element methods compare in general?
+    \begin{itemize}
+        \item \bottomup{hint: finite volume good for shocks, regular domain, similar orders of density (?)}
+        \item \bottomup{finite volume is made for hyperbolic conservation laws}
+        \item \bottomup{there are finite element methods for elliptic, parabolic and hyperbolic systems}
+        \item \bottomupL{SPH good for gravitating systems, resolution follows mass, Lagrangian character, but boundary conditions are difficult to implement}
+        \item \bottomupL{discontinuous Galerkin for hyperbolic systems: complex geometries from FEMs + flux conservation}
+    \end{itemize}
+    \item How about integrating self-gravity into these methods? Can gravity be included into a hyperbolic solver?
+\end{itemize}
+
+\subsection*{Diffusion}
+
+\begin{itemize}
+    \item (L) Explain the rough microscopic concept of diffusion?
+    \item (L) Based on a step length $\lambda_{mfp}$ and the central limit theorem, how does a concentration spread?
+    \item (L) How can $\lambda_{mfp}$ be expressed in terms of the density and the cross-section?
+    \item (LA) Derive the diffusion equation. What kind of PDE is it?
+    \begin{itemize}
+        \item \bottomup{hint: use $n(x,t+\Delta t) = \langle n(x-\Delta x,t) \rangle_{\Delta x \sim p(\cdot,\Delta t)}$}
+    \end{itemize}
+    \item (L) For a $\delta$-peak in density, what is the solution of the diffusion equation? In what way is this unphysical?
+    \item (L) How can one solve the diffusion equation?
+    \item (L) In the naive finite difference solution, how large can the time step be? What
+    is the problem with this kind of CFL criterion?
+    \item (L) What is the problem of the implicit approach?
+    \begin{itemize}
+        \item \bottomup{hint: only 1st order in time, $\mathcal{O}(\Delta x^2, \Delta t)$}
+    \end{itemize}
+    \item (L) How can one do better? Explain the Crank-Nicolson method, $\mathcal{O}(\Delta x^2, \Delta t^2)$
+    \item (L) What is the idea of tempered diffusion?
+    \begin{itemize}
+        \item \bottomupL{hint: use Fick's law, get velocity from assuming the momentum was relativistic (larger at lower velocities),
+        solve for $\tilde{v} = \frac{v}{1 + \frac{v^2}{c^2}}$}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Solving Linear Equations with Iterative Solver and the Multigrid Technique}
+
+\begin{itemize}
+    \item (K) How can one solve a linear system?
+    \item (L) Why should one not explicitly invert the matrix?
+    \item (L) What is the computational cost of the LU decomposition? Is the residual calculated from the result of LU decomposition exactly zero?
+    \item (G) What types of iterative solvers for linear systems are there?
+    \item (G) Derive the Jacobi update.
+    \item (L) Derive the error in the Jacobi scheme. When does Jacobi converge?
+    \begin{itemize}
+        \item \bottomup{hint: calculate $\vec{e} = \vec{x}^* - \vec{x}^{(n+1)}$ using $\vec{x}^* = \mat{M} \vec{x}^* + \mat{D}^{-1} \vec{b}$}
+    \end{itemize}
+    \item (G) Derive the Gauss-Seidel update. What makes Gauss Seidel better than Jacobi? What is the downside?
+    \item (LA) When does Gauss-Seidel converge?
+    \begin{itemize}
+        \item \bottomup{hint: if $\mat{A}$ diagonally dominant or symmetric and positive definite}
+    \end{itemize}
+    \item (L) Explain the concept of red-black ordering. 
+    \item (LA) Formulate the Poisson problem in 2D as
+    a relaxation scheme. How far does information travel in one step? What does the CFL criterion imply?
+    \item (G) What problems do these iterative methods have, how to solve them?
+    \begin{itemize}
+        \item \bottomupL{hint: slow convergence as of slow information travel on a fine grid
+        but we want the high resolution of the fine grid, use multigrid-cycle}
+    \end{itemize}
+    \item (L) Derive the V-cycle method. What are its advantages?
+    \item (L) How to restrict $\mat{A}$?
+    \begin{itemize}
+        \item \bottomup{hint: Galerkin coarse grid (possibly enlarges stencil) or same stencil}
+    \end{itemize}
+    \item (L) Also explain the full multigrid method. What problem
+    of the V-cycle does it solve?
+    \item (L) What are the costs of the V-cycle and the full multigrid method?
+    \begin{itemize}
+        \item \bottomupL{hint: until convergence both $\mathcal{O}(N_{\text{grid}} \log N_{\text{grid}})$
+        with $N_{\text{grid}}$ the number of grid points on the finest grid}
+    \end{itemize}
+    \item (LA) Outline the idea of the Krylov subspace conjugate gradient method? Which vectors span the Krylov subspace?
+    What are the directions taken? How many steps until convergence? Advantage when $\mat{A}$ is a Jacobian (e.g. from 
+    Newton's method for root finding (write this down))?
+\end{itemize}
+
+\subsection*{Fourier Methods}
+
+\begin{itemize}
+    \item (L) Write the gravitational Poisson equation as a convolution.
+    \item (L) How can the convolution theorem help us?
+    \item (L) What is the Poisson Greens function in Fourier space?
+    \item (L) Give the formula for the Fourier transform. 
+    \item (L) Derive / give the periodic Fourier transform.
+    \item (L) Derive / give the discrete (periodic) Fourier transform, which we can quickly calculate via FFT.
+    Why does the discrete sum in $k$ space (following from periodic distribution in real space) become finite when $\vec{x}$ is discrete?
+    \item (LA) What does Plancherel's theorem state?
+    \item (L) What is the storage convention for the values in Fourier-space?
+    \item (L) The fourier transformed variable of a real variable is generally complex.
+    So does are there more independent variables in the Fourier space than in the real space for DFT?
+    \item (L) What kind of convolution is calculated by using the convolution theorem with FFTs
+    (e.g. to find the potential from the convolution of the density with the Poisson green function)?
+    \item (L) For two arrays of sizes $N_1$ and $N_2$, how do you have to zero-pad them, so that
+    a cyclic convolution resembles the linear convolution?
+    \item (G) How can one solve the Poisson problem using Fourier methods?
+    \item (SA) How would that work in higher dimensions?
+    \item (L) What if one does not want to have periodic boundary conditions? How much does the cost increase?
+    \item (L) What are power spectrum and auto-correlation? How are they related?
+    \item (LA) How can this be used to quickly calculate the variance of a smoothed field?
+    \item (L) How can one calculate the power spectrum of an FFT?
+    \begin{itemize}
+        \item \bottomup{hint: essentially histogram of squared amplitudes over $|\vec{k}|$}
+    \end{itemize}
+    \item (L) Consider one smoothes an image with a kernel. Why does a cubic kernel better smooth out details than a top hat one, how can one see this from the power spectrum?
+    \begin{itemize}
+        \item \bottomupL{hint: smoothing is a convolution, correlation (related to power spectrum by Fourier transform) at $y = 0$ is the variance}
+    \end{itemize}
+    \item (L) Proof the Helmholtz decomposition in Fourier space. How can this be used to clense a
+    magnetic field from divergence? How can this be used to analyze stability in an astrophysical context?
+    (alternative: density distribution broader if more compressive motion)
+\end{itemize}
+
+\subsection*{Collisionless particle systems}
+
+\begin{itemize}
+    \item (LA) Based on the moments of the Boltzmann equation one can derive
+    a continuity, momentum and energy equation. What are the collisionless analogues
+    to the Euler equations, derived from the collisionless Boltzmann equation (Vlasov equation)?
+    \item (L) What differentiates collisionless from standard collisional fluids? Can an isotropic
+    pressure be assumed? Is there an equation of states? Can a fluid element be defined?
+    \item (L) Give examples for systems that can be described as normal fluids and ones that are collisionless.
+    \item (L) Are systems purely collisional or collisionless?
+    \begin{itemize}
+        \item \bottomupL{hint: no, e.g. the gaseous component in galaxies can be described 
+        by classic hydrodynamics, for stellar and dark matter (lacking collisions), 
+        a locally anisotropic pressure might be used but $N$-body simulations have shown
+        to be more stable. To account for effects of gas physics SPH and $N$-body
+        techniques can be combined (e.g. Gadget 4 code, or TreeSPH Gasoline), for instance in a small simulation with 
+        $250$ (heavier) dark-matter $30,000$ (lighter) gas particles (or both with numbers of same order of magnitude).}
+    \end{itemize}
+    \item (L) Given the $N$ body phase space probability $p\left(\vec{x}_1, \ldots, \vec{x}_N, \vec{v}_1, \ldots, \vec{v}_N\right)$ how
+    can one obtain $f_1(\vec{x}, \vec{v}, t)$, the distribution function of a single particle?
+    \item (L) What does collisionless (uncorrelated) mean in the context of the mean product $f_2$ of particle numbers
+    at two phase space points $\vec{x}, \vec{v}$ and $\vec{x}', \vec{v}'$? Mind this does not exclude global effects.
+    \item (LA) Give the formula for the Coulomb logarithm. What does it express?
+    \item (L) Are the bodies we model the real physical ones?
+    \begin{itemize}
+        \item \bottomup{hint: no, what we model can be seen as samples of the distribution function}
+    \end{itemize}
+    \item (L) When can a gravitational system be assumed collisionless?
+    \begin{itemize}
+        \item \bottomupL{hint: when $t_{\text{sim}} \ll t_{\text{relax}} \approxeq \frac{N}{8 \log N} t_\text{cross}$ ($N$ particles, crossing time $t_\text{cross}$), where the relaxation time is the timescale on which collisions become important}
+    \end{itemize}
+    \item (L) Consider two gravitational systems with the same mass and size, but one with more, smaller particles (so more frequent encounters).
+    Which system is more collisionless?
+    \item (L) Are a few big deflections or many small ones more important?
+    \item (L) Do the fiducial particles follow real trajectories?
+    \item (L) Our simulation contains $N$ bodies. What do we have to mind with respect to the simulation time?
+    \begin{itemize}
+        \item \bottomup{hint: our smaller $N$ systems must still be collisionless}
+    \end{itemize}
+    \item (L) Why do we need a softening length in the force calculation? (physically: smallest resolved scale; smallest possible impact parameter)
+    \item (L) What is the condition under which bounded pairs are avoided?
+    \begin{itemize}
+        \item \bottomup{hint: $\langle v^2 \rangle \gg \frac{G m}{\epsilon}$}
+    \end{itemize}
+    \item (L) One $N$ body simulation of ours is only one realization of $f_1$. How can we get
+    a better result for $f_1$?
+    \begin{itemize}
+        \item \bottomup{hint: use a larger $N$ and average over many simulations}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Force calculation | tree algorithms and particle mesh technique}
+
+\begin{itemize}
+    \item (G) Given a group of particles and interaction forces, how can one simulate the behavior?
+    \begin{itemize}
+        \item \bottomup{hint: use direct-summation, particle-mesh, or tree based method}
+    \end{itemize}
+    \item (L) How to simulate $N$ bodies? Are those typically the real physical bodies?
+    \begin{itemize}
+        \item \bottomupL{hint: direct summation, tree, particle-mesh based on solving Poisson equation on mesh either with FFT or multigrid relaxation; no typically heavier fiducial particles}
+    \end{itemize}
+    \item (G) What ways are there to calculate the potential from a density field?
+    \item (G) What part of the potential is better calculated with what method?
+    \begin{itemize}
+        \item \bottomup{hint: long range with particle-mesh, short-range direct summation}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Tree methods}
+\begin{itemize}
+    \item (L) Describe the idea of the tree method.
+    \item (L) Describe the Barnes-Hut algorithm. What are advantages and disadvantages? How is it done algorithmically?
+    \begin{itemize}
+        \item \bottomupL{hint: disadvantage: can go very deep if particles do not naturally fall onto a boarder, advantage: more refinement in dense areas. Algorithm: For each particle, do splits until it can be placed into an empty subnode. Then recursively calculate the multipole moments and centers of mass (just sum of subnode masses in monopole version).}
+    \end{itemize}
+    \item (L) Name an alternative to the Barnes-Hut algorithm.
+    \begin{itemize}
+        \item \bottomupL{hint: KD-trees as in tree classifiers, binary splits along axis, e.g. to balance mass $\rightarrow$ better control depth (but more complex data structure)}
+    \end{itemize}
+    \item (L) How many nodes do we have to open? What is the computational cost of the tree method? Why is this infeasible for the Millennium simulation $N > 10^{10}$
+    \item (L) How does the expected force error scale with the critical opening angle $\theta_c$?
+\end{itemize}
+
+\subsubsection*{Particle mesh method}
+\begin{itemize}
+    \item (L) What is the idea of the particle mesh method? What are its advantages?
+    \item (L) How are particles represented, how is mass mapped onto the auxiliary grid?
+    \item (L) How is the potential calculated from the density field?
+    \item (G) What are the different types of grid mappings in the particle mesh method? What are their
+    differences? Draw the shape functions. Give the formulas.
+    \item (L) How is the acceleration calculated from the potential? What finite difference scheme should one use?
+    \item (L) How is the acceleration on the grid points distributed to the particles?
+    \item (L) Why does the same assignment kernel have to be used for mass and acceleration assignment?
+    \item (LA) Sketch the proofs that using the same assignment kernel leads to vanishing self-force and
+    antisymmetric pairwise force.
+    \begin{itemize}
+        \item \bottomupL{hint: write potential as convolution, discretize and calculate acceleration, then use symmetry arguments}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Random Number Generation and Monte Carlo Techniques}
+
+\subsubsection*{Sampling from the uniform}
+
+\begin{itemize}
+    \item (L) What are advantages of pseudo-random- over true random number generators?
+    \item (LA) What are desired properties of random number generators?
+    \item (L) How can one sample from the uniform distribution? Introduce Linear Congruential Generators.
+    \item (L) What are the shortcomings of LCGs?
+    \begin{itemize}
+        \item \bottomupL{hint: regularities, e.g. take numbers from an LCG sequence in bunches of $k$ and plot
+        them in a $k$-dimensional space, they will lie on at most $(k! \cdot m)^{1\slash k}$ parallel $k-1$-dimensional hyperplanes}
+    \end{itemize}
+    \item (LA) Why shouldn't the modulo be chosen as a power of $2$ as in RANDU?
+    \begin{itemize}
+        \item \bottomupL{hint: least significant bit has period of at most $2$}
+    \end{itemize}
+    \item (L) What are improvements / better schemes?
+    \item (LA) For spatially more evenly spread points, what kind of method can be used?
+\end{itemize}
+
+\subsubsection*{Sampling from a distribution I: Inverse transform and acceptance-rejection method}
+\begin{itemize}
+    \item (L) Explain and derive the inverse transform method. What's the biggest problem?
+    \item (L) Give the inverse transform method for sampling from an exponential distribution.
+    \item (L) How can one sample from a Gaussian by the inverse transform method? Give the idea and derive the sampling formulas for the Box-Muller trick.
+    \item (L) Explain the acceptance rejection method. When is it most efficient?
+    \item (L) How can one sample from a sphere's surface?
+\end{itemize}
+
+\subsubsection*{Monte Carlo Integration}
+\begin{itemize}
+    \item (G) How can one integrate a function on a computer?
+    \item (L) Explain Monte Carlo Integration / Estimation. How is the estimate distributed? What is the standard error? How does the estimate converge for $N \rightarrow \infty$?
+    \item (LA) State and proof the Central Limit Theorem.
+    \item (G) Give an example of a classical (\textit{deterministic}) method for quadrature (integration).
+    \item (L) When is Monte Carlo integration better than e.g. Simpsons rule? So what's its main advantage?
+    \item (L) How can you reduce the variance in Monte Carlo integration? Explain the importance sampling method.
+\end{itemize}
+
+\subsubsection*{Sampling from a distribution I: MCMC}
+
+\begin{itemize}
+    \item (L) When a distribution is very complicated how can you sample from it? Explain Marcov Chain Monte Carlo.
+    \item (L) What are the key assumptions of Marcov Chain Monte Carlo? Will to frogs hopping on the Markov chain eventually meet, will they ever part ways again?
+    \item (L) What is detailed balance?
+    \item (LA) Proof the convergence towards the desired equilibrium distribution.
+    \item (L) Give the Metropolis Hastings algorithm. Show that it satisfies detailed balance.
+    \item (L) What happens for a symmetric proposal distribution?
+    \item (L) Explain the Metropolis-Hastings algorithm at the hand of sampling from a Gaussian.
+    \item (L) Why does one need thinning and burn in time?
+    \item (L) What is a caveat in the application of MCMC?
+\end{itemize}
+
+\subsubsection*{MCMC for thermodynamic systems}
+
+\begin{itemize}
+    \item (L) What gives the probabilities of states in thermodynamic systems at given temperature?
+    \item (L) What is an application of Monte Carlo methods in thermodynamic systems?
+    \item (L) What is the advantage of Marcov Chain Monte Carlo in the context of calculating thermodynamic averages? Give an example average of interest.
+    \begin{itemize}
+        \item \bottomup{hint: partition function drops out in Hastings ratio.}
+    \end{itemize}
+    \item (L) In the Metropolis-Hastings algorithm for sampling from the $\frac{1}{Z} \exp \left( - \frac{E(\vec{\phi})}{k_B T} \right)$, when
+    is a new state always accepted for a symmetric proposal distribution.
+    \item (LA) Give the alternative Gibbs sampler, where $W_f$ is directly formulated and does not depend on the current state.
+    \item (L) How can the Metropolis Hastings algorithm be used to simulate a system of spins (Ising model)?
+    \item (L) What quantity could be of interest?
+    \begin{itemize}
+        \item \bottomupL{hint: for instance the mean magnetization $M \frac{1}{V} \sum s_i$. For different temperatures
+        one can run the Metropolis-Hastings algorithm until one reaches plausible (equilibrium) spin configurations and consider the mean magnetization.
+        This way we can find the critical temperature under which spontaneous magnetization occurs.}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{MCMC for parameter estimation}
+
+\begin{itemize}
+    \item Why might one want to sample from a posterior?
+    \item What term in Bayes law makes the posterior intractable?
+    \item What is the advantage of applying Metropolis-Hastings to sampling from a posterior?
+    \item Give the Metropolis-Hastings algorithm for sampling from a posterior
+\end{itemize}
+
+\subsection*{Parallelization techniques}
+
+\subsubsection*{General concepts}
+\begin{itemize}
+    \item (L) What are concurrency and parallelism?
+    \item (L) Why do we want to parallelize?
+    \item (S) Can parallelization improve the scaling $\mathcal{O}$ of a method?
+    \item (L) What are the basic types of concurrency? How do they differ? Give examples.
+    \item (L) What are the general challenges of concurrency?
+\end{itemize}
+
+\subsubsection*{Shared memory concurrency}
+\begin{itemize}
+    \item (L) What are the limitations of shared memory concurrency?
+    \item (L) What are race conditions? Give an example. How can races be avoided?
+    \item (L) Many threads count up the same variable (same reference), what goes wrong if the operations are not atomic? What can one do?
+    \item (L) How does one typically parallelize in OpenMP?
+\end{itemize}
+
+\subsubsection*{Message passing concurrency | distributed memory parallelism}
+
+\begin{itemize}
+    \item (L) What is the idea of message passing concurrency?
+    \item (L) Why might one want to have distributed memory parallelism for a big simulation?
+    \item (L) Explain the structure of an MPI program. Give other examples of message passing approaches.
+    \item (L) How do we design our program to avoid doing lots of writes in parallel?
+    \item (L) Give a simple example of a parallel algorithm.
+\end{itemize}
+
+\subsubsection*{Hardware perspective}
+\begin{itemize}
+    \item (L) Why can't we make a single core infinitely many fast?
+    \item (L) Describe the terms cores, cache and cache line.
+    \item (L) How can we write linear algebra code to reduce memory access?
+    \item (L) Compare CPUs and GPUs, which have more cores, which lower clock speeds, faster data transfer, which are more suited for what?
+    \item (L) Give an example case of where one might want to use the GPU.
+    \item (LA) What are vector cores and hyperthreading?
+\end{itemize}
+
+\subsubsection*{Parallel computing for physical simulations}
+\begin{itemize}
+    \item How can we parallelize a physical simulation in space? How can the domain be split?
+    \item How can the necessary communication between threads be minimized?
+    \begin{itemize}
+        \item \bottomupL{hint: each domain has guard cells with the necessary shared information, exchanged at the beginning of each time step, otherwise too much communication overhead}
+    \end{itemize}
+    \item In a finite difference scheme, how many guard cells do we need to communicate?
+    \item How can one best split the domain, why should one use an adaptive grid? Mind that we often have multiscale physics problems, where in
+    one area a totally different time step might be necessary.
+    \item Do smaller or larger cells typically interact on shorter timescales? What is the consequence for physics load balancing?
+    \item What is the problem with long range forces like gravity? How can we mitigate this?
+    \begin{itemize}
+        \item \bottomupL{hint: let the threads operate on a shared tree structure, limiting data access to the necessary moments}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Scaling of processing time and Ahmdal's law}
+\begin{itemize}
+    \item (LA) Speak about strong scaling, Ahmdal's law and weak scaling and Gustafson's law.
+\end{itemize}
+
+\subsection*{Birds eye questions}
+\begin{itemize}
+    \item Comment on the importance of considering the flow and change of information in numerical schemes with examples.
+\end{itemize}
+
+\section{Computational Statistics and Data Analysis}
+
+\subsection*{Basic probability theory}
+
+\begin{itemize}
+    \item (L) Explain the basic components of a probability model, sample space, set of events, probability measure. Give examples.
+    \item (L) What is the probability of the intersection of two and more events?
+    \item Give: Bayes rule; rules for probabilities of unions of events; the law of total probability (marginalization).
+\end{itemize}
+
+\begin{itemize}
+    \item (L) What is a random variable? Give an example. Is an estimator e.g. a sample mean a random variable?
+    \item (L) How do continuous and discrete RVs differ?
+    \item (L) Introduce the expectation value and its properties. Introduce conditional expectation and the law of total expectation.
+    \item (L) Introduce the variance and its properties. Also introduce covariance and correlation.
+    \item (L) How is the correlation bound?
+    \item (L) How are independence and uncorrelatedness related?
+    \item (L) What is the variance of added random variables? (do the short proof)
+\end{itemize}
+
+\begin{itemize}
+    \item Give the discrete uniform, Bernoulli, binomial, geometric, hypergeometric and Poisson distribution and their rationales. Give expected values, variances and cumulative distribution functions.
+    \item Derive the Poisson distribution from the binomial distribution.
+\end{itemize}
+
+\begin{itemize}
+    \item Explain how with a quantile-quantile plot you can check if a sample might come from a certain distribution.
+\end{itemize}
+
+\begin{itemize}
+    \item (L) Give the uniform distribution.
+    \item (L) Give the Gaussian distribution and show that $\mu$ is the mean and $\sigma^2$ the variance.
+    \item (L) Give the Beta distribution. For what likelihoods is it a conjugate prior? Over which range is it defined?
+    \item (L) For which $\alpha, \beta$ do we have a flat prior?
+    \item (L) Give the conjugate prior for the Binomial distribution.
+    \item (L) Give the Gamma distribution. How are its parameters called? What could it model? Give its expectation value and variance. Where is it defined?
+    \item (L) Give the exponential distribution. What could it describe? For which parameter is it a special case of the Gamma distribution?
+    \item (L) How is the relation between Binomial and geometric analogue to the relation between Poisson and exponential distribution?
+    \item (L) Show that the exponential distribution is memoryless.
+    \item (L) What is a convenient way to check if two distributions are the same?
+    \begin{itemize}
+        \item \bottomupL{hint: if moment generating functions are the same, the distributions are the same}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item (D) Give the formula for the exponential family. What are its advantages?
+    \item (L) Relate the expected value and variance of the sufficient statistic to the link function.
+    \item (L) Do all distributions from the exponential family have conjugate priors?
+    \item (D) What is the conjugate prior of a Gaussian?
+    \item (L) What is the conjugate prior for $\mu$ in a Bernoulli or Binomial distribution?
+    \item (L) What is the conjugate prior for $\mu$ in a Gaussian distribution (with known $\sigma^2$)? What
+    is both $\mu$ and $\sigma^2$ are unknown?
+    \item (L) What is the conjugate prior for $\lambda$ in an exponential distribution?
+    \item (L) How is the exponential family connected to generalized linear models?
+    \item (L) When is a statistic $T(x)$ sufficient with respect to a parameter $\eta$? What means minimally sufficient?
+    \item (D) Derive the sufficient statistic for the Poisson distribution.
+    \item (D) Derive the sufficient statistic for the Bernoulli distribution.
+    \item (L) What is Tschebysheff's inequality about? Give and proof Tschebysheff's inequality.
+    \begin{itemize}
+        \item \bottomupL{hint: upper bound on prob. of \textit{wings} of a distribution wit finite $\mu, \sigma^2$.}
+    \end{itemize}
+    \item (L) Give the moment generating function.
+    \item (L) How can we obtain the moments of a distribution via the moment generating function?
+    \item (L) Give the moments of the Poisson distribution via the moment generating function.
+    \item (S) Name a distribution where not all moments exist.
+    \item (S) Give the Central Limit Theorem and its rational.
+    \item (L) Consider $s_1 \sim \mathcal{N}(\mu_1,\sigma^2)$ and $s_2 \sim \mathcal{N}(\mu_2,\sigma^2)$, what is the distribution of $s_1 + s_2$?
+\end{itemize}
+
+\begin{itemize}
+    \item What are multivariate distributions? Give the general multivariate Cumulative Distribution function and its properties.
+    \item Give the multicategorical distribution. Why should one use a 1-hot encoding for categories?
+    \item Give the multinomial distribution. (Give its expectation, variance and covariance).
+    \item Give the multivariate Gaussian distribution. Draw multivariate Gaussians for different covariance matrices
+    \begin{equation}
+        \mat{\Sigma}_1 = \begin{pmatrix} 0.5 & 0 \\ 0 & 1 \end{pmatrix}, \quad \mat{\Sigma}_2 = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}, \quad \mat{\Sigma}_3 = \begin{pmatrix} 1 & -0.5 \\ -0.5 & 1 \end{pmatrix}
+    \end{equation}
+\end{itemize}
+
+\subsection*{Statistical Inference}
+
+\begin{itemize}
+    \item (L) What is the goal of statistical inference?
+    \item (L) Give examples of statistical models.
+    \item (L) What is a statistic?
+    \item (L) What is an estimator?
+    \item (L) What kind of information do we seek with respect to model parameters based on a sample?
+    \item (L) Give the definitions of bias and consistency and illustrate with an example.
+    \item (L) Give the (unbiased) estimates of sample mean and variance.
+    \item (L) Show that even if $\hat{\sigma}^2$ is unbiased, $\sqrt{\hat{\sigma}^2}$ is not by Jensen's inequality.
+    \item (L) What is a sampling distribution?
+    \item (L) Define the standard error, mean squared error and precision of an estimator.
+    \item (L) In which case are mean squared error and standard error equal?
+    \item (L) When is an estimator sufficient?
+    \begin{itemize}
+        \item \bottomupL{hint: given the sufficient estimator for a population parameter, the likelihood of that sample,
+        given the estimator, is independent of the parameter.}
+    \end{itemize}
+    \item (L) Define the efficiency of an estimator.
+    \item (L) A lower bound of the variance of an unbiased estimator is given by the Cramér-Rao bound. What is the Cramér-Rao bound?
+    \item (L) What are desired properties of an estimator.
+    \item (D) What tests are there on the coefficients of linear models?
+\end{itemize}
+
+\subsubsection*{Parameter Estimation}
+
+\begin{itemize}
+    \item (L) What are common approaches to parameter estimation?
+    \item (L) Explain the least squares estimator. Take the example of linear regression.
+    \item (L) When will this estimate fail for linear regression? What are our assumptions?
+    \item (L) Give the maximum likelihood estimator. Apply it to the mean and variance of a Gaussian distribution.
+    \item (L) Show that least squares and maximum likelihood are equivalent for linear regression.
+    \item (L) What is the Bayesian approach to parameter estimation?
+    \item (L) If one wanted to have a point estimate in a Bayesian setting, what would one choose?
+    \item (L) Give the naive MAP.
+    \item (L) Give the Bayesian update to the distributions over $\vec{\beta}$ and $\sigma^2$ in linear regression.
+    Give an intuition for the updates, especially that of $\vec{\beta}$.
+    What priors are used?
+\end{itemize}
+
+\subsubsection*{Hypothesis testing}
+
+\begin{itemize}
+    \item (L) What is a hypothesis?
+    \item (L) Explain the terms null hypothesis and alternative hypothesis.
+    \item (L) Explain the procedure of null hypothesis significance testing.
+    \item (L) What is the rejection region? What the significance level? What the $p$-value?
+    \item (L) What is the size of a test? What is the power of a test?
+    \item (L) What is the difference between exact and asymptotic tests?
+    \item (L) Name different kinds of tests based on how the test statistic's distribution is derived.
+    \begin{itemize}
+        \item \bottomup{hint: exact, asymptotic, bootstrap}
+    \end{itemize}
+    \item (L) Give examples of exact and asymptotic tests.
+    \item (L) Say you have measured Covid19 infection rates before and after measures over multiple countries? With what kind of test could you test if the measures were effective? Give the test statistic.
+    \item (L) Describe an exact test to test if two samples come from the same distribution.
+    \item (L) Explain the problem of confounding factors.
+    \item (L) Give the central limit theorem in terms of a mean and standard normal distribution (do not forget the large $N$ limit)
+    \item (L) Introduce the $\chi^2$, $t$, and $F$-distribution.
+    \item (L) Consider you throw balls at boxes and have assigned probabilities of hitting the boxes. Based on observed counts, give a test that checks if the assumed probabilities are reasonable.
+    \item (L) Give an asymptotic test to check if a sample might reasonably come from a distribution with a given mean.
+    \item (L) For the one sample $t$-test, show that the test statistic is distributed as $t_{N-1}$.
+    \item (L) Give an asymptotic test to compare if two samples come from a distribution with the same mean.
+    \item (L) How can one test if two variances are the different, $H_0: \sigma_1^2 = \sigma_2^2$?
+    \item (L) How can one test if a general model is better than a reduced model? Explain the $F$-test and 
+    the likelihood ratio test for doing so.
+\end{itemize}
+
+\subsubsection*{Bootstrap}
+\begin{itemize}
+    \item (L) Explain the general idea and applications of bootstrapping for estimating standard errors, biases, confidence intervals and testing.
+    \item (L) Explain how bootstrapping can be used in testing.
+    \item (LA) What is semiparametric bootstrapping?
+    \item (L) Give a bootstrap test to check if a sample might come from a distribution with given mean.
+    \item (L) Give a bootstrap test to check if two samples might come from a distributions with the same mean.
+    \item (L) Give a bootstrap test to check if two samples might come from the same distribution.
+\end{itemize}
+
+\subsubsection*{Multiple Testing Problem}
+\begin{itemize}
+    \item (L) What is the false discovery rate?
+    \item (L) What is the multiple testing problem?
+    \item (L) What is the familywise error rate?
+    \item (L) What can we do about it? What is the Bonferroni correction? What is the problem of this simple correction?
+    \item (LA) Name a more powerful method to correct for multiple testing.
+\end{itemize}
+
+\subsection*{Numerical Methods for Parameter Estimation}
+
+\begin{itemize}
+    \item (D) What kinds of parameter estimators are there?
+    \begin{itemize}
+        \item \bottomupL{hint: mainly maximum likelihood in frequentist, in Bayesian setting
+        we have the full posterior, use e.g. MAP or posterior mean.}
+    \end{itemize}
+    \item (L) Describe Gradient descent for 1- and multidimensional optimization. What are possible problems? What are possible improvements?
+    \item (L) How is the gradient of the log-likelihood called?
+    \item (L) Give Newton's method for root finding and how it can be applied to optimization. To what kind of loss should this be applied? What are the advantages, what the disadvantages?
+    \item (L) When do we stop the iterative schemes?
+    \item (D) What is the role of the prior? Compare to regularization in a maximum likelihood setting.
+    \item (D) Which approach is better for less data - the Bayesian or Maximum-Likelihood approach?
+\end{itemize}
+
+
+\subsection*{Regression}
+
+\begin{itemize}
+    \item (D) What are the components of a linear model?
+    \begin{itemize}
+        \item \bottomup{features, response, regression coefficients, noise}
+    \end{itemize}
+    \item (L) Describe multiple linear regression. What is our model?
+    \item (L) Give the assumptions of linear regression (under which the least squares estimator is the best (lowest sampling variance) linear unbiased estimator (BLUE)) (Gauss-Markov assumptions).
+    \begin{itemize}
+        \item \bottomupL{hint: linearity ($E[e(\vec{x})] = 0$), homoscedasticity ($\Var(e(\vec{x})) = \sigma^2 = \text{const.} < \infty$), uncorrelated errors $\Cov(e(\vec{x}_i), e(\vec{x}_j)) = 0, i \neq j$.}
+    \end{itemize}
+    \item (L) Which is a common assumption for the distribution of the errors?
+    \item (L) Derive the least squares estimator for the coefficients in a linear model.
+    \item (D) How are the coefficients distributed assuming Gaussian errors?
+    \item (L) What does the distribution of $\hat{\vec{\beta}}_{LSE}$ depend on? For a given distribution of data points, how does the distribution of $\hat{\vec{\beta}}_{LSE}$ (or equally the SSQ isolines) look like?
+    \item (L) Is the estimator $\hat{\vec{\beta}}_{LSE}$ unbiased?
+    \item (L) How would one estimate the error variance $\hat{\sigma}^2$, how the variance of single coefficients $\hat{\beta}_j$?
+    \item (L) Give confidence intervals for the coefficients.
+    \item (L) How can we test if a coefficient is different from zero (if the feature is relevant)?
+    \item (L) Describe the General Linear Model (where there are also categorical features).
+    \item (L) How can one test if multiple categories have the same mean?
+    \begin{itemize}
+        \item \bottomup{hint: $F$-test with full and reduced model}
+    \end{itemize}
+    \item (L) What is a multivariate linear model? What does the parameter-matrix $\mat{B}$ look like?
+    \item (L) How is a multivariate linear model different from concatenated multiple linear models?
+    \item (L) What correlations in the error matrix are possible?
+    \item (LA) How is the least squares estimator for $\mat{B}$ distributed?
+    \item (L) Give an example for a multivariate hypothesis.
+\end{itemize}
+
+\subsubsection*{Modeling non-linear relationships}
+\begin{itemize}
+    \item (D) How can we notice that the true relationship is non-linear? What to do if the true relationship is non-linear?
+    \item (L) Explain how you can model non-linear relationships in the underlying data by feature engineering. What are the limitations?
+    \item (L) Explain the concept of spline regression.
+    \item (L) What is the idea of local linear regression? How are the parameters estimated (locally)?
+    \item (L) In local linear regression, what is the meaning of the coefficient $\lambda$? $\rightarrow$ Bias-Variance-Tradeoff
+\end{itemize}
+
+\subsection*{Bias-Variance Tradeoff and dealing with model complexity}
+
+\subsubsection*{Bias-Variance tradeoff}
+\begin{itemize}
+    \item (L) What are the bias and variance errors of models in the context of generalizability?
+    \item (L) Define the prediction error. Does it depend on the data set we train on?
+    \item (L) Derive the bias-variance decomposition of the expected quadratic prediction error.
+    \begin{itemize}
+        \item \bottomup{hint: use $\Var(X) = E[X^2]-(E[X])^2$, $\epsilon,\hat{f}$ independent, $E[\epsilon] = 0$.}
+    \end{itemize}
+    \item (L) What does the Bias-Variance tradeoff tell us? What limits our model from being \textit{perfect}?
+    \item (L) Draw the bias, the variance and the total error over the model complexity for different sizes of the training dataset.
+    \item (L) How are bias and variance related to training and test error?
+    \item (D) How is the kernel support $h$ in Local Linear Regression connected to the Bias-Variance-Tradeoff? How can one choose the best Kernel width?
+    \begin{itemize}
+        \item \bottomup{hint: Cross-Validation}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Estimating the prediction error and model selection}
+\begin{itemize}
+    \item (L) How can we estimate the prediction error?
+    \item (L) What kind of tradeoff is there in the choice of the size of the training and test set?
+    \item (L) How can we choose hyperparameters when we are rich in training data? Why do we need a
+    partition into three: training, validation and test set?
+    \item (L) On what data-set and with which hyperparameters do we train our production model?
+    \item (L) What are common problems in this approach?
+    \item (L) How should one partition data with class labels into training, validation and test set? Why can accuracy be a problematic measurement?
+    \item (L) How can K-fold cross-validation be used to estimate the prediction error / to choose hyperparameters? What are the advantages?
+    \item (L) How should one choose the number of folds $K$? What is the problem in leave-one-out ($K=N$) cross-validation?
+    \item (L) What is the problem if we set $K$ too low?
+    \item (L) How could one without explicitly estimating the prediction error by a form of hold-out
+    choose a good model? Explain the idea of analytical model selectors. What proxy is used for 
+    the variance / complexity?
+    \item (L) Give the Akaike Information Criterion (AIC) and the Bayesian Information Criterion (BIC).
+    \item (L) What will rather choose the more complex model, AIC or BIC?
+\end{itemize}
+
+\subsubsection*{Double descent}
+\begin{itemize}
+    \item (L) What is the double descent phenomenon?
+    \item (L) Do information criteria (like AIC, BIC) in their classical form predict double descent?
+    \item (L) Are multiple descents possible?
+\end{itemize}
+
+\subsubsection*{Dealing with model complexity | regularization}
+\begin{itemize}
+    \item (L) What is the problem of very high dimensional data to model (lots of features)?
+    \item (L) What can we do to avoid having an overfitting model?
+    \item (L) Explain situations where ordinary least squares breaks down or is not robust enough.
+    \begin{itemize}
+        \item \bottomupL{hint: breakdown for $p>N$ and collinear features, bad if not sufficiently many data points / too much noise and outliers}
+    \end{itemize}
+    \item (L) How to regularize model complexity in a linear model?
+    \item (L) What do we have to do before we apply our regularization and find the optimal parameters under the regularization? 
+    What will happen if the response variable is not centered? What will happen 
+    if the features are not normalized (z-scored)?
+    \item (D) What are common regularizations to a linear model, how do they differentiate?
+    \begin{itemize}
+        \item \bottomup{hint: Lasso and Ridge, Lasso can fully suppress a parameter.}
+    \end{itemize}
+    \item (L) Derive the best estimator under Ridge regularization.
+    \item (L) For which prior is the MAP estimator (assuming Gaussian errors) equivalent to the Ridge estimator?
+    \item (L) Give the Lasso objective and derive the solution in the one-dimensional case. When will
+    the parameter be set to zero?
+    \item (D) Sketch Ridge and Lasso regularization in the constrained formulation. How can you
+    see that one will rather set coefficients to zero than the other?
+    \item (D) How is the regularization connected to the Bias-Variance-Tradeoff?
+\end{itemize}
+
+\subsection*{Classification}
+
+\subsubsection*{General concepts}
+
+\begin{itemize}
+    \item (L) What are principal approaches to classification?
+    \item (D) What kinds of different classifiers are there? When should we prefer which classifier?
+\end{itemize}
+
+\subsubsection*{Discriminant analysis}
+
+\begin{itemize}
+    \item (L) What is the idea of discriminant analysis? What do we model? How to we obtain the class probabilities given a feature vector?
+    \item (L) For Linear Discriminant Analysis write down the discriminant function and identify 
+    the Mahalanobis distance.
+    \item (L) How does the LDA decision boundary between two classes look like?
+    \item (L) What is the difference between LDA and QDA?
+    \item (L) How do we train a discriminant analysis model, i.e. how do we estimate
+    the class means, covariance matrices (pooled covariance for LDA) and class priors?
+\end{itemize}
+
+\subsubsection*{Linear Classifiers in general}
+\begin{itemize}
+    \item (L) How can a linear decision boundary be modeled by a linear function?
+    \item (L) Draw the decision boundary given by $g(\vec{x}) = \vec{w}^T \vec{x} - b = 0$. 
+    What is the offset of the decision boundary from the origin (along $\vec{w}$)?
+\end{itemize}
+
+\subsubsection*{Support Vector Machines}
+\begin{itemize}
+    \item (D) Explain the idea of maximum margin classifiers aka SVMs? What are the margins, what the support vectors? Make a drawing.
+    \item (L) Does the number of support vectors necessarily grow with the dimensionality of the problem or the number of data points?
+    \item (L) Formulate the objective of the SVM classifier for linear separable data (hard margin). Write this as a constraint minimization (the primal problem).
+    \item (L) Why should one want to project to higher dimensions? What is the formal reasoning?
+    \item (L) What is the advantage of using a kernel? Give the kernel for expanding to polynomial features and the Gaussian RBF kernel. To which dimensionality does the Gaussian RBF kernel project?
+    \item (L) What is the problem of the primal problem in the context of projection to higher dimensions and kernelization?
+    \begin{itemize}
+        \item \bottomupL{hint: scales with dim. of feature matrix (very large in kernelization), $\vec{w}$ possibly high- or even infinite-dimensional.}
+    \end{itemize}
+    \item (L) Formulate the dual problem. What is the advantage of the dual problem?
+    \item (L) Give the decision only in terms of the dual variables.
+    \item (L) What value do the dual variables $\alpha_i$ take for the support vectors? What for all other points?
+    \item (L) How can one allow for soft margines? What do we penalize? What are the relaxed constraints? What are the support vectors now?
+    \item (L) For the soft margin, for stronger $\gamma$ (pentalty against crossing the margin), what happens to the margin, what to the number of support vectors?
+    \item (L) How can one generalize SVMs to multiple classes?
+\end{itemize}
+
+\subsubsection*{K-Nearest Neighbors}
+\begin{itemize}
+    \item (L) What is the idea of KNN classification (and regression)?
+    \item (L) How is a new data point classified?
+    \item (L) How should one choose $K$? What is the problem of choosing $K$ too small? What is the problem of choosing $K$ too large? Connect to the Bias-Variance-Tradeoff.
+    \item (L) KNN is said to be non-parametric. What does this mean? Can one still assign an effective number of parameters to the model?
+    \item (L) What are advantages and disadvantages of KNN?
+    \item (L) How can one avoid storing the whole training set?
+\end{itemize}
+
+\subsubsection*{Logistic Regression}
+\begin{itemize}
+    \item (L) Give the idea of logistic regression from the GLM and linear classifier perspective? What do we model?
+    \begin{itemize}
+        \item \bottomup{hint: we directly model the class probabilities given the feature vector}
+    \end{itemize}
+    \item (L) In 1D draw the probability model and decision boundary of logistic regression for two classes.
+    \item (L) Do we make distributional assumptions on the features?
+    \begin{itemize}
+        \item \bottomupL{hint: no, the central difference to discriminant analysis is that as in linear regression, we assume the $\vec{x}$ to be fixed and have a noise model for the class labels.}
+    \end{itemize}
+    \item (L) What is the decision rule?
+    \item (L) How is the probability model different for small and large $\vec{w}$ (while $\frac{b}{||\vec{w}||}$ is kept constant)?
+    \item (L) In higher dimensions, does logistic regression or discriminant analysis typically have more parameters?
+    \item (L) How do we derive the loss function for logistic regression?
+    \item (L) In what case is this \textit{always} maximized for $||\vec{w}|| \rightarrow \infty$? What is the corresponding likelihood of the observed class labels under this probability model?
+    \item (L) How can we generalize to multiple classes?
+    \item (L) Derive a multiclass probability model starting from the linearity in the log-odds (to a reference class).
+\end{itemize}
+
+\subsubsection*{Neural Networks for Classification}
+
+\begin{itemize}
+    \item (L) Draw multiclass logistic regression in an electrical engineering style diagram.
+    \item (L) How is the engineering style diagram of two-class logistic regression called?
+    \begin{itemize}
+        \item \bottomupL{hint: perceptron}
+    \end{itemize}
+    \item (L) What kind of decision boundary can a single perceptron model? What is the advantage
+    of a multilayer perceptron (aka neural network)?
+    \item (L) What is the typical loss for multiclass classification?
+    \item (L) What does the entropy of a distribution measure? What Bernoulli distribution has the lowest, what one the highest entropy?
+    \item (L) What loss is used in a classification problem? Write down the loss for a single data point.
+    \item (L) Relate the cross-entropy to the negative log-likelihood for multicategorical data. Can cross entropy be negative? When is the 
+    cross-entropy loss minimized (Gibbs inequality)?
+    \item (L) How is the cross-entropy connected to the relative entropy aka Kullback-Leibler divergence?
+    \item (L) Give the information theoretic interpretations of entropy, cross-entropy and relative entropy.
+\end{itemize}
+
+\subsection*{Primer on Neural Networks\skipthis}
+\begin{itemize}
+    \item (L) What is the idea of a neural network over a more simple model like linear regression or logistic classification?
+    \item (L) What is the structure of a neural network, what are the activation functions in the hidden layers and the output layer?
+    How do classification and regression differ in the output layer?
+    \item (L) How can one adapt the parameters to minimize the loss function?
+    \item (L) Why can't one use finite differencing to compute the gradient in (stochastic) gradient descent?
+    \item (L) What is automatic differentiation? When should one use forward, when reverse mode?
+    \item (L) What does one mean with (error) backpropagation?
+    \item (L) What is the problem of exploding and vanishing gradients? How can exploding gradients be mitigated?
+\end{itemize}
+
+\subsection*{Dimensionality Reduction}
+
+\begin{itemize}
+    \item (L) What are the fields of unsupervised learning?
+    \item (L) In which situations does dimensionality reduction make sense?
+    \item (L) Give an overview on approaches to dimensionality reduction.
+\end{itemize}
+
+\subsubsection*{Principal Component Analysis (PCA)}
+
+\begin{itemize}
+    \item (L) What is the idea of PCA? What kind of linear transformation on the data is PCA? How is dimensionality reduced?
+    \item (L) What preliminary change the data matrix is necessary before applying PCA?
+    \item (L) How is the first principal component of a data set $\{ \vec{x}_i \}_{i=1}^N$ defined?
+    \item (L) On how many of the principal components should we project our data to obtain a good dimensionality 
+    reduced representation?
+\end{itemize}
+
+\subsubsection*{Nonlinear PCA}
+\begin{itemize}
+    \item (L) We want to reduce dimensionality. Why should we intermediately project to a higher dimension?
+    \item (L) Consider $\mat{X}$ to be centered in the features. Is the up-projected $\mat{\Phi}$ also automatically centered?
+    \item (L) Given $\mat{\tilde{\Phi}}$ is centered, how can we obtain the principal components? What is the problem with
+    taking the eigenvectors of $\mat{\tilde{\Phi}}^T \mat{\tilde{\Phi}}$?
+    \item (L) How can we only implicitly go to higher dimensions by using a kernel? Do we explicitly calculate
+    the principal components in the high-dimensional space? How do we project the data to lower dimensions?
+    \item (L) Give the modified kernel function so the projected data is mean-centered.
+\end{itemize}
+
+\subsubsection*{Further non-linear dimensionality reduction methods}
+\begin{itemize}
+    \item (L) Give further non-linear dimensionality reduction methods.
+    \item (L) How can find better separating directions in classified data?
+    \item (L) What are dimensionality reduction techniques preserving (local) distance information
+    \begin{itemize}
+        \item \bottomupL{hint: global approach: MDS, neighbor approach: SNE}
+    \end{itemize}
+    \item (L) What is the idea of isomap?
+    \item (L) What is the idea of locally linear embedding?
+    \item (L) What is the idea of t-SNE?
+    \item (L) What is the idea of autoencoders?
+\end{itemize}
+
+\subsection*{Latent variable models}
+
+\begin{itemize}
+    \item (L) What are latent variables?
+\end{itemize}
+
+\subsubsection*{Independent Component Analysis (ICA)}
+
+\begin{itemize}
+    \item (L) What is the party cocktail problem? How can Independent Component Analysis (ICA) help to find the source signals?
+    \item (L) What is the rationale behind wanting independent / as non-Gaussian as possible latent sources? Why are uncorrelated sources not enough (identifiability issue)
+    \item (L) What metric can be used to measure the independence of the latent sources? How do we find the 
+    mixing matrix $\mat{\Gamma}$ yielding the most independent sources? How do we estimate the source entropy terms?
+    \item (L) Before applying ICA one has to whiten the data matrix $\mat{X}$. What does this mean? Why is this necessary?
+    \item (L) What are the limitations of ICA?
+\end{itemize}
+
+\subsubsection*{Factor Analysis}
+\begin{itemize}
+    \item (L) What is the idea of factor analysis? What is the model?
+    \item (L) How is factor analysis different from PCA? When should one use which?
+    \item (L) What are typical distributional assumptions on the latent variables $\vec{S}$ and 
+    the noise $\vec{\epsilon}$ in factor analysis?
+    \item (L) How can we estimate the parameters of the factor analysis model?
+    \item (L) How can the obtained factor analysis model be used as a generative model?
+\end{itemize}
+
+\subsubsection*{Generative Latent Models}
+\begin{itemize}
+    \item (L) Consider a model $p_\vec{\theta}(\vec{x},\vec{z}) = p_{\vec{\theta}_{\text{lat}}}(\vec{z}) p_{\vec{\theta}_{\text{obs}}}(\vec{x} | \vec{z})$ with latent (unobserved) variables $\vec{z}$.
+    What is the problem with doing maximum likelihood to obtain the parameters $\vec{\theta} = (\vec{\theta}_{\text{lat}}, \vec{\theta}_{\text{obs}})$?
+    \item (L) Given one found the parameters, how could one sample from the model (generate new data)?
+    \item (L) Why is one interested in obtaining the discriminant posterior $p(\vec{z} | \vec{x})$?
+    \item (L) Give the expression for the evidence lower bound (ELBO).
+    \item (L) How is the evidence lower bound useful in making the maximum likelihood problem tractable? When are ELBO and marginal evidence equal? Proof that it is indeed a lower bound.
+    \item (L) What is the variational density optimized towards when maximizing the evidence lower bound?
+    \item (L) What is the gap between the evidence lower bound and the log-likelihood?
+    \item (L) Explain the variational Expectation-Maximization (EM) algorithm.
+    \item (L) What are Gaussian Mixture Models? Apply the EM algorithm.
+    \item (L) What do we aim for in Variational Inference?
+    \item (L) Describe Variational Inference for finding an approximate posterior over parameters in a Bayesian setting (in the understanding of parameters as latent variables).
+    \item (L) Explain the architecture of a Variational Autoencoder.
+    \item (L) How can one train a Variational Autoencoder? What is the problem with calculating the gradient of the evidence lower bound with
+    respect to the parameters of encoder? How can we circumvent this problem?
+    \item (L) How can the VAE be used for generative modeling? What are other applications of VAEs?
+\end{itemize}
+
+\pagebreak

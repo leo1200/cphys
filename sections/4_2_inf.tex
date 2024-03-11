@@ -565,7 +565,7 @@ with i.i.d. residuals $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
 
 \bluebox{\textbf{Question:} What is the posterior distribution of the model parameters $\vec{\beta}$ and $\sigma^2$ given the sample?}
 
-Let us start with writing down the posterior (not denoting the fixed $\mat{X}$ (the colleciton of all $\vec{x}_i$) explicitly)
+Let us start with writing down the joint posterior of $\vec{\beta}$ and $\sigma^2$ (not denoting the fixed $\mat{X}$ (the colleciton of all $\vec{x}_i$) explicitly)
 \begin{equation}
     \begin{aligned}
         \text{posterior}&=p(\vec{\beta},\sigma^2 | \vec{y}) \\
@@ -574,9 +574,9 @@ Let us start with writing down the posterior (not denoting the fixed $\mat{X}$ (
         &= \frac{\text{likelihood} \cdot \text{\textcolor{green1}{priors}}}{\text{evidence}}
     \end{aligned}
 \end{equation}
-The likelihood is normal as we assumed normal residuals, so
+The likelihood over $y$ at the $N$ fixed $\vec{x}_i$ is normal (with linearly modeled mean $\vec{\mu} = \mat{X}\vec{\beta} \in \mathbb{R}^N$) as we assumed normal residuals, so
 \begin{equation}
-    p\left(\vec{y} \mid \vec{\beta}, \sigma^2\right)=(2 \pi)^{-N / 2}\left|\sigma^2 \mat{1}\right|^{-1 / 2} \exp{\left(-\frac{1}{2}(\vec{y}-\mat{X} \vec{\beta})^T\left(\sigma^{-2} \mat{1}\right)(\vec{y}-\mat{X} \vec{\beta})\right)}
+    p\left(\vec{y} \mid \vec{\beta}, \sigma^2\right)=(2 \pi)^{-N / 2}\left|\sigma^2 \mat{1}\right|^{-1 / 2} \exp{\left(-\frac{1}{2}(\vec{y}-\mat{X} \vec{\beta})^T\left(\sigma^{-2} \mat{1}\right)(\vec{y}-\mat{X} \vec{\beta})\right)}, \quad \vec{y} \in \mathbb{R}^N
 \end{equation}
 
 \note{For a Gaussian likelihood (without $\sigma^2$ or $\mu$ being known a priori)
@@ -591,14 +591,25 @@ The prior for $\vec{\beta}$ is the Gaussian
 with
 \begin{itemize}
     \item $\vec{\beta}_0$ being the mean of the prior of $\vec{\beta}$
-    \item $\mat{\Lambda}_0$ being the precision matrix (inverse covariance matrix) of the prior of $\vec{\beta}$
+    \item $\mat{\Lambda}_0$ being the precision matrix (inverse covariance matrix) of the prior of $\vec{\beta}$, so how certain we are that $\vec{\beta}_0$ is a good first guess (for the pre-factor note $\det(\mat{A}^{-1}) = (\det(\mat{A}))^{-1}$)
     \item $\sigma^2$ being only a parameter here, convenient for later calculations
 \end{itemize}
+so multiplied with the Gaussian likelihood, the posterior will be Gaussian as well.
 
-The prior for $\sigma^2$ is the inverse Gamma distribution
+The prior for $\sigma^2$ is the inverse Gamma distribution (i.e. $1\slash \sigma^2$ is Gamma distributed)\footnote{This can also be motivated based on the distribution
+of the MLE estimate for $\sigma^2$ around the true $\sigma^2$ given by
+\begin{equation}
+    \hat{\sigma}^2_\text{MLE} = \frac{1}{N} \sum_{i=1}^N (y_i - \bar{y}_i)^2 \sim \frac{\sigma^2}{N} \chi^2_{N} \sim \frac{\sigma^2}{N} \Gamma\left(\frac{N}{2},2\right)
+\end{equation}
+so using for $X \sim \Gamma(\alpha,\beta)$, $cX \sim \Gamma(\alpha,c\beta), c > 0$, we can, by shady math, obtain (by switching to $\sigma$ being a latent variable not a fixed parameter)
+\begin{equation}
+    \frac{1}{\sigma^2} \sim \Gamma\left(\frac{N}{2},\frac{2}{N\hat{\sigma}^2_\text{MLE}}\right)
+\end{equation}
+}
 \begin{equation}
     \text { Inverse - Gamma prior on } \sigma^2: \quad p\left(\sigma^2\right)=\frac{\kappa^\alpha \sigma^{2(-\alpha-1)}}{\Gamma(\alpha)} e^{-\kappa / \sigma^2}
 \end{equation}
+Multiplied with the Gaussian likelihood, the posterior will be inverse Gamma as well.
 
 Where the priors have been chosen so that the posterior
 
@@ -616,8 +627,15 @@ is of the same distributional form as the prior (conjugacy) (the Gaussian of the
 \begin{itemize}
     \item the Gaussian distribution of $\vec{\beta}$ is updated by
     \begin{equation}
-        \vec{\beta}_N = \left(\mat{X}^T \mat{X} + \mat{\Lambda}_0\right)^{-1} \left(\mat{X}^T \vec{y} + \mat{\Lambda}_0 \vec{\beta}_0\right), \quad \text{precision matrix } \mat{\Lambda}_N = \mat{X}^T \mat{X} + \mat{\Lambda}_0
+        \begin{gathered}
+            \begin{aligned}
+                \vec{\beta}_N &= \left(\mat{X}^T \mat{X} + \mat{\Lambda}_0\right)^{-1} \left(\mat{X}^T \vec{y} + \mat{\Lambda}_0 \vec{\beta}_0\right) \\
+                &= \left(\mat{X}^T \mat{X} + \mat{\Lambda}_0\right)^{-1} \left(\mat{X}^T \mat{X} \vec{\hat{\beta}}_{\text{MLE}} + \mat{\Lambda}_0 \vec{\beta}_0\right)
+            \end{aligned} \\
+            \text{precision matrix } \mat{\Lambda}_N = \mat{X}^T \mat{X} + \mat{\Lambda}_0
+        \end{gathered}
     \end{equation}
+    a sort of weighted average (but not really as the as it is not a scalar equation) between the MLE estimate and the prior $\vec{\beta}_0$ weighted by the prior precision (all normalized by a sort of total covariance matrix)
     \item the inverse Gamma distribution of $\sigma^2$ is updated by
     \begin{equation}
         \alpha_N = \alpha_0 + \frac{N}{2}, \quad \kappa_N = \kappa_0 + \frac{1}{2} \left(\vec{y}^T \vec{y} + \vec{\beta}_0^T \mat{\Lambda}_0 \vec{\beta}_0 - \vec{\beta}_N^T \mat{\Lambda}_N \vec{\beta}_N\right)

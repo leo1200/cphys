@@ -176,16 +176,16 @@ impossible (at the cost of speed; mind that e.g. numpy is based on C code).
 \subsection{Floating Point Arithmetic}
 In the following, we will encode rational numbers in the form $V = x \cdot 2^y$, with $x,y \in \mathbb{Z}$. Similar to the decimal notation
 \begin{equation}
-    d_m d_{m-1} \dots d_0 . d_{-1} d_{-2} \dots d_{-n} = \sum_{i=-n}^m d_i 10^i
+    d_m d_{m-1} \dots d_0 . d_{-1} d_{-2} \dots d_{-p} = \sum_{i=-p}^m d_i 10^i
 \end{equation}
 we can write in binary notation
 \begin{equation}
-    b_m b_{m-1} \dots b_0 . b_{-1} b_{-2} \dots b_{-n} = \sum_{i=-n}^m b_i 2^i, \quad 0.01_2 = 0.25_{10}
+    b_m b_{m-1} \dots b_0 . b_{-1} b_{-2} \dots b_{-p} = \sum_{i=-p}^m b_i 2^i, \quad 0.01_2 = 0.25_{10}
 \end{equation}
 or generally in base $\beta$ in scientific notation
 \begin{equation}
     \begin{multlined}
-        (-1) ^ s \cdot \explain{b_0 . b_{-1} b_{-2} \dots b_{-n}}{mantissa M} \cdot \beta^e = \beta^e \cdot \sum_{i=-n}^0 b_i 2^i, \quad \text{ exponent } e,\\ \text{ precision (number of digits) } p = n+1, \quad \text{ sign-bit } s \in \{0,1\}
+        (-1) ^ s \cdot \explain{b_0 . b_{-1} b_{-p} \dots b_{-p}}{mantissa M} \cdot \beta^e = \beta^e \cdot \sum_{i=-p}^0 b_i \beta^i, \quad \text{ exponent } e,\\ \text{ precision with implicit first bit } p+1, \quad \text{ sign-bit } s \in \{0,1\}
     \end{multlined}
 \end{equation}
 Note that in this notation (in the form $V = x \cdot 2^y$) we cannot exactly represent e.g. $0.1$ or $0.2$.
@@ -213,7 +213,7 @@ where based on the exponent we differentiate between
         \begin{multlined}
             V = (-1)^s \cdot \left(1 + \frac{M}{2^p}\right) \cdot 2^{E-b}, \quad \text{sign bit } s\\
             \text{ biased exponent } E = e + b, \quad \text{ integer representation of mantissa } M \\
-            \text{ precision } p = \#\text{mantissa bits} + 1 \text{ implicit bit}
+            \text{ precision } p = \#\text{mantissa bits}, \text{not including the } 1 \text{ implicit bit}
         \end{multlined}
     \end{equation}
     \item \textbf{denormalized values for $E = 0$} with value of the floating point number
