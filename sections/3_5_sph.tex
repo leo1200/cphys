@@ -179,18 +179,18 @@ we can write the smoothed fluid quantity as
 
 \begin{equation}
     \label{eq:smoothed_fluid_quantity}
-    \boxed{F_s(\vec{r}) \equiv\langle F(\vec{r})\rangle \simeq \sum_{j=1}^{N_i} \frac{m_j}{\rho_j} F_j W\left(\vec{r}-\vec{r}_j, h\right), \quad \text { number of neighbors } N_i}
+    \boxed{F_s(\vec{r}_i) \equiv\langle F(\vec{r}_i)\rangle \simeq \sum_{j=1}^{N_i} \frac{m_j}{\rho_j} F_j W\left(\vec{r}_i-\vec{r}_j, h\right), \quad \text { number of neighbors } N_i}
 \end{equation}
 
 \note{While this is similar to Monte-Carlo integration, the evaluation points are our SPH-particles which here turns out to be favorable over random sampling, as the distances between the particles tend to equilibrate due to pressure forces (making the interpolation smaller - still resulting noise is a problem of SPH).}
 
-\greenbox{$F_s(\vec{r})$ is defined everywhere and differentiable as the kernel is differentiable.}
+\greenbox{$F_s(\vec{r}_i)$ is defined everywhere and differentiable as the kernel is differentiable.}
 
 For the density we can write
 
 \begin{equation}
     \label{eq:rho_sph}
-    \boxed{\rho_s (\vec{r}) = \sum_{j=1}^{N_i} m_j W(\vec{r} - \vec{r}_j,h)}
+    \boxed{\rho_s (\vec{r}_i) = \sum_{j=1}^{N_i} m_j W(\vec{r}_i - \vec{r}_j,h)}
 \end{equation}
 
 The smoothing length $h$ should at least be larger than the particle distance.
@@ -229,7 +229,7 @@ with normalization
 the density calculation is only $\mathcal{O}(N_{ngb}N)$ with $N_{ngb}$ being the average number of neighbors considered
 depending on the choice of $h$.
 
-\note{The support size of SPH-particles is usually chosen to be $2h$ so that $W_{\text{Gaussian}}(||\vec{r}_i - \vec{r}'||, h) = 0$ for $||\vec{r}_i - \vec{r}'|| > 2h$, see figure \ref{fig:sph}.}
+\note{The support size of SPH-particles is usually chosen to be $2h$ so that $W(||\vec{r}_i - \vec{r}'||, h) = 0$ for $||\vec{r}_i - \vec{r}'|| > 2h$, see figure \ref{fig:sph}.}
 
 \begin{figure}[!htb]
  \centering
@@ -277,7 +277,7 @@ and illustrated in figure \ref{fig:scatter_gather}.
             \end{gathered}
         \end{equation} \\
         \hline \\
-        The total mass is conserved in the scatter approach, $\int \rho_s d^3 \vec{r} = \sum m_i$ & The total mass is not conserved in the gather approach, the error is only $\mathcal{O}(h^2)$ thoug. \\
+        The total mass is conserved in the scatter approach, $\int \rho_s d^3 \vec{r} = \sum m_i$ & The total mass is not conserved in the gather approach, the error is only $\mathcal{O}(h^2)$ though. \\
     \end{tabular}
     \caption{Scatter and gather approach for introducing a variable smoothing length $h$.}
     \label{tab:scatter_gather}
@@ -462,7 +462,7 @@ For the viscous stress tensor we can model
     \end{gathered}
 \end{equation}
 
-This form of a viscous force is a combination of a bulk and von-Neumann-Richtmyer viscosity and only acts if two particles (rapidly) approach \footnote{$\vec{v}_{i j} \cdot \vec{r}_{i j}<0$, and $\mu_{ij}$ measure how strongly two particles approach each other.} each other. It is Galilean invariant and vanishes for rigid body rotation.
+This form of a viscous force is a combination of a bulk and von-Neumann-Richtmyer viscosity and only acts if two particles (rapidly) approach\footnote{$\vec{v}_{i j} \cdot \vec{r}_{i j}<0$, and $\mu_{ij}$ measure how strongly two particles approach each other.} each other / come very close (avoid interpenetration). It is Galilean invariant and vanishes for rigid body rotation.
 
 \begin{mdframed}[style = padded]
     The total momentum equation then is
@@ -479,7 +479,7 @@ In order to conserve total energy, work done against the viscous force has to sh
 \idea{Such shear flows are marked by high vorticity $\vec{\omega} = \vec{\nabla} \times \vec{v}$, so for high vorticity we can crank down the artificial viscosity.}
 
 \begin{equation}
-    \tilde{\mu}_{ij} = \mu_{ij} \cdot \frac{f_i + f_j}{2}, \quad f_i = 
+    \tilde{\mu}_{ij} = \mu_{ij} \cdot \frac{f_i + f_j}{2}, \quad f_i = \frac{|\vec{\nabla}\cdot \vec{v}|_i}{|\vec{\nabla}\cdot \vec{v}|_i + ||\vec{\nabla} \times \vec{v}||_i}
 \end{equation}
 
 \subsubsection{Further viscosity switches}
@@ -609,7 +609,7 @@ the SPH equation with $s = \text{const.}$ follows from the Lagrange equation
 \end{equation}
 (for variable smoothing length $h$ under the constraint (Lagrange multiplier) $\rho_j h_j^3 = \text{const.}$) as
 \begin{equation}
-    \frac{d \vec{v}_i}{d t}=-\sum_{j=1}^{N_i} m_j\left\{\frac{1}{f_i} \frac{p_i}{\rho_i^2} \vec{\nabla}_i W\left(r_{i j}, h_i\right)+\frac{1}{f_j} \frac{p_j}{\rho_j^2} \vec{\nabla}_i W\left(r_{i j}, h_j\right)\right\}, \quad f_i=\left[1+\frac{h_i}{3 \rho_i} \frac{\partial \rho_i}{\partial h_i}\right]
+    \frac{d \vec{v}_i}{d t}=-\sum_{j=1}^{N_i} m_j\left\{\frac{1}{f_i} \frac{p_i}{\rho_i^2} \vec{\nabla}_i W\left(r_{i j}, h_i\right)+\frac{1}{f_j} \frac{p_j}{\rho_j^2} \vec{\nabla}_i W\left(r_{i j}, h_j\right)\right\}, \quad f_i=\left[1+\frac{h_i}{3 \rho_i} \frac{\partial \rho_i}{\partial h_i}\right]^{-1}
 \end{equation}
 From the symmetries of the Lagrangian it follows that energy, specific thermodynamic entropy, linear and angular momentum are conserved.
 

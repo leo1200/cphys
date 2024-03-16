@@ -329,7 +329,7 @@ and step in time using explicit Euler
 \end{figure}
 
 \subsubsubsection{Directional splitting / upwind scheme to the rescue}
-Let us only use downstream information, so (mind the sign of $v$)
+Let us only use upstream information, so (mind the sign of $v$)
 \begin{equation}
     \begin{aligned}
         v > 0&: u_i^{(n+1)} = u_i^{(n)} - v \frac{u_i^{(n)} - u_{i-1}^{(n)}}{h} \Delta t  \\
@@ -581,7 +581,7 @@ for instance for the Euler equations with
 \end{equation}
 
 \subsubsection{Deriving a finite volume scheme where only Riemann problems are left to solve}
-In a finite volume method, the state of the cell is an average over the fluid quntities over the cell
+In a finite volume method, the state of the cell is an average over the fluid quantities over the cell
 \begin{equation}
     \label{eq:cell_avg}
     \vec{U}_i = \frac{1}{V_i} \int_{\text{cell} i}{\vec{U}(\vec{x})} dV
@@ -622,11 +622,11 @@ defined in \ref{eq:cell_avg}.
     \begin{equation}
         \vec{U}_i^{(n+1)}=\vec{U}_i^{(n)}+\frac{\Delta t}{\Delta x}\left[\underbrace{\vec{F}^*_{i-\frac{1}{2}}}_{\text{flux from left into cell}}-\underbrace{\vec{F}^*_{i+\frac{1}{2}}}_{\text{out on the right}}\right]
     \end{equation}
-    This defined an update scheme for the fluid variables on the cells (with some appropriate initial and boundary conditions). $\vec{F}^*_{i-\frac{1}{2}}$ and $\vec{F}^*_{i+\frac{1}{2}}$ are black-boxes for now - to find the fluxes we need to solve the Riemann problem, later e.g. done with the approximate HLL solver.
+    This defines an update scheme for the fluid variables on the cells (with some appropriate initial and boundary conditions). $\vec{F}^*_{i-\frac{1}{2}}$ and $\vec{F}^*_{i+\frac{1}{2}}$ are black-boxes for now - to find the fluxes we need to solve the Riemann problem, later e.g. done with the approximate HLL solver.
 \end{mdframed}
 
 \subsubsubsection{Caveats of the Godunov scheme}
-\textcolor{red1}{CFL needs to be obeyed:} We can only assume the Riemann problems at the interfaces to be independent, if the timestep is short enough, so that no information has travelled from one interface to the other $\rightarrow$ CFL: $\frac{\Delta x}{\Delta t} \leq c_{max}$.
+\textcolor{red1}{CFL needs to be obeyed:} We can only assume the Riemann problems at the interfaces to be independent, if the timestep is short enough, so that no information has travelled from one interface to the other $\rightarrow$ CFL: $\frac{\Delta x}{\Delta t} \geq c_{max}$.
 
 \textcolor{red1}{$\vec{U}$ is not piecewise constant in reality:} Even if we start out with piecewise constant $\vec{U}$ in reality, this will change. Therefore the flux we calculate between the cells is also only an approximation.
 
@@ -719,7 +719,7 @@ We consider the integral over $u$ in the left region where the
 information can have propagated to, so $x \in [S_R T, 0]$ and
 in the right region $x \in [0, S_L T]$.
 \idea{As before the integral of $u$ over space at some time $t$ must be the same as at an earlier time plus / minus the fluxes in / out since then.}
-For the left ($x \in [S_R T, 0]$) we have
+For the left ($x \in [S_L T, 0]$) we have
 \begin{equation}
     \begin{aligned}
         -T S_L u^{H L L}= & \int_{T S_L}^0 u(x, T) d x \\
@@ -727,7 +727,7 @@ For the left ($x \in [S_R T, 0]$) we have
     \end{aligned}
 \end{equation}
 
-For the right ($x \in [0, S_L T]$) we have
+For the right ($x \in [0, S_R T]$) we have
 \begin{equation}
     \begin{aligned}
         T S_R u^{H L L}= & \int_{0}^{T S_R} u(x, T) d x \\
@@ -921,7 +921,7 @@ in the dimensions are done separately.
 
 \subsubsection{2nd order accurate in 3D example}
 \begin{equation}
-    \vec{U}^{(n+1)}=x\left(\frac{\Delta t}{2}\right) \mathcal{Y}\left(\frac{\Delta t}{2}\right) z(\Delta t) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
+    \vec{U}^{(n+1)}=x\left(\frac{\Delta t}{2}\right) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{Z}(\Delta t) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
 \end{equation}
 where the 2nd order is based on the alternating reverse order application of
 the time evolution operators.
@@ -962,7 +962,7 @@ Let $\rho(x)$ be the true solution. Then based on the mean L1 error
 we call a method
 \begin{itemize}
     \item \textcolor{blue1}{first order accurate} if $L1 \propto \Delta x \propto N^{-1}$ with $\Delta x = \frac{L}{N}$
-    \item \textcolor{blue1}{second order accurate} if $L1 \propto \Delta x^2 \propto N^{-1}$
+    \item \textcolor{blue1}{second order accurate} if $L1 \propto \Delta x^2 \propto N^{-2}$
     \item ...
 \end{itemize}
 In the 2nd order accurate scheme, doubling the number of cells will quarter our error.
@@ -1139,7 +1139,8 @@ with
 \begin{equation}
     \begin{gathered}
         \text{flux limiter } \phi_{i+\frac{1}{2}}^{(n)}(r) \text{ based on the ratio } r = \frac{U_i - U_{i-1}}{U_{i+1} - U_{i}} \\
-        \text{large if the jump of interest between } U_i \text{ and } U_{i+1} \text{ is large compared to the jump between } U_{i-1} \text{ and } U_{i}
+        \text{large if the jump of interest between } U_i \text{ and } U_{i+1} \\
+        \text{ is large compared to the jump between } U_{i-1} \text{ and } U_{i}
     \end{gathered}
 \end{equation}
 with and exemplary flux limiter being

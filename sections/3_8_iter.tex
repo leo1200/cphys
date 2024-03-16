@@ -352,25 +352,26 @@ makes sense in terms of relaxation of a dynamical system.}
 \subsubsection{Formulating an elliptic equation as an equilibrium of a relaxation problem}
 Consider the elliptic equation
 \begin{equation}
-    L\vec{x} = \vec{b}
+    Lx = b
 \end{equation}
 for instance for the gravitational 2D-Poisson problem $(\partial_x^2 + \partial_y^2) \phi = 4\pi G \rho$.
 
 The elliptic problem can be written as the equilibrium of the relaxation problem
 
 \begin{equation}
-    \frac{1}{K} \partial_t \vec{x} = L \vec{x} - \vec{b}, \quad \text{for } \partial_t \vec{x} = 0 \text{ for } t \rightarrow \infty, \quad \text{some factor } K { in } \frac{\m^2}{s}
+    \frac{1}{K} \partial_t x = L x - b, \quad \text{for } \partial_t x = 0 \text{ for } t \rightarrow \infty, \quad \text{some factor } K \text{ in } \frac{\m^2}{s}
 \end{equation}
 
 \subsubsection{Red-black ordering for the 2D Poisson equation}
-Consider for instance the 2D Poisson equation, formulated as a relaxation problem
+Consider for instance the 2D Poisson equation, formulated as a relaxation problem, here central in space,
+forward in time
 \begin{equation}
     K \frac{\phi_{i, j}^{(n+1)}-\phi_{i, j}^{(n)}}{\Delta t}=\frac{\phi_{i+1, j}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i-1, j}^{(n)}}{\Delta x^2}+\frac{\phi_{i, j+1}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i, j-1}^{(n)}}{\Delta x^2}-4 \pi G \rho_{i j}
 \end{equation}
 so
 \begin{equation}
     \label{eq:2dpoisson_disc}
-    \phi_{i, j}^{(n+1)}=\frac{K \Delta t}{\Delta x^2}\left(\phi_{i, j}^{(n+1)}+\phi_{i-1, j}^{(n)}+\phi_{i, j+1}^{(n)}+\phi_{i, j-1}^{(n)}\right)+\underbrace{\left(1-4 \frac{K \Delta t}{\Delta x^2}\right)}_{=0 \text{by choice } \Delta t = \frac{1}{4} \frac{K}{\Delta x^2}} \phi_{i, j}^{(n)}-4 \pi G \rho_{i j} \Delta t
+    \phi_{i, j}^{(n+1)}=\frac{K \Delta t}{\Delta x^2}\left(\phi_{i+1, j}^{(n)}+\phi_{i-1, j}^{(n)}+\phi_{i, j+1}^{(n)}+\phi_{i, j-1}^{(n)}\right)+\underbrace{\left(1-4 \frac{K \Delta t}{\Delta x^2}\right)}_{= \, 0 \text{ by choice } \Delta t = \frac{1}{4} \frac{\Delta x^2}{K}} \phi_{i, j}^{(n)}-4 \pi G \rho_{i j} \Delta t
 \end{equation}
 where the time-step choice is akin to the CFL criterion in diffusion.
 \greenbox{The discretized Poisson-relaxation update lends itself naturally to a red-black ordering scheme.}
@@ -794,6 +795,16 @@ steepest descent becomes, see figure \ref{fig:steepest_descent}.}
 \end{figure}
 
 \subsubsection{Krylov subspace and construction of iterative methods for solving $\mat{A}\vec{x} = \vec{b}$}
+\greenbox{Consider the simple fixed-point iteration
+\begin{equation}
+    (\mat{A}+\mat{1}-\mat{1})\vec{x} = b \rightarrow \vec{x}^{(n+1)} = (\mat{1}-\mat{A})x^{(n)} + \vec{b}
+\end{equation}
+then for $x^{(0)} = \vec{b}$
+\begin{equation}
+    \vec{x}^{(1)} = 2\vec{b}-\mat{A}b, \quad \vec{x}^{(2)} = 3\vec{b}-3\mat{A}\vec{b}+\mat{A}^2\vec{b},\quad \dots
+\end{equation}
+- it is only based on simple matrix vector products.
+}
 The Krylov subspace of order $r$ is based on
 \begin{equation}
     \vec{b}, \mat{A}\vec{b}, \mat{A}^2\vec{b}, \dots, \mat{A}^{r-1}\vec{b}
@@ -807,10 +818,10 @@ note that
     \item $\mat{A}^i \vec{b}$ can be calculated by $i$ matrix-vector products (very efficient)
     \item $\mat{A}^i \vec{b}$ are linearly independent for each $i < N$, the dimension of $\mathcal{K}_r$ increases with $r$ up to $N$, the dimension of $\mat{A}$
 \end{itemize}
-How can we smartly choose $\vec{x}^{(n)} \in \mathcal{K}_n$ in an iterative scheme for solving $\mat{A}\vec{x} = \vec{b}$?
+How can we smartly (smarter than in the simple scheme above) choose $\vec{x}^{(n)} \in \mathcal{K}_n$ in an iterative scheme for solving $\mat{A}\vec{x} = \vec{b}$?
 \begin{itemize}
     \item so that the residual $\vec{r}^{(n)} = \vec{b} - \mat{A}\vec{x}^{(n)}$ is orthogonal to $\mathcal{K}_n$ (so $\in \mathcal{K}_{n+1}$) (\textbf{conjugate gradients})
-    \item so that the residual has minimum norm for $\vec{x}^{(n)} \in \mathcal{K}_n$
+    \item so that the residual has minimum norm for $\vec{x}^{(n)} \in \mathcal{K}_n$ (GMRES)
     \item ...
 \end{itemize}
 \note{The best basis for the Krylov subspace $\mathcal{K}_r$ is orthonormal and can be computed using Arnoldi's method (essentialy Gram-Schmidt).

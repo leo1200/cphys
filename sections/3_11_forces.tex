@@ -229,21 +229,26 @@ We estimate the force error when resolving a group only based on the monopole
 to the situation where all mass would be concentrated at the groups edge
 (group radius $l$).
 \begin{equation}
-    \Delta F_{\text {node }} \sim\left|F_c-F_x\right|=\left|\frac{G M_{\text {node }}}{r^2}-\frac{G M_{\text {node }}}{r^2+l^2}\right| \underset{\frac{1}{1+x} \approx 1-x \\ x \ll 1}{\approx} \frac{G M_{\text {node }}}{r^2} \frac{l^2}{r^2}=\frac{G M_{\text {node }}}{r^2} \theta_c^2
+    \Delta F_{\text {node }} \sim\left|F_c-F_x\right|=\left|\frac{G M_{\text {node }}}{r^2}-\frac{G M_{\text {node }}}{r^2+l^2}\right| \underset{\frac{1}{1+x} \approx 1-x, \, x \ll 1}{\approx} \frac{G M_{\text {node }}}{r^2} \frac{l^2}{r^2}=\frac{G M_{\text {node }}}{r^2} \theta_c^2
 \end{equation}
-plugging in $M_\text{node} = \frac{M}{N_\text{nodes}}$ with $N_\text{nodes} \propto \theta^3_c$ (as previously found),
+plugging in $M_\text{node} = \frac{M}{N_\text{nodes}}$ with $N_\text{nodes} \propto \theta^{-3}_c$ (as previously found),
 and summing over all nodes (akin to how variance adds up in the random walk), we get
 
 \begin{equation}
     \begin{gathered}
-        \text{total squared error in the force calculation for one particle based on monopole approximations: }\\
-        \Delta F_{\text{tot}} \sim N_{\text{nodes}} \Delta F_{\text{node}} \propto \theta_c^7 \rightarrow |F_{\text{tot}}| \propto \theta_c^{3.5}
+        \text{total squared error in the force calculation} \\
+        \text{for one particle based on monopole approximations: }\\
+        \Delta F_{\text{tot}}^2 \sim N_{\text{nodes}} \Delta F_{\text{node}}^2 \propto \theta_c^7 \rightarrow |F_{\text{tot}}| \propto \theta_c^{3.5}
     \end{gathered}
 \end{equation}
 
 so \textcolor{blue1}{roughly inversely proportional to the computational cost for this particle} (as $N_{\text{nodes}} \propto \theta_c^{-3}$).
 
 \yellowbox{The smaller the opening angle, the higher the cost, the smaller the error.}
+
+\redbox{This is a pretty sketchy derivation to say the least because how the $r$ dependency
+is ignored. $M_{node}$ would need to be $\propto r^2 \theta_c^3$ for the
+above to make sense somehow (otherwise we would have to integrate over $r$).}
 
 \subsection{Faster method II | Particle mesh technique for efficiently computing long-ranged forces}
 Consider for instance a plasma. Coulomb interactions are short-ranged,

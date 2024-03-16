@@ -167,7 +167,7 @@ As of mass conservation, the change of mass $m_V$ in a volume $V$ can only be du
 which is the continuity equation.
 
 \subsubsubsection{Incompressible fluids}
-An incompressible fluid is one, where the density of a fluid parcel never changes with time $\frac{d\rho}{dt} = 0$ (there can still be gradients in the density). From the Lagrangian form of the continuity equation
+An incompressible fluid is one, where the density of a fluid parcel never changes with time $\frac{d\rho}{dt} = 0$ (there can still be gradients in the density). From the material derivative form of the continuity equation
 \begin{equation}
     0 = \frac{d\rho}{dt} = \partial_t \rho + \vec{v} \cdot \vec{\nabla} \rho \explain{=}{cont. eq.}  \quad \rightarrow \quad \boxed{\vec{\nabla} \cdot \vec{v} = 0}
 \end{equation}
@@ -434,8 +434,8 @@ proving the statement in the note.
 are described by the \textcolor{blue1}{Euler equations}. Those assumptions are well justified for gas flow
 in astrophysics, which are often of extremely low density.
 
-\textcolor{blue1}{If viscosity is relevant}, we use the hydrodynamical equations inclusind viscosity,
-the \textcolor{blue1}{Navier-Stokes equation}.
+\textcolor{blue1}{If viscosity is relevant}, we use the hydrodynamical equations includind viscosity,
+the \textcolor{blue1}{Navier-Stokes equations}.
 
 We will later discuss fluid instabilities in the absence of viscosity.
 
@@ -560,9 +560,9 @@ dimensionsless fluid variables and operators
 \end{equation}
 where for the pressure mind that pressure is also an energy density and the kinetic energy density is $\frac{1}{2} \rho_0 V_0^2$.
 
-Plugging this the incompressible Navier-Stokes equation (\ref{eq:navier_stokes_incompressible}) we get
+Plugging this into the incompressible Navier-Stokes equation (\ref{eq:navier_stokes_incompressible}) we get
 \begin{equation}
-    \frac{d\vec{\hat{v}}}{d\hat{t}} = -\frac{\vec{\hat{\nabla}P}}{\hat{\rho}} + \frac{\nu}{L_0 V_0} \vec{\hat{\nabla}}^2 \vec{\hat{v}}
+    \frac{d\vec{\hat{v}}}{d\hat{t}} = -\frac{\vec{\hat{\nabla}}P}{\hat{\rho}} + \frac{\nu}{L_0 V_0} \vec{\hat{\nabla}}^2 \vec{\hat{v}}
 \end{equation}
 involving the Reynolds number
 \begin{equation}
@@ -1040,7 +1040,7 @@ In Fourier space the nabla operator becomes $\vec{\nabla} \rightarrow \vec{k}$, 
 are no longitudinal disturbances (aka soundwaves) but only solenoidal, i.e. source free motion, so shear flow and rotational turbulence
 (swirling eddies as for instance produces by the Kelvin-Helmholtz instability).
 
-$\vec{v} \cdot \vec{v} = 0$ also implies subsonic flow as supersonic velocities would cause shocks coming with compression of the post-shock fluid.
+$\vec{\nabla} \cdot \vec{v} = 0$ also implies subsonic flow as supersonic velocities would cause shocks coming with compression of the post-shock fluid.
 
 \textcolor{blue1}{Incompressible turbulence is described by Kolmogorov's theory of incompressible turbulence}.
 

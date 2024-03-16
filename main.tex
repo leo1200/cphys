@@ -214,6 +214,7 @@
 \definecolor{red1}{HTML}{d63031}
 \definecolor{yellow1}{HTML}{7F6000}
 \definecolor{pink1}{HTML}{7030a0}
+\definecolor{light1}{HTML}{f1f2f6}
 
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
@@ -247,6 +248,10 @@
 \newtcolorbox{pinkBox}{textmarker,
     borderline west={6pt}{0pt}{pink1},
     colback=pink1!10!white}
+% define lightBox
+\newtcolorbox{lightBox}{textmarker,
+    borderline west={6pt}{0pt}{light1},
+    colback=light1!10!white}
 
 % define greyBox
 \newtcolorbox{greyBox}{textmarker,
@@ -268,6 +273,10 @@
 \newcommand{\yellowbox}[1]{\begin{hintBox} #1 \end{hintBox}}
 
 \newcommand{\bluebox}[1]{\begin{blueBox} #1 \end{blueBox}}
+
+\newcommand{\answerboxS}{\begin{lightBox} \vspace{3cm} \end{lightBox}}
+\newcommand{\answerboxM}{\begin{lightBox} \vspace{5cm} \end{lightBox}}
+\newcommand{\answerboxL}{\begin{lightBox} \vspace{7cm} \end{lightBox}}
 
 \usepackage{makecell}
 
@@ -521,7 +530,7 @@ Computation - quickly crunching billions of numbers - can give us a new perspect
 \import{sections/}{4_9_latent.tex}
 \import{sections/}{5_0_summaries.tex}
 \import{sections/}{5_1_FOSM.tex}
-\import{sections/}{5_2_CSDA.tex}
+% \import{sections/}{5_2_CSDA.tex}
 \import{sections/}{6_questions.tex}
 
 \pagebreak

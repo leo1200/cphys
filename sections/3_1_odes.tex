@@ -793,12 +793,12 @@ Depending on $q$ we can yield different schemes, with examples shown in table \r
     \hline
     \textcolor{blue1}{Forward Euler} & \textcolor{blue1}{2nd order Runge-Kutta (RK2) (aka Heun-method)} & \textcolor{blue1}{Midpoint-Rule} \\
     \hline
-    $$k_1 = f(y^{(n), t^{(n)}})$$
+    $$k_1 = f(y^{(n)}, t^{(n)})$$
     $$y^{(n+1)} = y^{(n)} + hk_1 + \mathcal{O}(h^2)$$ &
-    $$k_1 = f(y^{(n), t^{(n)}})$$
+    $$k_1 = f(y^{(n)}, t^{(n)})$$
     $$k_2 = f(y^{(n)} + h k_1, t^{(n)} + h)$$
     \begin{multline*} y^{(n+1)} = y^{(n)} + \frac{h}{2}(k_1 + k_2) \\ + \mathcal{O}(h^3)\end{multline*} &
-    $$k_1 = f(y^{(n), t^{(n)}})$$
+    $$k_1 = f(y^{(n)}, t^{(n)})$$
     $$k_2 = f(y^{(n)} + \frac{h}{2} k_1, t^{(n)} + \frac{h}{2})$$
     $$y^{(n+1)} = y^{(n)} + hk_2 + \mathcal{O}(h^3)$$ \\
     \hline
@@ -970,7 +970,7 @@ Hamiltonian systems
 
 \begin{itemize}
 \item conserve energy, i. e. $H(\vec{p}, \vec{q})$ is conserved along a trajectory if the Hamiltonian does not explicitly depend on time
-\item show \textit{symplecticity}, which is most intuitively understood as area conservation in phase space \cite{Hairer06}, phase space volumina spanned by trajactories remain constant (see the following examples) / the phase space ditribution function is constant along trajectories
+\item show \textit{symplecticity}, which is most intuitively understood as area conservation in phase space \citep{Hairer06}, phase space volumina spanned by trajactories remain constant (see the following examples) / the phase space ditribution function is constant along trajectories
 \end{itemize}
 
 \subsubsubsection{Poisson brackets and constants of motion (first integrals)}
@@ -1073,8 +1073,6 @@ It turns out that preserving symplecticity and energy at the same time is very d
 So the rebound N-body simulation package actually uses IAS15 (implicit integrator with adaptive time-stepping, 15th order) as the default \citep{Rein14}.
 }
 
-\note{The default integrator in the N-body-simulator rebound is IAS15, a non-symplectic integrator }
-
 \subsubsection{Verlet Scheme}
 Consider we want to solve the Newtonian equation of movement
 \begin{equation}
@@ -1105,7 +1103,7 @@ with
   \end{gathered}
 \end{equation}
 
-Adding both equations yields a scheme 4th order accurate in time
+Adding both equations yields a scheme 3rd order accurate in time
 
 \begin{equation}
   \vec{s}(t+\Delta t) = 2 \vec{s}(t) - \vec{s}(t-\Delta t) + \vec{a}(t) \Delta t^2 + \mathcal{O}(\Delta t^4)
@@ -1133,15 +1131,15 @@ but this is problematic as
 accelerations at $t$ and $t + \Delta t$}
 \begin{equation}
   \begin{aligned}
-    \vec{s}(t+\Delta t) &= \vec{s}(t) + \vec{v}(t) \Delta t + \frac{1}{2} \vec{a} \Delta t^2 +  \mathcal{O}(\Delta t)^3 \\
-    \vec{v}(t+\Delta t) &= \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2} + \mathcal{O}(\Delta t)^2
+    \vec{s}(t+\Delta t) &= \vec{s}(t) + \vec{v}(t) \Delta t + \frac{1}{2} \vec{a} \Delta t^2 +  \mathcal{O}(\Delta t^3) \\
+    \vec{v}(t+\Delta t) &= \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t + \Delta t)}{2} + \mathcal{O}(\Delta t^2)
   \end{aligned}
 \end{equation}
 \note{Again, we use $\vec{a}(t + \Delta t)$ to get $\vec{v}(t+\Delta t)$ which is not possible if $\vec{a}$ depends on $v$. If we would take only $\vec{a}(t)$
 instead of the average, we would just have explicit Euler.}
 In steps we can write
 \begin{enumerate}
-  \item calculate the new position: $\vec{s}(t+\Delta t) = \vec(s)(t) + \vec{v}(t)\Delta t + \frac{1}{2} \vec{a}(t) \Delta t^2$
+  \item calculate the new position: $\vec{s}(t+\Delta t) = \vec{s}(t) + \vec{v}(t)\Delta t + \frac{1}{2} \vec{a}(t) \Delta t^2$
   \item update the acceleration: $\vec{a}(t+\Delta t) = -\frac{1}{m} \left. \nabla V \right|_{\vec{s}(t+\Delta t)}$
   \item calculate the new velocity: $\vec{v}(t+\Delta t) = \vec{v}(t) + \frac{\vec{a}(t) + \vec{a}(t+\Delta t)}{2} \Delta t$
   \item update the time: $t \rightarrow t + \Delta t$
@@ -1171,7 +1169,7 @@ The leapfrog scheme can then be written as
 \begin{equation}
 \begin{aligned}
 & \vec{s}(t + \frac{1}{2} \Delta t)=\vec{s}(t - \frac{1}{2} \Delta t)+ \vec{v}(t) \Delta t + \mathcal{O}(\Delta t^3) \\
-& \vec{v}(t + \Delta t)=\vec{v}(t)+ \vec{a}(t + \frac{1}{2} \Delta t) \Delta t  + \mathcal{O}(\Delta t^3)
+& \vec{v}(t + \Delta t)=\vec{v}(t)+ \vec{a}(t + \frac{1}{2} \Delta t) \Delta t  + \mathcal{O}(\Delta t^2)
 \end{aligned}
 \end{equation}
 

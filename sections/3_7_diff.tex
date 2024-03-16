@@ -22,7 +22,7 @@ Based on the equipartition theorem, the mean squared velocity is
 \end{equation}
 so the mean squared relative velocity is higher (avg here over velocity space)
 \begin{equation}
-    \langle \vec{v}_{rel}^2 \rangle = \langle (\vec{v} - \vec{v}')^2 \rangle = \langle \vec{v}^2 \rangle + \langle \vec{v'}^2 \rangle - \underbrace{2 \langle \vec{v} \cdot \vec{v'} \rangle}_{=0 \text{ avg. over uncorrelated}} = \quad \langle \vec{v}^2 \rangle = \frac{6 k_B T}{m}
+    \langle \vec{v}_{rel}^2 \rangle = \langle (\vec{v} - \vec{v}')^2 \rangle = \langle \vec{v}^2 \rangle + \langle \vec{v'}^2 \rangle - \underbrace{2 \langle \vec{v} \cdot \vec{v'} \rangle}_{=0 \text{ avg. over uncorrelated}} = 2 \langle \vec{v}^2 \rangle = \frac{6 k_B T}{m}
 \end{equation}
 % = \int (\vec{v}-\vec{v'})^2 f(\vec{v}) f(\vec{v'}) d^3v d^3v'
 where we shorthand use $v_{rel} = \sqrt{\langle \vec{v}_{rel}^2 \rangle}$.
@@ -266,7 +266,7 @@ Let us start with the diffusion equation
 \end{equation}
 We make the Ansatz
 \begin{equation}
-    J(x,t) = u(x,t) \cdot v, \quad text{characteristic velocity } v
+    J(x,t) = u(x,t) \cdot v, \quad \text{characteristic velocity } v
 \end{equation}
 and define a \textit{negative specific diffusion momentum}, really just the negative of the
 not-yet-limited velocity $v$.

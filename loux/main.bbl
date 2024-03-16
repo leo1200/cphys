@@ -512,6 +512,47 @@
       \verb http://dx.doi.org/10.1201/9780429246593
       \endverb
     \endentry
+    \entry{mat_inv}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=689aab17b15aea5483d97dea9ca39df7}{%
+           family={{Fathi Vajargah}},
+           familyi={F\bibinitperiod},
+           given={Behrouz},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{fullhash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{bibnamehash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{authorbibnamehash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{authornamehash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{authorfullhash}{689aab17b15aea5483d97dea9ca39df7}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, we present a novel Monte Carlo algorithm for obtaining the inverse of a given nonsingular matrix A with high accuracy. The method is performed by splitting the given matrix A=D-B where D is a strictly diagonally dominant matrix and it can be easily constructed based on matrix A and B=k‖A‖ such that k can be selected as an arbitrary number greater than or equal to 1. The accuracy of presented algorithm is compatible with any numerical method. The theory of the method and its numerical results are also presented.}
+      \field{issn}{0096-3003}
+      \field{journaltitle}{Applied Mathematics and Computation}
+      \field{number}{1}
+      \field{title}{A way to obtain Monte Carlo matrix inversion with minimal error}
+      \field{volume}{191}
+      \field{year}{2007}
+      \field{pages}{225\bibrangedash 233}
+      \range{pages}{9}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.amc.2007.02.082
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0096300307002494
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0096300307002494
+      \endverb
+      \keyw{Monte Carlo,Markov chain,Matrix inversion,Minimal error}
+    \endentry
     \entry{gould96}{article}{}
       \name{author}{6}{}{%
         {{un=0,uniquepart=base,hash=48b7065868685fa8de1482e6df40ce77}{%

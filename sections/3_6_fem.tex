@@ -72,9 +72,9 @@ A linear 1D example can be seen in figure \ref{fig:1d_linear_reconstruction}.
 \subsubsubsection{Inserting the finite element approximation into the PDE yields a residuum}
 Consider a linear PDE of the form
 \begin{equation}
-    L\hat{\phi} + \hat{s} = 0, \quad \text{ linear differential operator } \hat{L}, \text{ source term } \hat{s}, \text{ solution } \hat{\phi}
+    L\phi + s = 0, \quad \text{ linear differential operator } L, \text{ source term } s, \text{ solution } \phi
 \end{equation}
-$\hat{L}$ being linear means $\hat{L}(a\phi + b\psi) = a\hat{L}\phi + b\hat{L}\psi$ for any functions $\phi, \psi$ and constants $a, b$.
+$L$ being linear means $L(a\phi + b\psi) = aL\phi + bL\psi$ for any functions $\phi, \psi$ and constants $a, b$.
 
 We now plug in the finite element approximation $\phi(x)$ and source function $s(x)$
 \begin{equation}
