@@ -479,7 +479,7 @@ measurements in the sample
     \begin{equation}
         k \text{-th column of } \mat{E}, \vec{e}_k \sim \mathcal{N}\left(\vec{0}_N, \sigma_{kk}^2 \mat{1}_{N \times N}\right)
     \end{equation}
-    \item error terms in over different outputs in one measurement can be correlated
+    \item error terms over different outputs can be correlated (e.g. temperature and humidity residual tend to be low together)
     \begin{equation}
         i\text{-th row of } \mat{E}, \vec{e}_i \sim \mathcal{N}\left(\vec{0}_q, \mat{\Sigma}\right), \quad \mat{\Sigma} \text{ covariance matrix} \in \mathbb{R}^{q \times q}
     \end{equation}
@@ -541,10 +541,33 @@ distribution of $\mat{\hat{B}}$. Possible correlation of outputs shows in the
 sampling distribution of $\mat{\hat{B}}$.}
 
 \subsubsection{Hypothesis testing in the multivariate case - considering parameters jointly}
-Consider we have a two-dimensional output $\vec{y}_i \in \mathbb{R}^2$ and a categorical
-predictor $\vec{x}_i \in \mathbb{R}^3$ with three categories $A,B,C$. If we consider the parameters
-jointly, we can formulate more complicated combined hypotheses, e.g. $H_0: \vec{\hat{\beta}}_{y_1}^2 + \vec{\hat{\beta}}_{y_2}^2 < c$.
-This is illustrated in figure \ref{fig:multivariate_hypothesis}.
+% Consider we have a two-dimensional output $\vec{y}_i \in \mathbb{R}^2$ and a categorical
+% predictor $\vec{x}_i \in \mathbb{R}^3$ with three categories $A,B,C$. If we consider the parameters
+% jointly, we can formulate more complicated combined hypotheses, e.g. $H_0: \vec{\hat{\beta}}_{y_1}^2 + \vec{\hat{\beta}}_{y_2}^2 < c$.
+
+Consider we only have one feature, $x \in \mathbb{R}$, and two outputs, $y_1, y_2 \in \mathbb{R}$. Our hypothesis
+is $H_0: \beta_{y_1} = \beta_{y_2} = 0$.
+\begin{itemize}
+    \item naive separate testing: we do separate t-tests for $\beta_{y_1}$ and $\beta_{y_2}$,
+    which is equivalent to testing for the joint hypothesis assuming independence of the residuals
+    of the two outputs
+    \item joint testing: remember that $\mat{\hat{B}} \sim \mathcal{N}\left(\mat{B}^*, \left( \mat{X}^T \mat{X} \right)^{-1} \otimes \mat{\Sigma} \right)$, here
+    just
+    \begin{equation}
+        \begin{pmatrix}
+            \hat{\beta}_{y_1} \\
+            \hat{\beta}_{y_2}
+        \end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix}
+            \beta_{y_1}^* \\
+            \beta_{y_2}^*
+        \end{pmatrix}, \left( \vec{x}^T \vec{x} \right)^{-1} \cdot \mat{\Sigma} \right)
+    \end{equation}
+    so the betas for the two responses can be correlated if the residuals over the two
+    responses are correlated (e.g. both tend to have low residuals at the same time) -
+    a test based on this distribution takes this into account.
+\end{itemize}
+
+For more complex categorical $\vec{x}$ this is illustrated in figure \ref{fig:multivariate_hypothesis}.
 
 \begin{figure}[!htb]
  \centering

@@ -371,7 +371,7 @@ which motivates
 to obtain the symmetric form
 
 \begin{equation}
-    \vec{\nabla} F_i =\rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F_i}{\rho_i^2}+\frac{F_j}{\rho_j^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
+     \langle\vec{\nabla} F(\vec{r})\rangle_i =\rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F_i}{\rho_i^2}+\frac{F_j}{\rho_j^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
 \end{equation}
 
 and analogously
@@ -409,6 +409,15 @@ Other symmetrizations
 \end{equation}
 
 and additional correction factors are possible.
+
+A basic illustration is provided in figure \ref{fig:sph_2particles}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/sph2.svg}\hfill
+ \caption{Illustration of the SPH Euler equation for two particles.}
+ \label{fig:sph_2particles}
+\end{figure}
 
 \subsubsection{Including further accelerations}
 Further accelerations like self gravity can be calculated as usual

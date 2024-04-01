@@ -222,9 +222,9 @@ of the majority of the distribution (imagine a \textit{Gaussian with a random pe
 From this it makes sense to expect this estimator to have a relatively high variance (low precision).}
 
 \subsubsection{A-posteriori Expectation}
-\bluebox{\textbf{Bayes estimator}: In general, a bayes estimator is given by
+\bluebox{\textbf{Bayes estimator}: In general, a Bayes estimator is given by
 \begin{equation}
-    \vec{\hat{\mu}}_{\text{Bayes}} = \argmin_{\vec{\tilde{\mu}}} E(\ell(\vec{\tilde{\mu}}, \vec{\mu}) | \vec{x}) = \int \ell(\vec{\tilde{\mu}}, \vec{\mu}) \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}
+    \vec{\hat{\mu}}_{\text{Bayes}} = \argmin_{\vec{\tilde{\mu}}} E(\ell(\vec{\tilde{\mu}}, \vec{\mu}) | \vec{x}) = \argmin_{\vec{\tilde{\mu}}} \int \ell(\vec{\tilde{\mu}}, \vec{\mu}) \Pi(\vec{\mu}|\vec{x}) \, d\vec{\mu}
 \end{equation}
 }
 For $\ell(\vec{\tilde{\mu}}, \vec{\mu}) = (\vec{\tilde{\mu}} - \vec{\mu})^2$, the Bayes estimator is the

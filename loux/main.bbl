@@ -1553,6 +1553,40 @@
       \verb https://doi.org/10.1007/BF03023062
       \endverb
     \endentry
+    \entry{over04}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b3fe22ca744ba1487012525fb0d71650}{%
+           family={Overduin},
+           familyi={O\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {Simon Fraser University}%
+      }
+      \strng{namehash}{b3fe22ca744ba1487012525fb0d71650}
+      \strng{fullhash}{b3fe22ca744ba1487012525fb0d71650}
+      \strng{bibnamehash}{b3fe22ca744ba1487012525fb0d71650}
+      \strng{authorbibnamehash}{b3fe22ca744ba1487012525fb0d71650}
+      \strng{authornamehash}{b3fe22ca744ba1487012525fb0d71650}
+      \strng{authorfullhash}{b3fe22ca744ba1487012525fb0d71650}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{USE OF THE LOGNORMAL DISTRIBTUON FOR SURVIVAL DATA: INFERENCE AND ROBUSTNESS}
+      \field{type}{mathesis}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb https://core.ac.uk/download/pdf/56374045.pdf
+      \endverb
+      \verb{url}
+      \verb https://core.ac.uk/download/pdf/56374045.pdf
+      \endverb
+    \endentry
     \entry{particle2020}{article}{}
       \name{author}{243}{}{%
         {{un=0,uniquepart=base,hash=616f2052fd07c16fb29d29d466ddf274}{%
@@ -3621,7 +3655,6 @@
       \field{year}{1995}
     \endentry
   \enddatalist
-  \missing{over04}
 \endrefsection
 \endinput
 

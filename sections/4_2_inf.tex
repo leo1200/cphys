@@ -451,10 +451,10 @@ so
 
 \paragraph*{MLE for linear regression - same result as LSE} Again consider a dataset $\{ \vec{x}_i,y_i \}_{i=1}^N$
 with a linear model $y_i = \vec{\beta}^T \vec{x}_i + \epsilon_i$ and i.i.d. residuals $\epsilon_i \sim \mathcal{N}(0,\sigma^2)$.
-The likelihood of the sample under some model parameters $\vec{\beta}$ is then
+The likelihood of the sample under some model parameters $\vec{\beta}$ is then (using $y_i|\vec{x}_i,\vec{\beta} \sim \mathcal{N}(\vec{\beta}^T \vec{x}_i,\sigma^2)$)
 \begin{equation}
     \begin{gathered}
-    \mathcal{L}_X(\vec{\beta})=\prod_{i=1}^N p\left(y_i \mid \vec{\beta}\right)=\prod_{i=1}^N N\left(y_i-\vec{\beta}^T \vec{x}_i, \sigma^2\right)=\prod_{i=1}^N \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y_i-\vec{\beta}^T \vec{x}_i\right)^2}{2 \sigma^2}\right) \\
+    \mathcal{L}_X(\vec{\beta})=\prod_{i=1}^N p\left(y_i \mid \vec{x}_i,\vec{\beta}\right)=\prod_{i=1}^N \frac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\frac{\left(y_i-\vec{\beta}^T \vec{x}_i\right)^2}{2 \sigma^2}\right) \\
     =\left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^N \exp \left(-\frac{\sum_{i=1}^N\left(y_i-\vec{\beta}^T \vec{x}_i\right)^2}{2 \sigma^2}\right)=\left(\frac{1}{\sqrt{2 \pi} \sigma}\right)^N \exp \left(-\frac{S S Q(\vec{\beta})}{2 \sigma^2}\right) \\
     \vec{\hat{\beta}}_{M L E}=\underset{\vec{\beta}}{\operatorname{argmax}} \mathcal{L}(\vec{\beta}) \Leftrightarrow \vec{\hat{\beta}}_{M L E}=\underset{\vec{\beta}}{\operatorname{argmin}} S S Q(\vec{\beta})=\vec{\hat{\beta}}_{L S E}
     \end{gathered}
@@ -648,7 +648,7 @@ is of the same distributional form as the prior (conjugacy) (the Gaussian of the
 \subsection{Hypothesis Testing}
 \textbf{Aim of hypothesis testing\footnote{More specifically null hypothesis significance testing.}:} We want to decide 
 whether some data sufficiently supports a \textcolor{pink1}{hypothesis}.
-\pinkbox{\textbf{What is a hypothesis?}: A hypothesis is a statement about population (a) parameter(s) (not
+\pinkbox{\textbf{What is a hypothesis?}: A hypothesis is a statement about (a) population parameter(s) (not
 about a sample). We usually formulate a devil's advocate null hypothesis $H_0$ (no difference,
 as in $H_0:$ the drug we test had no effect, $H_0:$ there is no global warming, ...), under which we devise the
 distribution of a statistic and under this distribution check how likely it is to observe
@@ -1082,11 +1082,11 @@ We use the test statistic
 \note{While for large $N$ we have a normal distribution by Slutkys theorem, for lower $N$ we have to mind that $\hat{\sigma}_{\bar{x}}$ is an estimate.}
 The distribution according to $t_{N-1}$ can be seen from
 \begin{equation}
-    t=\frac{\bar{x}-\mu_0}{\hat{\sigma}_{\bar{x}}}=\frac{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}{\hat{\sigma}_{\bar{x}} /(\sigma / \sqrt{N})}=\frac{\overbrace{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}^{\sim \mathcal{N}(0,1)}}{\underbrace{\sqrt{\frac{1}{N-1} \sum_{i=1}^N\left(\frac{x_i-\bar{x}}{\sigma}\right)^2}}_{\sim \sqrt{\chi_{N-1}^2 \slash (N-1)}}} \sim t_{N-1}
+    t=\frac{\bar{x}-\mu_0}{\hat{\sigma}_{\bar{x}}}=\frac{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}{\hat{\sigma}_{\bar{x}} /(\sigma / \sqrt{N})}=\frac{\overbrace{\left(\bar{x}-\mu_0\right) /(\sigma / \sqrt{N})}^{\sim \mathcal{N}(0,1)}}{\underbrace{\sqrt{\frac{1}{N-1} \sum_{i=1}^N\left(\frac{x_i-\bar{x}}{\sigma \slash \sqrt{N}}\right)^2}}_{\sim \sqrt{\chi_{N-1}^2 \slash (N-1)}}} \sim t_{N-1}
 \end{equation}
 \greenbox{\textbf{Why is it $N-1$?} The reasoning for why it is $t_{N-1}$ here is the same as for
 the reasoning of $N-1$ in the Bessel correction. While we have $N$ independent observations in the sample
-we only have $N-1$ independent residuals, $x_i - \bar{x}$ as they must sum up to $1$ (by definition of the sample mean).}
+we only have $N-1$ independent residuals, $x_i - \bar{x}$ as they must sum up to $0$ (by definition of the sample mean).}
 
 \paragraph*{Two-sample t-test} Consider we have two independent samples $X_1$ and $X_2$ of (possibly different) sizes $N_1$ and $N_2$ with means
 \begin{equation}
@@ -1100,7 +1100,7 @@ We want to test if the means \textbf{of the populations they come from} $\mu_1, 
 For unequal sample sizes and similar variances, we get
 \begin{equation}
     \begin{gathered}
-        t=\frac{\left(\bar{x}_1-\mu_1\right)-\left(\bar{x}_2-\mu_2\right)}{\hat{\sigma}_{\bar{x}_1-\bar{x}_2}} \underset{H_0: \mu_1 = \mu_2}{\approxeq} \frac{\bar{x}_1-\bar{x}_2}{\hat{\sigma}_{\text {pool }} \sqrt{\frac{1}{N_1}+\frac{1}{N_2}}}
+        t=\frac{\left(\bar{x}_1-\mu_1\right)-\left(\bar{x}_2-\mu_2\right)}{\hat{\sigma}_{\bar{x}_1-\bar{x}_2}} \underset{H_0: \mu_1 = \mu_2}{\approxeq} \frac{\bar{x}_1-\bar{x}_2}{\hat{\sigma}_{\text {pool }} \sqrt{\frac{1}{N_1}+\frac{1}{N_2}}} \sim t_{N_1+N_2-2}
     \end{gathered}
 \end{equation}
 where the pooled standard deviation $\hat{\sigma}_{\text{pool}}$ is given by
@@ -1480,9 +1480,9 @@ For testing if two samples possibly come from different distributions
     \item Formulate $H_0$, so $H_0: F_X = F_Y$.
     \item Specify the $\alpha$-level and test statistic $T$, which if $N_X = N_Y = N$ could be
     \begin{equation}
-        T(X,Y) = \frac{\bar{\Delta}}{\sigma_\Delta \slash \sqrt{N}}, \quad \delta_i = x_i - y_i
+        T(X,Y) = \frac{\bar{\Delta}}{\sigma_\Delta \slash \sqrt{N}}, \quad \Delta_i = x_i - y_i
     \end{equation}
-    \item \textbf{Bootstrapping:} From the union $Z = X \cup Y$ we make draw replacement $N_b$ samples of sizes $N_X$ and $N_Y$ respectively with replacement. For $b = 1,\dots,N_b$
+    \item \textbf{Bootstrapping:} From the union $Z = X \cup Y$ we draw $N_b$ samples of sizes $N_X$ and $N_Y$ respectively with replacement. For $b = 1,\dots,N_b$
     \begin{enumerate}
         \item Fraw samples with repition from $Z$
         \begin{equation}
