@@ -109,7 +109,7 @@ CPUs and GPUs are compared in table \ref{tab:cpu_gpu} and figure \ref{fig:cpu_gp
         \begin{itemize}
             \item each core runs its own code
             \item complex control logic $\rightarrow$ general purpose
-            \item shallow instruction pipelines\footnote{Instruction pipelining is a technique for implementing instruction-level parallelism within a single processor.}
+            \item shallow instruction pipelines\tablefootnote{Instruction pipelining is a technique for implementing instruction-level parallelism within a single processor.}
         \end{itemize} & \begin{itemize}
             \item many cores run the same code
             \item simple control logic $\rightarrow$ specialized for parallel operations
@@ -161,7 +161,7 @@ This way we effectively have more “virtual cores” than physical ones.
 The basic question is, how processes can be coordinated.
 Shared memory and message passing concurrency are compared in table \ref{tab:shared_message}.
 
-\begin{table}
+\begin{table}[!htb]
     \centering
     \begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
         \hline

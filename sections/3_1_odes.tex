@@ -1243,11 +1243,11 @@ The leapfrog scheme is second order accurate, symmetric (time reversible), sympl
 Second order accuracy may be surprising as we seemingly only Taylor approximate up to the first order - but note the interlacement
 and connection to velocity Verlet.
 
-\subsubsubsection{Leapfrog is symmetric (time reversible)}
-In terms of the one-step map $\Phi_h: (\vec{s}_n, \vec{v}_n) \rightarrow (\vec{s}_{n+1}, \vec{v}_{n+1})$ symmetry means that $\Phi_{-h}^{-1} = \Phi_h$
-so going one step forward and then back leads us back to where we came from, $n \rightleftharpoons n + 1$.
+\subsubsubsection{Leapfrog is time-symmetric and reversible}
+In terms of the one-step map $\Phi_h: (\vec{s}_n, \vec{v}_n) \rightarrow (\vec{s}_{n+1}, \vec{v}_{n+1})$ time-symmetry means that $\Phi_{-\Delta t}^{-1} = \Phi_{\Delta t}$
+so going one step and one back by switching the direction of time leads us back to where we came from, $n \rightleftharpoons n + 1$.
 
-We integrate from $\left( \vec{s}_n, \vec{v}_{n-\frac{1}{2}} \right)$ to $\left( \vec{s}_{n+1}, \vec{v}_{n+\frac{1}{2}} \right)$ and return.
+We integrate from $\left( \vec{s}_n, \vec{v}_{n-\frac{1}{2}} \right)$ to $\left( \vec{s}_{n+1}, \vec{v}_{n+\frac{1}{2}} \right)$ and see that changing $\Delta t \rightarrow -\Delta t$ and going a step leads us back to the initial state.
 
 \begin{equation}
   \begin{gathered}
@@ -1259,7 +1259,34 @@ We integrate from $\left( \vec{s}_n, \vec{v}_{n-\frac{1}{2}} \right)$ to $\left(
 \greenbox{The flow is also reversible - inverting the direction of initial velocity does not change
 the solution trajectory, it just inverts the direction (if the acceleration only depends on the position).}
 
-So leapfrog is symmetric (time-reversible), different from e.g. explicit Euler (see figure \ref{fig:euler_symm}).
+\pinkbox{\textbf{Reversibility}:
+A system of differential equations
+\begin{equation*}
+  \begin{aligned}
+    \partial_t \vec{s} &= \vec{f}(\vec{s},\vec{v}) \\
+    \partial_t \vec{v} &= \vec{g}(\vec{s},\vec{v})
+  \end{aligned}
+\end{equation*}
+is reversible if
+\begin{equation*}
+  \begin{aligned}
+    \vec{f}(\vec{s},-\vec{v}) &= -\vec{f}(\vec{s},\vec{v}) \\
+    \vec{g}(\vec{s},-\vec{v}) &= \vec{g}(\vec{s},\vec{v})
+  \end{aligned}
+\end{equation*}
+such that the time development map $\phi_t$ fulfills
+\begin{equation*}
+  \phi_t(\vec{s},\vec{v}) = (\vec{\hat{s}},\vec{\hat{v}}) \quad \text{implies} \quad \phi_{t}(\vec{\hat{s}},-\vec{\hat{v}}) = (\vec{s},-\vec{v})
+\end{equation*}
+- so reflecting the velocity at any point on the trajectory, lets us move back along the trajectory. \textbf{The leapfrog
+scheme is reversible} as of
+\begin{equation*}
+  \Phi_{\Delta t}(\vec{s}, \vec{v}) = (\vec{\hat{s}}, \vec{\hat{v}}) \quad \text{implies} \quad \Phi_{-\Delta t}(\vec{s}, -\vec{v}) = (\vec{\hat{s}}, -\vec{\hat{v}})
+\end{equation*}
+(which holds for most numerical schemes) and time-symmetry $\Phi_{-\Delta t}^{-1} = \Phi_{\Delta t}$.
+}
+
+So leapfrog is time-symmetric and reversible, different from e.g. explicit Euler (see figure \ref{fig:euler_symm}).
 
 \begin{figure}[!htb]
   \centering
@@ -1273,21 +1300,7 @@ applied to \textit{integrable and near-integrable} \textbf{reversible systems} s
 similar properties to symplectic methods applied to \textit{(near)-integrable} Hamiltonian
 systems: linear error growth and long-time near-conservation of first integrals.
 \textcolor{red1}{For a non-reversible system, a symmetric but non-symplectic method (e.g. Lobatto IIIB) will have 
-no good conservation properties though.}\footnote{A system of differential equations
-\begin{equation*}
-  \begin{aligned}
-    \partial_t \vec{u} &= \vec{f}(\vec{u},\vec{v}) \\
-    \partial_t \vec{v} &= \vec{g}(\vec{v},\vec{v})
-  \end{aligned}
-\end{equation*}
-is reversible if
-\begin{equation*}
-  \begin{aligned}
-    \vec{f}(\vec{u},-\vec{v}) &= -\vec{f}(\vec{u},\vec{v}) \\
-    \vec{g}(\vec{v},-\vec{v}) &= \vec{g}(\vec{v},\vec{v})
-  \end{aligned}
-\end{equation*}
-}}
+no good conservation properties though.}}
 
 \note{Not every symplectic method is symmetric. For instance symplectic Euler is symplectic but not symmetric.}
 
@@ -1350,7 +1363,7 @@ and for the potential part
 \paragraph{Constructing leapfrog} Let $\phi_{\Delta t}(H)$ describe making a step $\Delta t$ governed by $H$ in phase-space
 (a time evolution operator). Then leapfrog (kick-drift-kick version) is given as
 \begin{equation}
-  \phi_{\Delta t}(H) = \phi_{\frac{\Delta t}{2}}(H_{\text{pot}}) \odot \phi_{\frac{\Delta t}{2}}(H_{\text{kin}}) \odot \phi_{\Delta t}(H_{\text{pot}})
+  \phi_{\Delta t}(H) = \phi_{\frac{\Delta t}{2}}(H_{\text{pot}}) \odot \phi_{\Delta t}(H_{\text{kin}}) \odot \phi_{\frac{\Delta t}{2}}(H_{\text{pot}})
 \end{equation}
 \textcolor{blue1}{so Leapfrog is symplectic as a concatenation of symplectic operators}, so
 \begin{itemize}
@@ -1389,7 +1402,7 @@ Our goal is still to obtain highly accurate and cheap solutions
 to ODEs. The ingedriends of Bulirsch-Stoer are
 \begin{enumerate}
   \item we integrate across a whole interval with length $H$ multiple times with a sequence of decreasing substep-sizes $h_j$ each yielding a final result $F(h_j)$
-  \item we extrapolate $F(h)$ to $h = 0$ asking ourselves \textit{What would be the solution, if we had taken infinitely many, infinitely small steps?}, for instance using polynomial extrapolation or Richardson extrapolation\footnote{A sequence acceleration method to improve the convergence of a sequence $F^* = \lim_{h\rightarrow 0} F(h)$} with rational functions
+  \item we extrapolate $F(h)$ to $h = 0$ asking ourselves \textit{What would be the solution, if we had taken infinitely many, infinitely small steps?}, for instance using polynomial extrapolation or Richardson extrapolation\footnote{A sequence acceleration method to based on a sequence $F(h)$ for decreasing $h$ extrapolate to $h = 0$.}
 \end{enumerate}
 with the method being most-appropriate for differential equations containing smooth (cheap to evaluate) functions. An illustration is given in figure \ref{fig:bulirsch_stoer}.
 
@@ -1496,6 +1509,18 @@ polynomials will never do), so
 
 \redbox{\cite{hairer93} write: \enquote{Many authors in the sixties claimed that it is better to use rational functions instead of polynomials. Later numerical experiments (Deuflhard 1983) showed that rational extrapolation is nearly never more advantageous than polynomial extrapolation.}. 
 One reason I can imagine is that the more complex rational model is more unstable and harder to appropriately fit.}
+
+\pinkbox{\textbf{Richardson extrapolation:} Consider generally
+\begin{equation}
+  F(h) = F^\star + \alpha h^{k_0} + \mathcal{O}(h^{k_1}), \quad k_0 < k_1
+\end{equation}
+and based on a sequence $F(h)$ for decreasing $h$ we want to extrapolate to $h = 0$, so to $F^\star$. As an
+example consider $k_0 = p$, $k_1 = p + 1$. Then $R(h,\beta)$ with
+\begin{equation}
+  R(h,\beta) = \frac{\beta^p F(h \slash \beta) - F(h)}{\beta^p - 1} = F^\star + \mathcal{O}(h^{p+1})
+\end{equation}
+is called a Richardson extrapolation, which is a higher order estimate.
+}
 
 \subsection{Predictor-corrector methods}
 \greenbox{\textbf{Multistep idea}: While a one-step method only uses the differential value and the ODE itself in a step, multistep methods also

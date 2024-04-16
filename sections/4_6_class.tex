@@ -131,7 +131,7 @@ with the decision criterion
 which is the \textcolor{green1}{Bayes optimal classifier} if our assumtion $\sim \mathcal{N}(\vec{\mu}_k, \mat{\Sigma})$ is valid.
 
 \pinkbox{\textbf{Mahalanobis distance:} $D_\text{mah}$ measures the distance of a measurement $\vec{x}_i$ to the class mean $\vec{\mu}_k$ normalized
-by the covariance matrix $\mat{\Sigma}$. The Mahalanobis distance to a class with high spread might be smaller than
+by the variance of the distribution of the data points of class $k$ (or the pooled variance for LDA) along $\vec{x}_i-\vec{\mu}_k$. The Mahalanobis distance to a class with high spread might be smaller than
 to a class with low spread, even if the Euclidean distance to the mean of the class with high spread is larger,
 see figure \ref{fig:mahalanobis}. This is not the case in LDA though, as $\mat{\Sigma}_k = \mat{\Sigma}$ is assumed.}
 
@@ -191,7 +191,7 @@ the \textcolor{blue1}{class means} intuitively by
 and the \textcolor{blue1}{class covariances} by
 
 \begin{equation}
-    \mat{\hat{\Sigma}}_k=\frac{1}{N_k-1}\left(\mat{X}_{(k)}-\underset{N_k \times 1}{\vec{1}} \vec{\hat{\mu}}^T\right)^T\left(\mat{X}_{(k)}-\underset{N_k \times 1}{\vec{1}} \vec{\hat{\mu}}^T\right)
+    \mat{\hat{\Sigma}}_k=\frac{1}{N_k-1}\left(\mat{X}_{(k)}-\underset{N_k \times 1}{\vec{1}} \vec{\hat{\mu}}^T_k\right)^T\left(\mat{X}_{(k)}-\underset{N_k \times 1}{\vec{1}} \vec{\hat{\mu}}^T_k\right)
 \end{equation}
 
 where in LDA, we use the pooled covariance matrix
@@ -235,12 +235,12 @@ The decision boundary is given by
 \end{figure}
 
 \subsection{Support Vector Machines (SVM)}
-An SVM is a non-probabilistic binary classifier with linear decision boundary. Given
+A SVM is a non-probabilistic binary classifier with linear decision boundary. Given
 a training set $\mathcal{D} = \{ \vec{x}_i, c_i \}$, $c_i \in \{-1, 1\}$, we want
 to assign a class to a new point $\vec{x}$.
 
 \subsubsection{Basic Idea of SVMs - maximum margin classifier}
-We are using a liner classifier
+We are using a linear classifier
 \begin{equation}
     g(\vec{x}) = \vec{\beta}^T \vec{x} + \beta_0
 \end{equation}
@@ -292,7 +292,7 @@ Margins and decision boundary are illustrated in figure \ref{fig:svm_margin}.
 
 \subsubsection{Finding $\vec{\beta}$ and $\beta_0$ specifying the maximum-margin hyperplane}
 \subsubsubsection{Formulating the optimization problem}
-From figure \ref{fig:dist_p_h} we the that the distance between a point $\vec{x}^*$ and
+From figure \ref{fig:dist_p_h} we see that the distance between a point $\vec{x}^*$ and
 a hyperplane $g(\vec{x}) = \vec{w}^T - b = 0$ is given by
 \begin{equation}
     \text{distance} = \left| \frac{\vec{w}^T\vec{x}^*}{||\vec{w}||} - \frac{b}{||\vec{w}||} \right| = \frac{|g(x^*)|}{||\vec{w}||}
@@ -547,7 +547,7 @@ as illustrated in figure \ref{fig:projection_trick}.}
 \bluebox{In a space with sufficiently high dimensionality, arbitrary complex patterns are very likely to be linearly separable
 (Cover's Function Couting theorem).}
 
-We exapnd into a higher dimensional feature space by
+We expand into a higher dimensional feature space by
 
 \begin{equation}
     \vec{\phi} : \mathbb{R}^p \rightarrow \mathbb{R}^q, \quad q > p
@@ -644,6 +644,9 @@ Classification of a new point $\vec{x}$ is done by
     g(\vec{x}) = \sum_{i=1}^N \alpha_i^* c_i k(\vec{x}_i, \vec{x}) + \beta_0, \quad N \text{ samples in training set}
 \end{equation}
 
+\greenbox{So everything just depends on the kernel and we can go to effectively infinite dimensions by a kernel function.
+\textbf{The dual formulation enables kernelization}.}
+
 \subsubsection{Multiclass SVM}
 A simple option is to train a 1-vs-all classifier for all classes and then use
 \begin{equation}
@@ -653,9 +656,6 @@ A simple option is to train a 1-vs-all classifier for all classes and then use
 \note{\enquote{but it cannot capture correlations between the different classes since 
 it breaks a multiclass problem into multiple independent binary problems.}
 There are also approaches using multi-class objective functions \citep{crammer01}.}
-
-\greenbox{So everything just depends on the kernel and we can go to effectively infinite dimensions by a kernel function.
-\textbf{The dual formulation enables kernelization}.}
 
 \subsection{K-Nearest Neighbor classifier}
 kNN is a non-parametric, algorithmic modeling approach, where a new point
@@ -694,7 +694,7 @@ which is illustrated in table \ref{tab:knn_k}.
 
 \pinkbox{\textbf{Number of effective parameters:} While kNN is non-parametric,
 so there is no fixed number of parameters learned independent of the size of the
-training set, there are effectively $\sim \frac{k}{N}$ neighborhoods where one
+training set, there are effectively $\sim \frac{N}{k}$ neighborhoods where one
 parameter - the class - is learned.}
 
 \subsubsection{Advantages and Disadvantages of kNN}
@@ -839,13 +839,14 @@ The likelihood of a single data point is given by
 As usual, we minimize the negative log-likelihood
 \begin{equation}
     \begin{aligned}
-        \vec{\hat{\beta}}, \hat{\beta}_0 &= \argmin_{\vec{\beta}, \beta_0} \sum_{i=1}^N -\log(p(c_i | \vec{x}_i)) \\
-        &=\sum_{i=1}^N-c_i \log \sigma\left(\vec{\beta}^T \vec{x}_i\right)-\left(1-c_i\right) \log \left(1-\sigma\left(\vec{\beta}^T \vec{x}_i\right)\right) \\
-        &=-\sum_{i=1}^N \left( c_i \vec{\beta}^T \vec{x}_i - \log(1 + \exp(\vec{\beta}^T \vec{x}_i)) \right)
+        \vec{\hat{\beta}} &= \argmin_{\vec{\beta}} \sum_{i=1}^N -\log(p(c_i | \vec{x}_i)) \\
+        &=\argmin_{\vec{\beta}} \sum_{i=1}^N-c_i \log \sigma\left(\vec{\beta}^T \vec{x}_i\right)-\left(1-c_i\right) \log \left(1-\sigma\left(\vec{\beta}^T \vec{x}_i\right)\right) \\
+        &=\argmin_{\vec{\beta}} -\sum_{i=1}^N \left( c_i \vec{\beta}^T \vec{x}_i - \log(1 + \exp(\vec{\beta}^T \vec{x}_i)) \right) \\
+        &=\argmin_{\vec{\beta}} L(\vec{\beta})
     \end{aligned}
 \end{equation}
 which is called \textcolor{blue1}{logistic loss} or \textcolor{blue1}{cross-entropy loss} or 
-\textcolor{blue1}{log-loss} which is concave, \textbf{so we use Newton-Raphson to find the minimum}
+\textcolor{blue1}{log-loss} which is convex ($\partial_\vec{\beta}^2 L > 0$), \textbf{so we use Newton-Raphson to find the minimum}
 (there is no closed-form solution).
 
 \subsubsubsection{Understanding the terms in the negative log-loss as penalties}
@@ -1016,7 +1017,7 @@ by a sigmoid function ($p(c = 0 | \vec{x}) = 1 - \mu(\vec{x})$). This model is i
     \label{fig:perceptron}
 \end{figure}
 
-\greenbox{The perceptron is visualizes the logistic regression model for binary classification. It can linearly separate
+\greenbox{The perceptron visualizes the logistic regression model for binary classification. It can linearly separate
 classes with decision boundary perpendicular to $\vec{\beta}$ and offset $-\frac{b}{||\vec{\beta}||}$ (mind
 here $+b$ not $-b$ as previously in the formula).}
 
@@ -1071,18 +1072,22 @@ How can we for each data pair $\vec{x}_i, \vec{c}_i$ ($\vec{c}_i$ in $1$-hot enc
 
 We use the cross-entropy loss
 \begin{equation}
-    \epsilon = H(\{\vec{c}_i\}, \{\vec{f}_\vec{W}(\vec{x}_i)\}) = -\sum_{i=1}^N \vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
+    \text{loss } \epsilon = H(\{\vec{c}_i\}, \{\vec{f}_\vec{W}(\vec{x}_i)\}) = -\sum_{i=1}^N \vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
 \end{equation}
 
 \note{This is really the sum over many cross entropies, one for the predicted probability distribution over the classes
 at each feature vector $\vec{x}_i$ in the training set compared to the ground truth $\vec{c}_i$, given by
 \begin{equation}
-    \epsilon_i = H(\vec{c}_i, \vec{f}_\vec{W}(\vec{x}_i)) = -\sum_{k=1}^K c_{ik} \log(f_{\vec{W},k}(\vec{x}_i)) = \vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
+    \epsilon_i = H(\vec{c}_i, \vec{f}_\vec{W}(\vec{x}_i)) = -\sum_{k=1}^K c_{ik} \log(f_{\vec{W},k}(\vec{x}_i)) = -\vec{c}_i^T \log(\vec{f}_\vec{W}(\vec{x}_i))
 \end{equation}
 }
 
 \bluebox{\textbf{Neural Network loss in a regression setting:} In the
-regression setting}
+regression setting
+\begin{equation}
+    \text{loss } \epsilon = \frac{1}{N} \sum_{i=1}^N \left( \vec{y}_i - \vec{f}_\vec{W}(\vec{x}_i) \right)^2
+\end{equation}
+}
 
 \subsubsubsection{Intermezzo: Information measures for probability distributions}
 The shannon information content $h(x) = \log_2 \frac{1}{p(x)}$ of an event $x$
@@ -1152,6 +1157,6 @@ is the average extra information needed to encode events from $p$ using a code o
 to the average information needed to encode events from $p$ using a code optimized for $p$.
 
 \note{Consider we train a neural network and do gradient descent on this loss. Our networks estimate is 
-$q$, $H(p)$ does not depend on our network. Gradient descent will therefore will be the same for the cross-entropy loss and the KL-divergence.}
+$q$, $H(p)$ does not depend on our network. Gradient descent will therefore be the same for the cross-entropy loss and the KL-divergence.}
 
 \pagebreak

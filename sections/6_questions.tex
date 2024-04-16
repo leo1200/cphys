@@ -14,6 +14,8 @@
     \answerboxS
     \item (L) What are common pitfalls in integer arithmetic?
     \answerboxM
+    \item (L) What is the meaning of the machine precision $\epsilon$?
+    \answerboxS
     \item (L) Consider you multiply two integers which multiplication
     $6\cdot 10^9$ overflows the integer range and store it in a long long.
     What is the result stored? What is the underlying problem?
@@ -81,10 +83,12 @@
     \answerboxM
     \item (K) How can one derive the coefficients for Runge-Kutta schemes?
     \answerboxM
-    \item (L) Give the RK2 and midpoint method.
+    \item (L) Give the RK2 and midpoint method. Also give the Butcher tableaus for both.
     \answerboxM
     \item (K) How is the Butcher tableau for an explicit Runge-Kutta method different from that for an implicit one?
     \answerboxM
+    \item (L) Why is an adaptive step size important?
+    \answerboxS
     \item (K) Explain the step size halving / doubling scheme.
     \answerboxM
     \item (L) How to introduce a global error bound?
@@ -93,21 +97,26 @@
     \answerboxM
     \item (L) How can you continuously adapt the step size?
     \answerboxM
+    \item (L) How can one more efficiently estimate the truncation error?
+    \answerboxS
 \end{itemize}
 
 \subsubsection*{Problem of conserved quantities}
 \begin{itemize}
     \item (L) When using RK2 for the 2-body problem, which conserved quantities are not conserved?
     \answerboxS
-    \item (L) Explain the Störmer-Verlet / Velocity Verlet method.
+    \item (L) Explain the Störmer-Verlet / Velocity Verlet method. For what kind of ODE is it suited?
     \answerboxL
-    \item (L) Explain the Leapfrog method. What is its order? Show that its reversible.
-    Write down the kick-drift-kick and drift-kick drift update steps.
-    \answerboxL
-    \item (L) How are Velocity Verlet and Leapfrog related?
+    \item (L) Explain the Leapfrog method.
     \answerboxM
     \item (L) What is the order of the leapfrog scheme?
     \answerboxS
+    \item (L) Show that the Leapfrog scheme is time symmetric and reversible.
+    \answerboxM
+    \item (L) Write down the kick-drift-kick and drift-kick drift update steps. What problems do these formulations solve?
+    \answerboxL
+    \item (L) How are Velocity Verlet and Leapfrog related?
+    \answerboxM
     \item (L) What quantities in the 2-body problem are conserved with the Leapfrog method, which are not?
     \answerboxS
     \item (L) What are symplectic integrators? What are their advantages? Disadvantages?
@@ -124,18 +133,22 @@
 \begin{itemize}
     \item (K) Explain the Bulirsch-Stoer method.
     \answerboxL
+    \item (L) Give the modified midpoint rule used. What is its advantage?
+    \answerboxM
     \item (K) When to accept the Bulirsch-Stoer result for an interval
     \begin{itemize}
         \item \bottomupL{hint: when the difference between the result with the smallest step-size and the extrapolation is sufficiently small}
     \end{itemize}
     \answerboxS
-    \item (K) What is special about Richardson interpolation?
+    \item (K) What is special about Richardson extrapolation?
     \answerboxM
 \end{itemize}
 
 \subsubsection*{Predictor corrector and Multistep methods}
 \begin{itemize}
     \item (K) Explain the predictor-corrector scheme. What is the idea?
+    \answerboxM
+    \item (K) Explain the $P(EC)^k$ method. When should we stop doing corrector steps?
     \answerboxM
     \item (K) What are multistep methods? Give an example
     \answerboxM
@@ -158,15 +171,15 @@
     \item (LA) Relate the mean free path to the collisional cross-section and the density. What is the order of
     magnitude of the mean free path in air, what in solar wind?
     \answerboxM
-    \item (L) Write down the Boltzmann equation.
+    \item (L) Write down the Boltzmann equation. What should integration over all phase space yield?
     \answerboxS
-    \item (L) Write down the Navier-Stokes / Euler equations. How are they connected to the Boltzmann equation?
+    \item (L) Write down the Navier-Stokes / Euler equations. How are they connected to the Boltzmann equation? How are they closed?
     \answerboxL
     \item (L) What characterizes an incompressible fluid?
     \answerboxM
     \item (L) What are the assumptions of the Navier-Stokes equations, what of the Euler equations?
     \answerboxM
-    \item (L) What can viscosity be expressed by in the incompressible, isotropic case?
+    \item (L) What can viscosity be expressed by in the incompressible, isotropic case? What kind of viscosity is this, shear or bulk?
     \answerboxM
     \item (L) What does the Reynolds number express? Give an expression for it. When is a flow turbulent?
     \answerboxM
@@ -206,6 +219,9 @@
     \item (L) What kind of turbulence do we have in subsonic flow?
     \answerboxS
     \item (L) How does the kinematic viscosity change with the mean free path (at same density)?
+    How can this be used to interpret the Reynolds number as a comparison of scales?
+    \answerboxS
+    \item (L) What are the modes in supersonic turbulence?
     \answerboxS
     \item (L) Draw the Kolmogorov spectrum, name the ranges and their properties.
     \answerboxM
@@ -214,11 +230,21 @@
 \subsection*{Eulerian Hydrodynamics | Solving PDEs}
 
 \begin{itemize}
-    \item (L) How can we classify PDEs? Give typical examples for the classes. What types of solvers are there?
+    \item (L) How can we classify PDEs of 2nd order with two independent variables? Give typical examples and
+    characterizing properties for the classes.
+    \answerboxL
+    \item (LA) How can this classification be extended to more independent variables?
+    \answerboxM
+    \item (LA) When is a 1st order system in one time and many spatial dimensions / a conservation law hyperbolic?
+    \answerboxM
+    \item (L) Give an overview on PDE solvers and compare them.
     \answerboxL
     \item (L) Construct an advection solver. What do you have to mind with respect to the 
     direction of information flow and the maximum timestep?
     \answerboxL
+    \item (L) How can one handle a spatially varying velocity field, how can our advection solver
+    be extended so it can be used on the Euler equations?
+    \answerboxM
     \item (L) In the advection upwind scheme, why does the solution smooth out? Does a smaller
     time step reduce the numerical smoothing? How can this effect be reduced (give the numerical 
     diffusion constant).
@@ -233,8 +259,10 @@
     \answerboxS
     \item (L) Derive the update of a cell average in the Godunov scheme.
     \answerboxL
-    \item (L) How do you solve the small problems in the Godunov scheme? Explain the HLL method.
+    \item (L) How do you solve the intercell Riemann problems in the Godunov scheme? Explain the HLL method and derive the intercell fluxes.
     \answerboxL
+    \item (L) What are possible approaches to $S_L$ and $S_R$ in the HLL solver?
+    \answerboxS
     \item (L) How can we generalize the Godunov scheme to multiple spatial dimensions?
     \answerboxL
     \item (L) What is the spatial order of a hydro-solver, e.g. what does it mean that Godunov is 1st order?
@@ -436,6 +464,10 @@
     \answerboxM
     \item (G) What types of iterative solvers for linear systems are there?
     \answerboxM
+    \item (L) How can we quickly solve a tridiagonal system? Use the constant
+    heating problem $\partial_t T = -\epsilon = D \partial_x^2 T$ with
+    Dirichlet boundaries as an application example.
+    \answerboxM
     \item (G) Derive the Jacobi update.
     \answerboxM
     \item (L) Derive the error in the Jacobi scheme. When does Jacobi converge?
@@ -453,7 +485,7 @@
     \item (L) Explain the concept of red-black ordering.
     \answerboxS
     \item (LA) Formulate the Poisson problem in 2D as
-    a relaxation scheme. How far does information travel in one step? What does the CFL criterion imply?
+    a relaxation scheme suited for red-black ordering. How far does information travel in one step? What does the CFL criterion imply?
     \answerboxM
     \item (G) What problems do these iterative methods have, how to solve them?
     \begin{itemize}
@@ -573,7 +605,7 @@
         \item \bottomup{hint: no, what we model can be seen as samples of the distribution function}
     \end{itemize}
     \answerboxS
-    \item (L) When can a gravitational system be assumed collisionless?
+    \item (L) When can a gravitational system be assumed collisionless? What does this imply for long-time-scale simulations of collisionless systems?
     \begin{itemize}
         \item \bottomupL{hint: when $t_{\text{sim}} \ll t_{\text{relax}} \approxeq \frac{N}{8 \log N} t_\text{cross}$ ($N$ particles, crossing time $t_\text{cross}$), where the relaxation time is the timescale on which collisions become important}
     \end{itemize}
@@ -613,6 +645,8 @@
         \item \bottomup{hint: use direct-summation, particle-mesh, or tree based method}
     \end{itemize}
     \answerboxS
+    \item (L) What is the problem with direct summation? Why is this infeasible for the Millennium simulation $N > 10^{10}$?
+    \answerboxS
     \item (L) How to simulate $N$ bodies? Are those typically the real physical bodies?
     \begin{itemize}
         \item \bottomupL{hint: direct summation, tree, particle-mesh based on solving Poisson equation on mesh either with FFT or multigrid relaxation; no typically heavier fiducial particles}
@@ -641,7 +675,7 @@
         \item \bottomupL{hint: KD-trees as in tree classifiers, binary splits along axis, e.g. to balance mass $\rightarrow$ better control depth (but more complex data structure)}
     \end{itemize}
     \answerboxM
-    \item (L) How many nodes do we have to open? What is the computational cost of the tree method? Why is this infeasible for the Millennium simulation $N > 10^{10}$
+    \item (L) How many nodes do we have to open? What is the computational cost of the tree method? How can we further speed things up?
     \answerboxL
     \item (L) How does the expected force error scale with the critical opening angle $\theta_c$?
     \answerboxM
@@ -649,7 +683,8 @@
 
 \subsubsection*{Particle mesh method}
 \begin{itemize}
-    \item (L) What is the idea of the particle mesh method? What are its advantages?
+    \item (L) What is the idea of the particle mesh method? What are its advantages (compared to direct summation
+    and tree based methods)? What are its disadvantages?
     \answerboxM
     \item (L) How are particles represented, how is mass mapped onto the auxiliary grid?
     \answerboxM
@@ -722,7 +757,7 @@
     \answerboxL
     \item (LA) State and proof the Central Limit Theorem.
     \answerboxL
-    \item (G) Give an example of a classical (\textit{deterministic}) method for quadrature (integration).
+    \item (G) Give an example of a classical (\textit{deterministic}) method for quadrature (integration). What is the fundamental problem of the error scaling of such methods?
     \answerboxM
     \item (L) When is Monte Carlo integration better than e.g. Simpsons rule? So what's its main advantage?
     \answerboxL
@@ -774,7 +809,7 @@
     \answerboxL
     \item (L) What quantity could be of interest?
     \begin{itemize}
-        \item \bottomupL{hint: for instance the mean magnetization $M \frac{1}{V} \sum s_i$. For different temperatures
+        \item \bottomupL{hint: for instance the mean magnetization $M = \frac{1}{V} \sum s_i$. For different temperatures
         one can run the Metropolis-Hastings algorithm until one reaches plausible (equilibrium) spin configurations and consider the mean magnetization.
         This way we can find the critical temperature under which spontaneous magnetization occurs.}
     \end{itemize}
@@ -806,7 +841,7 @@
     \answerboxS
     \item (L) What are the basic types of concurrency? How do they differ? Give examples.
     \answerboxS
-    \item (L) What are the general challenges of concurrency?
+    \item (L) What are the general challenges of concurrency? What can we do about them?
     \answerboxM
 \end{itemize}
 
@@ -1303,6 +1338,9 @@
     \answerboxM
     \item (L) What will rather choose the more complex model, AIC or BIC?
     \answerboxM
+    \item (S) How does $-2\log \mathcal{L}(\vec{\hat{\beta}}_\text{MLE})$ (likelihood $\mathcal{L}$) scale
+    with the sample size, so why might scaling the number of effective parameters in BIC by $\log N$ make sense?
+    \answerboxS
 \end{itemize}
 
 \subsubsection*{Double descent}
@@ -1320,7 +1358,9 @@
     \item (L) What is the problem of very high dimensional data to model (lots of features)?
     \answerboxS
     \item (L) What can we do to avoid having an overfitting model?
-    \answerboxS
+    \answerboxM
+    \item (L) How can feature selection be done to mitigate overfitting?
+    \answerboxM
     \item (L) Explain situations where ordinary least squares breaks down or is not robust enough.
     \begin{itemize}
         \item \bottomupL{hint: breakdown for $p>N$ and collinear features, bad if not sufficiently many data points / too much noise and outliers}
@@ -1347,6 +1387,8 @@
     \item (D) Sketch Ridge and Lasso regularization in the constrained formulation. How can you
     see that one will rather set coefficients to zero than the other?
     \answerboxL
+    \item (L) For strongly correlated features, what will Lasso and Ridge do to the corresponding parameters?
+    \answerboxS
     \item (D) How is the regularization connected to the Bias-Variance-Tradeoff?
     \answerboxM
 \end{itemize}
@@ -1368,7 +1410,7 @@
     \item (L) What is the idea of discriminant analysis? What do we model? How to we obtain the class probabilities given a feature vector?
     \answerboxM
     \item (L) For Linear Discriminant Analysis write down the discriminant function and identify 
-    the Mahalanobis distance.
+    the Mahalanobis distance. (Bonus: How is the Mahalanobis distance useful in testing?)
     \answerboxM
     \item (L) How does the LDA decision boundary between two classes look like?
     \answerboxM
@@ -1377,6 +1419,8 @@
     \item (L) How do we train a discriminant analysis model, i.e. how do we estimate
     the class means, covariance matrices (pooled covariance for LDA) and class priors?
     \answerboxM
+    \item (L) Does the discriminant classifier have hyperparameters?
+    \answerboxS
 \end{itemize}
 
 \subsubsection*{Linear Classifiers in general}
@@ -1406,7 +1450,7 @@
     \end{itemize}
     \answerboxL
     \item (L) Formulate the dual problem. What is the advantage of the dual problem?
-    \answerboxM
+    \answerboxL
     \item (L) Give the decision only in terms of the dual variables.
     \answerboxM
     \item (L) What value do the dual variables $\alpha_i$ take for the support vectors? What for all other points?
@@ -1457,6 +1501,9 @@
     \answerboxS
     \item (L) How do we derive the loss function for logistic regression?
     \answerboxM
+    \item (L) How do we find the parameters $\vec{\hat{\beta}}$? Is there a closed analytical
+    solution? If not which numerical method do we use and why?
+    \answerboxS
     \item (L) In what case is this \textit{always} maximized for $||\vec{w}|| \rightarrow \infty$? What is the corresponding likelihood of the observed class labels under this probability model?
     \answerboxM
     \item (L) How can we generalize to multiple classes?
@@ -1588,18 +1635,19 @@
     \answerboxM
     \item (L) What is the rationale behind wanting independent / as non-Gaussian as possible latent sources? Why are uncorrelated sources not enough (identifiability issue)
     \answerboxM
-    \item (L) What metric can be used to measure the independence of the latent sources? How do we find the 
-    mixing matrix $\mat{\Gamma}$ yielding the most independent sources? How do we estimate the source entropy terms?
-    \answerboxM
     \item (L) Before applying ICA one has to whiten the data matrix $\mat{X}$. What does this mean? Why is this necessary?
     \answerboxM
+    \item (L) What metric can be used to measure the independence of the latent sources? How do we find the 
+    mixing matrix $\mat{\Gamma}$ yielding the most independent sources? How do we estimate the source entropy terms?
+    \answerboxL
     \item (L) What are the limitations of ICA?
     \answerboxM
 \end{itemize}
 
 \subsubsection*{Factor Analysis}
 \begin{itemize}
-    \item (L) What is the idea of factor analysis? What is the model?
+    \item (L) What is the idea of factor analysis? What is the model? What do the respective parts of the model account for?
+    Give examples where factor analysis could be applied.
     \answerboxM
     \item (L) How is factor analysis different from PCA? When should one use which?
     \answerboxM
@@ -1613,6 +1661,7 @@
 \end{itemize}
 
 \subsubsection*{Generative Latent Models}
+\paragraph*{Latent Variable Models and Evidence Lower Bound (ELBO)}
 \begin{itemize}
     \item (L) Consider a model $p_\vec{\theta}(\vec{x},\vec{z}) = p_{\vec{\theta}_{\text{lat}}}(\vec{z}) p_{\vec{\theta}_{\text{obs}}}(\vec{x} | \vec{z})$ with latent (unobserved) variables $\vec{z}$.
     What is the problem with doing maximum likelihood to obtain the parameters $\vec{\theta} = (\vec{\theta}_{\text{lat}}, \vec{\theta}_{\text{obs}})$?
@@ -1621,18 +1670,27 @@
     \answerboxM
     \item (L) Why is one interested in obtaining the discriminant posterior $p(\vec{z} | \vec{x})$?
     \answerboxM
-    \item (L) Give the expression for the evidence lower bound (ELBO).
+    \item (L) Give the expression for the evidence and the evidence lower bound (ELBO).
     \answerboxM
     \item (L) How is the evidence lower bound useful in making the maximum likelihood problem tractable? When are ELBO and marginal evidence equal? Proof that it is indeed a lower bound.
-    \answerboxM
+    \answerboxL
     \item (L) What is the variational density optimized towards when maximizing the evidence lower bound?
     \answerboxM
     \item (L) What is the gap between the evidence lower bound and the log-likelihood?
     \answerboxM
+\end{itemize}
+
+\paragraph*{Expectation-Maximization algorithm}
+\begin{itemize}
     \item (L) Explain the variational Expectation-Maximization (EM) algorithm.
     \answerboxM
     \item (L) What are Gaussian Mixture Models? Apply the EM algorithm.
     \answerboxL
+\end{itemize}
+
+\paragraph*{Variational Inference and Variational Autoencoders}
+
+\begin{itemize}
     \item (L) What do we aim for in Variational Inference?
     \answerboxM
     \item (L) Describe Variational Inference for finding an approximate posterior over parameters in a Bayesian setting (in the understanding of parameters as latent variables).
@@ -1640,7 +1698,7 @@
     \item (L) Explain the architecture of a Variational Autoencoder.
     \answerboxL
     \item (L) How can one train a Variational Autoencoder? What is the problem with calculating the gradient of the evidence lower bound with
-    respect to the parameters of encoder? How can we circumvent this problem?
+    respect to the parameters of the encoder? How can we circumvent this problem?
     \answerboxL
     \item (L) How can the VAE be used for generative modeling? What are other applications of VAEs?
     \answerboxM

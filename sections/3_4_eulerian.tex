@@ -135,7 +135,7 @@ which is the matrix representation of a conic section in $\vec{k}$-space (why?).
 \note{The classification scheme introduced is for 2nd order PDEs with two variables, it is not made e.g. for the advection equation $\partial_t u + v \partial_x u = 0$ which is first order and hyperbolic.}
 
 \subsubsection{Classification of linear 2nd order PDEs with more unknowns}
-For the general from
+For the general form
 \begin{equation}
     \sum_{i, j=1}^n A_{i j} \frac{\partial^2 u}{\partial x_i \partial x_j}+\sum_{i=1}^n b_i \frac{\partial u}{\partial x_i}+c u+d=0, \quad \mat{A} \text { with entries } A_{i j}
 \end{equation}
@@ -181,7 +181,7 @@ is seems different to tell, often \textit{hyperbolic} is used as \textit{advecti
 stokes equation can be either depending on the Reynolds number.}
 
 \bluebox{\textbf{Solving an elliptic problem by solving a hyperbolic problem to steady state\skipthis:}
-Consider for instance the hyperbolic Poisson equation
+Consider for instance the elliptic Poisson equation
 \begin{equation}
     \vec{\nabla}^2 \phi = 4\pi G \rho
 \end{equation}
@@ -914,14 +914,14 @@ in the dimensions are done separately.
 \subsubsubsection{2nd order accurate in 2D examples}
 \begin{equation}
     \begin{gathered}
-    \vec{U}^{(n+1)}=\frac{1}{2}[X(\Delta t) \mathcal{Y}(\Delta t)+\mathcal{Y}(\Delta t) \mathcal{X}(\Delta t)] \vec{U}^{(n)} \\
-    \text { or } \vec{U}^{(n+1)}=X\left(\frac{\Delta t}{2}\right) \mathcal{Y}(\Delta t) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
+    \vec{U}^{(n+1)}=\frac{1}{2}[\mathcal{X}(\Delta t) \mathcal{Y}(\Delta t)+\mathcal{Y}(\Delta t) \mathcal{X}(\Delta t)] \vec{U}^{(n)} \\
+    \text { or } \vec{U}^{(n+1)}=\mathcal{X}\left(\frac{\Delta t}{2}\right) \mathcal{Y}(\Delta t) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
     \end{gathered}
 \end{equation}
 
 \subsubsection{2nd order accurate in 3D example}
 \begin{equation}
-    \vec{U}^{(n+1)}=x\left(\frac{\Delta t}{2}\right) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{Z}(\Delta t) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
+    \vec{U}^{(n+1)}=\mathcal{X}\left(\frac{\Delta t}{2}\right) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{Z}(\Delta t) \mathcal{Y}\left(\frac{\Delta t}{2}\right) \mathcal{X}\left(\frac{\Delta t}{2}\right) \vec{U}^{(n)}
 \end{equation}
 where the 2nd order is based on the alternating reverse order application of
 the time evolution operators.
@@ -936,10 +936,14 @@ In the case of rectangular cells in 2D, we have
 \begin{equation}
     \vec{U}_{i, j}^{(n+1)}=\vec{U}_{i, j}^{(n)}+\frac{\Delta t}{\Delta x}\left(\vec{F}_{i-\frac{1}{2}, j}-\vec{F}_{i+\frac{1}{2}, j}\right)+\frac{\Delta t}{\Delta y}\left(\vec{G}_{i, j-\frac{1}{2}}-\vec{G}_{i, j-\frac{1}{2}}\right)
 \end{equation}
+\todo[inline]{Shouldn't this be all fluxes divided by the area of the cell?}
 
 In the situation of an unstructured mesh, we generally have
 \begin{equation}
-    \vec{U}^{(n+1)}=\vec{U}^{(n)}-\frac{\Delta t}{V} \int \vec{F} \cdot d \vec{S} \text { integral over cell surface,  } d\vec{S} \text{ is the surface element vector, pointing outwards}
+    \begin{gathered}
+        \vec{U}^{(n+1)}=\vec{U}^{(n)}-\frac{\Delta t}{V} \int \vec{F} \cdot d \vec{S} \text { integral over cell surface} \\
+        d\vec{S} \text{ is the surface element vector, pointing outwards}
+    \end{gathered}
 \end{equation}
 which makes sense intuitively (the change coming from the
 borders distributes over the cells).
@@ -1145,7 +1149,10 @@ with
 \end{equation}
 with and exemplary flux limiter being
 \begin{equation}
-    \phi_{\text{minmod}} = \max(0, \min(1, r)), \quad r > 1 \rightarrow \phi_{\text{minmod}} = 1 \rightarrow \text{high order}
+    \begin{gathered}
+        \phi_{\text{minmod}} = \max(0, \min(1, r)), \quad r > 1 \rightarrow \phi_{\text{minmod}} = 1 \rightarrow \text{high order} \\
+        \text{jumps of different sign} \quad \rightarrow \quad r \leq 0 \quad \rightarrow \quad \phi(r) = 0 \quad \rightarrow \quad \text{low order} \\
+    \end{gathered}
 \end{equation}
 (illustrated in figure \ref{fig:minmod}) where it makes sense that for a big $r$ we use the higher order method: \textcolor{blue1}{If the jump between $i$ and $i+1$ is small compared to the jump between $i-1$ and $i$, we can assume that the solution is smooth and use the higher order method (no dicontinuity expected).}
 

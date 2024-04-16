@@ -258,9 +258,9 @@ where based on random numbers $u_1, u_2 \sim \mathcal{U}(0,1)$ we can sample bot
     \end{aligned}
 \end{equation}
 
-As the 2D Gaussian is just a product of 1D Gaussians, from $r$ and $\phi$ we can then get two normally distributed numbers $x$ and $y$.
+As the 2D Gaussian is just a product of 1D Gaussians (the marginals of a Gaussian are Gaussian), from $r$ and $\phi$ we can then get two normally distributed numbers $x$ and $y$.
 
-\bluebox{\textbf{Box-Buller trick:} Given two uniformly distributed random numbers $u_1, u_2 \sim \mathcal{U}(0,1)$, we can generate two normally distributed random numbers $x, y \sim \mathcal{N}(0,1)$ by
+\bluebox{\textbf{Box-Muller trick:} Given two uniformly distributed random numbers $u_1, u_2 \sim \mathcal{U}(0,1)$, we can generate two normally distributed random numbers $x, y \sim \mathcal{N}(0,1)$ by
 \begin{equation}
     \phi = 2\pi u_1, \quad r = \sqrt{-2 \ln(1 - u_2)} \quad \rightarrow \quad x = r \cos(\phi), \quad y = r \sin(\phi)
 \end{equation}
@@ -358,11 +358,7 @@ so we can sample from the surface of a sphere by
     \item If $r_d = u_1^2 + u_2^2 + u_3^2 \leq 1$, return $(u_1, u_2, u_3)$, else reject and draw again
     \item Project the points to the surface of the unit sphere by
     \begin{equation}
-        \begin{aligned}
-            x &= \frac{u_1}{r}
-            y &= \frac{u_2}{r}
-            z &= \frac{u_3}{r}
-        \end{aligned}
+            x = \frac{u_1}{r}, \quad y = \frac{u_2}{r}, \quad z = \frac{u_3}{r}
     \end{equation}
 \end{itemize}
 which can easily be extended to higher dimensions.
@@ -696,7 +692,7 @@ This motivates the following ansatz
 with
 
 \begin{equation}
-    \Var[\hat{I}_{anti}] = \frac{1}{4} \left(\Var[\hat{I}_{N / 2}] + \Var[\tilde{I}_{N / 2}] + 2 \Cov[\hat{I}_{N / 2}, \tilde{I}_{N / 2}]\right) \explain{=}{\text{see eq. \ref{eq:mcint_var}}} \Var[\hat{I}_N] - \frac{1}{2} \Cov[\hat{I}_{N / 2}, \tilde{I}_{N / 2}]
+    \Var[\hat{I}_{anti}] = \frac{1}{4} \left(\Var[\hat{I}_{N / 2}] + \Var[\tilde{I}_{N / 2}] + 2 \Cov[\hat{I}_{N / 2}, \tilde{I}_{N / 2}]\right) \explain{=}{\text{see eq. \ref{eq:mcint_var}}} \Var[\hat{I}_N] + \frac{1}{2} \Cov[\hat{I}_{N / 2}, \tilde{I}_{N / 2}]
 \end{equation}
 
 where for $g$ continuous and monotonic, $\Cov[\hat{I}_{N / 2}, \tilde{I}_{N / 2}]$ is negative, as $U$ and $1 - U$ with $U \sim \mathcal{U}(0, 1)$ are negatively correlated. So we can reduce the variance compared to an estimator $\hat{I}_N$ using the same number of function 
@@ -823,7 +819,7 @@ are taken with a transition probability $W_f$
 \end{equation}
 which \textcolor{blue1}{only depends on the current state} - no information on the history is used.
 
-This conditional transition property has the natural properties
+This conditional transition probability distribution has the natural properties
 \begin{equation}
     \int W_f(x \rightarrow x') \, dx' = 1, \quad W_f(x \rightarrow x') \geq 0
 \end{equation}
@@ -861,7 +857,7 @@ applications of $f$ will yield us a sequence of numbers that are a sample of $p_
     of states $x_1,\dots,x_n$ in a single Markov chain under action of $f$ approaches $p_{eq}$ as the number of steps
     $n$ goes to infinity.
 \end{itemize}
-\greenbox{We therefore have to principal ways of sampling: \textbf{ensemble sampling} (we apply $f$ repeatedly
+\greenbox{We therefore have two principal ways of sampling: \textbf{ensemble sampling} (we apply $f$ repeatedly
 to a set of states, which at some point are samples from $p_{eq}$) and \textbf{chain sampling} (starting
 from one initial state samples are taken as sequences from the chain).}
 
@@ -909,7 +905,7 @@ Starting from a current state $x$ we want to go to the next one $x'$. Let $p$ be
     \begin{equation}
         \begin{gathered}
             q(x \rightarrow x'): x' = x + e, \quad e \text{ distributed symmetrically around } 0 \\
-            \text{e.g. } e \sim \mathcal{N}(0,\sigma^2) \text{ so }  q(x \rightarrow x') = \mathcal{N}(x-x',\sigma^2)
+            \text{e.g. } e \sim \mathcal{N}(0,\sigma^2) \text{ so }  q(x \rightarrow x') = \mathcal{N}(x,\sigma^2)
         \end{gathered}
     \end{equation}
     }
@@ -952,7 +948,7 @@ So for $W_f(x' \rightarrow x)$ we get
     W_f\left(x^{\prime} \rightarrow x\right)=q\left(x^{\prime} \rightarrow x\right) \cdot 1
 \end{equation}
 
-which together with the expression for $W_f(x \rightarrow x')$ we obtain detailed balance.
+which together with the expression for $W_f(x \rightarrow x')$ leads to detailed balance.
 
 \subsubsubsection{Metropolic update | for a symmetric proposal operator the Hasings ratio simplifies}
 Consider the case of a symmetric proposal operator (e.g. the one already introduced)
@@ -961,7 +957,7 @@ Consider the case of a symmetric proposal operator (e.g. the one already introdu
 \end{equation}
 so the Hastings ratio (acceptance probability) becomes
 \begin{equation}
-    r = \min{\left(1, \frac{p(x')}{p}\right)}
+    r = \min{\left(1, \frac{p(x')}{p(x)}\right)}
 \end{equation}
 \note{For a symmetric proposal operator we always accept the new state if it has higher
 probability than the current one. Moves to states with lower probability are still possible.}
@@ -1027,7 +1023,7 @@ for instance the mean energy $\langle E \rangle$.}
 Remember that states in the canonical ensemble have relative probabilities given 
 by the Boltzmann factor
 \begin{equation}
-    \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}
+    \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}, \quad p(\vec{\phi}) = \frac{1}{Z} \exp{\left( -\frac{H(\vec{\phi})}{k_B T} \right)}
 \end{equation}
 (higher energy states are more unlikely at lower temperatures).
 
@@ -1233,7 +1229,7 @@ which for the identity $u(\vec{\mu}) = \vec{\mu}$ is just the minimum mean squar
 expectations over the posterior distribution (like $\hat{\vec{\mu}}_{MMSE}$) simply by the Monte Carlo Estimator
 \begin{equation}
     \label{eq:post_int}
-    \hat{I}_N = \sum_{i=1}^{N} u(\vec{\mu}_i)
+    \hat{I}_N = \frac{1}{N} \sum_{i=1}^{N} u(\vec{\mu}_i)
 \end{equation}
 }
 

@@ -5,7 +5,7 @@
 examples already covered are implicit Euler applied to a linear ODE in sec. \ref{sssec:implicit_euler_linear},
 or to a non-linear one (the linear equation then follows from doing the implicit step
 by Newton-Raphson where the Jacobian is to be inverted (sec. \ref{sssec:implicit_euler_nonlinear})),
-or just recently in the diffusion equation.
+or just recently in the diffusion equation (based on method of lines and implicit Euler or Crank-Nicolson).
 
 Another example of a linear system we care about is solving a discretized Poisson equation.
 
@@ -13,7 +13,7 @@ Another example of a linear system we care about is solving a discretized Poisso
 are often too costly, so iterative methods - methods where we construct a sequence
 of approximate solutions that hopefully converge to the exact solution - are used.}
 
-\bluebox{In the multigrid-technique, differential equations are solved using a hierarchy of discretizations.}
+\bluebox{In the multigrid-technique, linear equations are solved using a hierarchy of discretizations.}
 
 \subsection{Motivational Example 1: From the Poisson equation we can get a possibly big linear system}
 Let us discretize the 1D Poisson equation
@@ -131,7 +131,7 @@ Consider $\mat{L}, \mat{R} \in \mathbb{R}^{N\times N}$ and $\mat{A} \in \mathbb{
     \mat{A} = \mat{L} \mat{R}, \quad \text{lower-left triangular matrix } \mat{L}, \text{ upper-right triangular matrix } \mat{R}
 \end{equation}
 \note{More generally, $\mat{P} \mat{A} = \mat{L} \mat{R}$ with $\mat{P}$ a permutation matrix is possible for
-every invertible matrix $\mat{A}$. Otherwise the decomposition is not always possible, e.g. for $a_{11} = 0 \rightarrow l_{11}$ or $l_{11} = 0$, so
+every invertible matrix $\mat{A}$. Otherwise the decomposition is not always possible, e.g. for $a_{11} = 0 \rightarrow r_{11}$ or $l_{11} = 0$, so
 $\mat{L}$ or $\mat{R}$ would be singular (not full rank), so $\mat{A}$ would not be invertible (contradiction). So $\mat{P}$ is used to switch rows of $\mat{A}$.}
 
 \subsubsection{Solving the linear system for $\vec{x}$ when we already know the LU-decomposition}
@@ -364,14 +364,14 @@ The elliptic problem can be written as the equilibrium of the relaxation problem
 
 \subsubsection{Red-black ordering for the 2D Poisson equation}
 Consider for instance the 2D Poisson equation, formulated as a relaxation problem, here central in space,
-forward in time
+forward in time (here assume $\Delta y = \Delta x$)
 \begin{equation}
-    K \frac{\phi_{i, j}^{(n+1)}-\phi_{i, j}^{(n)}}{\Delta t}=\frac{\phi_{i+1, j}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i-1, j}^{(n)}}{\Delta x^2}+\frac{\phi_{i, j+1}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i, j-1}^{(n)}}{\Delta x^2}-4 \pi G \rho_{i j}
+    \frac{1}{K} \frac{\phi_{i, j}^{(n+1)}-\phi_{i, j}^{(n)}}{\Delta t}=\frac{\phi_{i+1, j}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i-1, j}^{(n)}}{\Delta x^2}+\frac{\phi_{i, j+1}^{(n)}-2 \phi_{i, j}^{(n)}+\phi_{i, j-1}^{(n)}}{\Delta x^2}-4 \pi G \rho_{i j}
 \end{equation}
 so
 \begin{equation}
     \label{eq:2dpoisson_disc}
-    \phi_{i, j}^{(n+1)}=\frac{K \Delta t}{\Delta x^2}\left(\phi_{i+1, j}^{(n)}+\phi_{i-1, j}^{(n)}+\phi_{i, j+1}^{(n)}+\phi_{i, j-1}^{(n)}\right)+\underbrace{\left(1-4 \frac{K \Delta t}{\Delta x^2}\right)}_{= \, 0 \text{ by choice } \Delta t = \frac{1}{4} \frac{\Delta x^2}{K}} \phi_{i, j}^{(n)}-4 \pi G \rho_{i j} \Delta t
+    \phi_{i, j}^{(n+1)}=\frac{K \Delta t}{\Delta x^2}\left(\phi_{i+1, j}^{(n)}+\phi_{i-1, j}^{(n)}+\phi_{i, j+1}^{(n)}+\phi_{i, j-1}^{(n)}\right)+\underbrace{\left(1-4 \frac{K \Delta t}{\Delta x^2}\right)}_{= \, 0 \text{ by choice } \Delta t = \frac{1}{4} \frac{\Delta x^2}{K}} \phi_{i, j}^{(n)}-4 \pi G K \rho_{i j} \Delta t
 \end{equation}
 where the time-step choice is akin to the CFL criterion in diffusion.
 \greenbox{The discretized Poisson-relaxation update lends itself naturally to a red-black ordering scheme.}
@@ -723,9 +723,9 @@ also not always be optimal.}
 \subsubsection{Motivation for the need of Krylow subspace methods in the context of non-linear root-finding of big systems\skipthis}
 Consider a non-linear equation
 \begin{equation}
-    \vec{0} = g(\vec{\xi})
+    \vec{0} = \vec{g}(\vec{\xi})
 \end{equation}
-which we want to solve for $\xi$.\footnote{For instance an implicit Euler
+which we want to solve for $\vec{\xi}$.\footnote{For instance an implicit Euler
 step can be formulated as such a root finding problem.
 \begin{equation}
     \begin{gathered}
@@ -735,7 +735,7 @@ step can be formulated as such a root finding problem.
 \end{equation}}
 A common root-finding approach is Newton-Iteration\footnote{Which has quadratic convergence - as the method converges on the root, the difference between the root and the approximation is squared in each step.}
 \begin{equation}
-    \vec{\xi}_{k+1} = \xi_{k} - \mat{J}_g^{-1} (\vec{\xi}_k) g(\vec{\xi}_k), \quad \text{Jacobian } \mat{J}_g
+    \vec{\xi}_{k+1} = \vec{\xi}_{k} - \mat{J}_{\vec{g}}^{-1} (\vec{\xi}_k) \vec{g}(\vec{\xi}_k), \quad \text{Jacobian } \mat{J}_g
 \end{equation}
 where at the lowest level we have to solve the linear equation
 \begin{equation}
@@ -757,7 +757,7 @@ Then the following holds
 \end{equation}
 (intuitively as the quadratic form for a positive definite matrix if parabolic) where we can now apply standard gradient descent (\textbf{steepest descent method})
 \begin{equation}
-    \vec{x}^{(n+1)} = \vec{x}^{(n)} + \alpha^{(n)} \vec{p}^{(n)}, \quad \vec{p}^{(n)} = - \vec{\nabla} f(x^{(n)}) = - (\vec{b} - \mat{A} \vec{x^{(n)}})
+    \vec{x}^{(n+1)} = \vec{x}^{(n)} + \alpha^{(n)} \vec{p}^{(n)}, \quad \vec{p}^{(n)} = - \vec{\nabla} f(x^{(n)}) = - (\vec{b} - \mat{A} \vec{x}^{(n)})
 \end{equation}
 so we take steps along the steepest descent with some \textit{learning rate } $\alpha^{(n)}$
 

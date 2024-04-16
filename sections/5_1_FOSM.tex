@@ -111,7 +111,7 @@ by matching the Taylor expansion of the numerical scheme with the Taylor expansi
     \end{gathered}
 \end{equation}
 which is an explicit scheme for $\alpha_{i, l} = 0$ for $l \geq i$, so for a Butcher tableau that is lower triangular.
-\paragraph{Example - RK2:} For $m = 2$, one can find multiple schemes, e.g. the midpoint rule or RK2, with
+\paragraph*{Example - RK2:} For $m = 2$, one can find multiple schemes, e.g. the midpoint rule or RK2, with
 \begin{equation}
     \begin{gathered}
         \vec{k}_1 = \vec{f}(\vec{y}^{(n)}, t^{(n)}), \quad \vec{k}_2 = \vec{f}(\vec{y}^{(n)} + \Delta t \vec{k}_1, t^{(n)} + \Delta t) \\
@@ -290,9 +290,8 @@ convective \textcolor{blue1}{Euler equations}.
         \text{shear viscosity } \mu, \quad \text{bulk viscosity } \zeta, \quad \text{kinematic viscosity } \nu = \frac{\mu}{\rho}
     \end{gathered}
 \end{equation}
-where for incompressible flow $D_t \rho = \partial_t \rho + \vec{v} \cdot \vec{\nabla} \rho = -\rho \vec{\nabla} \cdot \vec{v} = 0$\footnote{Using the 
-general expression for a change of a variable in a control volume (Eulerian view) as of a local time-dependency
-and advection $D_t = \partial_t + \vec{v}\cdot \vec{\nabla}$.} only shear viscosity (no bulk viscosity, $\zeta = 0$) is relevant
+where for incompressible flow $D_t \rho = \partial_t \rho + \vec{v} \cdot \vec{\nabla} \rho = -\rho \vec{\nabla} \cdot \vec{v} = 0$\footnote{Using
+the material derivative $D_t = \partial_t + \vec{v}\cdot \vec{\nabla}$.} only shear viscosity (no bulk viscosity, $\zeta = 0$) is relevant
 \begin{equation}
     \vec{\nabla} \cdot \mat{\Pi} = \rho \nu \nabla^2 \vec{v}
 \end{equation}

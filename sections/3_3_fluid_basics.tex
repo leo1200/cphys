@@ -147,17 +147,23 @@ Lagrangian and Eulerian view are presented in table \ref{tab:lagrangian_eulerian
     \label{tab:lagrangian_eulerian}
 \end{table}
 
-The rate of change in the Eulerian view is the \textbf{material derivative}, the rate of change of a physical quantity 
-(like temperature) of a material element that is subjected to a macroscopic velocity field $\vec{v}$. Let $\Psi_L(t)$ describe
+The rate of change of a fluid variable (like temperature) along the
+motion of a fluid parcel along the velocity field $\vec{v}$ (expressed in terms of Eulerian derivatives) 
+is the \textbf{material derivative}. Let $\Psi_L(t)$ describe
 the evolution of a fluid quantity along the parcel motion (Lagrangian) and $\Psi_E(\vec{x},t)$ the evolution of a fluid
 quantity at a fixed location (Eulerian). Then the material derivative is
 \begin{equation}
     D_t \Psi_L = \frac{D\Psi_L}{Dt} = \partial_t \Psi_L =  \explain{\partial_t \Psi_E}{local change} + \explain{\vec{v} \cdot \vec{\nabla}_\vec{x} \Psi_E}{convective change} = D_t \Psi_E
 \end{equation}
-(derive $\Psi(\vec{x}(t),t)$ with respect to time and use the chain rule). Generally
+(derive $\Psi(\vec{x}(t),t)$ with respect to time and use the chain rule).
+
+Generally
 \begin{equation}
     D_t = \partial_t + \vec{v} \cdot \vec{\nabla}
 \end{equation}
+
+We sometimes speak of \textbf{advection} if a scalar quantity is transported by the flow, and of \textbf{convection} if a vector quantity is transported by the flow
+(but they are often also used synonymously and with different meanings in different contexts).
 
 \subsubsubsection{Continuity equation}
 As of mass conservation, the change of mass $m_V$ in a volume $V$ can only be due to flux $\vec{j} = \rho \vec{v}$ through the surface $\partial V$.
@@ -255,7 +261,7 @@ taking the appropriate moments of the Boltzmmann equation (mass, momentum and en
     \text{form of balance equations: } \partial_t\text{conserved quantity} + \vec{\nabla}\text{corrsp. flux} = \text{source term} 
 \end{equation}
 
-\subsubsection{Mass conservation | continuity equation (1st moment)}
+\subsubsection{Mass conservation | continuity equation (0th moment)}
 By following the steps
 \begin{itemize}
     \item multiply the Boltzmann equation by $m$ and integrate over $d^3u$
@@ -276,7 +282,7 @@ From
 \end{equation}
 where the third term also vanishes (apply Gauss, assume $f \rightarrow 0$ (e.g. Maxwellian $\exp(-u^2)$) for $u \rightarrow \infty$), we get the result from above.
 
-\subsubsection{Momentum conservation | Navier Stokes equation (2nd moment)}
+\subsubsection{Momentum conservation | Navier Stokes equation (1st moment)}
 By following the steps
 \begin{itemize}
     \item multiply Boltzmann equation with momentum ($m\vec{u}$) and integrate over $d^3u$
@@ -358,7 +364,7 @@ coefficients of shear and bulk viscosity respectively, with units $g \cm^{-1} \s
     \item $\xi \delta_{ij} \left( \vec{\nabla} \cdot \vec{v} \right)$ represents the resistance in volume, remember that for $\vec{\nabla} \cdot \vec{v} = 0$ we have an incompressible fluid
 \end{itemize}
 
-\subsubsection{Energy conservation (3rd moment)}
+\subsubsection{Energy conservation (2nd moment)}
 By the following steps
 \begin{itemize}
     \item multiply the Boltzmann equation by $m\vec{u}^2$ and integrate over $d^3u$
@@ -571,7 +577,7 @@ involving the Reynolds number
 
 We can understand the Reynolds number as the ratio between the chaotic advective term in the Navier-Stokes equation and the frictional term, so
 \begin{equation}
-    Re = \frac{\text{advective term}}{\text{frictional term}} = \frac{|(\vec{v}\cdot \vec{\nabla})\vec{v}|}{\nu \vec{\nabla}^2 \vec{v}}
+    Re = \frac{\text{advective term}}{\text{frictional term}} = \frac{\norm{(\vec{v}\cdot \vec{\nabla})\vec{v}}}{\norm{\nu \vec{\nabla}^2 \vec{v}}}
 \end{equation}
 \note{\textbf{Connection between the Reynolds number and turbulence:} The quadratic (in the velocity) term $(\vec{v}\cdot \vec{\nabla})\vec{v}$ generates turbulence (deterministic chaos) while the viscous term $\nu \vec{\nabla}^2 \vec{v}$ destroys it via dissipation.
 In terms of energy
@@ -606,7 +612,7 @@ jump by finite amounts. In the frame of the Euler equations these are
 true mathematical discontinuities, while exhibiting a finite width in the Navier Stokes equations. A shock wave
 \begin{itemize}
     \item propagates faster than the signal speed for compressible waves $c_s$
-    \item produces and irreversible change to the fluid change (increase in entropy)
+    \item causes an irreversible change to the fluid (increase in entropy)
 \end{itemize}
 A shock wave is a region of small thickness over which the properties of the flow change rapidly.
 
@@ -929,7 +935,7 @@ Based on $j=\rho_1 v_1 = \rho_2 v_2$ and $[\rho v^2 + P] = 0$ the slope of the s
 
 $P = \text{const.} \times \rho^\gamma$ on either side of the shock (where we assume equilibrium), but with different constants.
 
-\note{The jump conditions are \textit{reversible} - if we interchange post- and pre-shock flow conditions, so $v_1 < v_2$, then density, pressure and temperature would decrease across the shock and so the entropy, excluding a shock with deceleration.}
+\note{The jump conditions are \textit{reversible} - if we interchange post- and pre-shock flow conditions, so $v_1 < v_2$, then density, pressure and temperature would decrease across the shock and so the entropy, excluding a shock with expansion.}
 
 \subsubsubsection{Oblique shocks}
 The fluid might not impact the shock perpendicular to the shock front, but at an oblique angle.
@@ -1154,7 +1160,22 @@ The constant energy transfer through the cascade is described by
 \note{Including the the dissipation range, based on Kolmogorovs assumption that the statistics for small scale motion are universal, one might make the ansatz $E(k) = C \epsilon^{\frac{2}{3}} k^{-\frac{5}{3}} f_\eta(k\eta)$ with $f_\eta(x) = 1$ for $x \ll 1$ and $f_\eta(x) \rightarrow 0$ for $x \rightarrow \infty$.}
 
 \subsubsubsection{Derivation of the energy spectrum of Kolmogorov turbulence}
-See \cite{springel23}.
-\todo[inline]{Maybe add derivation of Kolmogorov spectrum.}
+We are interested in the energy spectrum $E(k)$ such that the energy between
+$k$-vectors ($k = 2\pi \slash \lambda$, length-scale $\lambda$) $k_1$ and $k_2$ is
+\begin{equation}
+    \Delta E = \int_{k_1}^{k_2} E(k) \, dk
+\end{equation}
+\begin{itemize}
+    \item epxress the energy spectrum via the velocity power spectrum $P_v(k)$, 
+    \begin{equation}
+        E(k) \, dk = P_v(k) k^2 \, dk
+    \end{equation}
+    \item use that the power spectrum is the Fourier transform of the correlation function (so have the same scaling $P_v(k) \propto \lambda^3 \xi_v$), so here
+    calculate
+    \begin{equation}
+        \xi_v(y) = \langle \vec{v}(\vec{x}) \cdot \vec{v}(\vec{x}+\vec{y}) \rangle \propto v_\lambda^2 \propto (\epsilon \lambda)^{\frac{2}{3}}
+    \end{equation}
+    (not dependent on the direction of $\vec{y}$ as turbulence is isotropic) with which we get the $k^{-\frac{5}{3}}$ scaling of the energy spectrum $E(k)$.
+\end{itemize}
 
 \pagebreak

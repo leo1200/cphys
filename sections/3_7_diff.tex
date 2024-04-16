@@ -125,15 +125,15 @@ we yield an ODE in Fourier space with trivial solution
 \subsubsubsection{Solution for an initial delta peak in the density over space}
 Consider
 \begin{equation}
-    n\left(x, t_0\right)=n_0 \delta\left(x-x_0\right), \quad \hat{n}\left(x, t_0\right)=n_0 \int_{-\infty}^{\infty} \delta\left(x-x_0\right) \exp (i k x) d x=n_0 \exp \left(i k x_0\right)
+    n\left(x, t_0\right)=N_0 \delta\left(x-x_0\right), \quad \hat{n}\left(x, t_0\right)=N_0 \int_{-\infty}^{\infty} \delta\left(x-x_0\right) \exp (i k x) d x=N_0 \exp \left(i k x_0\right)
 \end{equation}
 yielding the solution in Fourier space
 \begin{equation}
-    \rightarrow \hat{n}(k, t)=\hat{n}\left(k, t_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)=n_0 \exp \left(i k x_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)
+    \rightarrow \hat{n}(k, t)=\hat{n}\left(k, t_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)=N_0 \exp \left(i k x_0\right) \exp \left(-D k^2\left(t-t_0\right)\right)
 \end{equation}
 so with the inverse Fourier transform (completing the square and using that a Gaussian distribution is normed)
 \begin{equation}
-    \text{a Gaussian } n(x, t)=\frac{n_0}{\sqrt{4 \pi D\left(t-t_0\right)}} \exp \left(-\frac{\left(x-x_0\right)^2}{4 D\left(t-t_0\right)}\right)
+    \text{a Gaussian } n(x, t)=\frac{N_0}{\sqrt{4 \pi D\left(t-t_0\right)}} \exp \left(-\frac{\left(x-x_0\right)^2}{4 D\left(t-t_0\right)}\right)
 \end{equation}
 \greenbox{\textbf{Conservation:} As the Gaussian is normalized, $n_0$ stays constant irrespective of time implying particle 
 number conservation (or energy conservation for the diffusion of heat (heat conduction))}

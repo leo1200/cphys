@@ -10,12 +10,13 @@ Models including latent variables can have many applications.
     underlying unobserved variables linked to our observation. For instance
     \begin{itemize}
         \item we have measured neural activity by $100$ electrodes on the scalp and want to find the underlying neural signals
-        \item we have multiple stock prices and many points in time ($N$ measurements) and want to find the underlying factors that drive the stock prices
+        \item we have recorded multiple stock prices at many points in time and want to find the underlying factors that drive the stock prices
+        \item we did multiple tests on $N$ students and want to find out about underlying factors such as drive or diligence
     \end{itemize}
     \item \textbf{Making a model more flexible}: Consider for instance we have observed data and 
     assume there is also a latent variable giving the class of the data points, which is unobserved.
     In this setting we might be interested in the discriminative model, so the posterior of
-    the latent variable given the observed data. Or we might want to find parameters of a model
+    the latent variable given the observed data (i.e. cluster assignment in the example). Or we might want to find parameters of a model
     containing latent variables.
     \item \textbf{Generative modeling}: Based on a latent space representation with a simpler distribution,
     from which we can easily sample, we can generate new data, e.g. in image generation.
@@ -47,11 +48,11 @@ Consider three instruments playing at the center of the room, one plays a sine s
 \end{equation}
 another a square signal
 \begin{equation}
-    \{S_{i2}\}_{i=1}^N = \{ \text{square}(2t_1) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
+    \{S_{i2}\}_{i=1}^N = \{ \text{square}(2t_i) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
 \end{equation}
 and the third a sawtooth signal
 \begin{equation}
-    \{S_{i2}\}_{i=1}^N = \{ \text{sawtooth}(2t_1) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
+    \{S_{i2}\}_{i=1}^N = \{ \text{sawtooth}(2t_i) \}_{i=1}^N, \quad t = 0.000:0.004:8.000
 \end{equation}
 We measure this signal by three microphones at different positions in the room. They measure different
 linearly mixed signals
@@ -155,7 +156,7 @@ be orthogonal, so $\mat{\Gamma}^{-1} = \mat{\Gamma}^T$.}
 \bluebox{\textbf{Reformulated aim:} Find an orthogonal $\mat{\Gamma}$ such that the components of the vector random
 variable $\vec{S} = \mat{\Gamma}^T \vec{X}$ are independent (and non-Gaussian).}
 
-\yellowbox{\textbf{Why does requesting no correlation does not give unique sources?:} Assume we would only 
+\yellowbox{\textbf{Why does requesting no correlation not give unique sources?:} Assume we would only 
 request that the sources are uncorrelated, so $\Cov(\vec{S}) = \mat{1}$. As discussed, no correlation
 can be obtained by whitening. However, consider 
 \begin{equation}
@@ -176,6 +177,9 @@ densities of the source-components)
     \begin{aligned}
         \operatorname{MI}(\vec{S}) &= \explain{D_{KL}\left( p(\vec{S}) \, || \, \prod_{i=1}^q p(S_i) \right)}{Kullback-Leibler divergence aka Relative Entropy} \\
         &= \int p(\vec{S}) \log \frac{p(\vec{S})}{\prod_{i=1}^q p(S_i)} \, d\vec{S} \\
+        &= -\int p(\vec{S}) \sum_{i=1}^{q} \log p(S_i) \, d\vec{S} + \int p(\vec{S}) \log p(\vec{S}) \, d\vec{S} \\
+        &= -\sum_{i=1}^{q} \int p(\vec{S}) \log p(S_i) \, d\vec{S} + H(\vec{S}) \\
+        &= -\sum_{i=1}^{q} \int \log p(S_i) \underbrace{\int p(\vec{S}) \, dS_1 \dots dS_{i-1} dS_{i+1} \dots dS_q}_{=\, p(S_i)} \, dS_i + H(\vec{S}) \\
         &= \sum_{i=1}^{q} H(S_i) - H(\vec{S})
     \end{aligned}
 \end{equation}
@@ -186,7 +190,8 @@ where we used the expression for the entropy
 
 Assuming $\Cov(\vec{S}) = \mat{1}$ without loss of generality (can be enforced by choice of $\mat{\Gamma}$), and
 with $\Cov(\vec{X}) = \mat{1}$, we have $\vec{S} = \mat{\Gamma}^T \vec{X} \in \mathbb{R}^{q}$, from which
-one can show $H(\vec{S}) = H(\vec{X}) + \log |\det \mat{\Gamma}| = H(\vec{X})$, so
+one can show $H(\vec{S}) = H(\vec{X}) + \log |\det \mat{\Gamma}| = H(\vec{X})$ (\textcolor{blue1}{an orthogonal
+transformation does not change a distribution's entropy}), so
 
 \begin{equation}
     \operatorname{MI}(\vec{S}) = \sum_{i=1}^{q} H(S_i) - H(\vec{X})
@@ -208,7 +213,7 @@ equivalent to maximizing their non-Gaussianity (e.g. Wasserschein distance to a 
 but given the $\mat{\Gamma}$ we only have $N$ samples $S_{1}^{(1)}, S_{i}^{(2)}, \dots, S_{i}^{(N)}$ of the $i$-th source, not a probability
 distribution $p(S_i)$.
 }
-\idea{By estimating the probability distribution of the sources, we can estimate the entropy, e.g. by
+\idea{There are direct empirical estimates of the entropy (alternatively estimate the density), e.g.
 \begin{equation}
     \hat{H}_\text{RADICAL}(S_i) = \frac{1}{N-m} \sum_{k=1}^{N-m} \log \left( \frac{N+1}{m} \left( S_{i}^{(k+m)} - S_{i}^{(k)} \right) \right)
 \end{equation}
@@ -247,8 +252,7 @@ For instance the variation in a set stock prices (e.g. all from the DAX) might b
 like central bank policies etc. which we want to find. Or from a set of tests in school, we might want
 to find common factors like drive, diligence, etc.
 
-Consider $N$ \textit{individuals} (e.g. stocks, students) and $p$ \textit{measurements} (e.g. stock prices at different
-times, test scores in different tests).
+Consider $N$ \textit{individuals} (e.g. students) and $p$ \textit{records} (e.g. test scores in different tests).
 
 \begin{equation}
     \begin{gathered}
@@ -257,6 +261,15 @@ times, test scores in different tests).
         \quad \text{observation mean } \vec{\mu} \approxeq \frac{1}{N} \sum_{i=1}^{N} \vec{x}_i, \quad \text{noise } \vec{\epsilon}_i
     \end{gathered}
 \end{equation}
+
+where in the example of the students
+\begin{itemize}
+    \item $\vec{x}_i$ are the test scores of student $i$ in the different tests
+    \item $\vec{S}_i$ are the values of the latent variables for student $i$, e.g. interpreted as
+    student $i$'s diligence, drive, etc., the few underlying factors that mainly drive variations in the test scores
+    \item $\vec{\epsilon}_i$ is the noise term, the part of the test scores that is not explained by the latent variables
+    \item $\mat{\Gamma}$ is the loading matrix, which tells us how the latent variables are combined to form the observed features
+\end{itemize}
 
 \greenbox{The latent variables $S_1,\dots,S_q$ account for the common sources of variance and their correlation
 in the $x_1,\dots,x_p$, while the $\epsilon_j$ account for the remaining variance.}
@@ -273,7 +286,7 @@ means they are independent ($p(x,y) = p(x) p(y)$).
 
 \pinkbox{\textbf{Link to generative latent models:} Given the assumption $\vec{S}_i \sim \mathcal{N}(0, \mat{1})$, in this space
 we can easily generate new samples of $\vec{S}_i$ by drawing from a normal distribution and given we have found the loading matrix
-$\mat{\Gamma}$, we can generate new samples of $\vec{x}_i$ as $\vec{x} = \vec{\mu} + \mat{\Gamma} \vec{S} + \vec{\epsilon}_i$.}
+$\mat{\Gamma}$ and $\mat{\Psi}$, we can generate new samples of $\vec{x}_i$ as $\vec{x} = \vec{\mu} + \mat{\Gamma} \vec{S} + \vec{\epsilon}$ with $\vec{\epsilon}$ sampled from $\mathcal{N}(0, \mat{\Psi})$.}
 
 \problem{Remember the discussed identifiability issue for the case of independent Gaussian sources - the user can search for 
 rotated versions of the factors that are more easily interpretable.}
@@ -381,7 +394,7 @@ the parameters would follow by
 
 \greybox{\textbf{Latent posterior:} Approximating the posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$ (the discriminative model)
 would also be nice to do statistical inference in the latent space. Or assuming the latent variables are e.g. unobserved
-class labels (so clustering), by the discriminative model (the latent posterior), we can assign clusters of new data.}
+class labels (so clustering), by the discriminative model (the latent posterior), we can make cluster assignments.}
 
 \subsubsection{Evidence Lower Bound (ELBO)}
 We need the marginal likelihood of the observed data,
@@ -450,20 +463,31 @@ where Jenssens inequality holds because $\log$ is concave.
 \end{equation}
 }
 
-\textbf{On Jenssen's inequality}: Generally, Jenssens inequality is given by
-\begin{equation}
-    \begin{aligned}
-        \text{discrete case: }&\, f(\sum \alpha_i x_i) \geq \sum \alpha_i f(x_i) \\
-        &\text{for } f \text{ concave, } \alpha_i \geq 0, \sum \alpha_i = 1 \\
-        \text{continuous case: }&\, f(\int \alpha(x) g(x) \, dx) \geq \int \alpha(x) f(g(x)) \, dx \\
-        &\text{for } f \text{ concave, } \alpha(x) \geq 0, \int \alpha(x) \, dx = 1
-    \end{aligned}
-\end{equation}
+\textbf{On Jenssen's inequality}: Jenssens inequalities are given in 
+table \ref{tab:jenssen}.
 
-Which in 1D states, that the secant line between two points on a concave function is always below the function, so
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|p{0.3\textwidth}||p{0.3\textwidth}|p{0.3\textwidth}|}
+        \hline
+        & \textcolor{blue1}{$f$ concave} ($\forall x: \partial_x^2 f \leq 0$), e.g. $f:x\mapsto \log x$ & \textcolor{blue1}{$f$ convex} ($\forall x: \partial_x^2 f \geq 0$), e.g. $f:x\mapsto x^2$  \\
+        \hline
+        discrete case with $\alpha_i \geq 0, \sum \alpha_i = 1$ & $f(\sum \alpha_i x_i) \geq \sum \alpha_i f(x_i)$ & $f(\sum \alpha_i x_i) \leq \sum \alpha_i f(x_i)$ \\
+        \hline
+        continuous case with $\alpha(x) \geq 0, \int \alpha(x) \, dx = 1$ & $f(\int \alpha(x) g(x) \, dx) \geq \int \alpha(x) f(g(x)) \, dx$ & $f(\int \alpha(x) g(x) \, dx) \leq \int \alpha(x) f(g(x)) \, dx$ \\
+        \hline
+        application to the expectation value & $f(E[X]) \geq E[f(X)]$ & $f(E[X]) \leq E[f(X)]$ \\
+        \hline
+    \end{tabular}
+    \caption{Jenssen's inequalities.}
+    \label{tab:jenssen}
+\end{table}
+
+The discrete concave variant in 1D states, that the secant line between two points on a concave function is always below the function, so
 \begin{equation}
     f(\alpha x_1 + (1-\alpha) x_2) \geq \alpha f(x_1) + (1-\alpha) f(x_2), \quad \alpha \in [0,1]
 \end{equation}
+(which is really just the proper definition of a concave function).
 
 This is illustrated in figure \ref{fig:jenssen}.
 
@@ -585,29 +609,57 @@ so to specific clusters.}
     \label{fig:gmm}
 \end{figure}
 
-We approximate the density of the data $\mathcal{D} = \{ \vec{x}_1, \dots, \vec{x}_N \}$ (i.i.d.) by
+Given the unobserved class, our likelihood model is
 
 \begin{equation}
-    f(\vec{x}) = \sum_{k=1}^{K} \Pi_k \mathcal{N}(\vec{x} | \vec{\mu}_k, \mat{\Sigma}_k), \quad \sum_{k=1}^{K} \Pi_k = 1
+    \vec{x} \mid k \sim \mathcal{N}( \vec{\mu}_k, \mat{\Sigma}_k)
 \end{equation}
-(other basic models, e.g. Bernoulli would also be possible).
 
-The model parameters are
+and let $\Pi_k$ be the unknown prior probability of class $k$\footnote{If we knew class
+labels as in discriminant analysis this would be the ratio of data points of class $k$
+to all data points - but we do not have class labels.}.
+
+Our model for the likelihood of a data point $\vec{x}$ with marginalized out class labels is
+
+\begin{equation}
+    p_\vec{\theta}(\vec{x}) = \sum_{k=1}^{K} p(\vec{x}, k) = \sum_{k=1}^{K} \Pi_k \mathcal{N}(\vec{x} | \vec{\mu}_k, \mat{\Sigma}_k), \quad \sum_{k=1}^{K} \Pi_k = 1
+\end{equation}
+
+(other basic models, e.g. Bernoulli would also be possible) where
 
 \begin{equation}
     \vec{\theta} = \{ \Pi_1, \vec{\mu}_1, \mat{\Sigma}_1, \dots, \Pi_K, \vec{\mu}_K, \mat{\Sigma}_K \}
 \end{equation}
 
-so the likelihood is
+and the (logarithmic) likelihood of a training-set $\mathcal{D} = \{ \vec{x}_1, \dots, \vec{x}_N \}$
 
 \begin{equation}
-    \log \mathcal{L}_{\vec{\theta}}(\mathcal{D}) = \log p_{\vec{\theta}}(\mathcal{D}) = \log \prod_{i=1}^{N} \sum_{k=1}^{K} \Pi_k p(\vec{x}_i | \vec{\theta}_k), \quad p(\vec{x}_i | \vec{\theta}_k) = \mathcal{N}(\vec{x}_i | \vec{\mu}_k, \mat{\Sigma}_k)
+    \begin{gathered}
+        \log \mathcal{L}_{\vec{\theta}}(\mathcal{D}) = \log p_{\vec{\theta}}(\mathcal{D}) = \log \prod_{i=1}^{N} p_\vec{\theta}(\vec{x}_i) = \sum_{i=1}^{N} \log p_\vec{\theta}(\vec{x}_i) = \sum_{i=1}^{N} \log \sum_{k=1}^{K} \Pi_k p(\vec{x}_i | k, \vec{\theta}_k) \\
+        p(\vec{x}_i | k, \vec{\theta}_k) = \mathcal{N}(\vec{x}_i | \vec{\mu}_k, \mat{\Sigma}_k)
+    \end{gathered}
 \end{equation}
 
-Now introduce the latent variables $\vec{z}_i \in \{0,1\}^K$ with $z_{ik} = 1$ if $\vec{x}_i$ is assigned to the $k$-th Gaussian
+\problem{The sum in the logarithm prevents us from applying the logarithm to the summands, the normal densities. So no easy
+path towards a closed form solution.}
+
+\idea{Imagine we would know the discriminant model $\phi_{ik} = p(k|\vec{x}_i)$, then a sensible closed form approach
+for the parameters would be
+\begin{equation}
+    \begin{aligned}
+        N_k &= \sum_{i=1}^{N} \phi_{ik} \quad \# \text{ points effectively assigned to cluster $k$} \\
+        \Pi_k &= \frac{N_k}{N} \\
+        \vec{\mu}_k &= \frac{1}{N_k} \sum_{i=1}^{N} \phi_{ik} \vec{x}_i \\
+        \mat{\Sigma}_k &= \frac{1}{N_k} \sum_{i=1}^{N} \phi_{ik} (\vec{x}_i - \vec{\mu}_k)(\vec{x}_i - \vec{\mu}_k)^T
+    \end{aligned}
+\end{equation}}
+
+\idea{Let us just approximate $\phi_{ik} = p(k|\vec{x}_i)$.}
+
+Introduce the latent variables $\vec{z}_i \in \{0,1\}^K$ with $z_{ik} = 1$ if $\vec{x}_i$ is assigned to the $k$-th Gaussian
 (1-hot encoded).
 
-\paragraph*{E-step - updating the distribution over $\vec{z}_i$, $q_{\vec{\phi}(\vec{x})}(\vec{z}_i)$} Naturally, the probability that $\vec{x}_i$ is assigned to the $k$-th Gaussian is given by
+\paragraph*{E-step - updating the approximated discriminant distribution over $\vec{z}_i | \vec{x}_i$, $q_{\vec{\phi}(\vec{x})}(\vec{z}_i)$} Naturally, the probability that $\vec{x}_i$ is assigned to the $k$-th Gaussian is given by
 the probability of that Gaussian at $\vec{x}_i$ (with its weighting as in the density approximation) divided by the sum of the probabilities of all Gaussians at $\vec{x}_i$ (with their respective
 general weightings),
 \begin{equation}
@@ -620,6 +672,12 @@ where here at each point we have the posterior categorical distribution
 \begin{equation}
     q_{\vec{\phi}(\vec{x}_i)}(\vec{z}_i) = \prod_{k=1}^{K} \left( \phi_{ik} \right)^{z_{ik}}, \quad \phi_{ik} = p\left(z_{ik} = 1 | \vec{x}_i, \vec{\theta}^{(N)}\right)
 \end{equation}
+
+\greenbox{\textbf{Closed form successive approximation procedure}: With these $\phi_{ik}$ we can calculate the model parameters as given above,
+with these new model parameters, we can calculate new $\phi_{ik}$, and so on.
+\enquote{One man's vicious circle is another man's successive approximation procedure.} (Cosma Shalizi)}
+
+Below we give the formal $M$-step, although we have already given a reasonable succesive procedure.
 
 \paragraph*{M-step - updating the model parameters} We want to find the model parameters that maximize the ELBO. As an approximation
 to the true posterior $p_{\vec{\theta}}(\vec{z} | \vec{x})$, we use the variational density $q_{\vec{\phi}(\vec{x})}(\vec{z})$.
@@ -720,7 +778,7 @@ The main two approaches are
 \end{itemize}
 
 \greybox{\textbf{When to use MCMC, when variational methods?:} MCMC methods tend to
-be computationally intensive but guarantuee producing asymptotically exact samples
+be computationally intensive but guarantee producing asymptotically exact samples
 from the target density. Variational inference (VI) does not have these guarantees but
 is usually faster.
 \begin{itemize}
@@ -761,6 +819,9 @@ by distributional assumptions, an explicit form for the best $q_i$ can
 often be found.
 
 \subsubsection{Variational Autoencoder (VAE)}
+
+\greenbox{While a deterministic autoencoder just computes embeddings of input vectors, the \textbf{variational autoencoder
+is a generative model}.}
 
 \idea{Describe the variational parameters by $\vec{\phi}(\vec{x}) = \operatorname{NN}_{\vec{\Omega}_{\text{Enc}}}(\vec{x})$ so using
 a neural network and also stuff the $z$-dependency of $p(\vec{x}|\vec{z})$ into $z$-dependent parameters $\vec{\theta}(\vec{z}) = \operatorname{NN}_{\vec{\Omega}_{\text{Dec}}}(\vec{z})$.}
@@ -881,11 +942,15 @@ for instance assume
     z^{(l)} \mid \vec{x} \sim \mathcal{N}(\mu_{\vec{\phi}(\vec{x})}(\vec{x}), \sigma_{\vec{\phi}(\vec{x})}(\vec{x})) \quad \rightarrow \quad z^{(l)} = \mu_{\vec{\phi}(\vec{x})}(\vec{x}) + \sigma_{\vec{\phi}(\vec{x})}(\vec{x}) \epsilon^{(l)}, \quad \epsilon^{(l)} \sim \mathcal{N}(0,1)
 \end{equation}
 
-(where $\mu$ and $\sigma$ are the outputs of the encoder) then we can rewrite
+(where $\mu$ and $\sigma$ are the outputs of the encoder, so we kind of have a non-linear
+factor analysis model) then we can rewrite
 
 \begin{equation}
-    E_z[h(z)] = E_{\epsilon} \left[ h(g_{\vec{\phi}(\vec{x})}(\epsilon, \vec{x})) \right]
+    E_{z \, \sim \, q_{\vec{\phi}(\vec{x})}(z)}[h(z)] = E_{\epsilon \, \sim \, \mathcal{N}(0,1)} \left[ h(g_{\vec{\phi}(\vec{x})}(\epsilon, \vec{x})) \right], \quad \text{some general function } h
 \end{equation}
+
+so $\partial_\vec{\phi}$ can be drawn into the expectation / the sampling in the empirical estimation
+does not depend on $\vec{\phi}$.
 }
 
 \bluebox{\textbf{Generative process:} For using the VAE as a generative model the most flexible approach is to train

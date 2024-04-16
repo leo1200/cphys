@@ -322,7 +322,7 @@ A comparison of both versions in python can be found in figure \ref{fig:cancella
 Consider the following expressions for the sample variance of $\{x_i\}_{i=1}^N$
 \begin{equation}
     \begin{multlined}
-        \text{two-pass formula: } \bar{x} = \frac{1}{N} \sum_{i=1}^{N-1} x_i, \quad \sigma^2_N = \frac{1}{N} \sum_{i=1}^N (x_i - \bar{x})^2 \\ \text{one-pass formula: } \sigma^2_N = \frac{1}{N-1} \left( \sum_{i=1}^N x_i^2 - \frac{1}{N} \left( \sum_{i=1}^N x_i \right)^2 \right) \\ \text{ as } \sigma^2 = E[(x-\bar{x})^2] = E[x^2] - E[x]^2
+        \text{two-pass formula: } \bar{x} = \frac{1}{N} \sum_{i=1}^{N-1} x_i, \quad \sigma^2_N = \frac{1}{N} \sum_{i=1}^N (x_i - \bar{x})^2 \\ \text{one-pass formula: } \sigma^2_N = \frac{1}{N} \left( \sum_{i=1}^N x_i^2 - \frac{1}{N} \left( \sum_{i=1}^N x_i \right)^2 \right) \\ \text{ as } \sigma^2 = E[(x-\bar{x})^2] = E[x^2] - E[x]^2
     \end{multlined}
 \end{equation}
 While for the one-pass formula, we can calculate all necessary sums in one pass through the data, it suffers heavily from cancellation: For $\{10000,10001,10002\}$, the two-pass formula in single precision correctly gives $1.0$ while the one-pass formula yields $0.0$ (cancellation) (there are better one-pass formulas though).

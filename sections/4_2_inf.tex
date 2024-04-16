@@ -183,7 +183,7 @@ Good estimators are unbiased.
 
 \subsubsubsection{Consistency of an estimator}
 In the limit of an infinitely large sample, the
-estimator should in probability converge to the
+estimator should \underline{in probability} converge to the
 true parameters
 \begin{equation}
     \forall \epsilon: \lim_{N \rightarrow \infty} p(|\hat{\theta}_N - \theta^*| < \epsilon) = 1
@@ -265,6 +265,20 @@ by
 \end{equation}
 }
 
+\greybox{\textbf{Intuition for Jenssens inequality on the expectation:} A convex function will stretch out the 
+right tail of the distribution \textbf{increasingly along the x-axis}. Therefore the expectation of the new distribution
+we got by applying $\phi$ to the random variable will be shifted to higher values than the expectation of the original
+distribution itself. This is illustrated in figure \ref{fig:jenssenX}.}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=0.8\textwidth]{figures/jenssenX.svg}\hfill
+ \caption{Illustration of Jenssens inequality on the expectation. As the right tail is drawn increasingly further out for
+ a convex function, the expectation of the transformed distribution is higher than the transformation of the mean 
+ of the original distribution. The opposite holds for concave functions.}
+ \label{fig:jenssenX}
+\end{figure}
+
 \subsubsubsection{Sampling distribution}
 Consider we repeatedly draw samples of size $N$ and estimate $\hat{\theta}_N$. The distribution of
 those estimates is called sampling distribution, denoted $F_N(\hat{\theta})$.
@@ -284,7 +298,7 @@ we can also define the \textbf{mean squared error}, accounting for bias and vari
 
 where for an unbiased estimator ($E[\hat{\theta}_N] = \theta^*$) so $\operatorname{SE}_{\hat{\theta}}(N) = \operatorname{MSE}(\hat{\theta}_N)$.
 
-\paragraph*{Standard error of the means}
+\paragraph*{Standard error of the mean}
 \begin{equation}
     \begin{gathered}
         S E M=S E_{\widehat{\mu}}(N)=\sqrt{\operatorname{Var}\left(\bar{x}_N\right)}=\sqrt{\operatorname{Var}\left(\frac{1}{N} \sum_{i=1}^N x_i\right)} \\
@@ -299,14 +313,17 @@ of resampled samples from our sample (by choosing randomly from our sample with 
 
 \subsubsubsection{Sufficient statistic}
 A statistic or set of statistics $t(\vec{X})$ is sufficient if it contains all information there is in a sample
-about a population parameter $\theta$, so
+about a population parameter $\theta$ (/ population parameters $\vec{\theta}$), so
 \begin{equation}
    p(\vec{X} | t(\vec{X}), \theta) = p(\vec{X} | t(\vec{X}))
 \end{equation}
-so \textbf{the likelihood of the sample is independent of the population parameter given the sufficient statistic}.
+so \textbf{the likelihood of the sample is independent of the population parameter(s) given the sufficient statistic(s)}.
 
-The smallest set of sufficient statistics is called minimally sufficient, e.g. for a Gaussian these
-are the sample mean $\mu$ and variance $\frac{N}{N-1} s_x^2$.
+\paragraph*{Minimal sufficiency of a set of statistics} The smallest set of sufficient statistics, the minimum number of estimators
+carrying all information about the population, is called \textbf{minimally sufficient}, e.g. for a Gaussian these
+are the sample mean $\mu$ and variance $\frac{N}{N-1} s_x^2$ (completely specifying the normal distribution). There
+usually many possible sets of sufficient statistics but only one minimally sufficient one which the others
+are functions of.
 
 \subsubsubsection{Efficiency of an estimator}
 Consider $\hat{\theta}_\text{opt}$ to be the estimator with the smallest variance (smallest standard error).
@@ -319,7 +336,7 @@ The efficiency of any other estimator $\hat{\theta}_k$ is then
 \subsubsubsection{Precision of an estimator}
 We can define the precision of an estimator as
 \begin{equation}
-    \operatorname{Prec}(\hat{\theta}_N) = \frac{1}{\operatorname{SE}_{\hat{\theta}}(N)}
+    \operatorname{Prec}(\hat{\theta}_N) = \frac{1}{\operatorname{Var}(\hat{\theta}_N)}
 \end{equation}
 - the less the estimator varies over many samples, the more precise it is. For an
 unbiased estimator, the precision is fundamentally limited by the \textit{Fisher information}\footnote{
@@ -340,7 +357,7 @@ A good estimator is
     \item unbiased (its expected value is the population one)
     \item consistent (in the limit of a large sample we get the population parameter)
     \item efficient, so low standard error (it should not vary a lot between different samples)
-    \item minimally sufficient (it should extract all information from the sample with regards to the population parameter of interest)
+    \item (minimally) sufficient (it should extract all information from the sample with regards to the population parameter of interest)
 \end{itemize}
 
 \subsubsection{Approaches to Statistical Parameter Estimation}
@@ -724,6 +741,7 @@ See table \ref{tab:dec_mak}.
         \hline
         Significance level $\alpha$ & Probability of rejecting the null hypothesis $H_0$ given it is true (type 1 error). $\alpha$ is a
         parameter we choose and set the rejection region(s) accordingly. \\
+        \hline
         $p$-value & Based on the distribution of the test statistic devised under $H_0$ it is the probability of observing a value
         at least as extreme as $t$ in our sample. $p$ is used to check if we are in the rejection region. \\
         \hline
@@ -1283,6 +1301,12 @@ estimate, bootstrap estimate and corrected estimate for a biased estimator, the 
 of the standard deviation we also estimate the mean from which the points in the sample naturally deviate less than from the true mean, so the
 standard deviation is (with the biased estimator) underestimated.
 
+\yellowbox{\textbf{Note on the necessary sample size:} Note also that in non-parametric bootstrapping, we 
+extract the distributional form empirically from the sample (different from the exact test
+where the distribution is known by $H_0$ and asymptotic tests where the distribution
+is assumed with necessary parameters estimated from the data) -
+bootstrapping often requires a larger sample size.}
+
 \begin{figure}[!htb]
     \centering
     \includesvg[width=.95\linewidth]{figures/boot_samples.svg}
@@ -1298,7 +1322,9 @@ standard deviation is (with the biased estimator) underestimated.
 \end{figure}
 
 \subsubsection{Bootstrap Confidence Intervals\skipthis}
-Note in general that bootstrap distributions tend to be narrow on average, so the bootstrap confidence intervals often under-cover \citep{tim15}.
+Note in general that bootstrap distributions tend to be narrow on average, so the bootstrap confidence intervals often under-cover \citep{tim15}.,
+as values from the tails of the distribution underlying distribution are less likely to be in our sample from 
+which we draw the bootstrap samples in the first place.
 
 \note{This also carries over to testing. When a bootstrap distribution is used as an alternative
 to a $t$-distribution it is usually more narrow, so the bootstrap test rejects $H_0$ more often than the $t$-test.}
@@ -1392,7 +1418,9 @@ where $Z^{(b)} = (z_1^{(b)},\dots,z_n^{(b)})$ and $s_Z^{(b)} = \sqrt{\frac{1}{n-
 and $t_{\text{obs}} = t^*\left( X_{\text{sample}} \right)$.
 
 Here we assume that as the mean varies, the distributions are just translated versions of each other
-(translation family) where if our $x_i$ are lifetimes it might make sense to use
+(translation family) (the $H_0$ and $H_1$ distribution are just shifted versions of each other -
+true for Gaussians but e.g. wrong for exponential distributions) where 
+if our $x_i$ are lifetimes it might make sense to use
 logged lifetimes as they are more likely to satisfy a translation or normal family
 assumption \citep[chapter 16.4]{Efron1994}.
 
@@ -1461,6 +1489,10 @@ and using the test statistic
 with analogous calculations of $t^{(b)}$ on the bootstrap samples (the basic reasoning behind the denominator is that the scale on which means can be compared
 is the standard deviation, without which a statement like the means are 1 apart is meaningless (very different statement for standard deviations
 of the order of $10$ or $10^{-2}$)).
+
+\yellowbox{\textbf{Implicit translational family assumption:} That the empirical distribution under $H_0$ would look like this, 
+that it can be constructed based on shifting our sample data, assumes that the distribution of the sample is a translation family
+(shifting the mean just shifts the distribution).}
 
 \subsubsubsection{Bootstrap Hypothesis Test - Are two samples from different distributions?}
 Consider we have samples

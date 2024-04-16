@@ -2,7 +2,7 @@
 \thispagestyle{plain}
 
 We have already seen that we can write logistic and multiclass
-classification in a \textit{electrical engineering style} diagram.
+classification in an \textit{electrical engineering style} diagram.
 This can analogously be done for linear regression.
 
 \subsection{The final layer of a neural network for classification and regression}
@@ -16,7 +16,7 @@ style, we used for logistic regression, as illustrated in figure
 
 \begin{figure}[!htb]
     \centering
-    \includesvg[width=0.95\textwidth]{figures/classreg2.svg}
+    \includesvg[width=0.95\textwidth]{figures/classreg3.svg}
     \caption{Electrical engineering style diagrams.}
     \label{fig:lin_class_electrical}
 \end{figure}
@@ -104,7 +104,7 @@ also effect the training, so finding appropriate weights and biases (the offset 
     \label{fig:activation_functions}
 \end{figure}
 
-\subsubsection{Neural Network are universal function approximators}
+\subsubsection{Neural Networks are universal function approximators}
 \greenbox{By a single hidden layer, a neural network with finite number of nodes can
 approximate any continuous function on a compact set to arbitrary precision.}
 
@@ -123,7 +123,7 @@ neural network
 \end{equation}
 
 \subsubsection{Neural Networks and Algorithmic modeling}
-A neural network $F_\vec{\theta}$ (parameters $\vec{\theta}$) is deterministic universal
+A neural network $F_\vec{\theta}$ (parameters $\vec{\theta}$) is a deterministic universal
 approximator. When we use a neural network to predict the relationship between input $\vec{x}$
 and output $\vec{y}$, we directly model the relation between input and output, it is an algorithmic
 modeling approach (as random forests), different from a data modeling approach, where we would assume a certain
@@ -174,7 +174,7 @@ where the loss is calculated over the whole training dataset
 \end{equation}
 
 \subsubsubsection{Stochastic gradient descent}
-We introduce stochasticity (agains local minima) and reduce the length of the summation
+We introduce stochasticity (against local minima) and reduce the length of the summation
 by drawing an index subset $k^\star \subset 1, \ldots, N$ so a corresponding mini-batch
 dataset $\mathcal{D}^\star \subset \mathcal{D}$
 
@@ -268,7 +268,13 @@ Chain rule gives us
 \greenbox{Note that when going from left to right, the partial derivatives of the example only differ in the last term.}
 
 \bluebox{For a system with few inputs and many outputs, we prefer the forward mode, for a system with many inputs
-(the weights are also kind of inputs to the system), but few outputs, we prefer the reverse mode.}
+(the weights are also kind of inputs to the system), but few outputs\footnote{While
+the neural network might have many outputs, the \textit{output} we are interested in is the
+scalar output of the loss function for an individual features-response pair from the training set $\{ \vec{x}_i, \vec{y}_i \}$,
+e.g. for a multivariate 
+$\vec{y} \in \mathbb{R}^m$, $\text{loss} = \frac{1}{2} \sum_{j=1}^{m} \left( f_j(\vec{x}_i) - y_j \right)^2$.
+\textbf{For each features-response pair (from the mini-batch) the partial derivatives of the corresponding loss with respect to all weights (and biases) are calculated.}}, 
+we prefer the reverse mode.}
 
 \subsubsubsection{Intermezzo: Automatic differentiation}
 Let us better understand the concept of derivatives propagating
@@ -328,7 +334,7 @@ For $\vec{\xi} = \begin{pmatrix}
 \end{pmatrix}$ we calculate $\partial_{x_1} \vec{f}$ derivatives of both outputs with
 respect to a change in one input variable in one forward AD (automatic differentiation) pass. 
 
-\greybox{Computationally this can just be fone by passing a dual number through $\vec{f}$}
+\greybox{Computationally this can just be done by passing a dual number through $\vec{f}$}
 
 \paragraph*{Backpropagation} Here we go the other way around, as
 illustrated in figure \ref{fig:comp_graph_backprop}.
@@ -405,7 +411,7 @@ in the gradient descent steps, if \begin{itemize}
         \item Feedforward: Compute $\vec{a}^{(l)}$ and $\vec{z}^{(l)}$ for all layers
         \item Output errors: calculate $\vec{\delta}^{(L)}$
         \item Backpropagate errors: calculate $\vec{\delta}^{(l)}$ for all layers, starting
-        from the output layer, using the previous results on those from the feedforward pass along the way
+        from the output layer, using the previously calculated errors and the calculations from the feedforward pass along the way
         \item Compute the gradients:
         \begin{equation*}
             \frac{\partial \operatorname{loss}(\vec{y}, \vec{f}(\vec{x}, \vec{W}))}{\partial w_{j, k}^{(l)}}=a_k^{(l-1)} \delta_j^{(l)}
@@ -435,9 +441,15 @@ because sublayers learn simpler patterns).
 \begin{equation}
     \text{ReLU for } z_j^{(l)} > 0: \left. \frac{\partial h_j^{(l)}}{\partial z} \right|_{z_j^{(l)}} = 1
 \end{equation}
+which in contrast to the sigmoid and tanh activation functions, does not saturate (alleviating the
+vanishing gradients problem).
 But we have a problem with vanishing gradients for $z_j^{(l)} < 0$ - so maybe use a leaky ReLU.
 Another alleviation might be layerwise pretraining.
 }
+
+Against exploding gradients, we can use gradient clipping derivatives to a threshold. Exploding
+gradients are often caused by improper initialization of the weights, so this is also
+an aspect to improve.
 
 \subsection{Outlook}
 \begin{itemize}

@@ -252,7 +252,7 @@ depending on the choice of $h$.
 \idea{Use a variable smoothing length $h$.}
 
 There are two general approaches for introducing a variable smoothing
-length $\rho_i$ into the calculation of our fluid quantities - the
+length into the calculation of our fluid quantities - the
 scatter and gather approach, as shown in table \ref{tab:scatter_gather}
 and illustrated in figure \ref{fig:scatter_gather}.
 
@@ -362,16 +362,10 @@ As with the density, it is better not to directly apply eq. \ref{eq:gradient_of_
     \end{aligned}
 \end{equation}
 
-which motivates
+which motivates the symmetric form
 
 \begin{equation}
-    \vec{\nabla} F_i \approx \rho_i \left[\frac{F_i}{\rho_i^2} \langle \vec{\nabla} \rho \rangle + \langle \vec{\nabla} \left(\frac{F_i}{\rho_i}\right) \rangle \right]
-\end{equation}
-
-to obtain the symmetric form
-
-\begin{equation}
-     \langle\vec{\nabla} F(\vec{r})\rangle_i =\rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F_i}{\rho_i^2}+\frac{F_j}{\rho_j^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
+    \langle\vec{\nabla} F(\vec{r})\rangle_i = \rho_i \left[\frac{F_i}{\rho_i^2} \vec{\nabla}_i \langle \rho \rangle + \vec{\nabla}_i \langle \frac{F}{\rho} \rangle \right] = \rho_i\left[\sum_{j=1}^{N_i} m_j\left[\frac{F_i}{\rho_i^2}+\frac{F_j}{\rho_j^2}\right] \cdot \vec{\nabla}_i W_{i j}\right]
 \end{equation}
 
 and analogously
@@ -451,7 +445,7 @@ To our SPH Euler equation, we can add the viscous force as
 
 \begin{equation}
     \begin{gathered}
-        \vec{a}_i^{\text {visc }}=\left.\frac{d_{v_1}}{d t}\right|_{v i s c}=-\sum_{j=1}^{N_i} m_j \Pi_{i j} \cdot \vec{\nabla}_i \overline{W_{i j}} \\
+        \vec{a}_i^{\text {visc }}=\langle\frac{dv}{d t}\rangle_{i,v i s c}=-\sum_{j=1}^{N_i} m_j \Pi_{i j} \cdot \vec{\nabla}_i \overline{W_{i j}} \\
         \overline{W_{i j}}=\frac{1}{2} W_{i j}\left(\frac{h_i+h_j}{2}\right), \quad \Pi_{i j} \text { should be symmetric } \rightarrow \text { antisymmetric force }
     \end{gathered}
 \end{equation}
@@ -485,7 +479,7 @@ In order to conserve total energy, work done against the viscous force has to sh
 
 \subsubsection{Shear-Flow-Balsara correction}
 \problem{In the above we will also add high viscosity to shear flows (which we do not want), where particles also quickly approach each other (move adjacently with different velocities)}
-\idea{Such shear flows are marked by high vorticity $\vec{\omega} = \vec{\nabla} \times \vec{v}$, so for high vorticity we can crank down the artificial viscosity.}
+\idea{Such shear flows are marked by high vorticity $\vec{\omega} = \vec{\nabla} \times \vec{v}$, so for high vorticity (high rotation of the velocity field) compared to the divergence of the velocity field we can crank down the artificial viscosity.}
 
 \begin{equation}
     \tilde{\mu}_{ij} = \mu_{ij} \cdot \frac{f_i + f_j}{2}, \quad f_i = \frac{|\vec{\nabla}\cdot \vec{v}|_i}{|\vec{\nabla}\cdot \vec{v}|_i + ||\vec{\nabla} \times \vec{v}||_i}
@@ -495,7 +489,7 @@ In order to conserve total energy, work done against the viscous force has to sh
 To reduce viscosity far away from shocks many other switches have been proposed,
 e.g. by making the viscosity strength parameters $\alpha$ variable in time and adopting $\beta = 2 \alpha$.
 
-\idea{We only want high $\Pi_ij$ when there is high compression, $\vec{\nabla} \cdot \vec{v}$ strongly negative, which we can use as a switch after which we let $\alpha_i$ decay exponentially.}
+\idea{We only want high $\Pi_{ij}$ when there is high compression, $\vec{\nabla} \cdot \vec{v}$ strongly negative, which we can use as a switch after which we let $\alpha_i$ decay exponentially.}
 
 \subsection{SPH energy equation with artificial viscosity}
 The work done against the viscous force can be accounted in terms of energy or entropy.
@@ -503,7 +497,7 @@ The work done against the viscous force can be accounted in terms of energy or e
 Let us start with the hydrodynamic energy equation
 
 \begin{equation}
-    \frac{d \epsilon}{d t}=\frac{\partial \epsilon}{\partial t}+\vec{v} \cdot \vec{\nabla} \epsilon=\frac{d s}{d t}-\frac{p}{\rho} \vec{\nabla} \cdot \vec{v}
+    \frac{d \epsilon}{d t}=\frac{\partial \epsilon}{\partial t}+\vec{v} \cdot \vec{\nabla} \epsilon=T\frac{ds}{d t}-\frac{p}{\rho} \vec{\nabla} \cdot \vec{v}
 \end{equation}
 
 from which for adiabatic systems with $\frac{d s}{d t}=0$ and with eq. \ref{eq:gradient_1} we find

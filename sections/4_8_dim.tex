@@ -74,6 +74,7 @@ Applications of dimensionality reduction include
     \item lossy data compression
     \item speed-up of learning algorithms
     \item noise reduction
+    \item first step in semi-supervised learning
 \end{itemize}
 
 \subsection{Principal Component Analysis (PCA)}
@@ -88,12 +89,14 @@ An example of PCA applied to a 2D dataset is shown in figure \ref{fig:pca}.
 \begin{figure}[!htb]
     \centering
     \includesvg[width=.75\textwidth]{figures/pca_example.svg}
-    \caption{PCA applied to a 2D dataset.}
+    \caption{PCA applied to a 2D dataset. Note the principal components are usually normed, but
+    here scaled with the variance they explain for visualization.}
     \label{fig:pca}
 \end{figure}
 
 \subsubsection{Deriving the principal components from finding the direction with maximum variance}
-\note{One should mean-center the features before applying PCA - it is a linear transformation. We set
+\note{One must mean-center the features before applying PCA - it is a linear transformation, a rotation
+of the coordinate system with the directions of maximum variance measured with respect to the origin. We set
 $\mat{X}$ to
 \begin{equation}
     \mat{X} = \mat{X} - \underset{N\times 1}{\vec{1}} \vec{\mu}^T, \quad \text{means of features } \vec{\mu} \in \mathbb{R}^p
@@ -106,7 +109,7 @@ so the covariance matrix
 
 The first principal component is given by the direction with maximum (sample) variance
 \begin{equation}
-    \vec{v}^* = \argmax_{\vec{v}, ||\vec{v}|| = 1} \Var(\mat{X}\vec{v}) = \argmax_{\vec{v}, ||\vec{v}|| = 1} \frac{1}{N} \sum_{i=1}^{N} (\vec{x}_i^T \vec{v})^2 = \argmax_{\vec{v}, ||\vec{v}|| = 1} \vec{v}^T \mat{S} \vec{v}
+    \vec{v}^* = \argmax_{\vec{v}, ||\vec{v}|| = 1} \Var(\vec{x}^T\vec{v}) = \argmax_{\vec{v}, ||\vec{v}|| = 1} \frac{1}{N} \sum_{i=1}^{N} (\vec{x}_i^T \vec{v})^2 = \argmax_{\vec{v}, ||\vec{v}|| = 1} \vec{v}^T \mat{S} \vec{v}
 \end{equation}
 
 We can formulate this as the optimization problem
@@ -122,7 +125,7 @@ Then
 \end{equation}
 where multiplying by $\vec{v}^T$ from the left and using $\vec{v}^T \vec{v} = 1$ gives
 \begin{equation}
-    \vec{v}^T \mat{S} \vec{v} = \Var(\mat{X}\vec{v}) = \lambda
+    \vec{v}^T \mat{S} \vec{v} = \Var(\vec{x}^T\vec{v}) = \lambda
 \end{equation}
 
 \greenbox{So the direction of maximum variance is the eigenvector with the largest eigenvalues $\lambda_{\text{map}}$.}
@@ -165,7 +168,7 @@ to lower dimensions, as illustrated in figure \ref{fig:pca_examples}.}
     \label{fig:pca_examples}
 \end{figure}
 
-\idea{Map the data to a higher dimensional space, where the structure might become reducible
+\idea{Non-linearly map the data to a higher dimensional space, where the structure might become reducible
 to lower dimensions by a linear transformation, see figure \ref{fig:nonlinear_pca}.}
 
 \begin{figure}[!htb]
@@ -268,6 +271,49 @@ the RBF (radial basis function) kernel
     k(\vec{x}_i, \vec{x}_j) = \exp\left( - \frac{||\vec{x}_i - \vec{x}_j||^2}{2\sigma^2} \right), \quad \text{free parameter } \sigma
 \end{equation}
 
+\subsubsubsection{Comparison of the usage of the Kernel trick in Kernel Support Vector Machines (SVMs) and
+Kernel Principal Component Analysis (PCA)}
+See table \ref{tab:svm_pca}.
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{|p{0.3\textwidth}||p{0.3\textwidth}|p{0.3\textwidth}|}
+        \hline
+        & \textcolor{blue1}{Kernel SVM} &  \textcolor{blue1}{Kernel PCA} \\
+        \hline
+        \textcolor{blue1}{Usage} & supervised learning; non-linear classification & unsupervised learning; non-linear dimensionality reduction \\
+        \hline
+        \textcolor{blue1}{Reasoning behind projecting up} & by non-linear projection to higher dimensions
+        we want to get linear separability of classes in the high-dim. space & similar argument;
+        by projecting up the structure might become such that by rotation we can make the variance axis
+        aligned \\
+        \hline
+        \textcolor{blue1}{Problem to solve
+        when introducing kernelization}\tablefootnote{Going to the high-dim. space explicitly
+        is too costly, we do it implicitly by replacing
+        scalar products by a function calculating them
+        as is we were in the high (possibly infinite) dim.,
+        but acting on the original feature vectors.} & The primal problem scales
+        with the dimensionality of the feature space, as does 
+        $\vec{\beta}$ we want to find. & The principal components
+        are the EVs of the high-dim. matrix $\mat{\tilde{\Phi}}^T \mat{\tilde{\Phi}}$. \\
+        \hline
+        \textcolor{blue1}{Trick to make kernelization work} & Go to the dual 
+        problem where the data occurs in form of the Gram matrix, so our problem
+        turns into finding $N$ dual coefficients, write the decision function
+        in terms of those and kernel evaluations & Linear transforms $\mat{\tilde{\Phi}}^T \vec{u}$ of the eigenvectors
+        of the Gram matrix $\mat{\tilde{\Phi}} \mat{\tilde{\Phi}}^T \in \mathbb{R}^{N \times N}$ are 
+        eigenvectors of $\mat{\tilde{\Phi}} \mat{\tilde{\Phi}}^T$, we can project to the principal components
+        in the high-dim. space without ever going to the high-dim. space explicitly \\
+        \hline
+        \textcolor{blue1}{Further mind} & & PCA is coordinate rotation towards variance alignment,
+        which only makes sense for centered data, which must be specifically ensured in the high-dim. space \\
+        \hline
+    \end{tabular}
+    \caption{Comparison of the usage of the Kernel trick in Kernel Support Vector Machines (SVMs) and
+    Kernel Principal Component Analysis (PCA)}
+    \label{tab:svm_pca}
+\end{table}
+
 \subsection{Nonlinear Dimensionality Reduction II: Further techniques}
 \subsubsection{Linear discriminant analysis for dimensionality reduction of classified data}
 Here we find directions better separating groups. One
@@ -315,7 +361,7 @@ We follow the steps
     is connected to $\vec{x}_j$ if $\vec{x}_j$ is among the $k$ nearest neighbors of $\vec{x}_i$ among
     all points in the dataset. Note that while $\vec{x}_j$ might be in the k-nearest neighbor list
     of $\vec{x}_i$, $\vec{x}_i$ might not be in the k-nearest neighbor list of $\vec{x}_j$. In a 
-    symmetric KNNG, we ignore this directionality, two points are connected if one if in the
+    symmetric KNNG, we ignore this directionality, two points are connected if one is in the
     nearest neighbor list of the other.}
     \item We phrase the preservation of local structure as a potential problem
     \begin{enumerate}
@@ -329,6 +375,9 @@ We follow the steps
 
 Based on different potentials, different techniques are derived, 
 as illustrated in figure \ref{fig:distance_retaining_approaches}.
+
+\todo[inline]{Check / better illuminate the potential interpretation of SNE based
+on the probabalistic approach.}
 
 \begin{figure}[!htb]
     \centering
@@ -354,20 +403,37 @@ This is illustrated in figure \ref{fig:isomap}.
 \end{figure}
 
 \subsubsubsection{Locally Linear Embedding (LLE)}
+We want to go from high-dimensional $\vec{x}_i$ to low-dimensional $\vec{z}_i$. The steps are
 \begin{enumerate}
-    \item A set of nearest neighbors is found as each point
-    \item As set of weights is computed that describes the point as a linear combination of its neighbors
-    \item a low dimensional embedding is found such that a point is still described with the same weighted linear combination of its neighbors
+    \item A set of nearest neighbors is found at each point
+    \item A set of weights is computed that best describes the point as a linear combination of its neighbors
+    \begin{equation}
+        \mat{\hat{W}} = \argmin_\mat{W} \sum_i \norm{\vec{x}_i-\sum_{j}W_{ij}\vec{x}_j}
+    \end{equation}
+    \item A low dimensional embedding is found such that a point is given by a similar weighted linear combination of its neighbors
+    \begin{equation}
+        \{ \vec{\hat{z}}_i \} = \argmin_{\{ \vec{z}_i \}} \sum_i \norm{\vec{z}_i-\sum_{j}\hat{W}_{ij}\vec{z}_j}
+    \end{equation}
 \end{enumerate}
 
 \subsubsubsection{t-SNE (t-distributed stochastic neighbor embedding)}
 \begin{itemize}
-    \item construct a probability distribution over pairs of the high-dimensional data points,
-    such that similar objects have higher probabilities
-    \item a similar low dimensional probability distribution is constructed
-    and the Kullback-Leibler divergence\footnote{\begin{equation}
-        D_{\mathrm{KL}}(P \| Q)=\sum_{x \in \mathcal{X}} P(x) \log \left(\frac{P(x)}{Q(x)}\right)
-        \end{equation}} (relative entropy) between the two distributions is minimized
+    \item construct a probability distribution over pairs of the high-dimensional data points
+    \begin{equation}
+        p_{j \mid i}=\frac{\exp \left(-\left\|\vec{x}_i-\vec{x}_j\right\|^2 / 2 \sigma_i^2\right)}{\sum_{k \neq i} \exp \left(-\left\|\vec{x}_i-\vec{x}_k\right\|^2 / 2 \sigma_i^2\right)}, \quad p_{i j}=\frac{p_{j \mid i}+p_{i \mid j}}{2 N}
+    \end{equation}
+    (based on Gaussian kernels), such that similar objects have higher probabilities
+    \item a similar low dimensional probability distribution
+    \begin{equation}
+        q_{i j}=\frac{\left(1+\left\|\vec{z}_i-\vec{z}_j\right\|^2\right)^{-1}}{\sum_k \sum_{l \neq k}\left(1+\left\|\vec{z}_k-\vec{z}_l\right\|^2\right)^{-1}}
+    \end{equation}
+    (based on a heavy-tailed Student t-distribution with
+    one degree of freedom (a Cauchy distribution)) is constructed
+    and the Kullback-Leibler divergence
+    \begin{equation}
+        D_\text{KL}(P \mid Q)=\sum_{i} \sum_{j} p_{i j} \log \frac{p_{i j}}{q_{i j}}
+    \end{equation}
+    (relative entropy) between the two distributions is minimized to find the low-dimensional $\vec{z}_i$.
 \end{itemize}
 
 \subsubsection{Autoencoders}

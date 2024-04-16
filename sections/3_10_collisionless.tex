@@ -122,7 +122,10 @@ of the number of particles at two phase-space coordinates $(\vec{x},\vec{v})$ an
         \end{aligned}
 \end{equation}
 
-$f_1, f_2, f_3, \dots$ is the so called BBGKY chain. The Boltzmann equation is e.g. a model for $f_1$.
+$f_1, f_2, f_3, \dots$ is the so called BBGKY chain, where the evolution equation
+for $f_s$ always contains $f_{s+1}$. The Boltzmann equation is e.g. a model for $f_1$, where
+$f_2$ - needed for the evolution of $f_1$ - is modeled by the \textit{Stoßzahlansatz} (molecular chaos assumption),
+with $f_2$ being the collision integral in the Boltzmann equation.
 
 \subsection{Uncorrelated (collisionless) systems | multiplication closure to the BBGKY chain}
 Consider the simplest closure to the BBGKY hierarchy
@@ -327,7 +330,7 @@ where we would have $b=b_0$ for $\Delta v_\perp = v$.
 Over many interaction we accumulate
 
 \begin{equation}
-    \left\langle\theta^2\right\rangle=\sum_{\text {all encounters }} \theta_d^2=\sum_{\text {all encounters }}\left(\frac{b_0}{b}\right), \quad \langle \theta \rangle = 0 \text{ as of symmetry}
+    \left\langle\theta^2\right\rangle=\sum_{\text {all encounters }} \theta_d^2=\sum_{\text {all encounters }}\left(\frac{b_0}{b}\right)^2, \quad \langle \theta \rangle = 0 \text{ as of symmetry}
 \end{equation}
 
 and write
@@ -378,7 +381,7 @@ can be calculated as
 so we can relate
 
 \begin{equation}
-    \frac{\nu_d} = \nu_{\text{d, single}} {\ln \Lambda}, \quad \text{typically } 20 \leq \ln \Lambda \leq 30
+    \frac{\nu_d}{\nu_{\text{d, single}}} = {\ln \Lambda}, \quad \text{typically } 20 \leq \ln \Lambda \leq 30
 \end{equation}
 
 so \textcolor{blue1}{the deflection frequency based on lots of small deflections adding up is
@@ -398,7 +401,7 @@ We can now use the result for many small deflections
 in
 
 \begin{equation}
-    \langle (\Delta v_\perp)^2 \rangle \approx v^2 \langle \theta^2 \rangle = v^2 n 2 \pi b_0^2 v t \ln \Lambda \underbrace{=}_{N = vt \, \pi R^2 \, n} = 2N \frac{vb_0}{R}^2 \ln \Lambda
+    \langle (\Delta v_\perp)^2 \rangle \approx v^2 \langle \theta^2 \rangle = v^2 n 2 \pi b_0^2 v t \ln \Lambda \underbrace{=}_{N = vt \, \pi R^2 \, n} 2N \left(\frac{vb_0}{R}\right)^2 \ln \Lambda
 \end{equation}
 
 justified by the higher meaning of many small deflections.
@@ -510,11 +513,10 @@ on a macro scale.
     \item \textcolor{green1}{Avoid bound particle pairs}: When gravitational particles can come very close to each other they can form highly interactive / correlated pairs - and we want a collisionless system not highly correlated particles.
     Bounded pairs are avoided if
     \begin{equation}
-        \langle v^2 \rangle \gg \frac{Gm}{\epsilon}
+        T_\text{typical} = \frac{1}{2} m \langle v^2 \rangle \gg V_\epsilon = \frac{Gm}{\epsilon} \quad \rightarrow \quad  \langle v^2 \rangle \gg \frac{Gm}{\epsilon}
     \end{equation}
 \end{itemize}
 
 \bluebox{\textbf{The softening length introduces a smallest resolved scale / smallest trustworthy scale}. We must make a compromise between spatial resolution, computational cost and the points discussed above.}
-
 
 \pagebreak

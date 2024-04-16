@@ -88,8 +88,11 @@ We Taylor expand with respect to $\vec{l}$ around $\vec{l} = 0$.
     where $\mat{H}_f$ is the Hessian matrix of $f$, the Jacobian of the gradient of $f$.}
 with this we get
 \begin{equation}
-    f(\vec{y}+\vec{l})=\frac{1}{\left\|\vec{y}+\vec{s}-\vec{x}_i\right\|}=\frac{1}{\|\vec{y}\|}+\frac{\vec{y} \cdot \vec{l}}{\|\vec{y}\|^3}+\frac{1}{2} \underbrace{\frac{\vec{l}^T\left[3 \vec{y} \vec{y}^T-\vec{y}^2 1\right] \vec{l}}{\|\vec{y}\|^5}}_{=\frac{\vec{y}^T\left[3 \vec{l} \vec{l}^T-\vec{l}^2 1\right] \vec{y}}{\|\vec{y}\|^5}}+\cdots
+    f(\vec{y}+\vec{l})=\frac{1}{\left\|\vec{y}+\vec{l}\right\|}=\frac{1}{\|\vec{y}\|}-\frac{\vec{y} \cdot \vec{l}}{\|\vec{y}\|^3}+\frac{1}{2} \underbrace{\frac{\vec{l}^T\left[3 \vec{y} \vec{y}^T-\vec{y}^2 1\right] \vec{l}}{\|\vec{y}\|^5}}_{=\frac{\vec{y}^T\left[3 \vec{l} \vec{l}^T-\vec{l}^2 1\right] \vec{y}}{\|\vec{y}\|^5}}+\cdots
 \end{equation}
+(where we have drawn $\vec{y}$ out of the expression, as the quadrupole moment we are interested in is a property of the group
+not from where we look at it).
+
 The numerators summed over all particles in the group lead to the \textit{moments}
 \begin{equation}
     \begin{aligned}
@@ -244,7 +247,9 @@ and summing over all nodes (akin to how variance adds up in the random walk), we
 
 so \textcolor{blue1}{roughly inversely proportional to the computational cost for this particle} (as $N_{\text{nodes}} \propto \theta_c^{-3}$).
 
-\yellowbox{The smaller the opening angle, the higher the cost, the smaller the error.}
+\yellowbox{The smaller the opening angle, the higher the cost, the smaller the error.
+While for larger critical angle we have to open less nodes so we have less force terms ($\propto \theta_c^{-3}$),
+all of those fewer force terms are much more erroneous ($\propto \theta_c^5$).}
 
 \redbox{This is a pretty sketchy derivation to say the least because how the $r$ dependency
 is ignored. $M_{node}$ would need to be $\propto r^2 \theta_c^3$ for the
@@ -581,7 +586,7 @@ in Fourier space
 \begin{equation}
     \begin{aligned}
         \varphi_k & =-\frac{4 \pi G \varrho_k}{k^2} \\
-        & =\underbrace{-\frac{4 \pi G \varrho_k}{k^2} \exp \left(-k^2 r_s^2\right)}_{\text{long range part } \phi_k^l}-\underbrace{\frac{4 \pi G \varrho_k}{k^2}\left(1-\exp \left(-k^2 r_s^2\right)\right)}_{\text{short range part } \phi_k^s}
+        & =\underbrace{-\frac{4 \pi G \varrho_k}{k^2} \exp \left(-k^2 r_s^2\right)}_{\text{long range part } \phi_k^l}\,\underbrace{-\frac{4 \pi G \varrho_k}{k^2}\left(1-\exp \left(-k^2 r_s^2\right)\right)}_{\text{short range part } \phi_k^s}
     \end{aligned}
 \end{equation}
 where the longrange potential (and from this force on our particles) is calculated in Fourier space as

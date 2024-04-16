@@ -301,7 +301,8 @@ where
 \end{itemize}
 
 \subsubsubsection{Example for an orthogonal polynomial basis: Legendre polynomials}
-We can combine Legendre polynomials to 3D base functions with degree up to $k$ in the following manner
+We can combine Legendre polynomials to 3D base functions with degree up to $k$, leading to a $p=k+1$th order
+scheme in space, in the following manner
 \begin{equation}
     \begin{gathered}
         \left\{\phi_l(\vec{\xi})\right\}_{l=1}^{N(k)}=\left\{\tilde{P}_u\left(\xi_1\right) \tilde{P}_v\left(\xi_2\right) \tilde{P}_w\left(\xi_3\right) \mid u, v, w \in \mathbb{N}_0 \wedge u+v+w \leq k\right\} \\
@@ -381,14 +382,14 @@ evaluation points and weights. One such method is called Gauss-Legendre quadratu
 for $f: [-1,1] \rightarrow \mathbb{R}$ is exact for polynomials of degree $2n-1$.
 
 \textbf{Proof: } Let $f = P(x)$ have degree $\leq 2n-1$. Then we can write
-$P(x) = Q(x) P_{n+1}{x} + R(x)$ with $Q(x), R(x)$ polynomials of degree $\leq n$ ($P_{n+1}(x)$ is the $(n+1)$-th Legendre polynomial).
+$P(x) = Q(x) P_{n+1}(x) + R(x)$ with $Q(x), R(x)$ polynomials of degree $\leq n$ ($P_{n+1}(x)$ is the $(n+1)$-th Legendre polynomial).
 Then 
 \begin{equation}
     \begin{aligned}
         \int_{-1}^{1} P(x) d x &=\underbrace{\int_{-1}^{1} Q(x) P_{n+1}(x) d x}_{=0\text{ as } Q \text{ can be written in base } \{P_0,\dots,P_n\} \perp P_{n+1}}+\int_{-1}^{1} R(x) d x \\
         &=\int_{-1}^{1} R d x \\
         &=\underbrace{\sum_{q=1}^{n} R\left(\xi_{q}^{1 D}\right) w_{q}^{1 D}}_{\text{exact as } R \text{ is a polynomial of degree } \leq n} \\
-        &=\sum_{q=1}^{n} \left( R\left(\xi_{q}^{1 D}\right) + \underbrace{P_{n+1}(\xi_{q}^{1 D}) \cdot Q(\xi_{q}^{1 D})}_{=0, \text{as } \xi_{q}^{1 D} \text{ roots of } P_{n+1}} \right)w_{q}^{1 D}
+        &=\sum_{q=1}^{n} \left( R\left(\xi_{q}^{1 D}\right) + \underbrace{P_{n+1}(\xi_{q}^{1 D}) \cdot Q(\xi_{q}^{1 D})}_{=0, \text{as } \xi_{q}^{1 D} \text{ roots of } P_{n+1}} \right)w_{q}^{1 D} \\
         &= \sum_{q=1}^{n} P(\xi_{q}^{1 D}) w_{q}^{1 D}
     \end{aligned}
 \end{equation}

@@ -99,10 +99,15 @@ from which we train a model $\hat{f}_{\vec{\theta}}(\vec{x})$.
 \subsubsubsection{Definition of the prediction error}
 We want to evaluate our model on $\vec{x}_0 \notin \mathcal{D}$, i.e. on unseen data, with
 our estimate being $\hat{y}_0 = \hat{f}_{\vec{\theta}}(\vec{x}_0)$ and the true
-value being $y_0$. We define the prediction error as
+value being $y_0$. We define the prediction error at a given point $\vec{x}_0$ as
 \begin{equation}
-    \operatorname{PE} := E_{D,\epsilon}\left[ (y_0 - \hat{y}_0)^2 \right]
+    \operatorname{PE} := E_{D,\epsilon}\left[ (y_0 - \hat{y}_0)^2 \mid X = \vec{x}_0 \right]
 \end{equation}
+so the mean (squared) prediction error is
+\begin{equation}
+    \operatorname{MSE} = E_{\vec{x}} \left[ E_{D,\epsilon}\left[ (y_0 - \hat{y}_0)^2 \mid X = \vec{x} \right] \right]
+\end{equation}
+
 \note{If we on one data set $\mathcal{D}$ train a 
 model $\hat{f}_{\vec{\theta}}$ the prediction error this model has
 over many unseen points, depends on $\mathcal{D}$. Here however, we form the expectation over many
@@ -434,20 +439,20 @@ the number of data points to retain the same sampling density growing exponentia
 \greenbox{To make a model more robust (vary less) our principal approaches are
 \begin{itemize}
     \item to train a simpler model
-    on simpler data in the first place
+    on simpler data (less / more meaningful features) in the first place
     \item to penalize on model parameters / model output in some way, to reduce the sensitivity to noise / find the meaningful patterns / find a model with smoother simpler output
 \end{itemize}}
 
 \begin{itemize}
     \item \textcolor{blue1}{Feature selection}: Only use features (components of the measurements) relevant to the outcome, e.g. simply remove features with the least variance
-    \item \textcolor{blue1}{Dimensionality reduction}: Project the data into lower dimensions which still capture (e.g. in semi-supervised learning train a dimensionality reduction on all data
+    \item \textcolor{blue1}{Dimensionality reduction}: Project the data into lower dimensions which still capture 
+    the relevant information (e.g. in semi-supervised learning train a dimensionality reduction on all data
     and in the lower dimensional space train a classifier on the labeled data)
     \item \textcolor{blue1}{Regularization}: Penalize model complexity / drive unnecessary parameters to zero
     \begin{itemize}
         \item Explicit regularization: add a term to the optimization problem, e.g. regularize on the norm of the model parameters or in physics informed regularization penalize how the model violates a differential equation
-        \item Implicit regularization: other forms, e.g. early stopping in training a neural network (stop before model memorizes training data); dropout \footnote{Randomly ignore neurons during training (for a more robust distributed representation (?)).}; using stochastic gradient descent, 
+        \item Implicit regularization: other forms, e.g. early stopping in training a neural network (stop before model memorizes training data); dropout \footnote{Randomly ignore neurons during training (for a more robust distributed representation (?)).}; using stochastic gradient descent, ...
     \end{itemize}
-    the relevant information
 \end{itemize}
 
 \subsection{Feature selection - best subset selection}
@@ -478,7 +483,7 @@ Now consider we would like to regularize the model and driving down parameters o
     \item the penalty term is not scale-invariant: consider two equally important features, one with a large numerical scale one with a small scale,
     in usual linear regression, the large-scale feature will have a smaller parameter but as of model linearity, the same effect on the prediction. But 
     consider we would drive small parameters to zero - then large scale features would be penalized more. So we scale and center the features in the feature matrix $\mat{X}$.
-    \item we do not want to penalize the intercept term $\beta_0 = \bar{y} - \sum_{j=1}^p \bar{x}_j \beta_j$, so $\vec{Y}$ should be centered
+    \item we do not want to penalize the intercept term $\beta_0 = \bar{y} - \sum_{j=1}^p \bar{x}_j \beta_j$, so the response $\vec{Y}$ and features $\mat{X}$ should be centered
 \end{itemize}}
 \subsubsubsection{Centering and standardizing (z-scoring)}
 \begin{equation}
@@ -520,7 +525,7 @@ and if a point estimate is necessary, the posterior mean is usually preferred.
         \end{array}\right) \rightarrow y=\beta_0+\beta_1 x-\beta_2 x=\beta_0+\left(\beta_1-\beta_2\right) x
     \end{equation}
     then there is a unique solution to $\beta_0, \beta_1 - \beta_2$ but not to $\beta_1, \beta_2$ separately.
-    When the collinearity is not perfect, we might be able to invert $\mat{X}^T \mat{X}$ its likely unstable, e.g.
+    When the collinearity is not perfect, we might be able to invert $\mat{X}^T \mat{X}$ - but it is likely unstable, e.g.
     $\beta_1, \beta_2$ might be driven to very large values of opposite sign.
 \end{itemize}
 }
@@ -552,7 +557,7 @@ keeping the matrix invertible.}
 
 \subsubsubsection{Influence of $\lambda$ and Bias-Variance Tradeoff}
 With stronger regularization strenght $\lambda$, the parameters are driven towards zero, as 
-illustrated in figure \ref{fig:ridge_reg}. The smaller the coefficients, the less sensitive
+illustrated in figure \ref{fig:ridge_reg_lambda}. The smaller the coefficients, the less sensitive
 will the model output be to changes in the input, so the variance is reduced but the bias is increased.
 
 For $\lambda \rightarrow 0$ we have
@@ -573,7 +578,8 @@ Ridge regression is equivalent to the MAP estimate under the Gaussian error assu
 \begin{equation}
     \vec{\beta}_\text{prior} \sim \mathcal{N}(\vec{0}, \frac{\sigma^2}{\lambda} \mat{I})
 \end{equation}
-as the corresponding negative log-likelihood of the prior is
+The larger $\lambda$ the more confident we are
+one the \textit{initial guess} $\vec{\beta} = \vec{0}$. The corresponding negative log-likelihood of the prior is
 \begin{equation}
     -\log p(\vec{\beta}) = \frac{1}{2} \vec{\beta}^T \frac{\lambda}{\sigma^2} \mat{I} \vec{\beta} = \frac{\lambda}{2 \sigma^2} || \vec{\beta} ||_2^2
 \end{equation}
@@ -582,7 +588,7 @@ together with the $\frac{1}{\sigma^2}$ in the term negative log-likelihood term)
 
 \subsubsubsection{Discussion of the ridge regression}
 \begin{itemize}
-    \item bias is introduces
+    \item bias is introduced
     \item \textcolor{green1}{stabilization:} coefficients for correlated features are pushed towards each other rather than
     one being wildly positive and the other wildly negative
     \item \textcolor{green1}{non important variables are pushed closer to zero}
@@ -649,7 +655,7 @@ we can then say, when we should have $\beta_j = 0$.}
 
 which also places the constraint
 \begin{equation}
-    D_jj = \operatorname{sign}(\beta_j)
+    D_{jj} = \operatorname{sign}(\beta_j)
 \end{equation}
 
 \paragraph{Derivation of the thresholding for scalar $x_i \in \mathbb{R}$, so $\beta \in \mathbb{R}$ ($\beta_0 = 0$ as we centered the data)} In 1D

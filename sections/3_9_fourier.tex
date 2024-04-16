@@ -184,6 +184,18 @@ then it will indeed not add a \textbf{new} mode to the sum \ref{eq:ifmodes}, as
 where (in 3D) we invertibly and linearly map $N^3$ values $\rho_\vec{p}$ to $N^3$ values
 $\hat{\rho}_{\vec{l}}$.
 
+\pinkbox{\textbf{Note on convention in the Fourier transform:} In general Fourier tranform and inverse Fourier transform
+need opposite signs in the exponent and the normalization factors must be such that
+\begin{equation}
+    \mathcal{F}^{-1}(\mathcal{F}(\rho)) = \rho
+\end{equation}
+here
+\begin{equation}
+    \rho_{\vec{p}}=\sum_{\vec{l}} \hat{\rho}_{\vec{l}} \exp \left(i \frac{2 \pi}{N} \vec{l} \cdot \vec{p}\right) = \frac{1}{N^3} \sum_{\vec{p}'} \rho_{\vec{p}'} \underbrace{\sum_{\vec{l}} \exp \left(i \frac{2 \pi}{N} \vec{l} \cdot (\vec{p} - \vec{p}')\right)}_{=N^3 \delta_{\vec{p},\vec{p}'}} = \rho_{\vec{p}}
+\end{equation}
+which works for any normalizing factors with product $\frac{1}{N^3}$.
+}
+
 \subsubsection{Different conventions for the wave vector $\vec{k}$ and Nyquist frequency}
 The wave vectors $\vec{k}$ (in the general context of DFT also called \textit{frequencies}) are conventionally
 defined as
@@ -286,8 +298,8 @@ and find
 \begin{equation}
     z_i = x_i + \omega_N^i y_i, \quad z_{i+m} = x_i - \omega_N^i y_i
 \end{equation}
-so by recursion we can construct the $z_i$ in $\mathcal{O}(N \log N)$ operations.
-}
+so by recursion we can construct the $z_i$ in $\mathcal{O}(N \log N)$ operations. For a multidimensional
+FFT, we do succesive one-dimensional FFTs along each dimension of the array.}
 
 \subsection{DFT storage conventions}
 Let us get back to the frame of the DFT in the form
@@ -608,7 +620,7 @@ from which by inverse Fourier transform the Helmholtz decomposition follows.
     \item Stability analysis in astrophysics: Based on determining how much compressive motion and how much solenoidal motion is present, stability can be analyzed. Solenoidal motion stabilizes, compressive motion increases density so astrophysically the cooling rate of the system ($\propto \rho^2$) and finally leads to collapse.
     This can be studied by Fourier transform (problem: spatial information is non-local in Fourier space), and also based on
     \begin{equation}
-        \partial_t \rho = - \rho \vec{\nabla} \cdot \vec{v}, \quad \text{solenoidal } \vec{\nabla} \cdot \vec{v} = 0 \rightarrow \partial_t \rho = 0
+        D_t \rho = - \rho \vec{\nabla} \cdot \vec{v}, \quad \text{solenoidal } \vec{\nabla} \cdot \vec{v} = 0 \rightarrow D_t \rho = 0
     \end{equation}
     which can be seen as a peak in the probability distribution of the density which is broader for compressive motion.
 \end{itemize}
