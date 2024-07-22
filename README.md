@@ -1,1 +1,3 @@
 current pdf under loux/main.pdf
+surely contains some mistakes
+much to be done: e.g. add Hamiltonian Monte Carlo (and NUTS) in the sampling section etc
