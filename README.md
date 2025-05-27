@@ -22,4 +22,4 @@ If you're here, you might also be interested in
 - [Physics-based Deep Learning Book](https://physicsbaseddeeplearning.org/intro.html)
 - [Parallel Computing and Scientific Machine Learning (SciML): Methods and Applications](https://book.sciml.ai/)
 
-or my small astro fluid simulator (jf1uids)[https://github.com/leo1200/jf1uids].
+or my small astro fluid simulator [jf1uids](https://github.com/leo1200/jf1uids).
