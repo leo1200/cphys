@@ -391,6 +391,22 @@
 
 %\pagestyle{headings}  % Abschnitt/Kapitel links oben, Seitenzahlen rechts/außen oben
 
+\usepackage{eso-pic}
+\definecolor{darkorange}{rgb}{0.8, 0.4, 0}
+
+% Add warning at top of every page
+\AddToShipoutPictureBG{%
+  \AtPageUpperLeft{%
+    \raisebox{-1.8\baselineskip}{%
+      \makebox[\paperwidth]{%
+        \hfill
+        \scriptsize\textcolor{darkorange}{\textbf{Version 0.01: Expect errors (report under \href{https://github.com/leo1200/jf1uids/issues}{github.com/leo1200/jf1uids/issues}) and cross-check formulas before implementation.}}
+        \hfill
+      }%
+    }%
+  }%
+}
+
 % ===================== End of setup ============================
 
 
