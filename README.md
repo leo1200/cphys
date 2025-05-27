@@ -1,7 +1,7 @@
 # An Introduction to Computational Physics
 
 > [!TIP]
-> You may directly jump in [here](loux/main.pdf).
+> You may directly jump in [here](https://github.com/leo1200/cphys/blob/main/loux/main.pdf?raw=true).
 
 This book aims to be an approachable introduction to simulation methods (with a slight focus on fluid dynamics) and computational statistics leading up to machine learning.
 
