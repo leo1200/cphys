@@ -312,12 +312,17 @@ for the standard error and we only have one sample at hand, we can estimate the 
 of resampled samples from our sample (by choosing randomly from our sample with replacement). More on this later :)}
 
 \subsubsubsection{Sufficient statistic}
+\bluebox{\textbf{Aim:} We want to crunch down the $N$ data points in a sample, to one or a few statistics, 
+which possibly contain all information available in the sample about the population parameter(s).}
 A statistic or set of statistics $t(\vec{X})$ is sufficient if it contains all information there is in a sample
 about a population parameter $\theta$ (/ population parameters $\vec{\theta}$), so
 \begin{equation}
    p(\vec{X} | t(\vec{X}), \theta) = p(\vec{X} | t(\vec{X}))
 \end{equation}
-so \textbf{the likelihood of the sample is independent of the population parameter(s) given the sufficient statistic(s)}.
+so \textbf{the likelihood of the sample is independent of the population parameter(s) given the sufficient statistic(s)},
+no matter what $\theta$ is, given $t(\vec{X})$, the sample is equally likely. Given $t$ we cannot obtain more
+information about $\theta$ from the sample, e.g. the total number of succeses in a sample of Bernoulli trials is sufficient
+for the probability of success $\mu$.
 
 \paragraph*{Minimal sufficiency of a set of statistics} The smallest set of sufficient statistics, the minimum number of estimators
 carrying all information about the population, is called \textbf{minimally sufficient}, e.g. for a Gaussian these

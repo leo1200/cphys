@@ -890,13 +890,22 @@ is (in its canonical form) given by
     \begin{gathered}
     p(x \mid \vec{\eta})=\exp \left(\vec{\eta}^T \vec{T}(x)-h(\vec{\eta})+g(x)\right)=\tilde{h}(\vec{\eta}) \tilde{g}(x) \exp \left(\vec{\eta}^T \vec{T}(x)\right) \\
     h(\vec{\eta})=-\log (\tilde{h}(\vec{\eta})), \quad g(x)=\log (\tilde{g}(x)) \\
-    \text{link function } h(\vec{\eta}), \quad \text{sufficient statistic } \vec{T}(x)
+    \text{link function } h(\vec{\eta}), \quad \text{"sufficient statistic" } \vec{T}(x)
     \end{gathered}
 \end{equation}
 
+For i.i.d. samples $X = \{ x_i \}_{i=1}^N$ from a member of the exponential family, the likelihood is
+\begin{equation}
+    p(X \mid \vec{\eta}) = \prod_{i=1}^N p(x_i \mid \vec{\eta}) = \exp \left( \vec{\eta}^T \sum_{i=1}^N \vec{T}(x_i) - N h(\vec{\eta})\right) \exp \left( \sum_{i=1}^N g(x_i) \right)
+\end{equation}
+with $\sum \vec{T}(x_i)$ being a sufficient statistic for $\vec{\eta}$ by the factorization theorem.
+
 \greybox{\textbf{What is a sufficient statistic?} The statistic $\vec{T}(x)$ is sufficient for underlying parameter(s) $\vec{\eta}$ if it
-contains all the information in the data about $\vec{\eta}$, so the conditional probability of the data given the statistic $\vec{T}(x)$ 
-does not depend on $\vec{\eta}$. \textit{Example}: Sample mean $T(X) = \frac{1}{N} \sum_{i} x_i$ for a Gaussian distribution with known variance.}
+contains all the information in the sample about $\vec{\eta}$, so the conditional probability of the sample given the statistic $\vec{T}(x)$ 
+does not depend on $\vec{\eta}$. So for the term to really make sense write out the likelihood of an i.i.d. sample
+$X_\text{sample} = \{ x_i \}_{i=1}^N$ and see what $T(X_\text{sample})$ is.
+
+\textit{Example}: Sample mean $T(X) = \frac{1}{N} \sum_{i} x_i$ for a Gaussian distribution with known variance.}
 
 \greenbox{\textbf{Advantages of the exponential family:}
 \begin{itemize}

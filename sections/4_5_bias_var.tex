@@ -130,7 +130,8 @@ The terms in the decomposition are
 \begin{itemize}
     \item \textcolor{blue1}{bias}: error due to simplyfying assumptions in the model (e.g. bias for the model to be linear)
     \item \textcolor{green1}{variance}: the stray of $\hat{f}_{\vec{\theta}}\left(\vec{x}_0\right)$ from its mean, which is the larger, the more
-    sensitive the model is to the difference between samples due to noise
+    sensitive the model is to the difference between samples (training sets) due to noise; in a high variance model,
+    the learned function significantly depends on the particular realization of the training set at hand 
     \item \textcolor{pink1}{$\sigma^2$}: the noise in the true model, irreducible error
 \end{itemize}
 
@@ -347,7 +348,8 @@ second descent in test error over complexity is observed in the overparameterize
 \greenbox{\enquote{By considering larger function classes, which contain more 
 candidate predictors compatible with the data, we are able to find interpolating 
 functions that have smaller norm and are thus “simpler”. Thus increasing function 
-class capacity improves performance of classifiers.} \citep{Belkin19}}
+class capacity improves performance of classifiers.} \citep{Belkin19}. In the overparameterized
+regime bias is naturally small and variance is made small by appropriate regularization.}
 
 Double descent is illustrated in figure \ref{fig:double_descent}.
 
