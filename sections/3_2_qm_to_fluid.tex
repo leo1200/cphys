@@ -58,6 +58,18 @@ It turns out to be smarter to model a phase space density. The exact classical p
     \mathcal{F}(\vec{x},\vec{p},t) = \sum_{i=1}^{N} \delta (\vec{x} - \vec{x}_i) \delta (\vec{p} - \vec{p}_i)
 \end{equation}
 
+\note{While the following might give an intuition, it is incorrect. The crux, as far as I can tell, probably
+lies in the transition from the $6N$ ($N$ particles) dimensional distribution function $f$ for which
+\begin{equation}
+    \frac{\partial f(t, \vec{q}, \vec{p})}{\partial t}+\sum_{i=1}^N\left(v_i \cdot \nabla_{q_i}+F_i \cdot \nabla_{p_i}\right) f(t, \vec{q}, \vec{p})=0
+\end{equation}
+holds, with $\vec{q}$ and $\vec{p}$ collecting the positions and momenta respectively to the one-particle distribution
+function $\mathcal{F}$ as stated above and assuming the below form for Liouville's theorem for it (problems with differentiability included). For
+more formal coverage on the matter you might check out this 
+seminar report \href{https://www.thphys.uni-heidelberg.de/~wolschin/statsem21_4s.pdf}{https://www.thphys.uni-heidelberg.de/~wolschin/statsem21_4s.pdf}
+or for a full derivation of the Boltzmann equation from hard sphere dynamics consider \cite{deng24}.
+}
+
 Phase space conservation (Liouville theorem) (previously visualized for the pendulum) means that
 
 \begin{equation}

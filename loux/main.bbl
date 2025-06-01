@@ -467,6 +467,53 @@
       \field{pages}{265\bibrangedash 292}
       \range{pages}{28}
     \endentry
+    \entry{deng24}{misc}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6d8b6548edf7f293d0d08a8a4662cd40}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aa64139c1c99fa6d80e9a022a66fadf6}{%
+           family={Hani},
+           familyi={H\bibinitperiod},
+           given={Zaher},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5d38fb894354b4d9907d6b0143642902}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ccc3d4c320c22985bd956cfb97f9d163}
+      \strng{fullhash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{bibnamehash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{authorbibnamehash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{authornamehash}{ccc3d4c320c22985bd956cfb97f9d163}
+      \strng{authorfullhash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.AP}
+      \field{eprinttype}{arXiv}
+      \field{title}{Long time derivation of the Boltzmann equation from hard sphere dynamics}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2408.07818
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2408.07818
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2408.07818
+      \endverb
+    \endentry
     \entry{Efron1994}{book}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=5470455fc7dceb3ccf6db38cb22a113d}{%
