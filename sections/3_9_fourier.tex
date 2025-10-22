@@ -494,28 +494,42 @@ code \ref{code:linear_convolution}.}
 \problem{DFT / FFT are defined for periodic problems, a convolution based on them is a cyclic convolution.}
 \idea{As before we can zero-pad. \textcolor{red1}{The cost, however, rises ($\times 4$ in 2D).}}
 
-For solving the Poisson equation for non-periodic density distributions, we
-\begin{enumerate}
-    \item set up the mesh so that the density distribution only lives in one quarter - rest zeroes (see figure \ref{fig:zero_padding_2D}).
-    \item periodically extend the Green's function over the whole grid (so that the distance used is the one to the nearest periodic image)
-    \begin{equation}
-        g_{N-i,j} = g_{i,N-j} = g_{N-i,N-j} = g_{i,j}, \quad 0 \leq i,j \leq \frac{N}{2}
-    \end{equation}
-    which is symmetric around the origin (when replicating the mesh in all directions). \textcolor{red1}{Why does the Greens function have to be extended?}
-    \item calculate $\phi = g \star \rho$, in real space this would be
-    \begin{equation}
-        \phi_\vec{p} = \sum_{\vec{n}} g_{\vec{p}-\vec{n}} \rho_\vec{n}, \quad \vec{g}, \vec{\rho} \text{ periodic in the index } N
-    \end{equation}
-    The zero padding is large enough so that if \textit{the Green's function slides over the density, there is no cross talk between periodic images of the density distribution}.
-    We use the fast cyclic convolution in Fourier space.
-\end{enumerate}
+\bluebox{For two vectors $\vec{f}$ of length $N$ and $\vec{g}$ of length $M$ one can append zeros to both so they are 
+both of length $N+M-1$ (the length of the linear convolution). The cyclic convolution of these extended signals
+matches the linear convolution of the original vectors.}
 
-\begin{figure}[ht]
-    \centering
-    \includesvg[width=0.9\textwidth]{figures/zp3.svg}
-    \caption{Illustration of the zero padding in 2D.}
-    \label{fig:zero_padding_2D}
+However, this cannot be applied to our convolution of interest 
+
+\begin{equation}
+    \Phi(\vec{x}) = g \star \rho
+\end{equation}
+
+directly because the Green's function has infinite support, extending the potential
+with zeros would cut-off the gravitational interaction.
+
+\greenbox{In the Hockney-Eastwood method \citep{eastwood79} we zero-pad the density array $[\rho_0,\cdots, \rho_{N-1}] \in \mathbb{R}^N$
+to $[\rho_0,\cdots, \rho_{N-1},0,...,0] \in \mathbb{R}^{2N}$ but extend the Green's function such that
+the cyclic convolution reflects isolated-boundary conditions, by evaluating the Green's function at
+
+\begin{equation}
+    [0, 1, 2, ..., N-1, N, ..., 1] \cdot \Delta x
+\end{equation}
+
+An intuition for the Hockney-Eastwood method is provided
+in Fig. \ref{fig:hockney}, for the details of this technique, we refer to \cite{eastwood79}.}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/hockney_easwood.pdf}\hfill
+  \caption{Illustration of the Hockney-Eastwood in one
+  dimension.}
+  \label{fig:hockney}
 \end{figure}
+
+\paragraph{Beyond the Hockney-Eastwood method} James's method \citep{james77} improves on the computational cost $\mathcal{O}((2N)^d \log 2N)$ of the Hockney-Eastwood method
+based on finding a set of correction charges on the boundary (and convolving with a suitable Green's function) - mesh-doubling in 
+James's method is only necessary for boundary points. The Vico-Greengard-Ferrando method features improved 
+accuracy at larger grid-spacing \citep{zou21}.
 
 \subsection{Power spectra and correlation functions}
 Power spectra and correlation functions are deeply connected via the Fourier transform.

@@ -596,33 +596,40 @@ We derive the update scheme in 1D, so $\vec{F}$ is a vector ($\vec{v}\vec{v}^T$ 
     \label{fig:finite_volume_scheme}
 \end{figure}
 
-\textcolor{blue1}{Step 1}: Integrate the conservation law over a cell and timestep and recognize the average
-defined in \ref{eq:cell_avg}.
+\textcolor{blue1}{Step 1}: Integrate the conservation law over a cell and time step and recognize the average
+defined in Eq. \ref{eq:cell_avg}.
 
 \begin{equation}
     \begin{gathered}
         \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}} \int_{t_n}^{t_{n+1}}\left(\frac{\partial \vec{U}}{\partial t}+\frac{\partial \vec{F}}{\partial x}\right) d t d x=0 \\
-        \underbrace{=}_{\text{carry out simple integrals}} \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}\left[\vec{U}\left(x, t_{n+1}\right)-\vec{U}\left(x, t_n\right)\right] d x+\int_{t_n}^{t_{n+1}}\left[\vec{F}\left(x_{i+\frac{1}{2}}, t\right)-\vec{F}\left(x_{i-\frac{1}{2}}, t\right)\right] dt \\
-        \underbrace{=}_{\text{recognize avg}} \Delta x\left[\vec{U}_i^{(n+1)}-\vec{U}_i^{(n)}\right]+\int_{t_n}^{t_{n+1}}\left[\vec{F}\left(x_{i+\frac{1}{2}}, t\right)-\vec{F}\left(x_{i-\frac{1}{2}}, t\right)\right] d t=0
+        = \int_{x_{i-\frac{1}{2}}}^{x_{i+\frac{1}{2}}}\left[\vec{U}\left(x, t_{n+1}\right)-\vec{U}\left(x, t_n\right)\right] d x+\int_{t_n}^{t_{n+1}}\left[\vec{F}\left(x_{i+\frac{1}{2}}, t\right)-\vec{F}\left(x_{i-\frac{1}{2}}, t\right)\right] dt \\
+        \underbrace{=}_{\text{recognize average}} \Delta x\left[\vec{U}_i^{(n+1)}-\vec{U}_i^{(n)}\right]+\int_{t_n}^{t_{n+1}}\left[\vec{F}\left(x_{i+\frac{1}{2}}, t\right)-\vec{F}\left(x_{i-\frac{1}{2}}, t\right)\right] d t=0
     \end{gathered}
     \label{eq:finite_volume_scheme_step1}
 \end{equation}
 
-\textcolor{blue1}{Step 2}: In the frame of discrete cell averages, \textcolor{blue1}{between any two cells we essentially have a Riemann problem from which solution we can follow the flux between the cells}.
+\textcolor{blue1}{Step 2}: \textcolor{blue1}{Between any two cells we essentially have a Riemann problem whose solution determines the flux between the cells}.
 \begin{equation}
     \vec{F}(x_{i+\frac{1}{2}},t) \text{ for } t > t_n = \text{solution of Riemann problem with left state } \vec{U}_i^{(n)} \text{ and right state } \vec{U}_{i+1}^{(n)}
 \end{equation}
-\note{At the cell interface, the solution of the Riemann problem is constant in time, so
+\note{The Euler equations have no intrinsic scale, with a step function as input (also without intrinsic scale), the solution
+can only depend on 
 \begin{equation}
-    \vec{F}(x_{i+\frac{1}{2}},t) = \vec{F}^*_{i+\frac{1}{2}} = \vec{F}_{\text{Riemann}}(\vec{U}_i^{(n)}, \vec{U}_{i+1}^{(n)}) \text{ from Riemann solution at interface }
+    \xi = \frac{x - x_{i + \frac{1}{2}}}{t-t_n}
 \end{equation}
+such that $\vec{U}(x,t) = \vec{U}(\xi)$ and for $x = x_{i+\frac{1}{2}}$ where $\xi = 0$,
+$\vec{U}$ is constant such that the flux
+\begin{equation}
+    \vec{F}(x_{i+\frac{1}{2}},t) = \vec{F}^*_{i+\frac{1}{2}} = \vec{F}_{\text{Riemann}}(\vec{U}_i^{(n)}, \vec{U}_{i+1}^{(n)})
+\end{equation}
+too is constant (as long as $x_{i+\frac{1}{2}}$ is not reached by information from adjacent interfaces) \citep[Sec. 6.4.2]{dullemond}.
 }
 \begin{mdframed}[style=padded]
-    \textcolor{blue1}{Step 3}: As the solution at the interface is constant, without approximation, we can write the \textcolor{blue1}{Godunov scheme} (based on eq. \ref{eq:finite_volume_scheme_step1}) as
+    \textcolor{blue1}{Step 3}: As the solution at the interface is constant, without approximation, we can write the \textcolor{blue1}{Godunov scheme} (based on Eq. \ref{eq:finite_volume_scheme_step1}) as
     \begin{equation}
         \vec{U}_i^{(n+1)}=\vec{U}_i^{(n)}+\frac{\Delta t}{\Delta x}\left[\underbrace{\vec{F}^*_{i-\frac{1}{2}}}_{\text{flux from left into cell}}-\underbrace{\vec{F}^*_{i+\frac{1}{2}}}_{\text{out on the right}}\right]
     \end{equation}
-    This defines an update scheme for the fluid variables on the cells (with some appropriate initial and boundary conditions). $\vec{F}^*_{i-\frac{1}{2}}$ and $\vec{F}^*_{i+\frac{1}{2}}$ are black-boxes for now - to find the fluxes we need to solve the Riemann problem, later e.g. done with the approximate HLL solver.
+    This defines an update scheme, the first order Godunov scheme, for the fluid variables on the cells (with some appropriate initial and boundary conditions). $\vec{F}^*_{i-\frac{1}{2}}$ and $\vec{F}^*_{i+\frac{1}{2}}$ are black-boxes for now - to find the fluxes we need to solve the Riemann problem, which we will later approximate, for example, with the HLL solver.
 \end{mdframed}
 
 \subsubsubsection{Caveats of the Godunov scheme}
@@ -752,7 +759,7 @@ There are three states after the step $T$ in the HLL scheme
 and the interface flux is
 \begin{equation}
     \begin{gathered}
-        f^{H L L}=\frac{S_R f_R-S_L f_L+S_L S_R\left(u_R-u_L\right)}{S_R-S_L} \\
+        f^{H L L}=\frac{S_R f_L-S_L f_R+S_L S_R\left(u_R-u_L\right)}{S_R-S_L} \\
         \text{maximum velocity to the left } S_L, \quad \text{maximum velocity to the right } S_R \\
         \text{initial state on the left } u_L, \quad \text{initial state on the right } u_R \\
         f_L = f(u_L), \quad f_R = f(u_R)

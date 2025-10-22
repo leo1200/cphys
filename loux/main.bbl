@@ -51,6 +51,43 @@
       \field{pages}{471\bibrangedash 489}
       \range{pages}{19}
     \endentry
+    \entry{ataei2024xlb}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=70ee6612706733cd27e15eff3039b351}{%
+           family={Ataei},
+           familyi={A\bibinitperiod},
+           given={Mohammadmehdi},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=640e03a74b2404b22aef0958c6394385}{%
+           family={Salehipour},
+           familyi={S\bibinitperiod},
+           given={Hesam},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{932110aa7a48962d7e3d3264d100eb66}
+      \strng{fullhash}{932110aa7a48962d7e3d3264d100eb66}
+      \strng{bibnamehash}{932110aa7a48962d7e3d3264d100eb66}
+      \strng{authorbibnamehash}{932110aa7a48962d7e3d3264d100eb66}
+      \strng{authornamehash}{932110aa7a48962d7e3d3264d100eb66}
+      \strng{authorfullhash}{932110aa7a48962d7e3d3264d100eb66}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computer Physics Communications}
+      \field{title}{{XLB}: A differentiable massively parallel lattice {Boltzmann} library in {Python}}
+      \field{volume}{300}
+      \field{year}{2024}
+      \field{pages}{109187}
+      \range{pages}{1}
+    \endentry
     \entry{Bagla02}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=e3766e25c6b0c6dcbd9f5e1dd3c7e0b4}{%
@@ -93,6 +130,59 @@
       \endverb
       \verb{url}
       \verb http://dx.doi.org/10.1007/BF02702282
+      \endverb
+    \endentry
+    \entry{baydin18}{misc}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=74d5b5b1476ad2d13f3abe6e7598a37e}{%
+           family={Baydin},
+           familyi={B\bibinitperiod},
+           given={Atilim\bibnamedelima Gunes},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6724042a399c2e67a6f3a2ec5612519e}{%
+           family={Pearlmutter},
+           familyi={P\bibinitperiod},
+           given={Barak\bibnamedelima A.},
+           giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=63357a985ed2fb7d96cad546a373fe11}{%
+           family={Radul},
+           familyi={R\bibinitperiod},
+           given={Alexey\bibnamedelima Andreyevich},
+           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=485565bc90eeede382cade10f06f69ec}{%
+           family={Siskind},
+           familyi={S\bibinitperiod},
+           given={Jeffrey\bibnamedelima Mark},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e444b7e1bd409de27db2b1afce3ff492}
+      \strng{fullhash}{31169ae8028444120af473ccfa722828}
+      \strng{bibnamehash}{e444b7e1bd409de27db2b1afce3ff492}
+      \strng{authorbibnamehash}{e444b7e1bd409de27db2b1afce3ff492}
+      \strng{authornamehash}{e444b7e1bd409de27db2b1afce3ff492}
+      \strng{authorfullhash}{31169ae8028444120af473ccfa722828}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.SC}
+      \field{eprinttype}{arXiv}
+      \field{title}{Automatic differentiation in machine learning: a survey}
+      \field{year}{2018}
+      \verb{eprint}
+      \verb 1502.05767
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1502.05767
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1502.05767
       \endverb
     \endentry
     \entry{Belkin19}{article}{}
@@ -218,6 +308,166 @@
       \field{pages}{195\bibrangedash 202}
       \range{pages}{8}
     \endentry
+    \entry{blondel22}{misc}{}
+      \name{author}{8}{ul=2}{%
+        {{un=0,uniquepart=base,hash=d3b6c8582cea4e8b6576137b6a72cadc}{%
+           family={Blondel},
+           familyi={B\bibinitperiod},
+           given={Mathieu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a5a45875c180d5136325798b472b95d8}{%
+           family={Berthet},
+           familyi={B\bibinitperiod},
+           given={Quentin},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=29563c986154ca2b45d286b4dd5ef92a}{%
+           family={Frostig},
+           familyi={F\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4a22828b76006f42d747b699d2ef5167}{%
+           family={Hoyer},
+           familyi={H\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f373c1b405034badf1248f26dc0f1f45}{%
+           family={Llinares-López},
+           familyi={L\bibinithyphendelim L\bibinitperiod},
+           given={Felipe},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bab4e5caee2d67831e464ce575022b37}{%
+           family={Pedregosa},
+           familyi={P\bibinitperiod},
+           given={Fabian},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0df2e0c86d89bfaf4f3726c0bc382d4f}{%
+           family={Vert},
+           familyi={V\bibinitperiod},
+           given={Jean-Philippe},
+           giveni={J\bibinithyphendelim P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b1a261a072912d7d570b6e341f022470}
+      \strng{fullhash}{a6574c3081cfadae69703ab79a7d74ea}
+      \strng{bibnamehash}{b1a261a072912d7d570b6e341f022470}
+      \strng{authorbibnamehash}{b1a261a072912d7d570b6e341f022470}
+      \strng{authornamehash}{b1a261a072912d7d570b6e341f022470}
+      \strng{authorfullhash}{a6574c3081cfadae69703ab79a7d74ea}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Efficient and Modular Implicit Differentiation}
+      \field{year}{2022}
+      \verb{eprint}
+      \verb 2105.15183
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2105.15183
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2105.15183
+      \endverb
+    \endentry
+    \entry{blondel25}{misc}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=d3b6c8582cea4e8b6576137b6a72cadc}{%
+           family={Blondel},
+           familyi={B\bibinitperiod},
+           given={Mathieu},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=56cc711d42c8750b06db1c3845f6c1a6}{%
+           family={Roulet},
+           familyi={R\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \strng{fullhash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \strng{bibnamehash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \strng{authorbibnamehash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \strng{authornamehash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \strng{authorfullhash}{1c9e8fb8a1d150a9a5905c00ee140be4}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{The Elements of Differentiable Programming}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2403.14606
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2403.14606
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2403.14606
+      \endverb
+    \endentry
+    \entry{bodin}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=18320adc3f678314aa303080d2300dc4}{%
+           family={Bodineau},
+           familyi={B\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=72ea323e5a755a33ead1cc5adf5ace86}{%
+           family={Gallagher},
+           familyi={G\bibinitperiod},
+           given={Isabelle},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=032966cc1a13a786a81dd8bf063da9c1}{%
+           family={Saint-Raymond},
+           familyi={S\bibinithyphendelim R\bibinitperiod},
+           given={Laure},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f8a4b2f809c58e190a90233309739f25}
+      \strng{fullhash}{f3fdca8efc563cee5753ba1ebc7460a1}
+      \strng{bibnamehash}{f3fdca8efc563cee5753ba1ebc7460a1}
+      \strng{authorbibnamehash}{f3fdca8efc563cee5753ba1ebc7460a1}
+      \strng{authornamehash}{f8a4b2f809c58e190a90233309739f25}
+      \strng{authorfullhash}{f3fdca8efc563cee5753ba1ebc7460a1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{From molecular dynamics to kinetic theory and hydrodynamics}
+      \field{year}{2014}
+      \verb{urlraw}
+      \verb https://www.imj-prg.fr/wp-content/uploads/2020/prix/gallagher2014.pdf#page=1.02
+      \endverb
+      \verb{url}
+      \verb https://www.imj-prg.fr/wp-content/uploads/2020/prix/gallagher2014.pdf#page=1.02
+      \endverb
+    \endentry
     \entry{box58}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=002f69bf140cceda97f81a168d86ceec}{%
@@ -263,6 +513,129 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1214/aoms/1177706645
+      \endverb
+    \endentry
+    \entry{jax}{software}{}
+      \name{author}{11}{}{%
+        {{un=0,uniquepart=base,hash=b75383e6b48c8360c7a60031424c85cf}{%
+           family={Bradbury},
+           familyi={B\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=29563c986154ca2b45d286b4dd5ef92a}{%
+           family={Frostig},
+           familyi={F\bibinitperiod},
+           given={Roy},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7ab2d7e7f2bfceec36e42ad1962fde11}{%
+           family={Hawkins},
+           familyi={H\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e4d515e534ba184f553d5a2a926e0ea7}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Matthew\bibnamedelima James},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0101ae5b219809cf901e7645ca40b9ae}{%
+           family={Leary},
+           familyi={L\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=07e607fb522f06610feb023ecfa712e2}{%
+           family={Maclaurin},
+           familyi={M\bibinitperiod},
+           given={Dougal},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bca7d753be3217d63404d860acb6e5f5}{%
+           family={Necula},
+           familyi={N\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=56bf0b340039cf8594436a624ff548a9}{%
+           family={Paszke},
+           familyi={P\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0fd9a0e34f1b2adda41357c948d14986}{%
+           family={Vander{P}las},
+           familyi={V\bibinitperiod},
+           given={Jake},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=02f809ed2547f721c304772c06378c2d}{%
+           family={Wanderman-{M}ilne},
+           familyi={W\bibinithyphendelim M\bibinitperiod},
+           given={Skye},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fe167f78433aabd363ac3c06710a1945}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Qiao},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{be9c2f36b976223518e841214253df92}
+      \strng{fullhash}{12f83c04441cfb40a3c9b086929c12bf}
+      \strng{bibnamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authorbibnamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authornamehash}{be9c2f36b976223518e841214253df92}
+      \strng{authorfullhash}{12f83c04441cfb40a3c9b086929c12bf}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{JAX}: composable transformations of {P}ython+{N}um{P}y programs}
+      \field{version}{0.3.13}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb http://github.com/google/jax
+      \endverb
+      \verb{url}
+      \verb http://github.com/google/jax
+      \endverb
+    \endentry
+    \entry{bradley24}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a785675921635985f857ad463ff09021}{%
+           family={Bradley},
+           familyi={B\bibinitperiod},
+           given={Andrew\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a785675921635985f857ad463ff09021}
+      \strng{fullhash}{a785675921635985f857ad463ff09021}
+      \strng{bibnamehash}{a785675921635985f857ad463ff09021}
+      \strng{authorbibnamehash}{a785675921635985f857ad463ff09021}
+      \strng{authornamehash}{a785675921635985f857ad463ff09021}
+      \strng{authorfullhash}{a785675921635985f857ad463ff09021}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://cs.stanford.edu/~ambrad/adjoint_tutorial.pdf}}
+      \field{note}{Originally published November 16, 2010}
+      \field{title}{{PDE-constrained optimization and the adjoint method}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://cs.stanford.edu/~ambrad/adjoint_tutorial.pdf
+      \endverb
+      \verb{url}
+      \verb https://cs.stanford.edu/~ambrad/adjoint_tutorial.pdf
       \endverb
     \endentry
     \entry{breiman01}{article}{}
@@ -330,6 +703,73 @@
       \field{title}{Computer systems: a programmer’s perspective}
       \field{year}{2011}
     \endentry
+    \entry{challis48}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=f8e0cd2490ec20fc1e01042d9a15553e}{%
+           family={Challis},
+           familyi={C\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \strng{fullhash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \strng{bibnamehash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \strng{authorbibnamehash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \strng{authornamehash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \strng{authorfullhash}{f8e0cd2490ec20fc1e01042d9a15553e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science}
+      \field{number}{218}
+      \field{title}{LXV. On the velocity of sound, in reply to the remarks of the Astronomer Royal}
+      \field{volume}{32}
+      \field{year}{1848}
+      \field{pages}{494\bibrangedash 499}
+      \range{pages}{6}
+    \endentry
+    \entry{cheskidov24}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7075bff0ce0f7e89c4039aae3449845c}{%
+           family={Cheskidov},
+           familyi={C\bibinitperiod},
+           given={Alexey},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7075bff0ce0f7e89c4039aae3449845c}
+      \strng{fullhash}{7075bff0ce0f7e89c4039aae3449845c}
+      \strng{bibnamehash}{7075bff0ce0f7e89c4039aae3449845c}
+      \strng{authorbibnamehash}{7075bff0ce0f7e89c4039aae3449845c}
+      \strng{authornamehash}{7075bff0ce0f7e89c4039aae3449845c}
+      \strng{authorfullhash}{7075bff0ce0f7e89c4039aae3449845c}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.AP}
+      \field{eprinttype}{arXiv}
+      \field{title}{Dissipation anomaly and anomalous dissipation in incompressible fluid flows}
+      \field{year}{2024}
+      \verb{eprint}
+      \verb 2311.04182
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2311.04182
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2311.04182
+      \endverb
+    \endentry
     \entry{chou07}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=bda65ca2bca176cd01a5f2cc76a78003}{%
@@ -379,6 +819,89 @@
       \field{year}{2007}
       \field{pages}{515}
       \range{pages}{1}
+    \endentry
+    \entry{clausius58}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ebb4e4e2fa10827db3a75f58ecba3f72}{%
+           family={Clausius},
+           familyi={C\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \strng{fullhash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \strng{bibnamehash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \strng{authorbibnamehash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \strng{authornamehash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \strng{authorfullhash}{ebb4e4e2fa10827db3a75f58ecba3f72}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annalen der Physik}
+      \field{number}{10}
+      \field{title}{Ueber die mittlere Länge der Wege, welche bei der Molecularbewegung gasförmiger Körper von den einzelnen Molecülen zurückgelegt werden; nebst einigen anderen Bemerkungen über die mechanische Wärmetheorie}
+      \field{volume}{181}
+      \field{year}{1858}
+      \field{pages}{239\bibrangedash 258}
+      \range{pages}{20}
+      \verb{doi}
+      \verb https://doi.org/10.1002/andp.18581811005
+      \endverb
+      \verb{eprint}
+      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/andp.18581811005
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/andp.18581811005
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/andp.18581811005
+      \endverb
+    \endentry
+    \entry{Constantin2004}{inbook}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5f2184f5b6f3a0a131ecd61e0d8be22f}{%
+           family={Constantin},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \strng{fullhash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \strng{bibnamehash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \strng{authorbibnamehash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \strng{authornamehash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \strng{authorfullhash}{5f2184f5b6f3a0a131ecd61e0d8be22f}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Mathematical Foundation of Turbulent Viscous Flows}
+      \field{isbn}{9783540324546}
+      \field{issn}{1617-9692}
+      \field{month}{11}
+      \field{title}{Euler Equations, Navier-Stokes Equations and Turbulence}
+      \field{year}{2005}
+      \field{pages}{1\bibrangedash 43}
+      \range{pages}{43}
+      \verb{doi}
+      \verb 10.1007/11545989_1
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/11545989_1
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/11545989_1
+      \endverb
     \endentry
     \entry{Courant1928}{article}{}
       \name{author}{3}{}{%
@@ -467,6 +990,45 @@
       \field{pages}{265\bibrangedash 292}
       \range{pages}{28}
     \endentry
+    \entry{Dafermos2000}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=d2de4e1ef60191df9df4f1d0e251648c}{%
+           family={Dafermos},
+           familyi={D\bibinitperiod},
+           given={Constantine\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \strng{fullhash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \strng{bibnamehash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \strng{authorbibnamehash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \strng{authornamehash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \strng{authorfullhash}{d2de4e1ef60191df9df4f1d0e251648c}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783662220191}
+      \field{issn}{0072-7830}
+      \field{journaltitle}{Grundlehren der mathematischen Wissenschaften}
+      \field{title}{Hyperbolic Conservation Laws in Continuum Physics}
+      \field{year}{2000}
+      \verb{doi}
+      \verb 10.1007/978-3-662-22019-1
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/978-3-662-22019-1
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/978-3-662-22019-1
+      \endverb
+    \endentry
     \entry{deng24}{misc}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=6d8b6548edf7f293d0d08a8a4662cd40}{%
@@ -494,6 +1056,7 @@
       \strng{authorbibnamehash}{1984f71bd43ee05edb1a1f8993b211f0}
       \strng{authornamehash}{ccc3d4c320c22985bd956cfb97f9d163}
       \strng{authorfullhash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \field{extraname}{1}
       \field{sortinit}{D}
       \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
       \field{extradatescope}{labelyear}
@@ -512,6 +1075,100 @@
       \endverb
       \verb{url}
       \verb https://arxiv.org/abs/2408.07818
+      \endverb
+    \endentry
+    \entry{deng25}{misc}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6d8b6548edf7f293d0d08a8a4662cd40}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aa64139c1c99fa6d80e9a022a66fadf6}{%
+           family={Hani},
+           familyi={H\bibinitperiod},
+           given={Zaher},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5d38fb894354b4d9907d6b0143642902}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ccc3d4c320c22985bd956cfb97f9d163}
+      \strng{fullhash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{bibnamehash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{authorbibnamehash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \strng{authornamehash}{ccc3d4c320c22985bd956cfb97f9d163}
+      \strng{authorfullhash}{1984f71bd43ee05edb1a1f8993b211f0}
+      \field{extraname}{2}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.AP}
+      \field{eprinttype}{arXiv}
+      \field{title}{Hilbert's sixth problem: derivation of fluid equations via Boltzmann's kinetic theory}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2503.01800
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2503.01800
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2503.01800
+      \endverb
+    \endentry
+    \entry{eastwood79}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=490caa6c282bc7517552bac34cec8e69}{%
+           family={Eastwood},
+           familyi={E\bibinitperiod},
+           given={J.W},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=81295892ade63449eef1b66f2654ae0e}{%
+           family={Brownrigg},
+           familyi={B\bibinitperiod},
+           given={D.R.K},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{58075cdad8dffec68a05d827df4dabf6}
+      \strng{fullhash}{58075cdad8dffec68a05d827df4dabf6}
+      \strng{bibnamehash}{58075cdad8dffec68a05d827df4dabf6}
+      \strng{authorbibnamehash}{58075cdad8dffec68a05d827df4dabf6}
+      \strng{authornamehash}{58075cdad8dffec68a05d827df4dabf6}
+      \strng{authorfullhash}{58075cdad8dffec68a05d827df4dabf6}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A discussion of the solution by means of fast fourier transforms of the constant coefficient elliptic problem with isolated boundary conditions is presented. Concepts of filtering and sampling are used to show that the transform algorithm devised by Hockney [1] gives exact potential values in the computational box (c.f. remarks in [2]). The algorithm and performance of a three dimensional implementation of the transform algorithm is given. It is shown that interlaced meshes or mesh and submeshes may be employed to gain further computational economy.}
+      \field{issn}{0021-9991}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{number}{1}
+      \field{title}{Remarks on the solution of poisson's equation for isolated systems}
+      \field{volume}{32}
+      \field{year}{1979}
+      \field{pages}{24\bibrangedash 38}
+      \range{pages}{15}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0021-9991(79)90139-6
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0021999179901396
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0021999179901396
       \endverb
     \endentry
     \entry{Efron1994}{book}{}
@@ -559,46 +1216,129 @@
       \verb http://dx.doi.org/10.1201/9780429246593
       \endverb
     \endentry
-    \entry{mat_inv}{article}{}
+    \entry{eykin94}{article}{}
       \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=689aab17b15aea5483d97dea9ca39df7}{%
-           family={{Fathi Vajargah}},
-           familyi={F\bibinitperiod},
-           given={Behrouz},
-           giveni={B\bibinitperiod},
+        {{un=0,uniquepart=base,hash=c1f1b75cedd31cb1cae43f4fe7f7d07d}{%
+           family={Eyink},
+           familyi={E\bibinitperiod},
+           given={Gregory\bibnamedelima L.},
+           giveni={G\bibinitperiod\bibinitdelim L\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{689aab17b15aea5483d97dea9ca39df7}
-      \strng{fullhash}{689aab17b15aea5483d97dea9ca39df7}
-      \strng{bibnamehash}{689aab17b15aea5483d97dea9ca39df7}
-      \strng{authorbibnamehash}{689aab17b15aea5483d97dea9ca39df7}
-      \strng{authornamehash}{689aab17b15aea5483d97dea9ca39df7}
-      \strng{authorfullhash}{689aab17b15aea5483d97dea9ca39df7}
+      \strng{namehash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \strng{fullhash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \strng{bibnamehash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \strng{authorbibnamehash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \strng{authornamehash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \strng{authorfullhash}{c1f1b75cedd31cb1cae43f4fe7f7d07d}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We outline a proof and give a discussion at a physical level of an assertion of Onsager's: namely, that a solution of incompressible Euler equations with Hölder continuous velocity of order h >13 conserves kinetic energy, but not necessarily if h ≤ 13. We prove the result under a “∗-Hölder condition” which is somewhat stronger than usual Hölder continuity. Our argument establishes also the fundamental result that the instantaneous (sub-scale) energy transfer is dominated by local triadic interactions for a ∗-Hölder solution with exponenth in the range 0 < h < 1. However, we must use a “band-averaged” energy flux for the proof: as we explain, the ordinary definition of the flux fails to adequately measure transport in wavenumber space (scale), since it is insensitive to the distance through which energy is displaced by individual interactions. We discuss some connections of the results with phenomenological theories of fully-developed turbulence, the 1941 Kolmogorov theory and the “multifractal model” of Parisi and Frisch.}
+      \field{issn}{0167-2789}
+      \field{journaltitle}{Physica D: Nonlinear Phenomena}
+      \field{number}{3}
+      \field{title}{Energy dissipation without viscosity in ideal hydrodynamics I. Fourier analysis and local energy transfer}
+      \field{volume}{78}
+      \field{year}{1994}
+      \field{pages}{222\bibrangedash 240}
+      \range{pages}{19}
+      \verb{doi}
+      \verb https://doi.org/10.1016/0167-2789(94)90117-1
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/0167278994901171
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/0167278994901171
+      \endverb
+    \endentry
+    \entry{flatscher19}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6e25c72701f5aeabf3b6bb66dcacd420}{%
+           family={Flatscher},
+           familyi={F\bibinitperiod},
+           given={Tobit},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Technische Universität Graz}%
+      }
+      \strng{namehash}{6e25c72701f5aeabf3b6bb66dcacd420}
+      \strng{fullhash}{6e25c72701f5aeabf3b6bb66dcacd420}
+      \strng{bibnamehash}{6e25c72701f5aeabf3b6bb66dcacd420}
+      \strng{authorbibnamehash}{6e25c72701f5aeabf3b6bb66dcacd420}
+      \strng{authornamehash}{6e25c72701f5aeabf3b6bb66dcacd420}
+      \strng{authorfullhash}{6e25c72701f5aeabf3b6bb66dcacd420}
       \field{sortinit}{F}
       \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{In this paper, we present a novel Monte Carlo algorithm for obtaining the inverse of a given nonsingular matrix A with high accuracy. The method is performed by splitting the given matrix A=D-B where D is a strictly diagonally dominant matrix and it can be easily constructed based on matrix A and B=k‖A‖ such that k can be selected as an arbitrary number greater than or equal to 1. The accuracy of presented algorithm is compatible with any numerical method. The theory of the method and its numerical results are also presented.}
-      \field{issn}{0096-3003}
-      \field{journaltitle}{Applied Mathematics and Computation}
-      \field{number}{1}
-      \field{title}{A way to obtain Monte Carlo matrix inversion with minimal error}
-      \field{volume}{191}
-      \field{year}{2007}
-      \field{pages}{225\bibrangedash 233}
-      \range{pages}{9}
+      \field{title}{Lattice-Boltzmann method for multi-component flows in porous media}
+      \field{type}{mathesis}
+      \field{year}{2019}
       \verb{doi}
-      \verb https://doi.org/10.1016/j.amc.2007.02.082
+      \verb 10.3217/YQB1T-22135
       \endverb
       \verb{urlraw}
-      \verb https://www.sciencedirect.com/science/article/pii/S0096300307002494
+      \verb https://repository.tugraz.at/publications/yqb1t-22135
       \endverb
       \verb{url}
-      \verb https://www.sciencedirect.com/science/article/pii/S0096300307002494
+      \verb https://repository.tugraz.at/publications/yqb1t-22135
       \endverb
-      \keyw{Monte Carlo,Markov chain,Matrix inversion,Minimal error}
+    \endentry
+    \entry{gherghe25}{misc}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=6c6719a216e7107bd4d6cec54f850d48}{%
+           family={Gherghe},
+           familyi={G\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d35cf9a79f5921e389540b686ea7592}{%
+           family={Moyano},
+           familyi={M\bibinitperiod},
+           given={Iván},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=59b5cac548f1e8426ba1848ff813283d}{%
+           family={Sigal},
+           familyi={S\bibinitperiod},
+           given={Israel\bibnamedelima Michael},
+           giveni={I\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7b1d8a5c6781a2d4db0fd39fdfafea7c}
+      \strng{fullhash}{4651fd99b552945cbcbfce5580ef5393}
+      \strng{bibnamehash}{4651fd99b552945cbcbfce5580ef5393}
+      \strng{authorbibnamehash}{4651fd99b552945cbcbfce5580ef5393}
+      \strng{authornamehash}{7b1d8a5c6781a2d4db0fd39fdfafea7c}
+      \strng{authorfullhash}{4651fd99b552945cbcbfce5580ef5393}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{quant-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{On the time-dependent Born-Oppenheimer Approximation}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2505.18701
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2505.18701
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2505.18701
+      \endverb
     \endentry
     \entry{gould96}{article}{}
       \name{author}{6}{}{%
@@ -662,66 +1402,36 @@
       \field{pages}{349\bibrangedash 349}
       \range{pages}{1}
     \endentry
-    \entry{bonitz22}{article}{}
-      \name{author}{4}{}{%
-        {{un=0,uniquepart=base,hash=96dedaeac24f3dc5d7ffa74b5d99adfc}{%
-           family={Graziani},
-           familyi={G\bibinitperiod},
-           given={F.},
-           giveni={F\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=bca69ac7e21f9a2870fde0cfd1a3a811}{%
-           family={Moldabekov},
-           familyi={M\bibinitperiod},
-           given={Z.},
-           giveni={Z\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=d2074c0dec0dc9b4ca5d24d6c9eb7a95}{%
-           family={Olson},
-           familyi={O\bibinitperiod},
-           given={B.},
-           giveni={B\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=fcaaf5d81193c8ce3c377e25eb54183e}{%
-           family={Bonitz},
-           familyi={B\bibinitperiod},
-           given={M.},
-           giveni={M\bibinitperiod},
+    \entry{hahn19}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=93d31a82af8d979d70eb089df6657151}{%
+           family={Hahn},
+           familyi={H\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{bfb177295c8dc7c8d38d8a57a83a972f}
-      \strng{fullhash}{070d5e053d1c6889854ca63624b876d5}
-      \strng{bibnamehash}{bfb177295c8dc7c8d38d8a57a83a972f}
-      \strng{authorbibnamehash}{bfb177295c8dc7c8d38d8a57a83a972f}
-      \strng{authornamehash}{bfb177295c8dc7c8d38d8a57a83a972f}
-      \strng{authorfullhash}{070d5e053d1c6889854ca63624b876d5}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \strng{namehash}{93d31a82af8d979d70eb089df6657151}
+      \strng{fullhash}{93d31a82af8d979d70eb089df6657151}
+      \strng{bibnamehash}{93d31a82af8d979d70eb089df6657151}
+      \strng{authorbibnamehash}{93d31a82af8d979d70eb089df6657151}
+      \strng{authornamehash}{93d31a82af8d979d70eb089df6657151}
+      \strng{authorfullhash}{93d31a82af8d979d70eb089df6657151}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Abstract Warm dense matter (WDM), an exotic, highly compressed state of matter between solid and plasma phases, is of high current interest, in particular for astrophysics and inertial confinement fusion. For the latter, in particular the propagation of compression shocks is crucial. The main unknown in the shock propagation in WDM is the behaviour of the electrons since they are governed by correlations, quantum and spin effects that need to be accounted for simultaneously. Here we describe the shock dynamics of the warm dense electron gas using a quantum hydrodynamic model. From the numerical hydrodynamic simulations, we observe that the quantum Bohm pressure induces shear force that weakens the formation and strength of the shock. In addition, the Bohm pressure induces an electron density response that takes the form of oscillations. This is confirmed by the theoretical analysis of the early stage of the shock formation. Our theoretical and numerical analyses allow us to identify characteristic dimensionless shock propagation parameters at which the effect of the Bohm force is important.}
-      \field{journaltitle}{Contributions to Plasma Physics}
-      \field{number}{2}
-      \field{title}{Shock physics in warm dense matter: A quantum hydrodynamics perspective}
-      \field{volume}{62}
-      \field{year}{2022}
-      \field{pages}{e202100170}
-      \range{pages}{-1}
-      \verb{doi}
-      \verb https://doi.org/10.1002/ctpp.202100170
-      \endverb
-      \verb{eprint}
-      \verb https://onlinelibrary.wiley.com/doi/pdf/10.1002/ctpp.202100170
-      \endverb
+      \field{howpublished}{MAUCA Fundamental Course 2019 – Course Notes}
+      \field{title}{Fluid Mechanics for Astrophysicists: From Kinetic Theory to Fluids and Plasmas}
+      \field{year}{2019}
       \verb{urlraw}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ctpp.202100170
+      \verb https://www-n.oca.eu/ohahn/teaching/fluid_mechanics.pdf
       \endverb
       \verb{url}
-      \verb https://onlinelibrary.wiley.com/doi/abs/10.1002/ctpp.202100170
+      \verb https://www-n.oca.eu/ohahn/teaching/fluid_mechanics.pdf
       \endverb
-      \keyw{jellium,quantum hydrodynamics,shock propagation,warm dense matter}
     \endentry
     \entry{Hairer06b}{article}{}
       \name{author}{1}{}{%
@@ -1058,6 +1768,34 @@
       \verb https://epubs.siam.org/doi/abs/10.1137/1.9780898718027
       \endverb
     \endentry
+    \entry{hilbert19}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=75b05ce956b23032ea66e4c981e8f28a}{%
+           family={Hilbert},
+           familyi={H\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{75b05ce956b23032ea66e4c981e8f28a}
+      \strng{fullhash}{75b05ce956b23032ea66e4c981e8f28a}
+      \strng{bibnamehash}{75b05ce956b23032ea66e4c981e8f28a}
+      \strng{authorbibnamehash}{75b05ce956b23032ea66e4c981e8f28a}
+      \strng{authornamehash}{75b05ce956b23032ea66e4c981e8f28a}
+      \strng{authorfullhash}{75b05ce956b23032ea66e4c981e8f28a}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Lecture delivered at the International Congress of Mathematicians, Paris}
+      \field{month}{8}
+      \field{note}{\url{https://www.aemea.org/math/Hilbert_23_Mathematical_Problems_1900.pdf}}
+      \field{subtitle}{Lecture delivered before the International Congress of Mathematicians at Paris in 1900}
+      \field{title}{Mathematical Problems}
+      \field{year}{1900}
+    \endentry
     \entry{hirashima2023}{misc}{}
       \name{author}{7}{}{%
         {{un=0,uniquepart=base,hash=a0f898105be40bb55e1797c89f7fa870}{%
@@ -1153,6 +1891,67 @@
       \verb https://api.semanticscholar.org/CorpusID:18464112
       \endverb
     \endentry
+    \entry{james77}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9a49a80b0ee3a033f5df91adfe0b8590}{%
+           family={{James}},
+           familyi={J\bibinitperiod},
+           given={R.\bibnamedelimi A.},
+           giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \strng{fullhash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \strng{bibnamehash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \strng{authorbibnamehash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \strng{authornamehash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \strng{authorfullhash}{9a49a80b0ee3a033f5df91adfe0b8590}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational Physics}
+      \field{month}{10}
+      \field{number}{2}
+      \field{title}{{The Solution of Poisson's Equation for Isolated Source Distributions}}
+      \field{volume}{25}
+      \field{year}{1977}
+      \field{pages}{71\bibrangedash 93}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.1016/0021-9991(77)90013-4
+      \endverb
+    \endentry
+    \entry{diffrax}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=051731aab4dfad9f49233270e9e83536}{%
+           family={Kidger},
+           familyi={K\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {University of Oxford}%
+      }
+      \strng{namehash}{051731aab4dfad9f49233270e9e83536}
+      \strng{fullhash}{051731aab4dfad9f49233270e9e83536}
+      \strng{bibnamehash}{051731aab4dfad9f49233270e9e83536}
+      \strng{authorbibnamehash}{051731aab4dfad9f49233270e9e83536}
+      \strng{authornamehash}{051731aab4dfad9f49233270e9e83536}
+      \strng{authorfullhash}{051731aab4dfad9f49233270e9e83536}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{O}n {N}eural {D}ifferential {E}quations}
+      \field{type}{phdthesis}
+      \field{year}{2021}
+    \endentry
     \entry{Kincl23}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=b5e237e94cd37f13858f40a5fb688d57}{%
@@ -1200,6 +1999,63 @@
       \verb{url}
       \verb http://dx.doi.org/10.1016/j.cpc.2022.108593
       \endverb
+    \endentry
+    \entry{kruger17}{book}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=0ac28eb0b4644afc5f56a77196ab8144}{%
+           family={Krüger},
+           familyi={K\bibinitperiod},
+           given={Timm},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d34a700c514436cd2dd3e326ebbe1729}{%
+           family={Kusumaatmaja},
+           familyi={K\bibinitperiod},
+           given={Halim},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=35cc9c11d0e3150d6c23f6f6ba34746e}{%
+           family={Kuzmin},
+           familyi={K\bibinitperiod},
+           given={Alexey},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=14666c7c31359089f992eabfd087b840}{%
+           family={Shardt},
+           familyi={S\bibinitperiod},
+           given={Orest},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=881dcb22c54f565d8aa94d798f5f15ce}{%
+           family={Silva},
+           familyi={S\bibinitperiod},
+           given={Gonçalo},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a9dcce68834b7fb484eb4e337629abda}{%
+           family={Viggen},
+           familyi={V\bibinitperiod},
+           given={Erlend\bibnamedelima Magnus},
+           giveni={E\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{69d742af0ed1a2e152c48edbd29d473e}
+      \strng{fullhash}{fa8f0fe02a8063fe8a412beb3e84baba}
+      \strng{bibnamehash}{69d742af0ed1a2e152c48edbd29d473e}
+      \strng{authorbibnamehash}{69d742af0ed1a2e152c48edbd29d473e}
+      \strng{authornamehash}{69d742af0ed1a2e152c48edbd29d473e}
+      \strng{authorfullhash}{fa8f0fe02a8063fe8a412beb3e84baba}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Lattice Boltzmann Method: Principles and Practice}
+      \field{year}{2017}
     \endentry
     \entry{lambert91}{book}{}
       \name{author}{1}{}{%
@@ -1420,6 +2276,234 @@
       \endverb
       \keyw{Semantics;Mathematical model;Machine learning;Random variables;Manifolds;Machine learning algorithms;Prediction algorithms;High dimension;statistics;semantic manifold;anomaly detection;one-class learning;life-long learning;incremental learning;hierarchical models;generative models}
     \endentry
+    \entry{liu19}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=38189fe02b562b8892bd694420804211}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Qing},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c22de2e1a00aa09d6c62dd705fff8e9a}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Xiang-Bo},
+           giveni={X\bibinithyphendelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f86fda2ef32d4d19bbb3464e6fbc2d42}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Cai-Wu},
+           giveni={C\bibinithyphendelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{f8b027dacf356da353cf8da4f323f7f5}
+      \strng{fullhash}{72fc29b15edfe47829e62a56033258eb}
+      \strng{bibnamehash}{72fc29b15edfe47829e62a56033258eb}
+      \strng{authorbibnamehash}{72fc29b15edfe47829e62a56033258eb}
+      \strng{authornamehash}{f8b027dacf356da353cf8da4f323f7f5}
+      \strng{authorfullhash}{72fc29b15edfe47829e62a56033258eb}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, high-Mach-number compressible flows with shock waves are successfully simulated by Hermite-expansion-based lattice Boltzmann (LB) method proposed in the framework of the double-distribution-function approach. In the method, the discrete equilibrium distribution functions are obtained from the Hermite expansions of the continuous equilibrium distribution functions, and the discrete velocity sets are obtained by choosing the abscissas of suitable Gauss–Hermite quadratures with sufficient accuracy. Numerical simulations are carried out for some high-Mach-number compressible flows with shock waves in one and two dimensions. The numerical results are found to be in good agreement with the analytical solutions and/or other numerical results reported in the literature. The complex flow structures such as the contact discontinuities and interactions between the shock waves are well captured by the Hermite-expansion-based LB method.}
+      \field{issn}{0378-4371}
+      \field{journaltitle}{Physica A: Statistical Mechanics and its Applications}
+      \field{title}{Simulating high-Mach-number compressible flows with shock waves via Hermite-expansion-based lattice Boltzmann method}
+      \field{volume}{533}
+      \field{year}{2019}
+      \field{pages}{122062}
+      \range{pages}{1}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.physa.2019.122062
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378437119311951
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378437119311951
+      \endverb
+      \keyw{Lattice Boltzmann method,Hermite expansion approach,Compressible flows,High-Mach-number flows,Shock wave}
+    \endentry
+    \entry{luise25}{misc}{}
+      \name{author}{24}{}{%
+        {{un=0,uniquepart=base,hash=f8bb1292b0f6fe29810664ea34db868d}{%
+           family={Luise},
+           familyi={L\bibinitperiod},
+           given={Giulia},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e8ea5b32927bd11be26ca20a679ca632}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Chin-Wei},
+           giveni={C\bibinithyphendelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c7003cab20a5f4a7d853db86e2a23b87}{%
+           family={Vogels},
+           familyi={V\bibinitperiod},
+           given={Thijs},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=98c1a46ea43f612203868a5579f6cebc}{%
+           family={Kooi},
+           familyi={K\bibinitperiod},
+           given={Derk\bibnamedelima P.},
+           giveni={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ead1f648a4aeec4688036c900978feb9}{%
+           family={Ehlert},
+           familyi={E\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f5a81857be5fb23b117e2313469529ed}{%
+           family={Lanius},
+           familyi={L\bibinitperiod},
+           given={Stephanie},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=645cb875106cefd5f27b642e8f068745}{%
+           family={Giesbertz},
+           familyi={G\bibinitperiod},
+           given={Klaas\bibnamedelimb J.\bibnamedelimi H.},
+           giveni={K\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7452898004ac24bdb4a017a12c8bec23}{%
+           family={Karton},
+           familyi={K\bibinitperiod},
+           given={Amir},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a8bb848572630dfd664795640dd28847}{%
+           family={Gunceler},
+           familyi={G\bibinitperiod},
+           given={Deniz},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ea24dc835f5befe0a928e729454e9bee}{%
+           family={Stanley},
+           familyi={S\bibinitperiod},
+           given={Megan},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=34b844980bbae20e553723eb642af6da}{%
+           family={Bruinsma},
+           familyi={B\bibinitperiod},
+           given={Wessel\bibnamedelima P.},
+           giveni={W\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=00bb036f5e74e52852b5ad20607bd70d}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Lin},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d11e385674e8948634f43f72ac0581a4}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Xinran},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=57aa304d877e71e65b1f34fdbbe2f5d5}{%
+           family={Torres},
+           familyi={T\bibinitperiod},
+           given={José\bibnamedelima Garrido},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6ce5c0869e8348aaddbb0de59d9939fe}{%
+           family={Katbashev},
+           familyi={K\bibinitperiod},
+           given={Abylay},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4542ce1a3b123f567144d7367fa0988c}{%
+           family={Máté},
+           familyi={M\bibinitperiod},
+           given={Bálint},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3fe7570fe7295ebc270646e9fdfd9f3b}{%
+           family={Kaba},
+           familyi={K\bibinitperiod},
+           given={Sékou-Oumar},
+           giveni={S\bibinithyphendelim O\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=57710a8c80a5d6af7e540c168eebd238}{%
+           family={Sordillo},
+           familyi={S\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=02bc34eb9254e1f5df3ab6bf2dacb7c7}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yingrong},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=34b87ac8e5eb0a31f4864f78c87687db}{%
+           family={Williams-Young},
+           familyi={W\bibinithyphendelim Y\bibinitperiod},
+           given={David\bibnamedelima B.},
+           giveni={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9dfd0135a5e80aa6d81cea2c10fb7f73}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Christopher\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=adf447d0d6d246f5a5fcd334efdfcf7d}{%
+           family={Hermann},
+           familyi={H\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2e539e2ef093fd4fb83f6961292d598a}{%
+           family={Berg},
+           familyi={B\bibinitperiod},
+           given={Rianne},
+           giveni={R\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima den},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod},
+           prefixun=0}}%
+        {{un=0,uniquepart=base,hash=9af6b73ea776add4132fa8f65ea9571e}{%
+           family={Gori-Giorgi},
+           familyi={G\bibinithyphendelim G\bibinitperiod},
+           given={Paola},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{8cc972b155bed699797e13c87781df9c}
+      \strng{fullhash}{4056fd7432ee656a7c4fbdd2d99ced8b}
+      \strng{bibnamehash}{8cc972b155bed699797e13c87781df9c}
+      \strng{authorbibnamehash}{8cc972b155bed699797e13c87781df9c}
+      \strng{authornamehash}{8cc972b155bed699797e13c87781df9c}
+      \strng{authorfullhash}{4056fd7432ee656a7c4fbdd2d99ced8b}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{physics.chem-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{Accurate and scalable exchange-correlation with deep learning}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2506.14665
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2506.14665
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2506.14665
+      \endverb
+    \endentry
     \entry{Margolin2023}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=da1e96f9c4a62458dfa54c4973d85a60}{%
@@ -1599,6 +2683,38 @@
       \verb{url}
       \verb https://doi.org/10.1007/BF03023062
       \endverb
+    \endentry
+    \entry{onsager}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=005d4b021327efca5bb6a9ffe312f7a9}{%
+           family={Onsager},
+           familyi={O\bibinitperiod},
+           given={Lars},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Società Italiana di Fisica Bologna}%
+      }
+      \strng{namehash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \strng{fullhash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \strng{bibnamehash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \strng{authorbibnamehash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \strng{authornamehash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \strng{authorfullhash}{005d4b021327efca5bb6a9ffe312f7a9}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Il Nuovo Cimento (1943-1954)}
+      \field{number}{Suppl 2}
+      \field{title}{Statistical hydrodynamics}
+      \field{volume}{6}
+      \field{year}{1949}
+      \field{pages}{279\bibrangedash 287}
+      \range{pages}{9}
     \endentry
     \entry{over04}{thesis}{}
       \name{author}{1}{}{%
@@ -3476,6 +4592,92 @@
       \verb http://dx.doi.org/10.1093/mnras/stu2164
       \endverb
     \endentry
+    \entry{GMRES}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=2e9e890ef0ef7a6569e8afb4da0fbf7a}{%
+           family={Saad},
+           familyi={S\bibinitperiod},
+           given={Youcef},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=eac3074c8353b52f159e50629f58cfe2}{%
+           family={Schultz},
+           familyi={S\bibinitperiod},
+           given={Martin\bibnamedelima H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e503d866277c9f7effb481e6ffb692d6}
+      \strng{fullhash}{e503d866277c9f7effb481e6ffb692d6}
+      \strng{bibnamehash}{e503d866277c9f7effb481e6ffb692d6}
+      \strng{authorbibnamehash}{e503d866277c9f7effb481e6ffb692d6}
+      \strng{authornamehash}{e503d866277c9f7effb481e6ffb692d6}
+      \strng{authorfullhash}{e503d866277c9f7effb481e6ffb692d6}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Scientific and Statistical Computing}
+      \field{number}{3}
+      \field{title}{GMRES: A Generalized Minimal Residual Algorithm for Solving Nonsymmetric Linear Systems}
+      \field{volume}{7}
+      \field{year}{1986}
+      \field{pages}{856\bibrangedash 869}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1137/0907058
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1137/0907058
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/0907058
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/0907058
+      \endverb
+    \endentry
+    \entry{raymond09}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=032966cc1a13a786a81dd8bf063da9c1}{%
+           family={Saint-Raymond},
+           familyi={S\bibinithyphendelim R\bibinitperiod},
+           given={Laure},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{032966cc1a13a786a81dd8bf063da9c1}
+      \strng{fullhash}{032966cc1a13a786a81dd8bf063da9c1}
+      \strng{bibnamehash}{032966cc1a13a786a81dd8bf063da9c1}
+      \strng{authorbibnamehash}{032966cc1a13a786a81dd8bf063da9c1}
+      \strng{authornamehash}{032966cc1a13a786a81dd8bf063da9c1}
+      \strng{authorfullhash}{032966cc1a13a786a81dd8bf063da9c1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783540928478}
+      \field{issn}{1617-9692}
+      \field{journaltitle}{Lecture Notes in Mathematics}
+      \field{title}{Hydrodynamic Limits of the Boltzmann Equation}
+      \field{year}{2009}
+      \verb{doi}
+      \verb 10.1007/978-3-540-92847-8
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/978-3-540-92847-8
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/978-3-540-92847-8
+      \endverb
+    \endentry
     \entry{schlottke21}{article}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=fa979ee4e7aa746da6bbcd1ecea8e8fc}{%
@@ -3524,6 +4726,37 @@
       \field{year}{2021}
       \field{pages}{110467}
       \range{pages}{1}
+    \endentry
+    \entry{sormani22}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=deed3c7e76cb2df605da7b04d24a1f62}{%
+           family={Sormani},
+           familyi={S\bibinitperiod},
+           given={Mattia},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \strng{fullhash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \strng{bibnamehash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \strng{authorbibnamehash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \strng{authornamehash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \strng{authorfullhash}{deed3c7e76cb2df605da7b04d24a1f62}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Lecture notes for the course at Heidelberg University}
+      \field{title}{Lecture Notes in Astrophysical Fluid Dynamics}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://www.ita.uni-heidelberg.de/~mattia/teaching/AFD_2022.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ita.uni-heidelberg.de/~mattia/teaching/AFD_2022.pdf
+      \endverb
     \endentry
     \entry{springel23}{misc}{}
       \name{author}{8}{}{%
@@ -3591,6 +4824,347 @@
       \field{title}{Lecture notes in Fundamentals of Simulation Methods}
       \field{year}{2023}
     \endentry
+    \entry{stokes48}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c7199df8b1d221638c4e287d662fb97e}{%
+           family={Stokes},
+           familyi={S\bibinitperiod},
+           given={George\bibnamedelima Gabriel},
+           giveni={G\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Taylor \& Francis}%
+      }
+      \strng{namehash}{c7199df8b1d221638c4e287d662fb97e}
+      \strng{fullhash}{c7199df8b1d221638c4e287d662fb97e}
+      \strng{bibnamehash}{c7199df8b1d221638c4e287d662fb97e}
+      \strng{authorbibnamehash}{c7199df8b1d221638c4e287d662fb97e}
+      \strng{authornamehash}{c7199df8b1d221638c4e287d662fb97e}
+      \strng{authorfullhash}{c7199df8b1d221638c4e287d662fb97e}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The London, Edinburgh, and Dublin philosophical magazine and journal of science}
+      \field{number}{223}
+      \field{title}{LIV. On a difficulty in the theory of Sound}
+      \field{volume}{33}
+      \field{year}{1848}
+      \field{pages}{349\bibrangedash 356}
+      \range{pages}{8}
+    \endentry
+    \entry{strassen69}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7bca1a3f59886cbcc73817b5146b30c2}{%
+           family={Strassen},
+           familyi={S\bibinitperiod},
+           given={Volker},
+           giveni={V\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \strng{fullhash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \strng{bibnamehash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \strng{authorbibnamehash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \strng{authornamehash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \strng{authorfullhash}{7bca1a3f59886cbcc73817b5146b30c2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Numerische mathematik}
+      \field{number}{4}
+      \field{title}{Gaussian elimination is not optimal}
+      \field{volume}{13}
+      \field{year}{1969}
+      \field{pages}{354\bibrangedash 356}
+      \range{pages}{3}
+    \endentry
+    \entry{stumm10}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b7a3bae10f7e4d6913c32a688aa35642}{%
+           family={Stumm},
+           familyi={S\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=68a9142e72a38a6200c3beb53fe90f40}{%
+           family={Walther},
+           familyi={W\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{564103601b4b8b2f329db6983d16777e}
+      \strng{fullhash}{564103601b4b8b2f329db6983d16777e}
+      \strng{bibnamehash}{564103601b4b8b2f329db6983d16777e}
+      \strng{authorbibnamehash}{564103601b4b8b2f329db6983d16777e}
+      \strng{authornamehash}{564103601b4b8b2f329db6983d16777e}
+      \strng{authorfullhash}{564103601b4b8b2f329db6983d16777e}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Scientific Computing}
+      \field{number}{2}
+      \field{title}{New algorithms for optimal online checkpointing}
+      \field{volume}{32}
+      \field{year}{2010}
+      \field{pages}{836\bibrangedash 854}
+      \range{pages}{19}
+    \endentry
+    \entry{twetris}{article}{}
+      \name{author}{16}{}{%
+        {{un=0,uniquepart=base,hash=337d7d17c666067217596143fbbddb3c}{%
+           family={Tchipev},
+           familyi={T\bibinitperiod},
+           given={Nikola},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=509cdf8a86edbfcb9b879bc1acaa953e}{%
+           family={Seckler},
+           familyi={S\bibinitperiod},
+           given={Steffen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=118a8e94b9f698890bbe077e351ec424}{%
+           family={Heinen},
+           familyi={H\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=465fe6ecba0d7f7adecc4040b005fb5d}{%
+           family={Vrabec},
+           familyi={V\bibinitperiod},
+           given={Jadran},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=66c9388b3e24eb140b76a9718fbc2812}{%
+           family={Gratl},
+           familyi={G\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3d9d2d8f4a9e4138ca920bada1f2020d}{%
+           family={Horsch},
+           familyi={H\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3c35e02dec6da180e91e71bd7d15601c}{%
+           family={Bernreuther},
+           familyi={B\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7581cc8d00afca6db653e8dc9c81d685}{%
+           family={Glass},
+           familyi={G\bibinitperiod},
+           given={Colin\bibnamedelima W},
+           giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5639341655dcdc5302f2933da5555964}{%
+           family={Niethammer},
+           familyi={N\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fd0ef14d848c6b0f06de32bb92ad2953}{%
+           family={Hammer},
+           familyi={H\bibinitperiod},
+           given={Nicolay},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3bf43fb79d72d47e22fc6fe39073334d}{%
+           family={Krischok},
+           familyi={K\bibinitperiod},
+           given={Bernd},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=17f15c3537b3ac11580e2b75b540b705}{%
+           family={Resch},
+           familyi={R\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4a1ab7774f93e137a741e625c24a0b9a}{%
+           family={Kranzlmüller},
+           familyi={K\bibinitperiod},
+           given={Dieter},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=002ff8087ab9d689be8bb65121b4dd20}{%
+           family={Hasse},
+           familyi={H\bibinitperiod},
+           given={Hans},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=26eafa3a34098b617e2a5381e1d2e42c}{%
+           family={Bungartz},
+           familyi={B\bibinitperiod},
+           given={Hans-Joachim},
+           giveni={H\bibinithyphendelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5874df667c3bb432c96a057948be9843}{%
+           family={Neumann},
+           familyi={N\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{93bbc1e7c211348c321b07c4e71be779}
+      \strng{fullhash}{348739822e19167404398105146ade35}
+      \strng{bibnamehash}{93bbc1e7c211348c321b07c4e71be779}
+      \strng{authorbibnamehash}{93bbc1e7c211348c321b07c4e71be779}
+      \strng{authornamehash}{93bbc1e7c211348c321b07c4e71be779}
+      \strng{authorfullhash}{348739822e19167404398105146ade35}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The International Journal of High Performance Computing Applications}
+      \field{number}{5}
+      \field{title}{TweTriS: Twenty trillion-atom simulation}
+      \field{volume}{33}
+      \field{year}{2019}
+      \field{pages}{838\bibrangedash 854}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1177/1094342018819741
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1177/1094342018819741
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1177/1094342018819741
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1177/1094342018819741
+      \endverb
+    \endentry
+    \entry{thuerey25}{misc}{}
+      \name{author}{8}{}{%
+        {{un=0,uniquepart=base,hash=2152ffa5edd9076710fb73812c1037b2}{%
+           family={Thuerey},
+           familyi={T\bibinitperiod},
+           given={Nils},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9e49f014dde908ac3fc47e0c7ba8e399}{%
+           family={Holzschuh},
+           familyi={H\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=51636f4440744fd9299bb9708e818424}{%
+           family={Holl},
+           familyi={H\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=91a156880275d5ef629f0c2ef39c7843}{%
+           family={Kohl},
+           familyi={K\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=388d079d013feb0b8b1ce233ba8ea564}{%
+           family={Lino},
+           familyi={L\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c47eb4bdf7506788ca8df6c79ad68a37}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Q.},
+           giveni={Q\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6901a3e19b6f624d3dfbba7fb58e83df}{%
+           family={Schnell},
+           familyi={S\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e1cafc5ac1469bb9c2d61b49efa54390}{%
+           family={Trost},
+           familyi={T\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{7ca013e8f748f47bfcddb49cc265bd99}
+      \strng{fullhash}{fadc0a2d659567ae0d730d72ca2166bb}
+      \strng{bibnamehash}{7ca013e8f748f47bfcddb49cc265bd99}
+      \strng{authorbibnamehash}{7ca013e8f748f47bfcddb49cc265bd99}
+      \strng{authornamehash}{7ca013e8f748f47bfcddb49cc265bd99}
+      \strng{authorfullhash}{fadc0a2d659567ae0d730d72ca2166bb}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Physics-based Deep Learning}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2109.05237
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2109.05237
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2109.05237
+      \endverb
+    \endentry
+    \entry{tong}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e1841c0c41b5a5ffe8310253191fe07f}{%
+           family={Tong},
+           familyi={T\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \strng{fullhash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \strng{bibnamehash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \strng{authorbibnamehash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \strng{authornamehash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \strng{authorfullhash}{e1841c0c41b5a5ffe8310253191fe07f}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Lecture notes, Department of Applied Mathematics and Theoretical Physics, University of Cambridge}
+      \field{title}{Fluid Mechanics}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf#page=162.09
+      \endverb
+      \verb{url}
+      \verb https://www.damtp.cam.ac.uk/user/tong/fluids/fluids.pdf#page=162.09
+      \endverb
+    \endentry
     \entry{Ulmann2020}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=484dcc06308e8dc6a25f782795a4e601}{%
@@ -3627,6 +5201,65 @@
       \endverb
       \verb{url}
       \verb http://dx.doi.org/10.1515/9783110662207
+      \endverb
+    \endentry
+    \entry{um21}{misc}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=d9420b9956728dbc54eae39f844dc401}{%
+           family={Um},
+           familyi={U\bibinitperiod},
+           given={Kiwon},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3f3b4b0b64ba4489eb06b8307e93d15e}{%
+           family={Brand},
+           familyi={B\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=27e6f30b043e722c0b96fe8096ee8d0f}{%
+           family={Fei},
+           familyi={F\bibinitperiod},
+           given={Yun},
+           giveni={Y\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2cef5a0fc398c91694e02412d08a25bc}{%
+           family={Holl},
+           familyi={H\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2152ffa5edd9076710fb73812c1037b2}{%
+           family={Thuerey},
+           familyi={T\bibinitperiod},
+           given={Nils},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{19b436b2060dac158397a5b19657fbaa}
+      \strng{fullhash}{a33fcb95a52da38fdd649a65c8965bad}
+      \strng{bibnamehash}{19b436b2060dac158397a5b19657fbaa}
+      \strng{authorbibnamehash}{19b436b2060dac158397a5b19657fbaa}
+      \strng{authornamehash}{19b436b2060dac158397a5b19657fbaa}
+      \strng{authorfullhash}{a33fcb95a52da38fdd649a65c8965bad}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{physics.comp-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{Solver-in-the-Loop: Learning from Differentiable Physics to Interact with Iterative PDE-Solvers}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2007.00016
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2007.00016
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2007.00016
       \endverb
     \endentry
     \entry{leer79}{article}{}
@@ -3669,6 +5302,145 @@
       \verb https://www.sciencedirect.com/science/article/pii/0021999179901451
       \endverb
     \endentry
+    \entry{villani2008}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9a5829eabef68d560b86bf71527fd874}{%
+           family={Villani},
+           familyi={V\bibinitperiod},
+           given={Cédric},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {EMS Publishing House: Zürich, Switzerland}%
+      }
+      \strng{namehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{fullhash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{bibnamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authorbibnamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authornamehash}{9a5829eabef68d560b86bf71527fd874}
+      \strng{authorfullhash}{9a5829eabef68d560b86bf71527fd874}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{H-theorem and beyond: Boltzmann’s entropy in today’s mathematics}
+      \field{year}{2008}
+    \endentry
+    \entry{wang23}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=316423251e69fed0333da5dcdf289323}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wujie},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7414c780dfbac5ec64a7bac19edd4853}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Zhenghao},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9ff864256fb7e9a67613a411cf8d3567}{%
+           family={Dietschreit},
+           familyi={D\bibinitperiod},
+           given={Johannes\bibnamedelimb C.\bibnamedelimi B.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a37688f976e048ffbc85a45699635c91}{%
+           family={Gómez-Bombarelli},
+           familyi={G\bibinithyphendelim B\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {AIP Publishing}%
+      }
+      \strng{namehash}{91278671ff2d369b35c58cfdb05d9040}
+      \strng{fullhash}{cd7fbf1c004262e14875c46acc10792c}
+      \strng{bibnamehash}{91278671ff2d369b35c58cfdb05d9040}
+      \strng{authorbibnamehash}{91278671ff2d369b35c58cfdb05d9040}
+      \strng{authornamehash}{91278671ff2d369b35c58cfdb05d9040}
+      \strng{authorfullhash}{cd7fbf1c004262e14875c46acc10792c}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1089-7690}
+      \field{journaltitle}{The Journal of Chemical Physics}
+      \field{month}{1}
+      \field{number}{4}
+      \field{title}{Learning pair potentials using differentiable simulations}
+      \field{volume}{158}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1063/5.0126475
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1063/5.0126475
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1063/5.0126475
+      \endverb
+    \endentry
+    \entry{wilcox13}{misc}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=08c7b057179c99794714697fee461435}{%
+           family={Wilcox},
+           familyi={W\bibinitperiod},
+           given={Lucas\bibnamedelima C.},
+           giveni={L\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=c667a95f57c7f3ab7c6de064d36f5c52}{%
+           family={Stadler},
+           familyi={S\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=99afe2d504448d834bb4cb66ffdfea48}{%
+           family={Bui-Thanh},
+           familyi={B\bibinithyphendelim T\bibinitperiod},
+           given={Tan},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=22065f81400c65112a5f97f91a7b008b}{%
+           family={Ghattas},
+           familyi={G\bibinitperiod},
+           given={Omar},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5e3f768301ff0cd5d457524eab3f0975}
+      \strng{fullhash}{ee36f8775522584ef3e3897af0b61757}
+      \strng{bibnamehash}{5e3f768301ff0cd5d457524eab3f0975}
+      \strng{authorbibnamehash}{5e3f768301ff0cd5d457524eab3f0975}
+      \strng{authornamehash}{5e3f768301ff0cd5d457524eab3f0975}
+      \strng{authorfullhash}{ee36f8775522584ef3e3897af0b61757}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.NA}
+      \field{eprinttype}{arXiv}
+      \field{title}{Discretely exact derivatives for hyperbolic PDE-constrained optimization problems discretized by the discontinuous Galerkin method}
+      \field{year}{2013}
+      \verb{eprint}
+      \verb 1311.6900
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1311.6900
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1311.6900
+      \endverb
+    \endentry
     \entry{ras95}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=6dedcea44b2da1415e95ac8a84fef83e}{%
@@ -3701,7 +5473,56 @@
       \field{volume}{8}
       \field{year}{1995}
     \endentry
+    \entry{zou21}{misc}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=12dc46bad2af10d5ed593a618c71a287}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Junyi},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bc53416529bc1e07748239d1435def9f}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Eugenia},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7a1a49975d82778c47d1c3506cfc9eac}{%
+           family={Cerfon},
+           familyi={C\bibinitperiod},
+           given={Antoine\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ee9bddcdae1dabb94271f0dbabc895d4}
+      \strng{fullhash}{aa090fb9d8ba0f105541a05da073af4e}
+      \strng{bibnamehash}{aa090fb9d8ba0f105541a05da073af4e}
+      \strng{authorbibnamehash}{aa090fb9d8ba0f105541a05da073af4e}
+      \strng{authornamehash}{ee9bddcdae1dabb94271f0dbabc895d4}
+      \strng{authorfullhash}{aa090fb9d8ba0f105541a05da073af4e}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{physics.plasm-ph}
+      \field{eprinttype}{arXiv}
+      \field{title}{FFT-based free space Poisson solvers: why Vico-Greengard-Ferrando should replace Hockney-Eastwood}
+      \field{year}{2021}
+      \verb{eprint}
+      \verb 2103.08531
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2103.08531
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2103.08531
+      \endverb
+    \endentry
   \enddatalist
+  \missing{dullemond}
+  \missing{leveque}
 \endrefsection
 \endinput
 

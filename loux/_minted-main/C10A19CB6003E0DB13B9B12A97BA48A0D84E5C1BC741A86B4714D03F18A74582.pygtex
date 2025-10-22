@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+      \PYG{n+nd}{@partial}\PYG{p}{(}\PYG{n}{custom\PYGZus{}vjp}\PYG{p}{,} \PYG{n}{nondiff\PYGZus{}argnums}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+      \PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}point\PYGZus{}vjp}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{):}
+          \PYG{k}{def} \PYG{n+nf}{body}\PYG{p}{(}\PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{x}\PYG{p}{):} \PYG{k}{return} \PYG{n}{f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{k}{return} \PYG{n}{fori\PYGZus{}loop}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{,} \PYG{n}{body}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{)}
+
+      \PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}point\PYGZus{}vjp\PYGZus{}fwd}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{):}
+          \PYG{n}{x\PYGZus{}star} \PYG{o}{=} \PYG{n}{fixed\PYGZus{}point\PYGZus{}vjp}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{)}
+          \PYG{c+c1}{\PYGZsh{} primal output, stored variables for backward pass}
+          \PYG{k}{return} \PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{p}{(}\PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+
+      \PYG{k}{def} \PYG{n+nf}{fixed\PYGZus{}point\PYGZus{}vjp\PYGZus{}bwd}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{,} \PYG{n}{res}\PYG{p}{,} \PYG{n}{v}\PYG{p}{):}
+          \PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta} \PYG{o}{=} \PYG{n}{res}
+          \PYG{n}{A} \PYG{o}{=} \PYG{n}{jacobian}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{argnums}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)(}\PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{n}{B} \PYG{o}{=} \PYG{n}{jacobian}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{argnums}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)(}\PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{n}{u} \PYG{o}{=} \PYG{n}{jnp}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{solve}\PYG{p}{((}\PYG{n}{jnp}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{n}{x\PYGZus{}star}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{)}\PYG{o}{.}\PYG{n}{T}\PYG{p}{,} \PYG{n}{v}\PYG{p}{)}
+          \PYG{k}{return} \PYG{n}{jnp}\PYG{o}{.}\PYG{n}{zeros\PYGZus{}like}\PYG{p}{(}\PYG{n}{x\PYGZus{}star}\PYG{p}{),} \PYG{n}{u} \PYG{o}{@} \PYG{n}{B}
+
+      \PYG{n}{fixed\PYGZus{}point\PYGZus{}vjp}\PYG{o}{.}\PYG{n}{defvjp}\PYG{p}{(}\PYG{n}{fixed\PYGZus{}point\PYGZus{}vjp\PYGZus{}fwd}\PYG{p}{,} \PYG{n}{fixed\PYGZus{}point\PYGZus{}vjp\PYGZus{}bwd}\PYG{p}{)}
+\end{Verbatim}

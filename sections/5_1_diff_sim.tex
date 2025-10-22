@@ -1,0 +1,674 @@
+\section{A Primer on Differentiable Simulations}
+\label{sec:diff_sim}
+\thispagestyle{plain}
+
+We are interested in differentiating simulation outputs $\vec{U}(\vec{\theta})$ or an objective function
+$J(\vec{\theta})$ of these simulation outputs with respect to the simulation parameters $\vec{\theta}$, e.g. for sensitivity
+analysis or optimization tasks. These parameters might include the weights and biases of
+neural networks situated inside the simulator for error correction \citep{um21} or capturing
+physical effects (e.g. \cite{wang23}). Generally speaking, our simulator is the implementation
+of a numerical method for solving an ordinary differential equation (ODE) 
+or partial differential equation (PDE).
+
+There are essentially four ways for computing these derivatives:
+
+\begin{itemize}
+    \item \textbf{finite differencing:} We can approximate derivatives based on finite differences,
+    e.g. the forward difference
+    \begin{equation}
+        \partial_{\theta_i} U_j = \frac{U_j(\vec{\theta} + h \vec{e}_i) - U_j(\vec{\theta})}{h} + \mathcal{O}(h)
+    \end{equation}
+    or central difference
+    \begin{equation}
+        \partial_{\theta_i} U_j = \frac{U_j(\vec{\theta} + h \vec{e}_i) - U_j(\vec{\theta} - h \vec{e}_i)}{2h} + \mathcal{O}(h^2)
+    \end{equation}
+    with some $h>0$. To calculate these numerical derivatives we only
+    need to evaluate our simulator for different parameter choices.
+    Finite differencing, however, has multiple problems. While we would like to make $h$ small to reduce
+    the truncation error, e.g. $\mathcal{O}(h^2)$ in the central difference scheme, small $h$ will come at the cost
+    of round-off errors due to limited floating point precision - so we have to strike a balance (see e.g. Fig. 3 in
+    \cite{baydin18}). While we only have to evaluate our simulator twice for forward or central differences
+    of all simulation outputs with respect to one simulation parameter, computing each additional 
+    derivative with respect to a parameter requires one 
+    (forward differencing) or two (central differencing) additional simulations.
+    This will be unfeasible in many-parameter settings such as fitting a neural network inside the simulator.
+    \item \textbf{automatic differentiation (AD):} If the building blocks of our simulator
+    are differentiable, we can differentiate through our simulator to machine precision by applying the
+    chain rule, more specifically forward- or reverse-mode automatic differentiation \citep{baydin18}.
+    These building blocks might be the primitive operations in a numerical library like \texttt{JAX}
+    \citep{jax} or more monolithic numerical operators with hand-calculated derivatives \citep[e.g. of an advection step in][Sec. 13]{thuerey25}. While calculating the derivatives of a simulation
+    outcome with respect to multiple parameters is accurate, fast and simple using
+    automatic differentiation, memory demand can be an issue \citep[Sec. 5.1.1.2]{diffrax}.
+    We will discuss automatic differentiation in greater detail below.
+    \item \textbf{solving an adjoint problem:} The derivatives of interest can also be obtained
+    by solving an adjoint equation of the PDE or ODE of the physical state. The state and adjoint
+    system will generally differ, e.g. to calculate the derivative of the solution to an initial
+    value problem to a PDE with a first order derivative in time, solving the adjoint problem
+    amounts to integrating a final value problem backwards in time \citep{wilcox13}. The adjoint equation
+    might be discretized independently of the state equation or derived based on the discretized state
+    equation. While \textit{adjoint methods} do not have the memory problems
+    of automatic differentiation, deriving the adjoint system might be tedious, and
+    numerically solving the adjoint system comes at additional
+    computational cost and also introduces numerical errors to the derivatives calculated (see
+    Sec. 5.1.2.3 and Example 5.6 in \cite{diffrax}). The problem of inaccurate
+    derivatives can be amplified if different discretizations of the state and adjoint system
+    are chosen \citep{wilcox13}. In the following we will limit ourselves to the continuous
+    adjoint method for ODEs, where an adjoint system is derived from the ODE system itself, not a discretization
+    thereof. We limit ourselves to ODEs for two reasons: First, to make the introduction more approachable and 
+    second because PDEs with dependencies on space and time can be turned into a system of ODEs in time by discretizing
+    over space \citep[\textit{method of lines},][Sec. 2.1]{bradley24}. For specific coverage on adjoints for
+    linear hyperbolic PDEs (solved with a discontinuous Galerkin method), we refer to
+    Sec. 2 in \cite{wilcox13}.
+    \item \textbf{Reversible solvers}: If the numerical solver is reversible, we can faithfully reconstruct the
+    information necessary for the backward pass during the backward pass, but current reversible solvers
+    are low-order and have poor stability properties \citep[Sec. 5.1.3]{diffrax}.
+\end{itemize}
+
+Our fluid simulator, \texttt{jf1uids}, is differentiable based on automatic differentiation
+in \texttt{JAX}. We will therefore introduce automatic differentiation in the following.
+For reference, we will also present the continuous adjoint method and compare both
+at the example of optimizing parameters in an ODE.
+
+\subsection{Introducing Automatic Differentiation}
+
+Consider we are interested in the derivatives of a function $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$,
+e.g. the simulation output as a function of the parameters.
+
+Based on the chain rule and known derivatives of a set of primitive operations,
+we can efficiently and accurately (to machine precision) calculate these derivatives.
+
+\greenbox{
+    Intuitively
+    \begin{itemize}
+        \item forward-mode automatic differentiation forward propagates
+        a perturbation $\vec{v} \in \mathbb{R}^n$ at $\vec{x}$ (with $\vec{v}$ sufficiently small
+        so we can linearize $\vec{f}$ around $\vec{x}$) in the input space through the computational graph of the function $\vec{f}$ to
+        a resulting perturbation $\left.\mat{J}_\vec{f}\right|_{\vec{x}} \vec{v}$ in the output space
+        \item backward-mode automatic differentiation relates output perturbations back to 
+        input perturbations, projecting perturbations in the output space
+        $\vec{p} \in \mathbb{R}^m$ onto the output perturbations caused by the base vectors of
+        the input space
+
+        \begin{equation}
+            \left.\mat{J}_\vec{f}^T\right|_{\vec{x}} \vec{p} =
+            \begin{pmatrix}
+            - & (\partial_{x_1} \vec{f})^T & - \\
+            - & (\partial_{x_2} \vec{f})^T & - \\
+            & \vdots & \\
+            - & (\partial_{x_n} \vec{f})^T & -
+            \end{pmatrix}
+            \vec{p}
+            = \begin{pmatrix}
+            (\partial_{x_1} \vec{f})^T \vec{p} \\
+            (\partial_{x_2} \vec{f})^T \vec{p} \\
+            \vdots \\
+            (\partial_{x_n} \vec{f})^T \vec{p}
+            \end{pmatrix}
+        \end{equation}
+
+        for a scalar output and $p = 1$ this amounts to the derivatives of this
+        output with respect to all inputs.
+    \end{itemize}
+}
+
+\subsubsection{Forward-mode automatic differentiation}
+
+In a simulation we typically start at initial conditions $\vec{x} \in \mathbb{R}^N$ on which
+we apply a chain of transformations, e.g.
+
+\begin{equation}
+    \vec{f} = \vec{g}_m \circ \cdots \circ \vec{g}_2 \circ \vec{g}_1, \quad \vec{f}(\vec{x}) = \vec{g}_m(\dots \vec{g}_2(\vec{g}_1(\vec{x})))
+\end{equation}
+
+with for simplicity $\vec{f},\vec{g}_m,\cdots,\vec{g}_1: \mathbb{R}^N \rightarrow \mathbb{R}^N$. We might be interested in
+the sensitivity of the simulation output to a wiggle $\vec{v}$ in the initial conditions as captured
+by the Jacobian vector product (JVP) $\mat{J}_\vec{f}(\vec{x}) \vec{v}$ with $\mat{J}_\vec{f}(\vec{x}) \in \mathbb{R}^{N \times N}$
+if we linearize $\vec{f}$ around $\vec{x}$.
+
+By the chain rule
+
+\begin{equation}
+    \mat{J}_\vec{f}(\vec{x}) = \mat{J}_{\vec{g}_m}(\vec{g}_{m-1},\cdots, g_1(\vec{x})) \cdots \mat{J}_{\vec{g}_2}(\vec{g}_1(\vec{x})) \mat{J}_{\vec{g}_1}(\vec{x})
+\end{equation}
+
+which we can calculate in $m - 1$ matrix-matrix multiplications, each scaling with $\mathcal{O}(N^3)$ (naively) (or e.g. $\mathcal{O}(N^{\log_2 7})$ with Strassen's algorithm \citep{strassen69}),
+leading to an overall scaling of calculating the Jacobian of $\mathcal{O}(mN^3)$. But for a JVP
+we don't actually need to compute the Jacobian, we can just evaluate
+
+\begin{equation}
+    \mat{J}_\vec{f}(\vec{x}) \vec{v} = \mat{J}_{\vec{g}_m}(\vec{g}_{m-1}(\cdots(g_1(\vec{x})))) \cdots \mat{J}_{\vec{g}_2}(\vec{g}_1(\vec{x})) \mat{J}_{\vec{g}_1}(\vec{x}) \vec{v}
+\end{equation}
+
+from right to left with $m-1$ matrix-vector products, each costing only $\mathcal{O}(N^2)$!
+
+If we capture the dependency structure of a composition of functions as a computational graph,
+with functions as nodes and dependencies as arrows, calculating the JVP amounts to
+\begin{itemize}
+    \item starting from the inputs evaluate the nodes to calculate the inputs to the next nodes (\textit{primals}) in a forward pass
+    \item in the same forward pass, starting at a \textit{tangent} $\vec{v}$ in the input space calculate the JVPs of the nodes (evaluated at the \textit{primals}), giving the \textit{tangents} to the following nodes
+\end{itemize}
+
+Forward differentiating through computational graphs is commonly called forward-mode
+automatic differentiation\footnote{We will also use \textit{autodiff} to refer to automatic differentiation.}, forwardpropagation, or, drawing from differential geometry
+terminology, pushforward.\footnote{More details regarding the relation to
+differential geometry can be found under \href{https://juliadiff.org/ChainRulesCore.jl/stable/maths/propagators.html}{https://juliadiff.org/ChainRulesCore.jl/stable/maths/propagators.html}.}
+
+\greenbox{Partial derivatives $\partial_{x_i}\vec{f}$ are JVPs with the basis vectors, $\partial_{x_i}\vec{f} = \mat{J}_\vec{f}\vec{\hat{e}}_i$.}
+
+\subsubsubsection{Example of forward differentiation through a computational graph}
+
+Consider the following composition of functions
+
+\begin{equation}
+    \vec{f}(\vec{x}) = 
+    \begin{pmatrix}
+        g(h(x_1,x_2)) \\
+        u(h(x_1, x_2), x_2)
+    \end{pmatrix}
+    \label{eq:example_composition}
+\end{equation}
+
+with some functions $g: \mathbb{R} \rightarrow \mathbb{R}, h: \mathbb{R}^2 \rightarrow \mathbb{R}, u: \mathbb{R}^2 \rightarrow \mathbb{R}$.
+As $\vec{f}$ is a composition of functions, a chain of dependencies,
+it makes sense to illustrate it in a computational graph with functions as nodes and dependencies
+as arrows, as done in Fig. \ref{fig:comp_graph_diff}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/comp_graph.svg}\hfill
+ \caption{Illustrated is the computational graph of a function $\vec{f}: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ (given in Eq. \ref{eq:example_composition})
+ which is composed of functions $g: \mathbb{R} \rightarrow \mathbb{R}, h: \mathbb{R}^2 \rightarrow \mathbb{R}, u: \mathbb{R}^2 \rightarrow \mathbb{R}$
+ depicted as nodes in the computational graph. Input relations are depicted as arrows.}
+ \label{fig:comp_graph_diff}
+\end{figure}
+
+Consider a Jacobian-vector-product (JVP), here for our example function $\vec{f}$
+
+\begin{equation}
+    \mat{J}_\vec{f} \vec{v} = \begin{pmatrix}
+                                (\partial_1 h)\,(\partial_1 g) & (\partial_2 h)\,(\partial_1 g) \\
+                                (\partial_1 h)\,(\partial_1 u) & (\partial_2 u) + (\partial_2 h)\,(\partial_1 u)
+                              \end{pmatrix} \vec{v}
+                            = \begin{pmatrix}
+                                (v_1\,\partial_1 h + v_2\,\partial_2 h)\,\partial_1 g \\
+                                (v_1\,\partial_1 h + v_2\,\partial_2 h)\,\partial_1 u + v_2\,\partial_2 u
+                              \end{pmatrix}
+    \label{eq:example_jvp}
+\end{equation}
+
+where $\partial_i$ denotes the partial derivative of a function with respect to its $i$-th argument.
+
+Calculating the JVP through the computational graph is illustrated in Fig. \ref{fig:forward_diff}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/forward_diff.svg}\hfill
+ \caption{Illustrated is the forward differentiation through the function 
+ $\vec{f}$ (given in Eq. \ref{eq:example_composition}). The computational
+ graph is evaluated from left to right, the tangent expressions correspond
+ to the terms of the Jacobian-vector product as given in Eq. \ref{eq:example_jvp}.}
+ \label{fig:forward_diff}
+\end{figure}
+
+\subsubsection{Reverse-mode automatic differentiation}
+Let us reconsider our simulation $\vec{f} = \vec{g}_m \circ \cdots \circ \vec{g}_2 \circ \vec{g}_1$ from before
+but we apply a scalar function $L: \mathbb{R}^N \rightarrow \mathbb{R}$ to the simulation output $\vec{f}(\vec{x})$,
+e.g. a loss $L(\vec{f}(\vec{x})) = ||\vec{f}(\vec{x}) - \vec{y}_{exp}||^2$ to an experimental measurement $\vec{y}_{exp} \in \mathbb{R}^N$.
+
+To optimize $L$, we are interested in the gradient $\vec{\nabla}_\vec{x}L$, which we could calculate in $N$ forward
+differentiations (for each base vector $\vec{\hat{e}}_i, i = 1,...,N$).
+
+Let us write out this gradient
+
+\begin{equation}
+    \vec{\nabla}_\vec{x}L(\vec{f}(\vec{x})) = \mat{J}_\vec{f}^T \vec{\nabla}_\vec{f} L =  \mat{J}_{\vec{g}_1}^T(\vec{x}) \mat{J}_{\vec{g}_2}^T(\vec{g}_1(\vec{x})) \cdots \mat{J}_{\vec{g}_m}^T(\vec{g}_{m-1}(\cdots(g_1(\vec{x})))) \vec{\nabla}_\vec{f} L
+\end{equation}
+
+We see that calculating the gradient amounts to a Jacobian transpose vector product (J'VP). Similar
+to the forward-mode automatic differentiation rather than calculating the Jacobian matrix explicitly by matrix
+multiplication, we perform a chain of matrix vector products, here J'VPs. Note that the 
+transpose has permuted the order of the Jacobians - we now move backwards through our computational graph.
+
+\yellowbox{To evaluate the Jacobians, we need the evaluations $\vec{g}_1,...\vec{g}_{m-1}$ obtained in a \textit{forward pass}
+through the computational graph. Therefore, \textbf{reverse-mode autodiff has memory complexity
+scaling linearly with the number of algorithm iterations}, which can become a bottleneck.}
+
+\greenbox{We can calculate the gradient of a scalar function in a single backward pass through the computational graph
+(which must be preceded by a forward pass).}
+
+If we capture the dependency structure of a composition of functions as a computational graph,
+with functions as nodes and dependencies as arrows, calculating the J'VP amounts to
+\begin{itemize}
+    \item in a forward pass, evaluate all nodes, possibly precalculate the Jacobians of the nodes with respect to their inputs
+    \item starting from the output space calculate the J'VP backwards through the computational graph
+\end{itemize}
+
+Backward differentiation through a computational graph like this is commonly called reverse-mode
+automatic differentiation, backpropagation, or, again drawing from differential geometry terminology,
+pullback (of a differential form).
+
+\subsubsubsection{Example of backward differentiation through a computational graph}
+
+We consider the same example as before (Eq. \ref{eq:example_composition}). The J'VP reads
+
+\begin{equation}
+    \mat{J}_\vec{f}^T \vec{s} = \begin{pmatrix}
+                                (\partial_1 h)\,(\partial_1 g) & (\partial_2 h)\,(\partial_1 g) \\
+                                (\partial_1 h)\,(\partial_1 u) & (\partial_2 u) + (\partial_2 h)\,(\partial_1 u)
+                              \end{pmatrix}^T \vec{s}
+                            = \begin{pmatrix}
+                                (\partial_1 h)\,((\partial_1 g) s_1 + (\partial_1 u) s_2) \\
+                                (\partial_2 h)\,((\partial_1 g) s_1 + (\partial_1 u) s_2) + (\partial_2 u) s_2
+                              \end{pmatrix} 
+    \label{eq:example_vjp}
+\end{equation}
+
+which is illustrated on the computational graph in Fig. \ref{fig:backward_diff}. Often, one considers
+the transpose of the J'VP $(\mat{J}_\vec{f}^T \vec{s})^T=\vec{s}^T \mat{J}_\vec{f}$ and calls
+it Vector-Jacobian Product (VJP).
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/backward_diff.svg}\hfill
+ \caption{Backward differentiation illustrated for Eq. \ref{eq:example_composition}, the result
+ from the backward pass corresponds to the Jacobian transpose vector product in Eq. \ref{eq:example_vjp}.}
+ \label{fig:backward_diff}
+\end{figure}
+
+\subsubsubsection{Checkpointing for memory efficiency}
+\label{sec:checkpointing}
+Consider we have created a computational graph of our simulation 
+with primitive operations as nodes in the graph. To calculate the J'VPs 
+in the backward pass, the \textit{linearization points}, e.g. all inputs to
+(elementwise nonlinear) primitive operations, must be known - this saves
+space compared to the naive approach of storing the Jacobians of the primitive
+operations.
+
+It can, however, be too costly memorywise to store or too costly computationally (with regards
+to the computational cost of memory access)
+to retrieve all these linearization points.
+
+Alternatively, we might only store certain \textit{checkpoints} and recompute intermediate 
+linearization points, e.g. for a larger function we might only store its inputs and
+calculate the linearization points of its primitive operations by reevaluating the
+function in the backward pass as necessary.
+
+\greybox{\textbf{A note on optimal checkpointing:} Let us consider a simulation of $l=6$ timesteps
+with states $x_0\rightarrow x_1 \rightarrow \cdots \rightarrow x_6$ and assume we are able to store
+$c = 2$ checkpoints at a time. We might reasonably start with $x_0$ and $x_3$ checkpointed, but in
+the backward pass might want to change which state is checkpointed for the optimal checkpointing
+strategy. This is illustrated in Fig. \ref{fig:checkpointed_backprop}, an adaptation of Fig. 2.1 in \cite{stumm10}. But how do we
+choose initial checkpoints when the number of simulation steps is unknown a priori, i.e. in adaptive
+time-stepping with a while-loop? For this there exist optimal \textit{online} checkpointing strategies,
+e.g. Algorithm 1 from \cite{stumm10}.\footnote{An implementation in \texttt{JAX} by Patrick
+Kidger is available under \url{https://github.com/patrick-kidger/equinox/blob/main/equinox/internal/\_loop/checkpointed.py}}
+The algorithmic details are beyond the scope of this thesis, but in Fig. \ref{fig:online_checkpointing} adapted from
+Fig. 2.2 in \cite{stumm10} we provide intuition on how one adapts which states are checkpointed
+while moving forward in the loop.
+}
+
+More information on checkpointing in the context of \texttt{JAX} can be found under
+\url{https://docs.jax.dev/en/latest/\_autosummary/jax.checkpoint.html}.
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/checkpointed_backprop.svg}\hfill
+ \caption{Illustrated is the calculation of a Jacobian transpose vector product (J'VP) using checkpointing
+ through a loop with six iterations and with two checkpoints available.
+ The illustration is based on Fig. 2.1 in \cite{stumm10}. To calculate
+ the derivative of a state in the sequence with respect to its inputs (i.e. the previous state),
+ these inputs must be recalculated from checkpoints. We start
+ out with state $0$ and $3$ checkpointed and state $5$ stored
+ as a \textit{shadow checkpoint} (we assume that in the iteration we store
+ the current and last state). With state $5$ known we can differentiate
+ state $6$. In the next step we have to reconstruct state
+ $4$ from the checkpoint at state $3$ to differentiate state $5$ and so forth.
+ Checkpoints can be reallocated to reduce the number of necessary recomputations.
+ }
+ \label{fig:checkpointed_backprop}
+\end{figure}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/online_checkpointing.svg}\hfill
+ \caption{Illustrated is \textit{online checkpointing} with four checkpoints available, i.e.
+ in a loop with unknown number of iterations how do we reallocate the checkpoints as we
+ go for optimal coverage of the state sequence for subsequent backpropagation. This illustration
+ is based on Fig. 2.2 in \cite{stumm10}. A shadow checkpoint $c_s$ always trails behind the current
+ state. The figure is only meant to give a rough idea, for the details see Algorithm 1 in
+ \cite{stumm10}.}
+ \label{fig:online_checkpointing}
+\end{figure}
+
+\subsubsection{Example of custom differentiation rules: Implicit differentiation through a
+fixed-point iteration}
+\label{sec:custom_diff}
+
+There might be parts of our simulator for which we know differentiation rules so that
+we can avoid the memory and computational cost of differentiating through the primitive
+operations making up these parts.
+
+To equip a function with custom rules for forward and backward differentiation, we
+need to define a custom JVP and J'VP, here its transpose the VJP, respectively.
+
+As an example, consider our simulation contains a fixed point iteration, approximating
+$\vec{x}^\star(\vec{\theta})$ implicitly defined by
+
+\begin{equation}
+    \vec{x}^\star(\vec{\theta}) = \vec{f}(\vec{x}^\star(\vec{\theta}), \vec{\theta})
+\end{equation}
+
+by iterating $\vec{x}_{t+1} = \vec{f}(\vec{x}_t, \vec{\theta})$ (assuming there exists one
+attracting fixed-point, which we usually show using Banach's fixed-point theorem).
+
+By the chain rule (assuming $\vec{x}^\star(\vec{\theta}) = \vec{f}(\vec{x}^\star(\vec{\theta}), \vec{\theta})$ holds in a neighborhood around
+$\vec{\theta}_{eval}$ around which we want to differentiate)\footnote{The derivation follows \url{https://docs.jax.dev/en/latest/advanced-autodiff.html\#example-implicit-function-differentiation-of-iterative-implementations}.}
+
+\begin{equation}
+    \mat{J} = \partial_\vec{\theta} \vec{x}^\star(\vec{\theta}) = \underbrace{\partial_\vec{\theta} \vec{x}^\star(\vec{\theta})}_{=\mat{J}} \underbrace{\partial_1 \vec{f}(\vec{x}^\star(\vec{\theta}), \vec{\theta})}_{=:\mat{A}} + \underbrace{\partial_2 \vec{f}(\vec{x}^\star(\vec{\theta}), \vec{\theta})}_{=:\mat{B}}
+    \label{eq:implicit_diff}
+\end{equation}
+
+(where we have implicitly applied the implicit function theorem, see \cite{blondel22} for more details on this).
+
+We can rewrite Eq. \ref{eq:implicit_diff} to give an explicit expression
+
+\begin{equation}
+    \mat{J} = (\mat{1} - \mat{A})^{-1} \mat{B}
+\end{equation}
+
+The JVP can therefore be calculated by solving the linear system
+
+\begin{equation}
+    (\mat{1} - \mat{A}) (\mat{J} \vec{v}) = \mat{B} \vec{v}
+    \label{eq:jvp_fixed}
+\end{equation}
+
+and the VJP by
+
+\begin{equation}
+     (\mat{1} - \mat{A})^T \vec{u} = \vec{v} \quad \rightarrow \quad \vec{v}^T \mat{J} = \underbrace{\vec{v}^T (\mat{1} - \mat{A})^{-1}}_{=\vec{u}^T} \mat{B}
+    \label{eq:vjp_fixed}
+\end{equation}
+
+where solving the linear systems might be done using GMRES \citep{GMRES}. While there 
+are sophisticated techniques for inverting a matrix, the inverse can potentially be very dense even if
+the matrix itself is not, which would interfere with smart memory optimizations \citep{rackauckas22}.
+
+For the VJP, we might also solve
+
+\begin{equation}
+    (\mat{1} - \mat{A})^T \vec{u} = \vec{v} \quad \iff \quad \vec{u}^T = \vec{v}^T + \vec{u}^T \mat{A}
+    \label{eq:vjp_fixed_point}
+\end{equation}
+
+using a fixed-point iteration.
+
+As a simple example, based on Heron's root finding algorithm, we construct
+
+\begin{equation}
+    \vec{f}(\vec{x}, \vec{\theta}) = \alpha \vec{x} + (1-\alpha) \begin{pmatrix}
+        \frac{1}{x_1} \exp{(\theta_1^2 + 2\theta_2)} \\
+        \frac{1}{x_2} \exp{(2\theta_1 + \theta_2^2)}
+    \end{pmatrix}
+    \label{eq:example_fixed_point_equation}
+\end{equation}
+
+with analytical solution
+
+\begin{equation}
+    \vec{x}^\star(\vec{\theta}) = \begin{pmatrix}
+        \exp{(\frac{1}{2}\theta_1^2 + \theta_2)} \\
+        \exp{(\theta_1 + \frac{1}{2}\theta_2^2)}
+    \end{pmatrix}
+    \label{eq:example_fixed_point}
+\end{equation}
+
+where we use $\alpha = 0.8$ for slower convergence.\footnote{
+The fixed point method is based on
+\begin{equation}
+    x = \alpha x + (1-\alpha)\frac{S}{x} \iff x = \sqrt{S}
+\end{equation}
+with $S>0$, known as Heron's method for $\alpha = 0.5$.
+It converges with
+\begin{equation}
+    e_{n+1} = x_{n+1} - \sqrt{S} \underbrace{=}_{x_n = \sqrt{S} + e_n} \alpha (\sqrt{S} + e_n) + (1-\alpha)\frac{\sqrt{S}}{1 + \frac{e_n}{\sqrt{S}}} - \sqrt{S} 
+\end{equation}
+where approximating $\frac{1}{1 + \frac{e_n}{\sqrt{S}}}$ to 2nd order around $e_n = 0$ to $1 - \frac{e_n}{\sqrt{S}} + \frac{e_n^2}{S}$ yields
+\begin{equation}
+    e_{n+1} \approx (2\alpha-1) e_n + (1-\alpha)\frac{e_n^2}{\sqrt{S}}
+\end{equation}
+so only for $\alpha = 0.5$ do we get quadratic convergence, for $\alpha \ne 0.5$ the linear
+term dominates and the error decreases by a factor $2\alpha - 1$ per iteration.}
+
+For $v = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ and $\vec{\theta}_{eval} = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$
+we compare the accuracy of the JVP and VJP compared to the ground thruth between a direct differentiation
+through the fixed-point iteration and the implicit differentiation for different numbers of iterations in
+Fig. \ref{fig:custom_diffs} with the source code for the custom JVP given in Code-Snippet \ref{code:jvp},
+and the custom VJP in Code-Snippet \ref{code:vjp}. The error of the JVP and VJP from direct
+automatic differentiation through the fixed-point iteration decreases with the same scaling
+as the fixed-point error itself, in the example around two orders of magnitude per $10$ iterations.
+This is expected, the automatic differentiation calculates the accurate derivatives of our approximation
+of the fixed point to the parameters. Interestingly, the implicit differentiation, derived for
+the \textit{true} fixed-points, has better error scaling behavior (roughly $4$ orders of
+magnitude per $10$ iterations). By design the reverse-mode automatic differentiation
+has a memory overhead compared to the implicit differentiation (scaling with the number of iterations)
+while the linear solve (or fixed-point iteration if one follows Eq. \ref{eq:vjp_fixed_point}) 
+in the implicit differentiation is a computational overhead compared to the backmode automatic
+differentiation (not scaling with the iterations but the number of parameters). We leave
+more in-depth profiling to future work.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/custom_diff_errors.pdf}\hfill
+  \caption{Our aim is to differentiate the fixed-point of Eq. \ref{eq:example_fixed_point_equation} 
+  with respect to the parameters $\theta_1,\theta_2$ or rather calculate JVPs and VJPs.
+  We compare direct automatic differentiation through
+  the fixed-point iteration and implicit differentiation (evaluated at the
+  current estimate of the fixed-point) to the ground truth (based on the analytical expression
+  for the fixed-point, Eq. \ref{eq:example_fixed_point}).}
+  \label{fig:custom_diffs}
+\end{figure}
+
+\begin{codebox}
+    \begin{minted}{python3}
+        @partial(custom_jvp, nondiff_argnums=(0, 3))
+        def fixed_point_jvp(f, x_guess, theta, num_iters=100):
+            def body(_, x): return f(x, theta)
+            return fori_loop(0, num_iters, body, x_guess)
+
+        @fixed_point_jvp.defjvp
+        def fixed_point_jvp_rule(f, num_iters, primals, tangents):
+            x_guess, theta = primals
+            dx_guess, dtheta = tangents
+            x_star = fixed_point_jvp(f, x_guess, theta, num_iters)
+            A = jacobian(f, argnums=0)(x_star, theta)
+            B = jacobian(f, argnums=1)(x_star, theta)
+            dx = jnp.linalg.solve(jnp.eye(x_star.shape[0]) - A, B @ dtheta)
+            # primal output, tangent output
+            return x_star, dx
+    \end{minted}
+    \caption{Implementation of a custom Jacobian vector product for the results of
+    fixed-point iterations in \texttt{JAX} following Eq. \ref{eq:jvp_fixed}}
+    \label{code:jvp}
+\end{codebox}
+
+\begin{codebox}
+    \begin{minted}{python3}
+        @partial(custom_vjp, nondiff_argnums=(0, 3))
+        def fixed_point_vjp(f, x_guess, theta, num_iters=100):
+            def body(_, x): return f(x, theta)
+            return fori_loop(0, num_iters, body, x_guess)
+
+        def fixed_point_vjp_fwd(f, x_guess, theta, num_iters):
+            x_star = fixed_point_vjp(f, x_guess, theta, num_iters)
+            # primal output, stored variables for backward pass
+            return x_star, (x_star, theta)
+
+        def fixed_point_vjp_bwd(f, num_iters, res, v):
+            x_star, theta = res
+            A = jacobian(f, argnums=0)(x_star, theta)
+            B = jacobian(f, argnums=1)(x_star, theta)
+            u = jnp.linalg.solve((jnp.eye(x_star.shape[0]) - A).T, v)
+            return jnp.zeros_like(x_star), u @ B
+
+        fixed_point_vjp.defvjp(fixed_point_vjp_fwd, fixed_point_vjp_bwd)
+    \end{minted}
+    \caption{Implementation of a custom vector Jacobian product for the results of
+    fixed-point iterations in \texttt{JAX} following Eq. \ref{eq:vjp_fixed}}
+    \label{code:vjp}
+\end{codebox}
+
+% https://docs.jax.dev/en/latest/advanced-autodiff.html#example-implicit-function-differentiation-of-iterative-implementations
+% https://arxiv.org/pdf/2105.15183
+
+\subsection{Introducing the Continuous Adjoint Method for ODEs}
+
+We will now introduce the continuous adjoint method for differentiating
+the solution of ODEs, or rather a scalar function $L$ of the solution like a loss,
+and compare it to direct differentiation through the 
+numerical solver in Sec. \ref{sec:ad_vs_adjoint}. Our treatment here follows \cite{diffrax}.
+
+Consider the initial value problem (IVP)
+
+\begin{equation}
+    \vec{y}(0) = \vec{y}_0, \quad \frac{d\vec{y}}{dt} = \vec{f}_\vec{\theta}(t,\vec{y}(t))
+\end{equation}
+
+with
+
+\begin{equation}
+    \vec{y}(0) \in \mathbb{R}^d, \quad \vec{\theta} \in \mathbb{R}^m, \quad \vec{f}_\vec{\theta}: [0,T]\times \mathbb{R}^d \rightarrow \mathbb{R}^d
+\end{equation}
+
+where $\vec{y}: [0,T] \rightarrow \mathbb{R}^d$ is the solution to the IVP and $\vec{f}_\vec{\theta}$ is 
+continuous in $t$ and uniformly Lipschitz and continuously differentiable in $\vec{y}$.
+
+Our aim is to calculate $\frac{dL(\vec{y}(T))}{d\vec{\theta}}$, where 
+$L: \mathbb{R}^d \rightarrow \mathbb{R}$ and $T$ is the time point of interest.
+
+This can be achieved by solving the adjoint system (here of the \textit{continuous}
+original problem, not its discretization)
+
+\begin{equation}
+    \begin{gathered}
+        \vec{a}_\vec{y}(T) = \frac{dL}{d\vec{y}(T)}, \quad \frac{d\vec{a}_\vec{y}}{dt}(t) = -\vec{a}_\vec{y}(t)^T \underbrace{\frac{\partial \vec{f}_\vec{\theta}}{\partial \vec{y}}(t,\vec{y}(t))}_{\in \mathbb{R}^{d \times d}} \\
+        \vec{a}_\vec{\theta}(T) = 0, \quad \frac{d\vec{a}_\vec{\theta}}{dt}(t) = -\vec{a}_\vec{y}(t)^T \underbrace{\frac{\partial \vec{f}_\vec{\theta}}{\partial \vec{\theta}}(t,\vec{y}(t))}_{\in \mathbb{R}^{d \times m}}
+    \end{gathered}
+    \label{eq:continuous_adjoint}
+\end{equation}
+
+with $\vec{a}_\vec{y}: [0,T] \rightarrow \mathbb{R}^d, \vec{a}_\vec{\theta}: [0,T] \rightarrow \mathbb{R}^m$ from $t=T$ to $t = 0$ backwards in time where
+
+\begin{equation}
+    \boxed{
+        \frac{dL(\vec{y}(T))}{d\vec{\theta}} = \vec{a}_\vec{\theta}(0)
+    }
+\end{equation}
+
+\yellowbox{Note that to evaluate the Jacobians in Eq. \ref{eq:continuous_adjoint} we need 
+to know $\vec{y}(t)$ but to have a memory advantage over direct autodiff through the numerical
+solver, we cannot save the whole forward trajectory in the \textit{forward pass}. Therefore,
+as we integrate $\vec{a}_\vec{y}$ and $\vec{a}_\vec{\theta}$ backwards in time starting from
+$t = T$, we obtain $\vec{y}(t)$ by integrating back from $y(T)$ (obtained in the forward pass).
+\textbf{Note, however, that the numerical integration backwards in time will not
+match the forward trajectory in general, except when the numerical solver itself is
+reversed and floating point errors are insignificant.} Also, the backward problem
+might generally be harder than the forward problem.}
+
+For a proof of the continuous adjoint method, we refer to \cite[Sec. 5.1.2.1]{diffrax}.
+
+% \subsubsection{Proof of the continuous adjoint method}
+
+
+\subsection{Application Example: AD through the solver
+vs. continuous adjoint method on exponential decay}
+\label{sec:ad_vs_adjoint}
+
+Consider the ODE for exponential decay
+
+\begin{equation}
+    \frac{dy}{dt}(t) = \lambda y(t), \quad \lambda < 0, \quad y(0) = y_0, 
+\end{equation}
+
+with analytical solution $y(t) = y_0 \exp{(\lambda t)}$ and analytical
+derivative $\partial_\lambda y = t y_0 \exp{(\lambda t)}$.
+
+The adjoint system reads
+
+\begin{equation}
+    \begin{aligned}
+        & a_y(T) = 1, \quad && \frac{da_y}{dt}(t) = -a_y(t) \lambda \\
+        & a_\lambda(T) = 0, \quad && \frac{da_\lambda}{dt}(t) = -a_y(t) y(t)
+    \end{aligned}
+\end{equation}
+
+We will compare the following approaches for calculating $\partial_\lambda y$:
+
+\begin{itemize}
+    \item direct automatic differentiation through the implicit Euler method with
+    $y_{n+1} = y_n + \Delta t \lambda y_{n+1} \rightarrow y_{n+1} = \frac{y_n}{1-\Delta t \lambda}$
+    \item direct automatic differentiation through dopri5\footnote{All tests involving dopri5 were carried out using \texttt{diffrax}, \url{https://docs.kidger.site/diffrax/}.}
+    \item the continuous adjoint method with implicit Euler for the forward- and backsolve
+    \item a discrete adjoint system of the implicit Euler method which we derive based on 
+    the backpropagation idea as illustrated in Fig. \ref{fig:backprop_decay}:
+    \begin{equation}
+        \begin{gathered}
+            g(y,\lambda) = \frac{y}{1-\Delta t \lambda} \rightarrow y_{N} = \underbrace{\left(g \circ g \circ \cdots \circ g\right)}_{\times N}(y_0) \\
+            \rightarrow \partial_\lambda y_N = \sum_{n=0}^{N-1} \left.\partial_\lambda g \right|_{y_n} a_{y_{n+1}} \text{ with } a_{y_{n}} = \left.\partial_y g \right|_{y_n} a_{y_{n+1}}, a_{y_N} = 1 \\
+            \partial_\lambda g = \Delta t \frac{y}{(1 - \Delta t \lambda)^2}, \quad \partial_y g = \frac{1}{1 - \Delta t \lambda}
+        \end{gathered}
+    \end{equation}
+    Let us introduce
+    \begin{equation}
+        a_{\lambda_n} = a_{\lambda_{n+1}} + \left.\partial_\lambda g \right|_{y_n} a_{y_{n+1}}, \quad a_{\lambda_N} = 0
+    \end{equation}
+    such that $\partial_\lambda y_N = a_{\lambda_0}$. By manually reverting the implicit Euler step for this specific problem, we find the discrete
+    adjoint system
+    \begin{equation}
+        \begin{gathered}
+            y_n = y_{n+1} \cdot (1 - \Delta t \lambda), \quad y_N \text{ from forward pass} \\
+            a_{y_{n}} = \frac{1}{1 - \Delta t \lambda} a_{y_{n+1}}, a_{y_N} = 1 \\
+            a_{\lambda_n} = a_{\lambda_{n+1}} + \Delta t \frac{y_n}{(1 - \Delta t \lambda)^2} a_{y_{n+1}} = a_{\lambda_{n+1}} + \Delta t a_{y_{n}} y_{n+1}, a_{\lambda_N} = 0
+        \end{gathered}
+        \label{eq:backprop_decay}
+    \end{equation}
+    which we can recognize to be a specific discretization of the continuous adjoint equations, connecting
+    the continuous adjoint method, backpropagation and reversible solvers.
+    \item the continuous adjoint method with dopri5 for the forward- and backsolve
+\end{itemize}
+
+\begin{figure}[!htb]
+ \centering
+ \includesvg[width=1.0\textwidth]{figures/backprop_decay.svg}\hfill
+ \caption{Illustration of backpropagation through the computational graph of an implicit
+ Euler iteration to solve $\frac{dy}{dt}(t) = \lambda y(t), \lambda < 0, y(0) = y_0$, corresponding
+ to Eq. \ref{eq:backprop_decay}.}
+ \label{fig:backprop_decay}
+\end{figure}
+
+An exemplary comparison is shown in Fig. \ref{fig:differentiation_decay} for $\Delta t = 0.3$ and
+$\lambda = -0.5$. The core observations are:
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=1.0\textwidth]{figures/differentiation_decay.pdf}\hfill
+  \caption{Comparison of different techniques for taking the derivative of the solution to an ODE
+  with respect to its parameters for a simple exponential decay problem.}
+  \label{fig:differentiation_decay}
+\end{figure}
+
+\begin{itemize}
+    \item the discrete adjoint and autodiff results match as expected
+    \item the continuous adjoint method on implicit Euler, where the backward discretization
+    is not an appropriate adjoint system to the forward discretization, yields the worst results
+    \item dopri5 is sufficiently accurate such that both the direct autodiff and continuous
+    adjoint nicely match the ground truth
+\end{itemize}
+
+% \begin{itemize}
+%     \item implicit differentiation (jaxopt): \href{https://arxiv.org/pdf/2105.15183}{here}
+%     \item curse of unrolling: \href{https://arxiv.org/pdf/2209.13271}{here}
+% \end{itemize}
+
+\pagebreak

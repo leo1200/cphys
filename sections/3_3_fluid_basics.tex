@@ -230,9 +230,7 @@ number or particles therein, so in total
     \end{equation}  
     where $\left. \frac{df}{dt} \right|_c$ is the change in $f$ due to \textit{collisions}. 
 \end{mdframed}
-\note{One can understand this in the sense of dicontinupus motion (instantaneous velocity changes) kicking a particle out of a phase space volume.
-More aligned with our previous derivation, we can see this as a simplification of the correlation term between forces and accelerations (also capturing the
-particle interaction) (see subsection \ref{subsec:particle_to_boltzmann}).}
+\note{One can understand this in the sense of dicontinupus motion (instantaneous velocity changes) kicking a particle out of a phase space volume.}
 In the case of a sufficiently large collision term $\left. \frac{df}{dt} \right|_c$ (in the fluid limit $\lambda_mfp\ll L$) $f(\vec{u})$
 becomes Mawellian. Near the sun for instance Coulomb collisions are incapable of isotropizing the velocity distribution of the 
 ions in the solar wind (cigar shape).
@@ -445,15 +443,19 @@ the \textcolor{blue1}{Navier-Stokes equations}.
 
 We will later discuss fluid instabilities in the absence of viscosity.
 
-\subsubsection{Euler Equations}
-Assuming (\textcolor{green1}{valid for non-dense media like air})
+\subsubsubsection{Euler equations}
+Assuming
 \begin{itemize}
-    \item no thermal conductivity
     \item no internal friction
+    \item no thermal conductivity
     \item no external forces
 \end{itemize}
 the balance equations obtained from the moments of the Boltzmann equation simplify to the Euler
-equations (table \ref{tab:euler_eq}).
+equations (see Table \ref{tab:euler_eq}). The no-internal-friction-assumption (as compared to the Navier-Stokes equations, which
+can be considered a viscous regularization of the Euler equations \citep[Sec. 1]{Constantin2004}) corresponds to taking the
+limit of an infinite Reynolds number $Re = \frac{V_0 L_0}{\nu} \rightarrow \infty$ (characteristic 
+velocity $V_0$, characteristic lengthscale $L_0$, kinematic viscosity $\nu$), which is well justified
+e.g. for the interstellar medium with $Re \sim 10^5$ to $10^{10}$ \citep{sormani22}.
 
 \begin{table}[!htb]
     \centering
@@ -465,13 +467,15 @@ equations (table \ref{tab:euler_eq}).
             \partial_t \rho + \vec{\nabla} \cdot (\rho \vec{v}) = 0
         \end{equation} &
         \begin{equation}
-            \partial_t (\rho \vec{v}) + \vec{\nabla} \cdot (\rho \vec{v}\vec{v}^T + P\mat{1}) = 0
+            \begin{gathered}
+                \partial_t (\rho \vec{v}) + \\ \underbrace{\vec{\nabla} \cdot \underbrace{(\rho \vec{v}\vec{v}^T + P\mat{1})}_{=:\mat{A}}}_{=\sum_{\vec{A}_i \in \text{columns}(\mat{A})} \partial_{x_i} \vec{A}_i} = 0
+            \end{gathered}
         \end{equation} &
         \begin{equation}
             \begin{gathered}
                 \partial_t (\rho e) + \vec{\nabla} \cdot \left[(\rho e + P)\vec{v} \right]\\ = 0 
                 \text{ with } e = e_{th} + \frac{1}{2} \vec{v}^2 \\
-                \frac{\text{total energy}}{\text{unit mass}}
+                \text{in} \, \frac{\text{total energy}}{\text{unit mass}}
             \end{gathered}
         \end{equation} \\
         \hline
@@ -480,12 +484,37 @@ equations (table \ref{tab:euler_eq}).
     \label{tab:euler_eq}
 \end{table}
 The equations form a set of hyperbolic conservation laws (all continuity equations, one for mass, one for momentum, one for energy).
-\paragraph{Hierarchy and closure} The equations are in a hierarchy that in one 
-equations occur quantities following from the next higher one (velocity in the 
-continuity equation, …) - we need a further closure relation, for an ideal gas this is
+% \footnote{The Euler 
+% equations are fully advective, with mass-density flux 
+% $\rho \vec{v}$, momentum-density flux $(\rho \vec{v}) \vec{v}^T$ 
+% and energy-density flux $(\rho e) \vec{v}$ as of the bulk motion $\vec{v}$
+% where the pressure terms accounts for microscopic motion - statistically
+% more momentum is transfered from regions with higher root-mean-square thermal velocity
+% to those with lower root-mean-square thermal velocity by collisions.}
+
+\greybox{\textbf{Hyperbolic conservation laws:}\footnote{The name \textit{hyperbolic} can be related to the
+classification of linear second order PDEs. The solutions of homogeneous linear second order PDEs
+are conic sections in Fourier-space with hyperbolic PDEs corresponding to hyperbolic
+solutions.} A conservation law
 \begin{equation}
-    P = (\gamma - 1) \rho e_{th}, \quad \gamma = \text{ specific heat ratio } = \frac{c_p}{c_v}, \quad \text{ for monoatomic gas } \gamma = \frac{f+2}{f} = \frac{5}{3}
+\partial_t \vec{U}+\sum_{j=1}^d \partial_{x_j} \vec{F}_j(\vec{U})=0, \quad \text{flux} \, \vec{F}_j \, \text{in direction} \, \vec{\hat{e}}_j, \quad \vec{U} \in \mathbb{R}^N
 \end{equation}
+is hyperbolic if for all $\vec{k} \in \mathbb{R}^d$ the $N\times N$ matrix
+\begin{equation}
+\mat{J}_N(\vec{k}) := \sum_{j=1}^d k_j \frac{\partial \vec{F}_j(\vec{U})}{\partial \vec{U}}
+\end{equation}
+is diagonalizable with real eigenvalues \citep[Ch. 18]{leveque}. In a hyperbolic system, information travels
+with finite speed along characteristics and (in non-linear hyperbolic systems) 
+the appearance of discontinuities from smooth initial conditions
+is typical \citep{Dafermos2000}.}
+
+\paragraph{Hierarchy and closure} The Euler equations form a hierarchy, the velocity
+occuring in the continuity equation is given through the momentum balance in which the pressure occurs
+which also appears in the energy balance - we need a further closure relation, for an ideal gas this is
+\begin{equation}
+    P = (\gamma - 1) \rho e_{th}, \quad \gamma = \text{ specific heat ratio } = \frac{c_p}{c_v}, \quad \text{ for a monatomic gas } \gamma = \frac{f+2}{f} = \frac{5}{3}
+\end{equation}
+
 
 \bluebox{\textbf{Intuition:} Let us consider the $x$-component of the momentum equation to
 get a better understanding (the others are analogous). We have
@@ -616,97 +645,123 @@ true mathematical discontinuities, while exhibiting a finite width in the Navier
 \end{itemize}
 A shock wave is a region of small thickness over which the properties of the flow change rapidly.
 
-\subsubsection{Propagation of disturbances 1: Speed of sound}
+\subsubsection{Motivation on the formation of shocks}
+
+The motivation for the formation of shocks is threefold:
+
+\begin{itemize}
+    \item first we demonstrate that perturbations in a fluid described by the Euler equations
+    propagate with the sound speed $c_s$ with $c_s^2 = \frac{dP}{d\rho}$
+    \item we will then motivate that propagation with the sound speed implies wave steepening
+    and leads to discontinuities
+    \item finally we will showcase that wave steepening is more fundamental than the sound speed motivation
+    based on an isothermal gas with constant sound speed
+\end{itemize}
+
+\subsubsubsection{Perturbations travel at the speed of sound}
+\label{sec:sound_speed}
+
 \greenbox{\textbf{Microscopic Intuition:} Consider a higher density region in a fluid. Probabalisticly there is more momentum in the direction of lower density, so (by collisions) the higher density will spread out.
 The characteristic speed of on which density information propagates is related to the jiggling of the particles, i.e. their themperature. 
-This characteristic speed of sound is roughly derived in the following.}
+This characteristic speed of sound is derived in the following.}
 \greenbox{Soundwaves are messengers, carrying density and pressure fluctuations. Imagine you're driving in fog towards a traffic jam - if you're so quick no messenger can quickly enough reach you, you will have a shock.}
-Consider the Euler equation for momentum without internal forces
-or friction in 1D in a steady state with constant flux $j = \rho v$, so
-$0 = d(\rho v) \rightarrow \rho dv = -v d\rho$. We get
+
+By linearization of the Euler equations,
+one can show that small perturbations in a fluid described by the Euler equations
+travel with the speed of sound
+(for a derivation see \cite[Sec. 2.4.1]{hahn19}). 
 
 \begin{equation}
-    \frac{dv}{dt} = -\frac{1}{\rho} \frac{dP}{dx} \quad \rightarrow \quad dP = -(\rho dv) \frac{dx}{dt} = (v d\rho) v \quad \rightarrow \quad v^2 \equiv c_s^2 = \frac{dP}{d\rho}
+    c_s^2 = \frac{dP}{d\rho}
 \end{equation}
 
-(note is relative to the bulk motion, so in the local rest frame of the flow, more later).
+We will more generally show that information in fluids, not just a small perturbation, travels at the
+speed of sound, where for the explanations outlined below we draw both
+from \cite[Sec. 4.5.1]{tong} and \cite[Sec. 4.3.1]{sormani22}.
 
-Now we use that for an adiabatic process, $P \rho^{-\gamma} = \text{const.}$ (and $T\rho^{1-\gamma} = \text{const.}$) so taking the logarithm and differentiating with respect to $\rho$ yields
+Let us start by rewriting the momentum balance in the 1D Euler equations
+using the continuity equation $\partial_t \rho + \partial_x (\rho v) = 0$
 
 \begin{equation}
-    \frac{dP}{d\rho} = \frac{\gamma p}{\rho}
+    \partial_t (\rho v) + \partial_x \cdot (\rho v^2 + P) = v \underbrace{\left(\partial_t \rho + \partial_x (\rho v) \right)}_{=0} + \rho \partial_t v + \rho v \partial_x v + \partial_x P = 0
 \end{equation}
 
-so using the ideal gas law
+to yield
 
 \begin{equation}
-    P = n k_B T = \frac{\rho}{m_p \mu} k_B T \quad \text{with } \mu \text{ being a mean molecular weight}
+    \frac{\partial v}{\partial t} + v \frac{\partial v}{\partial x} = -\frac{1}{\rho} \frac{\partial P}{\partial x} = -\frac{c_s^2}{\rho} \frac{\partial \rho}{\partial x}
 \end{equation}
 
-we get
+We would like to eliminate $\rho$ from these equations. Above we have already assumed
+an adiabatic equation of state, so $P = P(\rho)$, now we more specifically
+consider an ideal gas with $P\rho^{-\gamma} = \text{const.}$, so $c_s^2 \propto \rho^{\gamma - 1}$.
 
-\begin{equation}
-    c_s^2 = \frac{\gamma k_B T}{m_p \mu}
-\end{equation}
+Inserting
 
-so based on $T\rho^{1-\gamma} = \text{const.}$ we can write
-
-\begin{equation}
-    c_s^2 \propto \rho^{\gamma - 1}
-\end{equation}
-
-\subsubsection{Characteristics of Perturbations}
-\idea{Our aim is to find the characteristics, lines in the $(x,t)$ plane along which perturbations propagate.}
-Let us start with the continuity equation in 1D
-
-\begin{equation}
-    \text{cont.: }\frac{1}{\rho} \left( \frac{\partial \rho}{\partial t} + v \frac{\partial \rho}{\partial x} \right) = 0
-\end{equation}
-
-With $c_s^2 = \frac{\partial P}{\partial \rho}$ we can write the Euler equation for momentum as
-
-\begin{equation}
-    \text{Euler: } \frac{\partial v}{\partial t} + v \frac{\partial v}{\partial x} = -\frac{1}{\rho} \frac{\partial P}{\partial x} = -\frac{c_s^2}{\rho} \frac{\partial \rho}{\partial x}
-\end{equation}
-
-Based on $c_s^2 \propto \rho^{\gamma - 1}$, we can replace $\partial \rho$ in those equations using
 \begin{equation}
     \frac{d\rho}{\rho} = \frac{2}{\gamma - 1} \frac{dc_s}{c_s}
 \end{equation}
 
-With this replace $\partial \rho$ in the continuity and Euler equation. From adding
-and subtracting the Euler and continuity equation, we get
+and adding and subtracting the continuity equation and momentum balance yields
+
 \begin{equation}
     \begin{aligned}
-        &\left[\partial_t+\left(v+c_{s}\right) \partial_x\right]\left(u+\frac{2}{\gamma-1} c_{s}\right)=0\\
-        &\left[\partial_t+\left(v-c_{s}\right) \partial_x\right]\left(u-\frac{2}{\gamma-1} c_{s}\right)=0
+        &\left[\partial_t+\left(v+c_{s}\right) \partial_x\right]\left(v+\frac{2}{\gamma-1} c_{s}\right)=0\\
+        &\left[\partial_t+\left(v-c_{s}\right) \partial_x\right]\left(v-\frac{2}{\gamma-1} c_{s}\right)=0
     \end{aligned}
 \end{equation}
-Defining
+
+From this we can show, that there are characteristic curves given by
+
+\begin{equation}
+    \mathcal{C}_{ \pm}: \quad \partial_t x = u(x, t) \pm c_s(x, t)
+\end{equation}
+
+on which so-called Riemann invariants
+
+\begin{equation}
+    R_{\pm} \equiv u\pm\frac{2}{\gamma-1} c_{s}
+\end{equation}
+
+are constant. For $R_{+}(x(t),t)$ on a curve $\in C_{+}$ this follows from
+
 \begin{equation}
     \begin{aligned}
-        &\xi_{+} \equiv u+\frac{2}{\gamma-1} c_{s} \quad \rightarrow \quad \frac{d}{dt} \xi_{+}(x(t),t) = \left[ \partial_t + (\partial_t x) \partial_x \right] \xi_{+}(x(t),t) = 0 \text{ for } \partial_t x = v + c_s\\
-        &\xi_{-} \equiv u-\frac{2}{\gamma-1} c_{s} \quad \rightarrow \quad \frac{d}{dt} \xi_{-}(x(t),t) = \left[ \partial_t + (\partial_t x) \partial_x \right] \xi_{-}(x(t),t) = 0 \text{ for } \partial_t x = v - c_s
+        \frac{d}{dt} R_{+}(x(t),t) &= \left[ \partial_t + \mathcolor{blue1}{(\partial_t x)} \partial_x \right] R_{+}(x(t),t) \\
+        &=\left[\partial_t+\mathcolor{blue1}{\left(v+c_{s}\right)} \partial_x\right]\left(v+\frac{2}{\gamma-1} c_{s}\right)\\
+        &=0
     \end{aligned}
 \end{equation}
-where we applied the \textit{method of characteristics}.
-\par
-\begin{mdframed}[style = padded]
-    From this we can see that (\textit{as expected}) in a fluid with bulk motion $v$, perturbations propagate along characteristics with velocity $v \pm c_s$.
-\end{mdframed}
 
-These characeteristic equations are the same no matter the aplitude of the perturbations.
+Let us introduce coordinates $\xi_\pm$ specifying which characteristic we are on. We can then
+express the velocity at a space-time position $(x,t)$ as
 
-\subsubsection{Formation of a shock}
-\subsubsubsection{Formation as a pressure driven compressive disturbance}
-\begin{figure}
+\begin{equation}
+    u(x,t) = \frac{1}{2} \left( R_{+}(\xi_{+}) + R_{-}(\xi_{-}) \right)
+\end{equation}
+
+Likewise the speed of sound $c_s(\rho)$ (only dependent on $\rho$ as $P = P(\rho)$ by assumption) is given by
+
+\begin{equation}
+    c_{s}(\rho) = \frac{\gamma - 1}{4}\left( R_{+}(\xi_{+}) - R_{-}(\xi_{-}) \right)
+\end{equation}
+
+Therefore both Riemann invariants $R_{\pm}$ together specify the fluid state, this is illustrated
+in Fig. \ref{fig:characteristics}. As the Riemann
+invariants are constant along characteristics $\mathcal{C}_{ \pm}: \partial_t x = u(x, t) \pm c_s(x, t)$, 
+in the frame comoving with the fluid, information travels with the local sound speed.
+
+\begin{figure}[!htb]
     \centering
-    \includesvg[width=0.9\textwidth]{figures/shock_formation.svg}
-    \caption{Formation of a shock}
-    \label{fig:shock_formation}
+    \includesvg[width=0.9\textwidth]{figures/characteristics.svg}
+    \caption{Illustration of characteristics in a 1D fluid on the space-time plane.}
+    \label{fig:characteristics}
 \end{figure}
 
-Consider a fluid with base density $\rho_0$. For small perturbation in density, we can to first order
+\subsubsubsection{Wave steepening motivated from the sound speed}
+% https://www.ita.uni-heidelberg.de/~mattia/teaching/HD_shocks.pdf
+
+Consider a fluid with base density $\rho_0$. For small perturbation of the density, we can to first order
 use
 \begin{equation}
     c_s = \left( \frac{\partial P}{\partial \rho} \right)^{\frac{1}{2}} \simeq \left(\frac{\gamma p_0}{\rho_0}\right)^{\frac{1}{2}}
@@ -714,11 +769,208 @@ use
 But now consider a larger perturbation. Adiabatically the temperature scales with $T \propto \rho^{\gamma - 1}$, and as $c_s^2$ scales
 linearly with the temperature, we have
 \begin{equation}
-    c_s^2 \propto T \propto \rho^{\gamma - 1} 
+    c_s^2 \propto T \propto \rho^{\gamma - 1}, \quad \gamma - 1 = \frac{5}{3} - 1 > 0
 \end{equation}
-Therefore, the “waves crest overtakes the valley” (figure \ref{fig:shock_formation}) but as the hydrodynamic equations don't allow for multivalued solutions, we get a shock
-with discontinuities in $\rho$, $v$, $T$ and $s$. For an isothermal gas $c_s = \text{const.}$ but steepening can happen
-nonetheless as of the non-linearity of the Euler / Navier-Stokes equations (?).
+Therefore, the “waves crest overtakes the valley” but as the hydrodynamic equations don't allow for multivalued solutions, we get a shock
+with discontinuities in $\rho$, $v$, $T$ and the specific entropy $s$ \citep[Sec. 4.3.1]{sormani22}. More formally
+we can derive the formation of shocks as the intersection of characteristics $\mathcal{C}_{+}$ or $\mathcal{C}_{-}$
+respectively \citep[Sec. 4.5.1]{tong}.
+
+\subsubsubsection{Wave steepening in isothermal fluids}
+We have motivated wave steepening based on a varying speed of sound. The core
+phenomenon, however, is deeper than this, ultimately linked to the nonlinear term
+$v_j\partial_j v_i$ in the Euler equations \citep[Sec. 2.4.2]{hahn19}.
+The paradoxical occurrence of double-valued solutions to the isothermal Euler equations
+(where the speed of sound is constant) was already noted by British astronomer 
+J. Challis in 1848 \citep{challis48} and shortly after interpreted by Stokes to represent what we would
+nowadays call a shock: \enquote{Perhaps the
+most natural supposition to make for trial is that a surface of discontinuity is formed,
+in passing across which there is an abrupt change of density and velocity} \citep{stokes48}.
+The historical and mathematical account follows \cite{Dafermos2000}.
+
+\paragraph{An implicit solution to the 1D isothermal Euler equations} For an isothermal gas ($T = \text{const.}$), the speed of sound will likewise be constant and we retrieve
+the closure $P = c_s^2 \rho$. With this the Euler equations in 1D simplify to
+
+\begin{equation}
+    \begin{gathered}
+        \partial_t \rho + \partial_x (\rho v) = 0  \\
+        \partial_t (\rho v) + \partial_x (\rho v^2) + c_s^2 \partial_x \rho = 0
+    \end{gathered} 
+\end{equation}
+
+Now assume the velocity is the gradient of a scalar potential $\phi$, so $v = \partial_x \phi$, so
+$\partial_t v = \partial_t \partial_x \phi = \partial_x \partial_t \phi$. Inserting into the momentum
+equation yields (we insert the continuity equation as well)
+
+\begin{equation}
+    \partial_x \partial_t \phi + \partial_x \phi \partial_x^2 \phi + \frac{c_s^2}{\rho} \partial_x \rho = 0
+\end{equation}
+
+integration over $x$ and absorbing any constant into $\phi$ yields a Bernoulli-like equation
+
+\begin{equation}
+    \partial_t \phi + \frac{1}{2} \left(\partial_x \phi\right)^2 + c_s^2 \ln \frac{\rho}{\rho_0} = 0
+\end{equation}
+
+with which we can write
+
+\begin{equation}
+    \rho = \rho_0 \exp \left( - \frac{\partial_t \phi + \frac{1}{2} (\partial_x \phi) ^2}{c_s^2} \right)
+\end{equation}
+
+which we can plug into the continuity equation to eliminate $\rho$, yielding
+
+\begin{equation}
+    \partial_t^2 \phi+2\left(\partial_x \phi\right)\left(\partial_x \partial_t \phi\right)+\left(\partial_x \phi\right)^2 \partial_x^2 \phi-c_s^2 \partial_x^2 \phi=0
+\end{equation}
+
+This equation is solved by the implicit equation
+
+\begin{equation}
+    \partial_x \phi=f\left(x+\left(c_s-\partial_x \phi\right) t\right) \quad \rightarrow \quad v = f\left(x+\left(c_s-v\right) t\right)
+\end{equation}
+
+for any smooth $f$, which we won't derive but can quickly be verified by insertion.
+
+\paragraph{Occurence of double-valued solutions} Let us consider the example of \cite{challis48} as
+described in \cite{Dafermos2000} (modified to fix the units).
+
+Consider $f(\eta) = -v_0 \sin{\left(\frac{1}{2x_0} \pi \eta\right)}$ (some $v_0, x_0 \ne 0$), so
+
+\begin{equation}
+    v(x,t) = -v_0 \sin{\left(\frac{1}{2} \pi \left( x + (c_s - v(x,t))t\right)\right)}
+\end{equation}
+
+Consider we measure the fluid state while moving along two different lines in space-time
+
+\begin{equation}
+    \begin{aligned}
+        \text{space-time line A:}& \quad x_A(t) = -c_s t \\
+        \text{space-time line B:}& \quad x_B(t) = -x_0-\left(c_s-v_0\right)t
+    \end{aligned}
+\end{equation}
+
+Plugging both into $v(x,t)$ yields
+\begin{equation}
+    \begin{aligned}
+        \text{A:}& \quad v(x_A(t),t) = -v_0 \sin{\left(-\frac{1}{2x_0} \pi \cdot v(x_A(t),t) \cdot t\right)} &\rightarrow \quad v(x_A(t),t) &= 0\\
+        \text{B:}& \quad v(x_B(t),t) = -v_0 \sin{\left(-\frac{1}{2x_0} \pi \left(x_0+\left(v_0 - v(x_B(t),t)\right)t\right)\right)} &\rightarrow \quad v(x_B(t),t) &= v_0
+    \end{aligned}
+\end{equation}
+
+Note however that both lines meet at $t = \frac{x_0}{v_0}, x = - c_s \frac{x_0}{v_0}$ which would imply a multi-valued solution!
+The wave steepening for this case is illustrated in Fig. \ref{fig:wave_steepening} (we solved for the velocity numerically).
+
+\begin{figure}[!htb]
+ \centering
+ \includegraphics[width=1.0\textwidth]{figures/wave_steepening.pdf}\hfill
+ \caption{Illustration of wave steepening in the isothermal Euler equations for smooth initial conditions.}
+ \label{fig:wave_steepening}
+\end{figure}
+
+% \subsubsection{Propagation of disturbances 1: Speed of sound}
+% \greenbox{\textbf{Microscopic Intuition:} Consider a higher density region in a fluid. Probabalisticly there is more momentum in the direction of lower density, so (by collisions) the higher density will spread out.
+% The characteristic speed of on which density information propagates is related to the jiggling of the particles, i.e. their themperature. 
+% This characteristic speed of sound is roughly derived in the following.}
+% \greenbox{Soundwaves are messengers, carrying density and pressure fluctuations. Imagine you're driving in fog towards a traffic jam - if you're so quick no messenger can quickly enough reach you, you will have a shock.}
+% Consider the Euler equation for momentum without internal forces
+% or friction in 1D in a steady state with constant flux $j = \rho v$, so
+% $0 = d(\rho v) \rightarrow \rho dv = -v d\rho$. We get
+
+% \begin{equation}
+%     \frac{dv}{dt} = -\frac{1}{\rho} \frac{dP}{dx} \quad \rightarrow \quad dP = -(\rho dv) \frac{dx}{dt} = (v d\rho) v \quad \rightarrow \quad v^2 \equiv c_s^2 = \frac{dP}{d\rho}
+% \end{equation}
+
+% (note is relative to the bulk motion, so in the local rest frame of the flow, more later).
+
+% Now we use that for an adiabatic process, $P \rho^{-\gamma} = \text{const.}$ (and $T\rho^{1-\gamma} = \text{const.}$) so taking the logarithm and differentiating with respect to $\rho$ yields
+
+% \begin{equation}
+%     \frac{dP}{d\rho} = \frac{\gamma p}{\rho}
+% \end{equation}
+
+% so using the ideal gas law
+
+% \begin{equation}
+%     P = n k_B T = \frac{\rho}{m_p \mu} k_B T \quad \text{with } \mu \text{ being a mean molecular weight}
+% \end{equation}
+
+% we get
+
+% \begin{equation}
+%     c_s^2 = \frac{\gamma k_B T}{m_p \mu}
+% \end{equation}
+
+% so based on $T\rho^{1-\gamma} = \text{const.}$ we can write
+
+% \begin{equation}
+%     c_s^2 \propto \rho^{\gamma - 1}
+% \end{equation}
+
+% \subsubsection{Characteristics of Perturbations}
+% \idea{Our aim is to find the characteristics, lines in the $(x,t)$ plane along which perturbations propagate.}
+% Let us start with the continuity equation in 1D
+
+% \begin{equation}
+%     \text{cont.: }\frac{1}{\rho} \left( \frac{\partial \rho}{\partial t} + v \frac{\partial \rho}{\partial x} \right) = 0
+% \end{equation}
+
+% With $c_s^2 = \frac{\partial P}{\partial \rho}$ we can write the Euler equation for momentum as
+
+% \begin{equation}
+%     \text{Euler: } \frac{\partial v}{\partial t} + v \frac{\partial v}{\partial x} = -\frac{1}{\rho} \frac{\partial P}{\partial x} = -\frac{c_s^2}{\rho} \frac{\partial \rho}{\partial x}
+% \end{equation}
+
+% Based on $c_s^2 \propto \rho^{\gamma - 1}$, we can replace $\partial \rho$ in those equations using
+% \begin{equation}
+%     \frac{d\rho}{\rho} = \frac{2}{\gamma - 1} \frac{dc_s}{c_s}
+% \end{equation}
+
+% With this replace $\partial \rho$ in the continuity and Euler equation. From adding
+% and subtracting the Euler and continuity equation, we get
+% \begin{equation}
+%     \begin{aligned}
+%         &\left[\partial_t+\left(v+c_{s}\right) \partial_x\right]\left(u+\frac{2}{\gamma-1} c_{s}\right)=0\\
+%         &\left[\partial_t+\left(v-c_{s}\right) \partial_x\right]\left(u-\frac{2}{\gamma-1} c_{s}\right)=0
+%     \end{aligned}
+% \end{equation}
+% Defining
+% \begin{equation}
+%     \begin{aligned}
+%         &\xi_{+} \equiv u+\frac{2}{\gamma-1} c_{s} \quad \rightarrow \quad \frac{d}{dt} \xi_{+}(x(t),t) = \left[ \partial_t + (\partial_t x) \partial_x \right] \xi_{+}(x(t),t) = 0 \text{ for } \partial_t x = v + c_s\\
+%         &\xi_{-} \equiv u-\frac{2}{\gamma-1} c_{s} \quad \rightarrow \quad \frac{d}{dt} \xi_{-}(x(t),t) = \left[ \partial_t + (\partial_t x) \partial_x \right] \xi_{-}(x(t),t) = 0 \text{ for } \partial_t x = v - c_s
+%     \end{aligned}
+% \end{equation}
+% where we applied the \textit{method of characteristics}.
+% \par
+% \begin{mdframed}[style = padded]
+%     From this we can see that (\textit{as expected}) in a fluid with bulk motion $v$, perturbations propagate along characteristics with velocity $v \pm c_s$.
+% \end{mdframed}
+
+% These characeteristic equations are the same no matter the aplitude of the perturbations.
+
+% \subsubsection{Formation of a shock}
+% \subsubsubsection{Formation as a pressure driven compressive disturbance}
+% \begin{figure}
+%     \centering
+%     \includesvg[width=0.9\textwidth]{figures/shock_formation.svg}
+%     \caption{Formation of a shock}
+%     \label{fig:shock_formation}
+% \end{figure}
+
+% Consider a fluid with base density $\rho_0$. For small perturbation in density, we can to first order
+% use
+% \begin{equation}
+%     c_s = \left( \frac{\partial P}{\partial \rho} \right)^{\frac{1}{2}} \simeq \left(\frac{\gamma p_0}{\rho_0}\right)^{\frac{1}{2}}
+% \end{equation}
+% But now consider a larger perturbation. Adiabatically the temperature scales with $T \propto \rho^{\gamma - 1}$, and as $c_s^2$ scales
+% linearly with the temperature, we have
+% \begin{equation}
+%     c_s^2 \propto T \propto \rho^{\gamma - 1} 
+% \end{equation}
+% Therefore, the “waves crest overtakes the valley” (figure \ref{fig:shock_formation}) but as the hydrodynamic equations don't allow for multivalued solutions, we get a shock
+% with discontinuities in $\rho$, $v$, $T$ and $s$. For an isothermal gas $c_s = \text{const.}$ but steepening can happen
+% nonetheless as of the non-linearity of the Euler / Navier-Stokes equations (?).
 
 \subsubsubsection{Causes for shocks}
 \begin{itemize}
@@ -1144,8 +1396,8 @@ The dissipation is reflected by the energy spectrum of Kolmogorov turbulence, se
 
 \begin{figure}[!htb]
     \centering
-    \includesvg[width=0.9\textwidth]{figures/kol_power.svg}
-    \caption{Kolmogorov energy spectrum}
+    \includesvg[width=0.9\textwidth]{figures/kolmogorov_spectrum.svg}
+    \caption{Illustration of the Kolomogorov energy spectrum with the characteristic $E(k) \propto k^{-\frac{5}{3}}$ scaling in the inertial range where no dissipation occurs.}
     \label{fig:kolmogorov_spectrum}
 \end{figure}
 
@@ -1158,6 +1410,12 @@ The constant energy transfer through the cascade is described by
 \end{equation}
 
 \note{Including the the dissipation range, based on Kolmogorovs assumption that the statistics for small scale motion are universal, one might make the ansatz $E(k) = C \epsilon^{\frac{2}{3}} k^{-\frac{5}{3}} f_\eta(k\eta)$ with $f_\eta(x) = 1$ for $x \ll 1$ and $f_\eta(x) \rightarrow 0$ for $x \rightarrow \infty$.}
+
+\greybox{\textbf{What about the Euler equations where the viscosity $\nu \rightarrow 0$?}: \enquote{
+It is of some interest to note that in principle, turbulent dissipation as described could take place just
+as readily without the final assistance by viscosity. In the absence of viscosity, the standard proof of the
+conservation of energy does not apply, because the velocity field does not remain differentiable! 
+} \citep{onsager}, see also \cite{eykin94, cheskidov24}.}
 
 \subsubsubsection{Derivation of the energy spectrum of Kolmogorov turbulence}
 We are interested in the energy spectrum $E(k)$ such that the energy between

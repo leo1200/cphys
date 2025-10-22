@@ -14,11 +14,13 @@ If you are interested in expanding the book, here are some suggestions for topic
 
 - [ ] Hamilton Monte Carlo / NUTS
 - [ ] Lattice Boltzmann fluid dynamics
+- [ ] Average Vector Field method for ODEs/PDEs
 - [ ] pretty much everything Scientific Machine Learning related with a critical review of the literature
 
 ## Things to check out
 If you're here, you might also be interested in
 
+- [The Elements of Differentiable Programming](https://arxiv.org/abs/2403.14606)
 - [Physics-based Deep Learning Book](https://physicsbaseddeeplearning.org/intro.html)
 - [Parallel Computing and Scientific Machine Learning (SciML): Methods and Applications](https://book.sciml.ai/)
 
