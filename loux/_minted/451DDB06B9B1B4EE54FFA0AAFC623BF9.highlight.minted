@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{n}{inverse\PYGZus{}transform\PYGZus{}method}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{k+kr}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{F\PYGZus{}inv}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{          }\PYG{c+c1}{\PYGZsh{} Draw n samples from a distribution with CDF F}
+\PYG{+w}{          }\PYG{c+c1}{\PYGZsh{} given its inverse F\PYGZus{}inv.}
+\PYG{+w}{          }\PYG{n}{u}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZhy{}}\PYG{+w}{ }\PYG{n+nf}{runif}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} draw n samples from U(0,1)}
+\PYG{+w}{          }\PYG{k+kr}{return}\PYG{p}{(}\PYG{n+nf}{F\PYGZus{}inv}\PYG{p}{(}\PYG{n}{u}\PYG{p}{))}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} apply the inverse transform}
+\PYG{+w}{      }\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

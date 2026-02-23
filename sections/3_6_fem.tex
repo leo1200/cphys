@@ -307,7 +307,7 @@ scheme in space, in the following manner
     \begin{gathered}
         \left\{\phi_l(\vec{\xi})\right\}_{l=1}^{N(k)}=\left\{\tilde{P}_u\left(\xi_1\right) \tilde{P}_v\left(\xi_2\right) \tilde{P}_w\left(\xi_3\right) \mid u, v, w \in \mathbb{N}_0 \wedge u+v+w \leq k\right\} \\
         \text { scaled Legendre polynomials } \tilde{P}_n(\xi)=\sqrt{2 n+1} P_n(\xi) \\
-        \text { "special orthog. " } \int_{-1}^1 P_i(\xi) P_j(\xi) d \xi= \begin{cases}0 & \text { if } i \neq j \\ 2 & \text { if } i=j\end{cases}
+        \text { "special orthog. " } \int_{-1}^1 \tilde{P}_i(\xi) \tilde{P}_j(\xi) d \xi= \begin{cases}0 & \text { if } i \neq j \\ 2 & \text { if } i=j\end{cases}
     \end{gathered}
 \end{equation}
 For a polynomial basis with maximum degree $k$ we have
@@ -375,22 +375,22 @@ evaluation points and weights. One such method is called Gauss-Legendre quadratu
 \textbf{Claim: } The approximation
 \begin{equation}
     \begin{gathered}
-        \int_{-1}^1 f(\xi) d \xi \approx \sum_{q=1}^n f\left(\xi_q^{1 D}\right) w_q^{1 D} \\
-        \text{roots } \xi_q^{1 D} \text{ of } P_n(\xi), \text{ weights } w_q^{1 D}=\frac{2}{\left(1-\left( \xi_{q}^{1 D} \right)^2\right)\left(P_{n}^{\prime}\left(\xi_{q}^{1 D}\right)\right)^{2}}
+        \int_{-1}^1 f(\xi) d \xi \approx \sum_{q=0}^n f\left(\xi_q^{1 D}\right) w_q^{1 D} \\
+        \text{roots } \xi_q^{1 D} \text{ of } P_{n+1}(\xi), \text{ weights } w_q^{1 D}=\frac{2}{\left(1-\left( \xi_{q}^{1 D} \right)^2\right)\left(P_{n+1}^{\prime}\left(\xi_{q}^{1 D}\right)\right)^{2}}
     \end{gathered}
 \end{equation}
-for $f: [-1,1] \rightarrow \mathbb{R}$ is exact for polynomials of degree $2n-1$.
+for $f: [-1,1] \rightarrow \mathbb{R}$ is exact for polynomials of degree $2n+1$.
 
-\textbf{Proof: } Let $f = P(x)$ have degree $\leq 2n-1$. Then we can write
+\textbf{Proof: } Let $f = P(x)$ have degree $\leq 2n+1$. Then we can write
 $P(x) = Q(x) P_{n+1}(x) + R(x)$ with $Q(x), R(x)$ polynomials of degree $\leq n$ ($P_{n+1}(x)$ is the $(n+1)$-th Legendre polynomial).
 Then 
 \begin{equation}
     \begin{aligned}
         \int_{-1}^{1} P(x) d x &=\underbrace{\int_{-1}^{1} Q(x) P_{n+1}(x) d x}_{=0\text{ as } Q \text{ can be written in base } \{P_0,\dots,P_n\} \perp P_{n+1}}+\int_{-1}^{1} R(x) d x \\
         &=\int_{-1}^{1} R d x \\
-        &=\underbrace{\sum_{q=1}^{n} R\left(\xi_{q}^{1 D}\right) w_{q}^{1 D}}_{\text{exact as } R \text{ is a polynomial of degree } \leq n} \\
-        &=\sum_{q=1}^{n} \left( R\left(\xi_{q}^{1 D}\right) + \underbrace{P_{n+1}(\xi_{q}^{1 D}) \cdot Q(\xi_{q}^{1 D})}_{=0, \text{as } \xi_{q}^{1 D} \text{ roots of } P_{n+1}} \right)w_{q}^{1 D} \\
-        &= \sum_{q=1}^{n} P(\xi_{q}^{1 D}) w_{q}^{1 D}
+        &=\underbrace{\sum_{q=0}^{n} R\left(\xi_{q}^{1 D}\right) w_{q}^{1 D}}_{\text{exact as } R \text{ is a polynomial of degree } \leq n} \\
+        &=\sum_{q=0}^{n} \underbrace{\left(\underbrace{Q(\xi_{q}^{1 D}) \cdot P_{n+1}(\xi_{q}^{1 D})}_{=0, \text{as } \xi_{q}^{1 D} \text{ roots of } P_{n+1}} + R\left(\xi_{q}^{1 D}\right)\right)}_{=P(\xi_{q}^{1 D})} w_{q}^{1 D} \\
+        &= \sum_{q=0}^{n} P(\xi_{q}^{1 D}) w_{q}^{1 D}
     \end{aligned}
 \end{equation}
 

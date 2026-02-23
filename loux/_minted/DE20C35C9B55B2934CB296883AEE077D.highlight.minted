@@ -1,0 +1,22 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} cyclic convolution in real space}
+\PYG{+w}{      }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{DirectCyclicConv1D}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{Conv}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{p}{)}
+
+\PYG{+w}{          }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{m}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+\PYG{+w}{              }\PYG{k}{if}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{                  }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{[}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{+w}{              }\PYG{k}{else}
+\PYG{+w}{                  }\PYG{c}{\PYGZsh{} make g periodic}
+\PYG{+w}{                  }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{[}\PYG{n}{N}\PYG{o}{+}\PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)]}
+\PYG{+w}{              }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{end}
+
+\PYG{+w}{          }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Conv}
+
+\PYG{+w}{      }\PYG{k}{end}
+
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} cyclic convolution in Fourier space}
+\PYG{+w}{      }\PYG{n}{FastCyclicConv1D}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ifft}\PYG{p}{(}\PYG{n}{fft}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}\PYG{o}{.*}\PYG{n}{fft}\PYG{p}{(}\PYG{n}{g}\PYG{p}{))}
+\end{MintedVerbatim}

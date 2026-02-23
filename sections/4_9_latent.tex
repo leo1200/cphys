@@ -871,17 +871,17 @@ More explicitly, one would always write $q_{\vec{\phi}(\vec{x})}(\vec{z}|\vec{x}
 \subsubsubsection{The Variational Autoencoder}
 We now take a probabilistic approach to the autoencoder
 \begin{itemize}
-    \item \textbf{Probabilistic Encoder:} The encoder $h_{\vec{\Omega}_{\text{Dec}}}(\vec{x})$ takes input points from the normal data space $\vec{x}$ and outputs
+    \item \textbf{Probabilistic Encoder:} The encoder $h_{\vec{\Omega}_{\text{Enc}}}(\vec{x})$ takes input points from the data space $\vec{x}$ and outputs
     parameters $\vec{\phi}$ for the variational density $q_{\vec{\phi}(\vec{x})}(\vec{z})$. One can then
     for this location $\vec{x}$ sample a $\vec{z}$ from $q_{\vec{\phi}(\vec{x})}(\vec{z})$ with the
     obtained parameters. 
     \item \textbf{Probabilistic Decoder:} The decoder $f_{\vec{\Omega}_{\text{Dec}}}(\vec{z})$ maps from the latent space $\vec{z}$ to 
-    to parameters $\vec{\theta}$ for the likelihood $p_{\vec{\theta}}(\vec{x}|\vec{z})$, from 
-    which we can sample a $\vec{x}$. (Only mapping to the mean of the likelihood is also possible.)
+    parameters $\vec{\theta}$ for the likelihood $p_{\vec{\theta}}(\vec{x}|\vec{z})$, from 
+    which we can sample an $\vec{x}$. (Only mapping to the mean of the likelihood is also possible.)
 \end{itemize}
 
 \greenbox{While the distributions $q_{\vec{\phi}(\vec{x})}(\vec{z})$ and $p_{\vec{\theta}}(\vec{x}|\vec{z})$ might generally
-be very simple, as of the possibly complex mappings $h_{\vec{\Omega}_{\text{Dec}}}$ and $f_{\vec{\Omega}_{\text{Dec}}}$, the
+be very simple, as of the possibly complex mappings $h_{\vec{\Omega}_{\text{Enc}}}$ and $f_{\vec{\Omega}_{\text{Dec}}}$, the
 variational autoencoder can model very complex distributions.}
 
 The general variational autoencoder idea is illustrated in figure \ref{fig:vae}.
@@ -893,13 +893,14 @@ The general variational autoencoder idea is illustrated in figure \ref{fig:vae}.
     \label{fig:vae}
 \end{figure}
 
-\subsubsubsection{Gradient of the ELBO}
+\subsubsubsection{Estimation of the ELBO}
 The ELBO is given by
 \begin{equation}
     \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = E_{\vec{z} \sim q_{\vec{\phi}(\vec{x})}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}(\vec{x})}(\vec{z})} \right]
 \end{equation}
+
 For a given $\vec{x}$, we calculate the parameters $\vec{\phi}$ for the variational density $q_{\vec{\phi}(\vec{x})}(\vec{z})$ by the encoder
-${\vec{\phi}} = h_{\vec{\Omega}_{\text{Dec}}}(\vec{x})$ and draw
+${\vec{\phi}} = h_{\vec{\Omega}_{\text{Enc}}}(\vec{x})$ and draw
 \begin{equation}
     \vec{z}^{(l)} \sim q_{\vec{\phi}(\vec{x})}(\vec{z}), \quad l = 1,\dots,L
 \end{equation}
@@ -907,9 +908,12 @@ With the decoder we calculate $\vec{\theta} = f_{\vec{\Omega}_{\text{Dec}}}(\vec
 an estimate of the ELBO is given by
 
 \begin{equation}
-    \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) \approx \frac{1}{L} \sum_{l=1}^{L} \left(\log p_{\vec{\theta}}(\vec{x}|\vec{z}^{(l)}) - \log q_{\vec{\phi}(\vec{x})}(\vec{z}^{(l)})\right)
+    \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) \approx \frac{1}{L} \sum_{l=1}^{L} \left(\log p_{\vec{\theta}}(\vec{x}|\vec{z}^{(l)}) + \log p(\vec{z}^{(l)}) - \log q_{\vec{\phi}(\vec{x})}(\vec{z}^{(l)})\right)
 \end{equation}
-\bluebox{For being able to backpropagate to $\vec{\Omega}_{\text{Dec}}$ and $\vec{\Omega}_{\text{Dec}}$, we need to calculate the gradient of the ELBO with respect to the parameters
+
+\subsubsubsection{ELBO-gradients}
+
+\bluebox{For being able to backpropagate to $\vec{\Omega}_{\text{Enc}}$ and $\vec{\Omega}_{\text{Dec}}$, we need to calculate the gradient of the ELBO with respect to the parameters
 \begin{equation}
     \partial_{\vec{\theta}, \vec{\phi}} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x})
 \end{equation}
@@ -927,7 +931,8 @@ We can readily calculate
 \begin{equation}
     \partial_{\vec{\phi}} \text{ELBO}_{\vec{\theta}, \vec{\phi}}(\vec{x}) = \partial_{\vec{\phi}} E_{\vec{z} \sim q_{\vec{\phi}(\vec{x})}(\vec{z})} \left[ \log \frac{p_\vec{\theta}(\vec{x},\vec{z})}{q_{\vec{\phi}(\vec{x})}(\vec{z})} \right]
 \end{equation}
-we cannot put the derivative inside the expectation, because this expectation (how we sample the $\vec{z}$) depends on the parameters $\vec{\phi}$ itself.
+we cannot put the derivative inside the expectation, because this expectation (how we sample the $\vec{z}$) depends on the parameters $\vec{\phi}$ itself. Which samples we draw to 
+approximate the ELBO depends on the parameters $\vec{\phi}$.
 }
 
 \greenbox{\textbf{Reparametrization trick}: Write $z^{(l)}(\vec{x})$ as a deterministic function depending on $\vec{\phi}$ and a parameter-free random variable $\epsilon^{(l)}$ which is independent of $\vec{\phi}$.
@@ -953,8 +958,16 @@ so $\partial_\vec{\phi}$ can be drawn into the expectation / the sampling in the
 does not depend on $\vec{\phi}$.
 }
 
-\bluebox{\textbf{Generative process:} For using the VAE as a generative model the most flexible approach is to train
-another model to obtain a learned prior $p(\vec{z})$ (as for instance in the original DALLE
+\bluebox{\textbf{Generative process and a note on the prior:} For generative modeling
+we sample $\vec{z} \sim p(\vec{z})$, obtain parameters $\vec{\theta}$ of the likelihood from
+which we can then sample $\vec{x} \sim p_{\vec{\theta}}(\vec{x}|\vec{z})$. But what is the prior $p(\vec{z})$?
+
+In a vanilla VAE the prior $p(\vec{z})$ is set and fixed (typically standard normal). However, the prior 
+enters the ELBO gradient $\partial_\vec{\phi} \operatorname{ELBO}$ as sampling of $\vec{z}$
+depends on $\vec{\phi}$ (this becomes obvious when applying the reparameterization trick).
+
+In more advanced setups
+another model is trained to obtain a learned prior $p(\vec{z})$ (as for instance in the original DALLE
 \footnote{
 \enquote{The overall procedure can be viewed as maximizing the evidence lower bound on the joint
 likelihood of the model distribution over images, captions and tokens for the encoded RGB image.} 

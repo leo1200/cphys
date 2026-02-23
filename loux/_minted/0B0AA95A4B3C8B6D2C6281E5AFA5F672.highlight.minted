@@ -1,0 +1,45 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} simple linear convolution in real space}
+\PYG{+w}{      }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{conv1d}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{m}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{m}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{          }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{n}
+\PYG{+w}{              }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{m}
+\PYG{+w}{                  }\PYG{n}{y}\PYG{p}{[}\PYG{n}{i}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+=}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}
+\PYG{+w}{              }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{y}
+\PYG{+w}{      }\PYG{k}{end}
+
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} zero padded linear convolution in real space}
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} note that this zero padded version is equivalent}
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} to the cyclic convolution with zero padding}
+\PYG{+w}{      }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{DirectLinearConvolution}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{M}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+
+\PYG{+w}{          }\PYG{n}{g\PYGZus{}pad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{]}\PYG{+w}{     }\PYG{c}{\PYGZsh{} length N+M\PYGZhy{}1}
+\PYG{+w}{          }\PYG{n}{f\PYGZus{}pad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{]}\PYG{+w}{     }\PYG{c}{\PYGZsh{} length N+M\PYGZhy{}1}
+
+\PYG{+w}{          }\PYG{n}{Conv}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{          }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+\PYG{+w}{              }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{m}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}\PYG{o}{+}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}
+\PYG{+w}{                  }\PYG{k}{if}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{                      }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{Conv}\PYG{p}{[}\PYG{n}{n}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{f\PYGZus{}pad}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{g\PYGZus{}pad}\PYG{p}{[}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{m}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{+w}{                  }\PYG{k}{end}
+\PYG{+w}{                  }\PYG{c}{\PYGZsh{} n+1 \PYGZlt{}= m}
+\PYG{+w}{              }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{Conv}
+\PYG{+w}{      }\PYG{k}{end}
+
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} fast linear convolution in Fourier space}
+\PYG{+w}{      }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{FastLinearConvolution}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,}\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{f}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{M}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{f\PYGZus{}pad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{M}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{]}
+\PYG{+w}{          }\PYG{n}{g\PYGZus{}pad}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[}\PYG{+w}{ }\PYG{n}{g}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{N}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{]}
+\PYG{+w}{          }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{FastCyclicConv1D}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{f\PYGZus{}pad}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{g\PYGZus{}pad}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{end}
+\end{MintedVerbatim}

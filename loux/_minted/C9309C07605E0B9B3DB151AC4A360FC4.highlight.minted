@@ -1,0 +1,17 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+      \PYG{n+nd}{@partial}\PYG{p}{(}\PYG{n}{custom\PYGZus{}jvp}\PYG{p}{,} \PYG{n}{nondiff\PYGZus{}argnums}\PYG{o}{=}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{3}\PYG{p}{))}
+      \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{fixed\PYGZus{}point\PYGZus{}jvp}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{):}
+          \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{body}\PYG{p}{(}\PYG{n}{\PYGZus{}}\PYG{p}{,} \PYG{n}{x}\PYG{p}{):} \PYG{k}{return} \PYG{n}{f}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{k}{return} \PYG{n}{fori\PYGZus{}loop}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{,} \PYG{n}{body}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{)}
+
+      \PYG{n+nd}{@fixed\PYGZus{}point\PYGZus{}jvp}\PYG{o}{.}\PYG{n}{defjvp}
+      \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{fixed\PYGZus{}point\PYGZus{}jvp\PYGZus{}rule}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{,} \PYG{n}{primals}\PYG{p}{,} \PYG{n}{tangents}\PYG{p}{):}
+          \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta} \PYG{o}{=} \PYG{n}{primals}
+          \PYG{n}{dx\PYGZus{}guess}\PYG{p}{,} \PYG{n}{dtheta} \PYG{o}{=} \PYG{n}{tangents}
+          \PYG{n}{x\PYGZus{}star} \PYG{o}{=} \PYG{n}{fixed\PYGZus{}point\PYGZus{}jvp}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{x\PYGZus{}guess}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{,} \PYG{n}{num\PYGZus{}iters}\PYG{p}{)}
+          \PYG{n}{A} \PYG{o}{=} \PYG{n}{jacobian}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{argnums}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)(}\PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{n}{B} \PYG{o}{=} \PYG{n}{jacobian}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{argnums}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)(}\PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{theta}\PYG{p}{)}
+          \PYG{n}{dx} \PYG{o}{=} \PYG{n}{jnp}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{solve}\PYG{p}{(}\PYG{n}{jnp}\PYG{o}{.}\PYG{n}{eye}\PYG{p}{(}\PYG{n}{x\PYGZus{}star}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])} \PYG{o}{\PYGZhy{}} \PYG{n}{A}\PYG{p}{,} \PYG{n}{B} \PYG{o}{@} \PYG{n}{dtheta}\PYG{p}{)}
+          \PYG{c+c1}{\PYGZsh{} primal output, tangent output}
+          \PYG{k}{return} \PYG{n}{x\PYGZus{}star}\PYG{p}{,} \PYG{n}{dx}
+\end{MintedVerbatim}

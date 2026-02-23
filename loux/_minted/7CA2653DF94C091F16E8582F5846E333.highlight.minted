@@ -1,0 +1,17 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} in\PYGZhy{}place decomposition of A into L and R, the upper\PYGZhy{}right part of A is overwritten by R,}
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} the lower\PYGZhy{}left part of A is overwritten by L without diagonal (set to 1)}
+\PYG{+w}{      }\PYG{k}{function}\PYG{+w}{ }\PYG{n}{lu\PYGZus{}decomposition!}\PYG{p}{(}\PYG{n}{A}\PYG{o}{::}\PYG{k+kt}{Matrix}\PYG{p}{\PYGZob{}}\PYG{k+kt}{T}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{where}\PYG{+w}{ }\PYG{k+kt}{T}\PYG{+w}{ }\PYG{o}{\PYGZlt{}:}\PYG{+w}{ }\PYG{k+kt}{Number}
+\PYG{+w}{          }\PYG{n}{N}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{size}\PYG{p}{(}\PYG{n}{A}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{          }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+\PYG{+w}{              }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{j}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+\PYG{+w}{                  }\PYG{n}{A}\PYG{p}{[}\PYG{n}{j}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{/=}\PYG{+w}{ }\PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{]}
+\PYG{+w}{                  }\PYG{k}{for}\PYG{+w}{ }\PYG{n}{k}\PYG{+w}{ }\PYG{k}{in}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{n}{N}
+\PYG{+w}{                      }\PYG{n}{A}\PYG{p}{[}\PYG{n}{j}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZhy{}=}\PYG{+w}{ }\PYG{n}{A}\PYG{p}{[}\PYG{n}{j}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{i}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{]}
+\PYG{+w}{                  }\PYG{k}{end}
+\PYG{+w}{              }\PYG{k}{end}
+\PYG{+w}{          }\PYG{k}{end}
+\PYG{+w}{      }\PYG{k}{end}
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} one can then extract L = tril(A, \PYGZhy{}1) + I}
+\PYG{+w}{      }\PYG{c}{\PYGZsh{} and U = triu(A) via the LinearAlgebra package}
+\end{MintedVerbatim}

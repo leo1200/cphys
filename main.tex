@@ -168,7 +168,7 @@
 \usepackage{tabularx}
 
 % Enable the inclusion of Code
-\usepackage[outputdir=loux]{minted}
+\usepackage{minted}
 \usemintedstyle{manni}
 \setminted[R]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
 \setminted[C]{frame=single, obeytabs=true, tabsize=4, linenos, breaklines}
@@ -177,17 +177,26 @@
 \setminted[cpp]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
 \setminted[go]{frame=single, obeytabs=true, tabsize=4, linenos, numbersep=-10pt, breaklines, gobble=2}
 
-\usepackage{tocbasic}
+% problems with tocbasic 
+% in newest LaTeX version
+% \usepackage{tocbasic}
 
-\DeclareNewTOC[%
-  type=codebox,%
-  types=codeboxes,%
-  float,% Gleitumgebungen sollen definiert werden.
-  floattype=4,%
-  name=Code-Snippet,%
-  listname={List of Code-Snippets}%
-  ]{lor}
-\setuptoc{lor}{chapteratlist}
+% \DeclareNewTOC[%
+%   type=codebox,%
+%   types=codeboxes,%
+%   float,% Gleitumgebungen sollen definiert werden.
+%   floattype=4,%
+%   name=Code-Snippet,%
+%   listname={List of Code-Snippets}%
+%   ]{lor}
+% \setuptoc{lor}{chapteratlist}
+
+\newfloat{codebox}{tbp}{lor}
+\floatname{codebox}{Code-Snippet}
+\newcommand{\listofcodeboxes}{%
+  \addcontentsline{toc}{section}{List of Code-Snippets}%
+  \listof{codebox}{List of Code-Snippets}%
+}
 
 % Relations with text beneath
 \newcommand{\isEquivTo}[1]{\underset{#1}{\sim}}
@@ -221,6 +230,10 @@
 
 % Enable highlight-boxes
 \usepackage[most]{tcolorbox}
+
+% avoid weird error in the newest 
+% LaTeX version
+\newcounter{tcolorboxnumber}
 
 %textmarker style from colorbox doc
 \tcbset{textmarker/.style={%
@@ -400,7 +413,7 @@
     \raisebox{-1.8\baselineskip}{%
       \makebox[\paperwidth]{%
         \hfill
-        \scriptsize\textcolor{darkorange}{\textbf{Version 0.02: Expect errors (report under \href{https://github.com/leo1200/cphys/issues}{https://github.com/leo1200/cphys/issues}) and cross-check formulas before implementation.}}
+        \scriptsize\textcolor{darkorange}{\textbf{Version 0.03: Expect errors (report under \href{https://github.com/leo1200/cphys/issues}{https://github.com/leo1200/cphys/issues}) and cross-check formulas before implementation.}}
         \hfill
       }%
     }%
